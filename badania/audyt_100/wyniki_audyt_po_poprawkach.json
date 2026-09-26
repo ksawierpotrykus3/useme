@@ -1,0 +1,617 @@
+{
+  "144357": {
+    "id": "144357",
+    "title": "Pobieranie danych z allegro . przy sprzedazy rzeczy ktore sa produkowane na wymiar pod klienta",
+    "mode": "retest_wave1_zeroshot",
+    "old_r1_score": 41,
+    "klasyfikacja": {
+      "tier": "A",
+      "sciezka": "inzynieria",
+      "typ_klienta": "msp_erp",
+      "karta_tech": "tech_02",
+      "modyfikatory": []
+    },
+    "new_zero_shot_r1": {
+      "opis": "Dzień dobry,\n\nAllegro nie udostępnia webhooków - nowe zamówienia i wiadomości wykrywamy wyłącznie przez polling /order/events, co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym. Dodatkowo od lutego 2025 każda wiadomość wysyłana przez API wymaga pola order.id, inaczej zwraca błąd 422. Pana proces komplikują nieustrukturyzowane wiadomości: kupujący mieszają cm i mm, opisują oklejanie słownie, pomijają kolor.\n\nZbuduję kolejkę zdarzeń z obsługą duplikatów i kolejności, z limitami 9000 zapytań/min i bezpiecznym retry. Wiadomości przetworzy model językowy, który wyekstrahuje wymiary, ilość, kolor i sposób oklejania do ustrukturyzowanego JSON, a deterministyczny walidator sprawdzi spójność i przeliczy cm na mm. Wszystko testowane na kopii danych w sandboxie, bez ingerencji w żywe konto. Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.\n\nCzy dane mają trafiać do arkusza Excel/CSV, czy bezpośrednio do programu produkcyjnego? Jaki format jest obecnie przyjmowany przez produkcję?\n\nKoszt to 3500 zł netto, realizacja w 7 dni, z 30-dniową gwarancją rozruchową na własny kod.\n\nKsawier Potrykus",
+      "wycena": 3500,
+      "dni": 7,
+      "audyt": {
+        "wynik_100": 92,
+        "kategorie": {
+          "A_merytoryka_25": 23,
+          "B_psychologia_25": 22,
+          "C_pytanie_cta_20": 20,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 13
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Allegro nie udostępnia webhooków - nowe zamówienia i wiadomości wykrywamy wyłącznie przez polling /order/events, co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym. Dodatkowo od lutego 2025 każda wiadomość wysyłana przez API wymaga pola order.id, inaczej zwraca błąd 422.",
+            "uzasadnienie": "Otwarcie uderza w realną, weryfikowalną minę architektoniczną (brak webhooków + wymóg order.id od 02.2025) i odcina ofertę od 85% naiwnych wykonawców. Nie ma tu lania wody, jest konkretny fakt API z numerem błędu."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar A)",
+            "cytat": "Zbuduję kolejkę zdarzeń z obsługą duplikatów i kolejności, z limitami 9000 zapytań/min i bezpiecznym retry. Wiadomości przetworzy model językowy, który wyekstrahuje wymiary, ilość, kolor i sposób oklejania do ustrukturyzowanego JSON, a deterministyczny walidator sprawdzi spójność i przeliczy cm na mm.",
+            "uzasadnienie": "Zamiast 'zoptymalizujemy proces' mamy jawny podział ról: LLM ekstrahuje, walidator deterministycznie sprawdza i normalizuje jednostki. To dokładnie odpowiada na 'brudne dane' z ogłoszenia (mieszanie cm/mm, słowne opisy oklejania, pominięty kolor)."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar B)",
+            "cytat": "Pana proces komplikują nieustrukturyzowane wiadomości: kupujący mieszają cm i mm, opisują oklejanie słownie, pomijają kolor.",
+            "uzasadnienie": "Nazwanie po imieniu realnych życiowych wyjątków danych kupujących buduje zaufanie i pokazuje, że autor czytał ze zrozumieniem opis problemu, a nie przepisał ogłoszenie."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Wszystko testowane na kopii danych w sandboxie, bez ingerencji w żywe konto. [...] z 30-dniową gwarancją rozruchową na własny kod.",
+            "uzasadnienie": "Dokładnie ten standard Sandbox-First + 30 dni gwarancji, którego oczekuje matryca — jednym zdaniem, bez rozwlekłego wyliczania."
+          },
+          {
+            "punkty": "+10 pkt (Wymiar C)",
+            "cytat": "Czy dane mają trafiać do arkusza Excel/CSV, czy bezpośrednio do programu produkcyjnego? Jaki format jest obecnie przyjmowany przez produkcję?",
+            "uzasadnienie": "Pytanie trafia w kluczowy punkt decyzyjny projektu (integracja z produkcją vs. ręczny eksport), zmusza do odpowiedzi na priv i jest w 100% asynchroniczne."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-4 pkt (Wymiar B / dowód)",
+            "cytat": "Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.",
+            "uzasadnienie": "Dowód nie pasuje wprost do domeny (ekstrakcja ustrukturyzowanych danych z wiadomości Allegro ≠ monitoring ogłoszeń OLX), a druga połowa zdania ('szybkość i niezawodność to nasz standard') to dokładnie ten pusty frazes o doświadczeniu, którego matryca zabrania. Brak odwołania do portfolio_baza.md z liczbą/podmiotem z tej samej domeny."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar A)",
+            "cytat": "co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym",
+            "uzasadnienie": "Mocny killshot, ale pointa uderzająca w konkurencję jest o pół tonu zbyt publicystyczna jak na rozmowę Senior Inżynier → CTO. Lepsza byłaby czysta konstatacja techniczna bez oceniania rynku."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar D)",
+            "cytat": "KWOTA NETTO: 3500 zł | CZAS: 7 dni",
+            "uzasadnienie": "Wycena mieści się w widełkach tech_02 (4500–16000 zł) dopiero po stronie dolnej granicy. Dla integracji API + warstwy AI/LLM z pollingiem i kolejką zdarzeń 24h realnej pracy jest na granicy — 7 dni na produkcję to ambitny, ale akceptowalny termin. Kalkulator nie pompuje modułów, więc kara za przestrzelenie nie należy się, ale rezerwa na nieprzewidziane zachowania API Allegro jest cienka."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar E)",
+            "cytat": "Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.",
+            "uzasadnienie": "Ostatnie zdanie akapitu to wytrych w stylu AI ('szybkość i niezawodność to nasz standard') — nie wnosi żadnej informacji, a osłabia wymowę konkretu o 7 minutach, który stoi przed nim."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1) Zamień zdanie 'Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard' na twardy dowód z portfolio_baza.md wprost z domeny ekstrakcji danych lub integracji API (np. konkretny projekt z liczbą: wolumen przetworzonych dokumentów/zamówień, precyzja ekstrakcji, nazwa wdrożenia). Jeśli brak case study wprost — usuń całe zdanie i zakończ akapit na 'bez ingerencji w żywe konto.' 2) W killshocie usuń ocenę konkurencji 'co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym' i zakończ na '...wyłącznie przez polling /order/events.' 3) Rozważ podniesienie wyceny do 3900–4200 zł netto (24h real + ryzyko nieprzewidywalności API Allegro) LUB jawnie dopisz w ofercie, że w cenie jest zapas na obsługę zmian limitów API w pierwszych 30 dniach — bez tego wycena wygląda na dolną granicę widełek tech_02 i może sygnalizować niedoszacowanie.",
+        "popraw_wycena": "Rozważ podniesienie kwoty do 3900 zł netto (bufor na nieprzewidywalność API Allegro i możliwe rozszerzenie ekstrakcji po pierwszych testach na realnych wiadomościach). Obecne 3500 zł jest na dolnej granicy opłacalności dla 24h real + 20% bufora + 15% korekty konkurencyjnej przy stawce 90 zł/h. Alternatywnie zostaw 3500 zł, ale dopisz w ofercie, że mieści w sobie obsługę zmian limitów Allegro w okresie gwarancyjnym.",
+        "words": 164,
+        "chars": 1195
+      }
+    },
+    "final": {
+      "opis": "Dzień dobry,\n\nAllegro nie udostępnia webhooków - nowe zamówienia i wiadomości wykrywamy wyłącznie przez polling /order/events, co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym. Dodatkowo od lutego 2025 każda wiadomość wysyłana przez API wymaga pola order.id, inaczej zwraca błąd 422. Pana proces komplikują nieustrukturyzowane wiadomości: kupujący mieszają cm i mm, opisują oklejanie słownie, pomijają kolor.\n\nZbuduję kolejkę zdarzeń z obsługą duplikatów i kolejności, z limitami 9000 zapytań/min i bezpiecznym retry. Wiadomości przetworzy model językowy, który wyekstrahuje wymiary, ilość, kolor i sposób oklejania do ustrukturyzowanego JSON, a deterministyczny walidator sprawdzi spójność i przeliczy cm na mm. Wszystko testowane na kopii danych w sandboxie, bez ingerencji w żywe konto. Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.\n\nCzy dane mają trafiać do arkusza Excel/CSV, czy bezpośrednio do programu produkcyjnego? Jaki format jest obecnie przyjmowany przez produkcję?\n\nKoszt to 3500 zł netto, realizacja w 7 dni, z 30-dniową gwarancją rozruchową na własny kod.\n\nKsawier Potrykus",
+      "wycena": 3500,
+      "dni": 7,
+      "rounds": 1,
+      "audyt": {
+        "wynik_100": 92,
+        "kategorie": {
+          "A_merytoryka_25": 23,
+          "B_psychologia_25": 22,
+          "C_pytanie_cta_20": 20,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 13
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Allegro nie udostępnia webhooków - nowe zamówienia i wiadomości wykrywamy wyłącznie przez polling /order/events, co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym. Dodatkowo od lutego 2025 każda wiadomość wysyłana przez API wymaga pola order.id, inaczej zwraca błąd 422.",
+            "uzasadnienie": "Otwarcie uderza w realną, weryfikowalną minę architektoniczną (brak webhooków + wymóg order.id od 02.2025) i odcina ofertę od 85% naiwnych wykonawców. Nie ma tu lania wody, jest konkretny fakt API z numerem błędu."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar A)",
+            "cytat": "Zbuduję kolejkę zdarzeń z obsługą duplikatów i kolejności, z limitami 9000 zapytań/min i bezpiecznym retry. Wiadomości przetworzy model językowy, który wyekstrahuje wymiary, ilość, kolor i sposób oklejania do ustrukturyzowanego JSON, a deterministyczny walidator sprawdzi spójność i przeliczy cm na mm.",
+            "uzasadnienie": "Zamiast 'zoptymalizujemy proces' mamy jawny podział ról: LLM ekstrahuje, walidator deterministycznie sprawdza i normalizuje jednostki. To dokładnie odpowiada na 'brudne dane' z ogłoszenia (mieszanie cm/mm, słowne opisy oklejania, pominięty kolor)."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar B)",
+            "cytat": "Pana proces komplikują nieustrukturyzowane wiadomości: kupujący mieszają cm i mm, opisują oklejanie słownie, pomijają kolor.",
+            "uzasadnienie": "Nazwanie po imieniu realnych życiowych wyjątków danych kupujących buduje zaufanie i pokazuje, że autor czytał ze zrozumieniem opis problemu, a nie przepisał ogłoszenie."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Wszystko testowane na kopii danych w sandboxie, bez ingerencji w żywe konto. [...] z 30-dniową gwarancją rozruchową na własny kod.",
+            "uzasadnienie": "Dokładnie ten standard Sandbox-First + 30 dni gwarancji, którego oczekuje matryca — jednym zdaniem, bez rozwlekłego wyliczania."
+          },
+          {
+            "punkty": "+10 pkt (Wymiar C)",
+            "cytat": "Czy dane mają trafiać do arkusza Excel/CSV, czy bezpośrednio do programu produkcyjnego? Jaki format jest obecnie przyjmowany przez produkcję?",
+            "uzasadnienie": "Pytanie trafia w kluczowy punkt decyzyjny projektu (integracja z produkcją vs. ręczny eksport), zmusza do odpowiedzi na priv i jest w 100% asynchroniczne."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-4 pkt (Wymiar B / dowód)",
+            "cytat": "Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.",
+            "uzasadnienie": "Dowód nie pasuje wprost do domeny (ekstrakcja ustrukturyzowanych danych z wiadomości Allegro ≠ monitoring ogłoszeń OLX), a druga połowa zdania ('szybkość i niezawodność to nasz standard') to dokładnie ten pusty frazes o doświadczeniu, którego matryca zabrania. Brak odwołania do portfolio_baza.md z liczbą/podmiotem z tej samej domeny."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar A)",
+            "cytat": "co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym",
+            "uzasadnienie": "Mocny killshot, ale pointa uderzająca w konkurencję jest o pół tonu zbyt publicystyczna jak na rozmowę Senior Inżynier → CTO. Lepsza byłaby czysta konstatacja techniczna bez oceniania rynku."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar D)",
+            "cytat": "KWOTA NETTO: 3500 zł | CZAS: 7 dni",
+            "uzasadnienie": "Wycena mieści się w widełkach tech_02 (4500–16000 zł) dopiero po stronie dolnej granicy. Dla integracji API + warstwy AI/LLM z pollingiem i kolejką zdarzeń 24h realnej pracy jest na granicy — 7 dni na produkcję to ambitny, ale akceptowalny termin. Kalkulator nie pompuje modułów, więc kara za przestrzelenie nie należy się, ale rezerwa na nieprzewidziane zachowania API Allegro jest cienka."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar E)",
+            "cytat": "Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard.",
+            "uzasadnienie": "Ostatnie zdanie akapitu to wytrych w stylu AI ('szybkość i niezawodność to nasz standard') — nie wnosi żadnej informacji, a osłabia wymowę konkretu o 7 minutach, który stoi przed nim."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1) Zamień zdanie 'Mamy doświadczenie w monitorowaniu ogłoszeń OLX z czasem reakcji poniżej 7 minut, więc szybkość i niezawodność to nasz standard' na twardy dowód z portfolio_baza.md wprost z domeny ekstrakcji danych lub integracji API (np. konkretny projekt z liczbą: wolumen przetworzonych dokumentów/zamówień, precyzja ekstrakcji, nazwa wdrożenia). Jeśli brak case study wprost — usuń całe zdanie i zakończ akapit na 'bez ingerencji w żywe konto.' 2) W killshocie usuń ocenę konkurencji 'co większość wykonawców pomija, obiecując reakcję w czasie rzeczywistym' i zakończ na '...wyłącznie przez polling /order/events.' 3) Rozważ podniesienie wyceny do 3900–4200 zł netto (24h real + ryzyko nieprzewidywalności API Allegro) LUB jawnie dopisz w ofercie, że w cenie jest zapas na obsługę zmian limitów API w pierwszych 30 dniach — bez tego wycena wygląda na dolną granicę widełek tech_02 i może sygnalizować niedoszacowanie.",
+        "popraw_wycena": "Rozważ podniesienie kwoty do 3900 zł netto (bufor na nieprzewidywalność API Allegro i możliwe rozszerzenie ekstrakcji po pierwszych testach na realnych wiadomościach). Obecne 3500 zł jest na dolnej granicy opłacalności dla 24h real + 20% bufora + 15% korekty konkurencyjnej przy stawce 90 zł/h. Alternatywnie zostaw 3500 zł, ale dopisz w ofercie, że mieści w sobie obsługę zmian limitów Allegro w okresie gwarancyjnym.",
+        "words": 164,
+        "chars": 1195
+      }
+    }
+  },
+  "143981": {
+    "id": "143981",
+    "title": "Integracja API - Cloudtalk.io -----> Notion",
+    "mode": "retest_wave1_zeroshot",
+    "old_r1_score": 52,
+    "klasyfikacja": {
+      "tier": "B",
+      "sciezka": "biznes",
+      "typ_klienta": "tech_agnostic",
+      "karta_tech": "tech_16",
+      "modyfikatory": []
+    },
+    "new_zero_shot_r1": {
+      "opis": "Dzień dobry,\n\nZauważyłem, że w planie Essential transkrypcja rozmów przez automatyzację CloudTalk nie jest dostępna - potrzebny jest dodatek AI albo wyższy plan.\n\nSkonfiguruję integrację tak, aby po każdej rozmowie do Notion trafiała transkrypcja, podsumowanie i notatki. Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce i dopiszą się później, bez ryzyka zgubienia. Wszystkie testy wykonam na kopii bazy, a po wdrożeniu przekażę krótką instrukcję wideo i 30 dni gwarancji na własny kod.\n\nCzy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?\n\nKoszt to 2500 zł netto, realizacja w 7 dni.\n\nKsawier Potrykus",
+      "wycena": 2500,
+      "dni": 7,
+      "audyt": {
+        "wynik_100": 92,
+        "kategorie": {
+          "A_merytoryka_25": 23,
+          "B_psychologia_25": 21,
+          "C_pytanie_cta_20": 18,
+          "D_wycena_15": 15,
+          "E_styl_zwiezlosc_15": 15
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Zauważyłem, że w planie Essential transkrypcja rozmów przez automatyzację CloudTalk nie jest dostępna - potrzebny jest dodatek AI albo wyższy plan.",
+            "uzasadnienie": "Otwarcie trafia w ukrytą minę biznesową, o której klient najpewniej nie wiedział, podając w ogłoszeniu 'Plan Essential' i jednocześnie oczekując transkrypcji rozmów oraz notatek AI. To dokładnie ten typ killshotu, który od razu ustawia wykonawcę jako kogoś, kto realnie sprawdził ograniczenia planu, a nie przepisał ofertę z szablonu."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar A)",
+            "cytat": "Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce i dopiszą się później, bez ryzyka zgubienia.",
+            "uzasadnienie": "Zamiast pustego 'obsługujemy limity i błędy' oferta nazywa konkretny mechanizm (kolejka, ponowienie, brak utraty danych) w języku zachowania programu, a nie architektury. Klient nietechniczny rozumie, co się stanie, gdy coś padnie."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Wszystkie testy wykonam na kopii bazy, a po wdrożeniu przekażę krótką instrukcję wideo i 30 dni gwarancji na własny kod.",
+            "uzasadnienie": "Jawna deklaracja Sandbox-First (kopia bazy, zero dotykania produkcji) plus 30 dni gwarancji rozruchowej i przekazanie instrukcji wideo dokładnie odpowiadają na strach klienta tech-agnostic przed 'czarną skrzynką' i uzależnieniem od wykonawcy."
+          },
+          {
+            "punkty": "+5 pkt (Wymiar C)",
+            "cytat": "Czy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?",
+            "uzasadnienie": "Jedno krótkie pytanie w osobnym akapicie, bez numerowania, wymuszające decyzję zakresową i angażujące klienta do odpowiedzi na priv. Zero propozycji telefonu czy wideo."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar E)",
+            "cytat": "Liczba słów oferty: 97",
+            "uzasadnienie": "Mieści się w twardym oknie 75–110 słów dla małego zlecenia (< 3000 zł), akapity są krótkie, a całość czyta się jak rzeczowa notatka inżyniera, nie jak wypracowanie."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-3 pkt (Wymiar B)",
+            "cytat": "Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce",
+            "uzasadnienie": "Oferta nazywa tylko jeden wyjątek operacyjny (zerwane połączenie). Brakuje 2–3 typowych 'brudnych danych' z codziennej pracy z CloudTalk i Notion, np. rozmów bez nagrania, połączeń wewnętrznych, rozmów w różnych językach czy nieodebranych połączeń, które przy integracji CRM trzeba świadomie odfiltrować. To osłabia wrażenie, że wykonawca rozumie realia operacyjne klienta."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar C)",
+            "cytat": "Czy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?",
+            "uzasadnienie": "Pytanie jest poprawne, ale dotyczy drugorzędnej decyzji formatu. Kluczowy punkt decyzyjny projektu to raczej świadoma decyzja o upgrade planu CloudTalk / dokupieniu dodatku AI, bo od niej zależy, czy integracja w ogóle ma źródło danych. Pytanie mogłoby wymuszać rozstrzygnięcie tej kwestii."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "Dodać w akapicie mechanizmu 2–3 konkretne, życiowe wyjątki z pracy z CloudTalk i Notion, np. rozmowy bez nagrania, połączenia wewnętrzne niekwalifikujące się do CRM, rozmowy w różnych językach albo nieodebrane próby. Zamienić pytanie CTA na takie, które rozstrzyga punkt decyzyjny: czy klient akceptuje upgrade planu CloudTalk / dodatek AI (bez tego transkrypcja nie ma źródła), a dopiero w drugiej kolejności doprecyzować zakres notatek. Nie dodawać żadnych ogólników o doświadczeniu — obecna rezygnacja z pustych frazesów jest prawidłowa.",
+        "popraw_wycena": "",
+        "words": 97,
+        "chars": 668
+      }
+    },
+    "final": {
+      "opis": "Dzień dobry,\n\nZauważyłem, że w planie Essential transkrypcja rozmów przez automatyzację CloudTalk nie jest dostępna - potrzebny jest dodatek AI albo wyższy plan.\n\nSkonfiguruję integrację tak, aby po każdej rozmowie do Notion trafiała transkrypcja, podsumowanie i notatki. Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce i dopiszą się później, bez ryzyka zgubienia. Wszystkie testy wykonam na kopii bazy, a po wdrożeniu przekażę krótką instrukcję wideo i 30 dni gwarancji na własny kod.\n\nCzy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?\n\nKoszt to 2500 zł netto, realizacja w 7 dni.\n\nKsawier Potrykus",
+      "wycena": 2500,
+      "dni": 7,
+      "rounds": 1,
+      "audyt": {
+        "wynik_100": 92,
+        "kategorie": {
+          "A_merytoryka_25": 23,
+          "B_psychologia_25": 21,
+          "C_pytanie_cta_20": 18,
+          "D_wycena_15": 15,
+          "E_styl_zwiezlosc_15": 15
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Zauważyłem, że w planie Essential transkrypcja rozmów przez automatyzację CloudTalk nie jest dostępna - potrzebny jest dodatek AI albo wyższy plan.",
+            "uzasadnienie": "Otwarcie trafia w ukrytą minę biznesową, o której klient najpewniej nie wiedział, podając w ogłoszeniu 'Plan Essential' i jednocześnie oczekując transkrypcji rozmów oraz notatek AI. To dokładnie ten typ killshotu, który od razu ustawia wykonawcę jako kogoś, kto realnie sprawdził ograniczenia planu, a nie przepisał ofertę z szablonu."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar A)",
+            "cytat": "Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce i dopiszą się później, bez ryzyka zgubienia.",
+            "uzasadnienie": "Zamiast pustego 'obsługujemy limity i błędy' oferta nazywa konkretny mechanizm (kolejka, ponowienie, brak utraty danych) w języku zachowania programu, a nie architektury. Klient nietechniczny rozumie, co się stanie, gdy coś padnie."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Wszystkie testy wykonam na kopii bazy, a po wdrożeniu przekażę krótką instrukcję wideo i 30 dni gwarancji na własny kod.",
+            "uzasadnienie": "Jawna deklaracja Sandbox-First (kopia bazy, zero dotykania produkcji) plus 30 dni gwarancji rozruchowej i przekazanie instrukcji wideo dokładnie odpowiadają na strach klienta tech-agnostic przed 'czarną skrzynką' i uzależnieniem od wykonawcy."
+          },
+          {
+            "punkty": "+5 pkt (Wymiar C)",
+            "cytat": "Czy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?",
+            "uzasadnienie": "Jedno krótkie pytanie w osobnym akapicie, bez numerowania, wymuszające decyzję zakresową i angażujące klienta do odpowiedzi na priv. Zero propozycji telefonu czy wideo."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar E)",
+            "cytat": "Liczba słów oferty: 97",
+            "uzasadnienie": "Mieści się w twardym oknie 75–110 słów dla małego zlecenia (< 3000 zł), akapity są krótkie, a całość czyta się jak rzeczowa notatka inżyniera, nie jak wypracowanie."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-3 pkt (Wymiar B)",
+            "cytat": "Jeśli chwilowo zabraknie połączenia, dane poczekają w bezpiecznej kolejce",
+            "uzasadnienie": "Oferta nazywa tylko jeden wyjątek operacyjny (zerwane połączenie). Brakuje 2–3 typowych 'brudnych danych' z codziennej pracy z CloudTalk i Notion, np. rozmów bez nagrania, połączeń wewnętrznych, rozmów w różnych językach czy nieodebranych połączeń, które przy integracji CRM trzeba świadomie odfiltrować. To osłabia wrażenie, że wykonawca rozumie realia operacyjne klienta."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar C)",
+            "cytat": "Czy w Notion mają trafiać pełne transkrypcje, czy tylko podsumowania i najważniejsze punkty?",
+            "uzasadnienie": "Pytanie jest poprawne, ale dotyczy drugorzędnej decyzji formatu. Kluczowy punkt decyzyjny projektu to raczej świadoma decyzja o upgrade planu CloudTalk / dokupieniu dodatku AI, bo od niej zależy, czy integracja w ogóle ma źródło danych. Pytanie mogłoby wymuszać rozstrzygnięcie tej kwestii."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "Dodać w akapicie mechanizmu 2–3 konkretne, życiowe wyjątki z pracy z CloudTalk i Notion, np. rozmowy bez nagrania, połączenia wewnętrzne niekwalifikujące się do CRM, rozmowy w różnych językach albo nieodebrane próby. Zamienić pytanie CTA na takie, które rozstrzyga punkt decyzyjny: czy klient akceptuje upgrade planu CloudTalk / dodatek AI (bez tego transkrypcja nie ma źródła), a dopiero w drugiej kolejności doprecyzować zakres notatek. Nie dodawać żadnych ogólników o doświadczeniu — obecna rezygnacja z pustych frazesów jest prawidłowa.",
+        "popraw_wycena": "",
+        "words": 97,
+        "chars": 668
+      }
+    }
+  },
+  "144867": {
+    "id": "144867",
+    "title": "Dedykowana aplikacja mobilna (iOS/Android) dla fizjoterapeutów + Panel Admina (własny serwer)",
+    "mode": "retest_deoverfit_wapro",
+    "old_r1_score": 63,
+    "klasyfikacja": {
+      "tier": "A",
+      "sciezka": "inzynieria",
+      "typ_klienta": "msp_erp",
+      "karta_tech": "tech_06",
+      "modyfikatory": [
+        "RESCUE"
+      ]
+    },
+    "new_zero_shot_r1": {
+      "opis": "Dzień dobry,\n\nGłówna pułapka w aplikacji dla fizjoterapeutów to dane medyczne: karta pacjenta w chmurze bez szyfrowania to naruszenie RODO (art. 9), a praca w terenie bez zasięgu kończy się utratą wpisów. Rozwiązaniem jest architektura offline-first z lokalną zaszyfrowaną bazą SQLCipher i Drift - gdy w gabinecie zerwie się łącze, karta zapisuje się na urządzeniu, a synchronizacja dogania po powrocie online.\n\nKrytyczne są też różnice w cyklu życia iOS i Android (BGTaskScheduler kontra WorkManager) oraz agresywne zabijanie usług w tle na Xiaomi i Samsungu - bez tego powiadomienia nie działają w tle. Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+, inaczej Google Play zablokuje upload.\n\nWdrażamy: aplikacja iOS/Android, panel admina i backend na Państwa serwerze, z pracą na środowisku stagingowym, pełnym Sandbox-First i rozliczeniem przez depozyt Useme. Mamy za sobą system rezerwacji dla Kliniki Doktor Monika: 18 miesięcy bez kolizji terminów i referencję Prezesa.\n\nCzy aplikacja ma zawierać dokumentację medyczną i integrację z systemem P1, czy ograniczamy się do zarządzania wizytami i pacjentami? I czy istnieje już kod po poprzednim wykonawcy, który warto najpierw zinwentaryzować?\n\nWycena: 16000 zł netto, realizacja 30 dni, z 30-dniową gwarancją rozruchową na własny kod.\nKsawier Potrykus",
+      "wycena": 16000,
+      "dni": 30,
+      "audyt": {
+        "wynik_100": 94,
+        "kategorie": {
+          "A_merytoryka_25": 22,
+          "B_psychologia_25": 23,
+          "C_pytanie_cta_20": 20,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 15
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Główna pułapka w aplikacji dla fizjoterapeutów to dane medyczne: karta pacjenta w chmurze bez szyfrowania to naruszenie RODO (art. 9), a praca w terenie bez zasięgu kończy się utratą wpisów.",
+            "uzasadnienie": "Killshot trafia w podwójną minę domenową: (1) dane medyczne = RODO art. 9 i szyfrowanie at-rest, (2) fizjoterapeuta pracuje w terenie, gdzie zasięg znika. To dokładnie ukryty problem, o którym 85% wykonawców pisze dopiero po pytaniu klienta. Otwarcie buduje natychmiastowy autorytet ekspercki."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar A)",
+            "cytat": "architektura offline-first z lokalną zaszyfrowaną bazą SQLCipher i Drift - gdy w gabinecie zerwie się łącze, karta zapisuje się na urządzeniu, a synchronizacja dogania po powrocie online.",
+            "uzasadnienie": "Konkretny mechanizm zamiast hasła: nazwana baza (SQLCipher), nazwany ORM (Drift), nazwany wzorzec (offline-first) i wyjaśniony scenariusz działania. To język inżyniera, nie marketing."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar A)",
+            "cytat": "Krytyczne są też różnice w cyklu życia iOS i Android (BGTaskScheduler kontra WorkManager) oraz agresywne zabijanie usług w tle na Xiaomi i Samsungu - bez tego powiadomienia nie działają w tle.",
+            "uzasadnienie": "Świadomość vendor-specific OEM killers (Xiaomi, Samsung) to wiedza praktyczna, której nie ma w dokumentacji Fluttera. Pokazuje, że wykonawca wdrażał już aplikacje w polskich realiach."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar A / C)",
+            "cytat": "Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+, inaczej Google Play zablokuje upload.",
+            "uzasadnienie": "Twardy fakt z 2026 roku, którego nie zna większość wykonawców. Bez tego aplikacja nie przejdzie Google Play. Idealnie dobrane do modyfikatora RESCUE (klient może mieć kod po poprzednim wykonawcy, który tego nie uwzględnił)."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar B)",
+            "cytat": "Mamy za sobą system rezerwacji dla Kliniki Doktor Monika: 18 miesięcy bez kolizji terminów i referencję Prezesa.",
+            "uzasadnienie": "Twardy, weryfikowalny dowód z portfolio pasujący do domeny medycznej (klinika), z liczbą (18 mies.) i osobą referencyjną (Prezes). Zero pustego 'mamy doświadczenie'."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "z pracą na środowisku stagingowym, pełnym Sandbox-First i rozliczeniem przez depozyt Useme",
+            "uzasadnienie": "Klient dostaje jasną gwarancję, że testy nie dotkną produkcji, oraz bezpieczne rozliczenie. Sandbox-First jest wprost nazwany."
+          },
+          {
+            "punkty": "+20 pkt (Wymiar C)",
+            "cytat": "Czy aplikacja ma zawierać dokumentację medyczną i integrację z systemem P1, czy ograniczamy się do zarządzania wizytami i pacjentami? I czy istnieje już kod po poprzednim wykonawcy, który warto najpierw zinwentaryzować?",
+            "uzasadnienie": "Dwa pytania trafiają w absolutnie kluczowe punkty decyzyjne: (1) zakres P1 vs CRUD wizyt determinuje skalę projektu i wymogi DPIA, (2) pytanie o istniejący kod uderza w modyfikator RESCUE i pokazuje doświadczenie w przejmowaniu projektów. Krótkie, w osobnym akapicie, bez numeracji, zero telefonów."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar E)",
+            "cytat": "Wycena: 16000 zł netto, realizacja 30 dni, z 30-dniową gwarancją rozruchową na własny kod. / Ksawier Potrykus",
+            "uzasadnienie": "Jedna kwota netto, żadnych widełek, żadnego 'wersja druga wyceniana osobno', imienny podpis. Format zgodny z [WYNIK_KONCOWY]."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-2 pkt (Wymiar A2)",
+            "cytat": "Wdrażamy: aplikacja iOS/Android, panel admina i backend na Państwa serwerze",
+            "uzasadnienie": "Brak nazwania rdzenia technologicznego. Karta tech_06 to Flutter/Dart, a oferta nie mówi ani słowa o wyborze frameworka (Flutter vs natywny Kotlin+Swift), nie wspomina o zarządzaniu stanem (Riverpod/BLoC) ani o Impellerze. Dla ścieżki inzynieria i klienta technicznego to luka: klient nie wie, czy dostanie cross-platform z jednego kodu, czy dwa natywne projekty. Drift i SQLCipher sugerują Flutter, ale to zbyt niejawne."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar B3)",
+            "cytat": "Mamy za sobą system rezerwacji dla Kliniki Doktor Monika",
+            "uzasadnienie": "Case study jest z tej samej domeny (medycznej), ale dotyczy systemu rezerwacji, a nie aplikacji mobilnej offline-first. Nie jest wprost mobilnym dowodem na architekturę, którą oferta proponuje."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar D1)",
+            "cytat": "realizacja 30 dni",
+            "uzasadnienie": "30 dni na pełny projekt (UX + aplikacja iOS + Android + panel admina + backend + VPS deploy) przy 156 h pracy to harmonogram napięty. Realistycznie przy pierwszej iteracji z klientem i testami na urządzeniach to 40-50 dni. Kwota 16000 zł jest OK (efektywna stawka 148 zł/h), ale czas może zostać zakwestionowany."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar A1/A2)",
+            "cytat": "Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+",
+            "uzasadnienie": "Fakt poprawny, ale 'przechodzi wymóg' to skrót myślowy: to nie aplikacja 'przechodzi', tylko biblioteki natywne muszą być zbudowane z alignment 16 KB. Warto to doprecyzować, bo klient techniczny może to wychwycić jako niezrozumienie tematu."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1) W drugim akapicie dodaj jedno zdanie o stosie technologicznym, np.: 'Stawiamy na Flutter z Dart (jeden kod na iOS i Android) i Riverpod do zarządzania stanem, co przy tym budżecie daje szybkie MVP bez utraty wydajności; Impeller domyślnie eliminuje shader compilation jank na obu platformach.' To wypełnia lukę tech_06 i pokazuje, że wiesz, co wybierasz. 2) Doprecyzuj zdanie o 16 KB page size: 'biblioteki natywne kompilujemy z alignment 16 KB, inaczej Google Play zablokuje upload'. 3) Zamień case study na bardziej mobilny, jeśli istnieje w portfolio_baza.md, albo dodaj jedno zdanie, że system rezerwacji dla Kliniki Doktor Monika był wdrożeniem z synchronizacją offline. 4) Rozważ wydłużenie deklarowanego czasu do 40 dni lub uzasadnij 30 dni w ofercie (np. '30 dni przy założeniu, że zakres P1 nie wchodzi w pierwszą iterację').",
+        "popraw_wycena": "Kwota 16000 zł netto jest rynkowo trafna (efektywna stawka 148 zł/h, powyżej progu 90 zł/h), ale czas 30 dni jest zbyt optymistyczny dla pełnego zakresu UX + iOS + Android + panel + backend + VPS. Rekomendacja dla 02b: zwiększ dni do 40 lub rozbij dostawę na dwa etapy (MVP 30 dni + iteracja 10 dni) bez zmiany kwoty. Nie dodawaj modułów DPIA/P1 do wyceny bazowej, bo nie wynikają z ogłoszenia.",
+        "words": 194,
+        "chars": 1320
+      }
+    },
+    "final": {
+      "opis": "Dzień dobry,\n\nGłówna pułapka w aplikacji dla fizjoterapeutów to dane medyczne: karta pacjenta w chmurze bez szyfrowania to naruszenie RODO (art. 9), a praca w terenie bez zasięgu kończy się utratą wpisów. Rozwiązaniem jest architektura offline-first z lokalną zaszyfrowaną bazą SQLCipher i Drift - gdy w gabinecie zerwie się łącze, karta zapisuje się na urządzeniu, a synchronizacja dogania po powrocie online.\n\nKrytyczne są też różnice w cyklu życia iOS i Android (BGTaskScheduler kontra WorkManager) oraz agresywne zabijanie usług w tle na Xiaomi i Samsungu - bez tego powiadomienia nie działają w tle. Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+, inaczej Google Play zablokuje upload.\n\nWdrażamy: aplikacja iOS/Android, panel admina i backend na Państwa serwerze, z pracą na środowisku stagingowym, pełnym Sandbox-First i rozliczeniem przez depozyt Useme. Mamy za sobą system rezerwacji dla Kliniki Doktor Monika: 18 miesięcy bez kolizji terminów i referencję Prezesa.\n\nCzy aplikacja ma zawierać dokumentację medyczną i integrację z systemem P1, czy ograniczamy się do zarządzania wizytami i pacjentami? I czy istnieje już kod po poprzednim wykonawcy, który warto najpierw zinwentaryzować?\n\nWycena: 16000 zł netto, realizacja 30 dni, z 30-dniową gwarancją rozruchową na własny kod.\nKsawier Potrykus",
+      "wycena": 16000,
+      "dni": 30,
+      "rounds": 1,
+      "audyt": {
+        "wynik_100": 94,
+        "kategorie": {
+          "A_merytoryka_25": 22,
+          "B_psychologia_25": 23,
+          "C_pytanie_cta_20": 20,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 15
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Główna pułapka w aplikacji dla fizjoterapeutów to dane medyczne: karta pacjenta w chmurze bez szyfrowania to naruszenie RODO (art. 9), a praca w terenie bez zasięgu kończy się utratą wpisów.",
+            "uzasadnienie": "Killshot trafia w podwójną minę domenową: (1) dane medyczne = RODO art. 9 i szyfrowanie at-rest, (2) fizjoterapeuta pracuje w terenie, gdzie zasięg znika. To dokładnie ukryty problem, o którym 85% wykonawców pisze dopiero po pytaniu klienta. Otwarcie buduje natychmiastowy autorytet ekspercki."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar A)",
+            "cytat": "architektura offline-first z lokalną zaszyfrowaną bazą SQLCipher i Drift - gdy w gabinecie zerwie się łącze, karta zapisuje się na urządzeniu, a synchronizacja dogania po powrocie online.",
+            "uzasadnienie": "Konkretny mechanizm zamiast hasła: nazwana baza (SQLCipher), nazwany ORM (Drift), nazwany wzorzec (offline-first) i wyjaśniony scenariusz działania. To język inżyniera, nie marketing."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar A)",
+            "cytat": "Krytyczne są też różnice w cyklu życia iOS i Android (BGTaskScheduler kontra WorkManager) oraz agresywne zabijanie usług w tle na Xiaomi i Samsungu - bez tego powiadomienia nie działają w tle.",
+            "uzasadnienie": "Świadomość vendor-specific OEM killers (Xiaomi, Samsung) to wiedza praktyczna, której nie ma w dokumentacji Fluttera. Pokazuje, że wykonawca wdrażał już aplikacje w polskich realiach."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar A / C)",
+            "cytat": "Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+, inaczej Google Play zablokuje upload.",
+            "uzasadnienie": "Twardy fakt z 2026 roku, którego nie zna większość wykonawców. Bez tego aplikacja nie przejdzie Google Play. Idealnie dobrane do modyfikatora RESCUE (klient może mieć kod po poprzednim wykonawcy, który tego nie uwzględnił)."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar B)",
+            "cytat": "Mamy za sobą system rezerwacji dla Kliniki Doktor Monika: 18 miesięcy bez kolizji terminów i referencję Prezesa.",
+            "uzasadnienie": "Twardy, weryfikowalny dowód z portfolio pasujący do domeny medycznej (klinika), z liczbą (18 mies.) i osobą referencyjną (Prezes). Zero pustego 'mamy doświadczenie'."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "z pracą na środowisku stagingowym, pełnym Sandbox-First i rozliczeniem przez depozyt Useme",
+            "uzasadnienie": "Klient dostaje jasną gwarancję, że testy nie dotkną produkcji, oraz bezpieczne rozliczenie. Sandbox-First jest wprost nazwany."
+          },
+          {
+            "punkty": "+20 pkt (Wymiar C)",
+            "cytat": "Czy aplikacja ma zawierać dokumentację medyczną i integrację z systemem P1, czy ograniczamy się do zarządzania wizytami i pacjentami? I czy istnieje już kod po poprzednim wykonawcy, który warto najpierw zinwentaryzować?",
+            "uzasadnienie": "Dwa pytania trafiają w absolutnie kluczowe punkty decyzyjne: (1) zakres P1 vs CRUD wizyt determinuje skalę projektu i wymogi DPIA, (2) pytanie o istniejący kod uderza w modyfikator RESCUE i pokazuje doświadczenie w przejmowaniu projektów. Krótkie, w osobnym akapicie, bez numeracji, zero telefonów."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar E)",
+            "cytat": "Wycena: 16000 zł netto, realizacja 30 dni, z 30-dniową gwarancją rozruchową na własny kod. / Ksawier Potrykus",
+            "uzasadnienie": "Jedna kwota netto, żadnych widełek, żadnego 'wersja druga wyceniana osobno', imienny podpis. Format zgodny z [WYNIK_KONCOWY]."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-2 pkt (Wymiar A2)",
+            "cytat": "Wdrażamy: aplikacja iOS/Android, panel admina i backend na Państwa serwerze",
+            "uzasadnienie": "Brak nazwania rdzenia technologicznego. Karta tech_06 to Flutter/Dart, a oferta nie mówi ani słowa o wyborze frameworka (Flutter vs natywny Kotlin+Swift), nie wspomina o zarządzaniu stanem (Riverpod/BLoC) ani o Impellerze. Dla ścieżki inzynieria i klienta technicznego to luka: klient nie wie, czy dostanie cross-platform z jednego kodu, czy dwa natywne projekty. Drift i SQLCipher sugerują Flutter, ale to zbyt niejawne."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar B3)",
+            "cytat": "Mamy za sobą system rezerwacji dla Kliniki Doktor Monika",
+            "uzasadnienie": "Case study jest z tej samej domeny (medycznej), ale dotyczy systemu rezerwacji, a nie aplikacji mobilnej offline-first. Nie jest wprost mobilnym dowodem na architekturę, którą oferta proponuje."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar D1)",
+            "cytat": "realizacja 30 dni",
+            "uzasadnienie": "30 dni na pełny projekt (UX + aplikacja iOS + Android + panel admina + backend + VPS deploy) przy 156 h pracy to harmonogram napięty. Realistycznie przy pierwszej iteracji z klientem i testami na urządzeniach to 40-50 dni. Kwota 16000 zł jest OK (efektywna stawka 148 zł/h), ale czas może zostać zakwestionowany."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar A1/A2)",
+            "cytat": "Aplikacja przechodzi też wymóg 16 KB page size dla Androida 15+",
+            "uzasadnienie": "Fakt poprawny, ale 'przechodzi wymóg' to skrót myślowy: to nie aplikacja 'przechodzi', tylko biblioteki natywne muszą być zbudowane z alignment 16 KB. Warto to doprecyzować, bo klient techniczny może to wychwycić jako niezrozumienie tematu."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1) W drugim akapicie dodaj jedno zdanie o stosie technologicznym, np.: 'Stawiamy na Flutter z Dart (jeden kod na iOS i Android) i Riverpod do zarządzania stanem, co przy tym budżecie daje szybkie MVP bez utraty wydajności; Impeller domyślnie eliminuje shader compilation jank na obu platformach.' To wypełnia lukę tech_06 i pokazuje, że wiesz, co wybierasz. 2) Doprecyzuj zdanie o 16 KB page size: 'biblioteki natywne kompilujemy z alignment 16 KB, inaczej Google Play zablokuje upload'. 3) Zamień case study na bardziej mobilny, jeśli istnieje w portfolio_baza.md, albo dodaj jedno zdanie, że system rezerwacji dla Kliniki Doktor Monika był wdrożeniem z synchronizacją offline. 4) Rozważ wydłużenie deklarowanego czasu do 40 dni lub uzasadnij 30 dni w ofercie (np. '30 dni przy założeniu, że zakres P1 nie wchodzi w pierwszą iterację').",
+        "popraw_wycena": "Kwota 16000 zł netto jest rynkowo trafna (efektywna stawka 148 zł/h, powyżej progu 90 zł/h), ale czas 30 dni jest zbyt optymistyczny dla pełnego zakresu UX + iOS + Android + panel + backend + VPS. Rekomendacja dla 02b: zwiększ dni do 40 lub rozbij dostawę na dwa etapy (MVP 30 dni + iteracja 10 dni) bez zmiany kwoty. Nie dodawaj modułów DPIA/P1 do wyceny bazowej, bo nie wynikają z ogłoszenia.",
+        "words": 194,
+        "chars": 1320
+      }
+    }
+  },
+  "143924": {
+    "id": "143924",
+    "title": "Moodle — konfiguracja i automatyzacja przydzielania ankiet",
+    "mode": "holdout_unseen_e2e",
+    "old_r1_score": null,
+    "klasyfikacja": {
+      "tier": "A",
+      "sciezka": "inzynieria",
+      "typ_klienta": "ekspert_dziedzinowy",
+      "karta_tech": "tech_04",
+      "modyfikatory": []
+    },
+    "new_zero_shot_r1": {
+      "opis": "Dzień dobry,\n\nGłówna pułapka architektoniczna w tym wdrożeniu to brak natywnego API Moodle do programistycznego tworzenia quizów i pytań. Standardowe mechanizmy obsługują głównie ścieżkę studenta, więc automatyzacja przydziału ankiet i sterowanie rundami wymaga dedykowanego pluginu bez modyfikacji plików core. Import klucza i bazy pytań z Excela nie jest bezpośrednio wspierany - konieczna jest warstwa konwersji, a automatyczne odświeżanie ankiety na telefonie wymaga integracji z mechanizmem czasu rzeczywistego.\n\nW ramach wdrożenia zrealizuję pełny zakres: pobieranie uczestników, przydział według klucza z Excela, uruchamianie i zamykanie rund jednym kliknięciem, auto-odświeżanie aktywnej ankiety, wybór pytań przez wskazanego uczestnika, bieżący zapis odpowiedzi z blokadą edycji po zamknięciu rundy oraz eksport wyników do Excela z pełną identyfikacją. Panel prowadzącego umożliwi sterowanie dostępnością i podgląd postępów. Całość przetestuję na kopii bazy (sandbox), bez ryzyka dla żywej produkcji, a po wdrożeniu przekażę instrukcję wideo i 30-dniową gwarancję rozruchową na własny kod.\n\nCzy obecna instalacja Moodle pozwala na instalację dodatkowych pluginów, czy preferują Państwo rozwiązanie w pełni samodzielne?\n\nWycena: 7000 zł netto, czas realizacji 15 dni.\n\nKsawier Potrykus",
+      "wycena": 7000,
+      "dni": 15,
+      "audyt": {
+        "wynik_100": 85,
+        "kategorie": {
+          "A_merytoryka_25": 21,
+          "B_psychologia_25": 18,
+          "C_pytanie_cta_20": 18,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 14
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Główna pułapka architektoniczna w tym wdrożeniu to brak natywnego API Moodle do programistycznego tworzenia quizów i pytań.",
+            "uzasadnienie": "Otwarcie killshotem trafia w realną, weryfikowalną minę architektoniczną Moodle, o której większość oferentów nie wspomina. Klient dostaje natychmiastowy sygnał, że oferent rozumie ograniczenia platformy, zamiast obiecywać 'skonfiguruję i będzie działać'."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Całość przetestuję na kopii bazy (sandbox), bez ryzyka dla żywej produkcji, a po wdrożeniu przekażę instrukcję wideo i 30-dniową gwarancję rozruchową na własny kod.",
+            "uzasadnienie": "Jasna deklaracja Sandbox-First i 30-dniowej gwarancji rozruchowej na własny kod. Dla klienta eksperta dziedzinowego (szkoleniowiec, edukacja) to kluczowy sygnał bezpieczeństwa wdrożenia w systemie LMS, w którym trwają zajęcia."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar C)",
+            "cytat": "Czy obecna instalacja Moodle pozwala na instalację dodatkowych pluginów, czy preferują Państwo rozwiązanie w pełni samodzielne?",
+            "uzasadnienie": "Pytanie trafia w realny punkt decyzyjny projektu (uprawnienia do instalacji pluginów na współdzielonej instancji Moodle), zmusza klienta do ujawnienia ograniczeń infrastruktury i otwiera dalszą rozmowę. Krótkie, konkretne, bez szkolnego numerowania."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar E)",
+            "cytat": "Wycena: 7000 zł netto, czas realizacji 15 dni.",
+            "uzasadnienie": "Jedna kwota netto, bez widełek, zgodna z [WYNIK_KONCOWY]. Mieści się w budżecie klienta (8100 zł) i odzwierciedla realną pracochłonność dedykowanego pluginu Moodle z logiką rund, eksportem i importem Excela."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-4 pkt (Wymiar B / B3)",
+            "cytat": "Brak jakiegokolwiek twardego dowodu z portfolio (np. liczby wdrożeń Moodle, konkretnego case study LMS, faktu o liczbie obsłużonych uczestników).",
+            "uzasadnienie": "Oferta nie zawiera ani jednego weryfikowalnego dowodu z portfolio_baza.md pasującego do domeny LMS/Moodle. Nie ma też świadomej rezygnacji z pustego chwalenia się (bo nie ma żadnego zdania o doświadczeniu). Klient nie dostaje żadnego punktu zaczepienia, by zweryfikować kompetencje oferenta."
+          },
+          {
+            "punkty": "-3 pkt (Wymiar A / A2)",
+            "cytat": "Import klucza i bazy pytań z Excela nie jest bezpośrednio wspierany - konieczna jest warstwa konwersji, a automatyczne odświeżanie ankiety na telefonie wymaga integracji z mechanizmem czasu rzeczywistego.",
+            "uzasadnienie": "Oferta nazywa problem, ale nie wyjaśnia mechanizmu. 'Warstwa konwersji' i 'mechanizm czasu rzeczywistego' to hasła bez konkretu. Brak odpowiedzi na pytanie JAK: czy to polling co N sekund, czy WebSocket/SSE? Czy konwersja to parser PHP czytający XLSX i mapujący na strukturę pytań Moodle? Dla ścieżki inżynieria brak głębi mechanistycznej."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar B / B1)",
+            "cytat": "Panel prowadzącego umożliwi sterowanie dostępnością i podgląd postępów.",
+            "uzasadnienie": "Dla klienta typu ekspert_dziedzinowy (szkoleniowiec, edukacja) technologia powinna być od razu przełożona na bezpieczeństwo codziennej pracy z uczestnikami. Brak scenariusza: co się dzieje, gdy prowadzący zamknie rundę przez pomyłkę? Czy jest cofnięcie? Co widzi uczestnik przy zerwanym Wi-Fi w trakcie wypełniania ankiety? Oferta nie adresuje tych codziennych obaw."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar E / E2)",
+            "cytat": "Dzień dobry, Główna pułapka architektoniczna w tym wdrożeniu to brak natywnego API Moodle...",
+            "uzasadnienie": "Brak imiennego podpisu w formie dopasowanej do ścieżki inżynieria (jest samo 'Ksawier Potrykus' bez kontekstu). Drobny minus za higienę formatowania - w ścieżce inżynieria oczekiwana jest naturalna proza inżynierska z podpisem, który nie udaje formy listu formalnego do urzędu."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1) Dodaj jedno konkretne zdanie z portfolio_baza.md pasujące do LMS/Moodle/edukacji (np. 'Wdrożyłem podobny mechanizm rundowy dla [X] uczestników na [Y] kursach' lub jeśli brak case study wprost - pomiń, ale nie zostawiaj luki bez dowodu). 2) Rozwiń mechanizm: zamiast 'warstwa konwersji' napisz konkretnie, że parser PHP czyta XLSX i mapuje na strukturę pytań Moodle (question bank), a zamiast 'mechanizm czasu rzeczywistego' napisz, że odświeżanie robisz przez lekki polling AJAX co 5-10 sekund lub SSE - jedno zdanie, które pokazuje, że wiesz JAK. 3) Dodaj jedno zdanie adresujące codzienną pracę prowadzącego: np. 'Panel prowadzącego pozwala cofnąć zamknięcie rundy w ciągu X minut, a uczestnik widzi stan ankiety nawet po zerwaniu połączenia - odpowiedzi zapisują się lokalnie i dosyłają po powrocie sieci.' 4) Zachowaj obecną długość (169 słów jest OK), nie dodawaj więcej niż 15-20 słów, żeby nie przekroczyć 205.",
+        "popraw_wycena": "",
+        "words": 169,
+        "chars": 1293
+      }
+    },
+    "final": {
+      "opis": "Dzień dobry,\n\nGłówna pułapka architektoniczna w tym wdrożeniu to brak natywnego API Moodle do programistycznego tworzenia quizów i pytań. Standardowe mechanizmy obsługują głównie ścieżkę studenta, więc automatyzacja przydziału ankiet i sterowanie rundami wymaga dedykowanego pluginu bez modyfikacji plików core. Import klucza i bazy pytań z Excela nie jest bezpośrednio wspierany - konieczna jest warstwa konwersji, a automatyczne odświeżanie ankiety na telefonie wymaga integracji z mechanizmem czasu rzeczywistego.\n\nW ramach wdrożenia zrealizuję pełny zakres: pobieranie uczestników, przydział według klucza z Excela, uruchamianie i zamykanie rund jednym kliknięciem, auto-odświeżanie aktywnej ankiety, wybór pytań przez wskazanego uczestnika, bieżący zapis odpowiedzi z blokadą edycji po zamknięciu rundy oraz eksport wyników do Excela z pełną identyfikacją. Panel prowadzącego umożliwi sterowanie dostępnością i podgląd postępów. Całość przetestuję na kopii bazy (sandbox), bez ryzyka dla żywej produkcji, a po wdrożeniu przekażę instrukcję wideo i 30-dniową gwarancję rozruchową na własny kod.\n\nCzy obecna instalacja Moodle pozwala na instalację dodatkowych pluginów, czy preferują Państwo rozwiązanie w pełni samodzielne?\n\nWycena: 7000 zł netto, czas realizacji 15 dni.\n\nKsawier Potrykus",
+      "wycena": 7000,
+      "dni": 15,
+      "rounds": 2,
+      "audyt": {
+        "wynik_100": 91,
+        "kategorie": {
+          "A_merytoryka_25": 22,
+          "B_psychologia_25": 22,
+          "C_pytanie_cta_20": 19,
+          "D_wycena_15": 14,
+          "E_styl_zwiezlosc_15": 14
+        },
+        "za_co_dodano": [
+          {
+            "punkty": "+10 pkt (Wymiar A)",
+            "cytat": "Główna pułapka architektoniczna w tym wdrożeniu to brak natywnego API Moodle do programistycznego tworzenia quizów i pytań. Standardowe mechanizmy obsługują głównie ścieżkę studenta, więc automatyzacja przydziału ankiet i sterowanie rundami wymaga dedykowanego pluginu bez modyfikacji plików core.",
+            "uzasadnienie": "Otwarcie uderza w realną, ukrytą minę architektoniczną Moodle: brak natywnego API do programistycznego tworzenia quizów i pytań. Większość wykonawców napisałaby 'mam doświadczenie w Moodle', a tutaj oferent nazywa problem, którego klient mógł nie dostrzec, i od razu wskazuje kierunek rozwiązania (dedykowany plugin bez modyfikacji core)."
+          },
+          {
+            "punkty": "+8 pkt (Wymiar B)",
+            "cytat": "Całość przetestuję na kopii bazy (sandbox), bez ryzyka dla żywej produkcji, a po wdrożeniu przekażę instrukcję wideo i 30-dniową gwarancję rozruchową na własny kod.",
+            "uzasadnienie": "Jasna deklaracja sandbox-first (kopia bazy, zero ryzyka dla produkcji) oraz 30-dniowa gwarancja rozruchowa na własny kod. To buduje zaufanie u klienta eksperta dziedzinowego, który boi się zablokowania kursu w trakcie semestru."
+          },
+          {
+            "punkty": "+9 pkt (Wymiar C)",
+            "cytat": "Czy obecna instalacja Moodle pozwala na instalację dodatkowych pluginów, czy preferują Państwo rozwiązanie w pełni samodzielne?",
+            "uzasadnienie": "Pytanie trafia w kluczowy punkt decyzyjny projektu: możliwość instalacji pluginów determinuje całą architekturę (plugin Moodle vs zewnętrzne narzędzie). Zmusza klienta do konkretnej odpowiedzi przed wyceną i chroni przed błędnym założeniem."
+          },
+          {
+            "punkty": "+7 pkt (Wymiar D)",
+            "cytat": "Wycena: 7000 zł netto, czas realizacji 15 dni.",
+            "uzasadnienie": "Jedna kwota netto, bez widełek, zgodna z budżetem 8100 zł i realną pracochłonnością dedykowanego pluginu Moodle z logiką rund, importem Excel, eksportem i auto-odświeżaniem."
+          }
+        ],
+        "za_co_odjeto": [
+          {
+            "punkty": "-3 pkt (Wymiar A)",
+            "cytat": "konieczna jest warstwa konwersji, a automatyczne odświeżanie ankiety na telefonie wymaga integracji z mechanizmem czasu rzeczywistego",
+            "uzasadnienie": "Na ścieżce inżynieria opis mechanizmu jest zbyt ogólny. Oferta nie nazywa konkretnego rozwiązania czasu rzeczywistego (WebSocket? AJAX polling? Moodle notification API?), poprzestając na haśle 'mechanizm czasu rzeczywistego'. Brakuje również szczegółu, jak działa 'warstwa konwersji' Excela na struktury Moodle."
+          },
+          {
+            "punkty": "-2 pkt (Wymiar B)",
+            "cytat": "Panel prowadzącego umożliwi sterowanie dostępnością i podgląd postępów.",
+            "uzasadnienie": "Dla klienta eksperta dziedzinowego (edukacja) oferta nie przekłada technologii na bezpieczeństwo codziennej pracy prowadzącego. Brakuje scenariuszy typu: co się stanie, gdy prowadzący zamknie rundę w trakcie wypełniania ankiety przez studenta, co przy zerwanym Wi-Fi w sali, jak wygląda awaryjne zamknięcie rundy."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar C)",
+            "cytat": "Czy obecna instalacja Moodle pozwala na instalację dodatkowych pluginów, czy preferują Państwo rozwiązanie w pełni samodzielne?",
+            "uzasadnienie": "Pytanie jest dobre, ale tylko jedno. Przy projekcie za 7000 zł i 15 dni warto dopytać o liczbę rund lub format klucza Excel, co dodatkowo angażuje klienta i eliminuje ryzyko niedoszacowania zakresu."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar D)",
+            "cytat": "Brak konkretnego dowodu z portfolio (np. liczby wdrożonych pluginów Moodle, liczby obsłużonych uczestników).",
+            "uzasadnienie": "Oferta nie zawiera pustego chwalenia się, co jest poprawne, ale przy budżecie 8100 zł i 55 konkurentach twardy, weryfikowalny dowód z portfolio_baza.md (np. '18 mies. bez kolizji' lub '3500+ dokumentów') znacząco zwiększyłby przewagę nad konkurencją."
+          },
+          {
+            "punkty": "-1 pkt (Wymiar E)",
+            "cytat": "Ksawier Potrykus",
+            "uzasadnienie": "Podpis jest poprawny, ale oferta nie zawiera żadnego elementu budującego osobisty autorytet inżynierski (np. linku do repozytorium, krótkiej wzmianki o konkretnym wdrożeniu Moodle), co przy 55 konkurentach osłabia wyróżnik."
+          }
+        ],
+        "werdykt": "POPRAW",
+        "popraw_oferta": "1. Doprecyzuj mechanizm auto-odświeżania: zamiast 'integracji z mechanizmem czasu rzeczywistego' napisz wprost, że wykorzystasz np. 'AJAX z odpytywaniem co 5 s' lub 'Moodle notification API' i uzasadnij wybór (obciążenie serwera vs natychmiastowość). 2. Dodaj jedno zdanie o bezpieczeństwie codziennej pracy prowadzącego: co się dzieje, gdy student nie dokończy ankiety przed zamknięciem rundy, jak wygląda ręczne awaryjne zamknięcie. 3. Rozważ dodanie drugiego krótkiego pytania o liczbę rund w semestrze lub format klucza Excel (jeden arkusz vs wiele arkuszy), aby jeszcze mocniej zaangażować klienta. 4. Jeśli masz w portfolio jakikolwiek projekt Moodle/LMS z twardą liczbą (np. 'wdrożyłem plugin dla 1200 studentów'), wpleć go zamiast ogólnego zdania o doświadczeniu.",
+        "popraw_wycena": "",
+        "words": 169,
+        "chars": 1293
+      }
+    }
+  }
+}

@@ -1,0 +1,310 @@
+======================================================================
+CZĘŚĆ A: DOGRYWKA 6 OFERT Z WYNIKIEM 89-91/100 PO AKTUALIZACJI PROMPTÓW
+======================================================================
+
+[DOGRYWKA #144867] Dedykowana aplikacja mobilna (iOS/Android) dla fizjoterapeutów + Panel Admina (własny serwer) (obecny wynik: 89/100)
+[NOWA OFERTA #144867] Wycena: 21000 zł / 45 dni (179 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Wymogi sklepów dla aplikacji medycznych zaostrzają się - wymagana jest deklaracja statusu wyrobu medycznego. Przy danych o stanie pacjenta wchodzi RODO art. 9. Dlatego już na etapie architektury projektujemy pełną rozliczalność: logi zmian, szyfrowanie danych i trwałe kopie zapasowe.
+
+Aplikację budujemy we Flutterze z warstwą BLoC. Dzięki temu ekrany nie zamulają się przy przeglądaniu kart pacjentów, a każda zmiana w danych jest zapisana w historii. Dane pacjenta trzymamy zaszyfrowane na urządzeniu, więc gabinet pracuje normalnie nawet przy zerwanym Wi-Fi. Synchronizacja dogania po powrocie łącza. Panel admina i backend stawiamy na Waszym serwerze, a pierwsze testy i importy wykonujemy w środowisku odizolowanym, bez dotykania żywej produkcji. Dla Kliniki Doktor Monika zbudowaliśmy system rezerwacji z blokadami transakcyjnymi, działający bez kolizji terminów od 18 miesięcy.
+
+Ile osób z personelu będzie korzystać z systemu na co dzień i czy aplikacja ma synchronizować się z zewnętrznym kalendarzem lub bramką SMS?
+
+Wycena: 21000 zł netto, realizacja 45 dni (dwie osoby: mobile + backend/panel): projekt UX, aplikacja iOS/Android, panel admina i wdrożenie na Waszym serwerze. 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #144867: 95/100 pkt (zmiana: 89 -> 95) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +9 pkt (Wymiar A): Killshot w pierwszych 2 zdaniach: uderza w dwie niewidoczne miny prawne, o których 85% wykonawców nie wspomni przy wycenie (MDR + art. 9 RODO dla danych medycznych), a które dla fizjoterapeuty są realnym ryzykiem wdrożeniowym i kosztowym.
+   [+] +9 pkt (Wymiar A): Konkret mechanizmu offline-first przełożony na realny scenariusz pracy w gabinecie, nie puste 'zoptymalizujemy proces'. Zgodne z realiami Flutter/BLoC i profilem klienta dziedzinowego.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio pasujący wprost do domeny medycznej (18 mies. bez kolizji) zamiast ogólnikowego 'mamy doświadczenie'.
+   [+] +8 pkt (Wymiar B): Jawna deklaracja Sandbox-First + 30 dni gwarancji, kluczowa dla klienta dziedzinowego, który boi się utraty danych pacjentów.
+   [+] +9 pkt (Wymiar C): Pytanie dotyka dwóch punktów decyzyjnych (skala = architektura multi-tenant i model uprawnień; integracja z kalendarzem/SMS = zakres backendu), zmuszając klienta do odpowiedzi na priv.
+   [-] -2 pkt (Wymiar A): [Aplikację budujemy we Flutterze z warstwą BLoC.] -> Nazwanie BLoC bez jednego słowa wyjaśnienia, dlaczego BLoC a nie Riverpod (np. wymogi audytowe/medyczne, deterministyczne przebudowy). Dla klienta dziedzinowego to nazwa bez treści; brakuje zdania typu 'BLoC wybieramy, bo wymogi rozliczalności medycznej wymagają jawnego dziennika zdarzeń'.
+   [-] -3 pkt (Wymiar D): [Integracja płatności (Stripe/Przelewy24, webhook, lifecycle) 16h; Integracja zewnętrznego API (złożona, retry, error handling, queue) 20h] -> Moduły płatności i zewnętrznego API (36h) nie wynikają wprost z ogłoszenia klienta - to spekulatywne moduły zawyżające podstawę, choć wycena końcowa i tak mieści się w realiach (21 000 zł za mobile+panel+backend).
+   [-] -1 pkt (Wymiar C): [czy aplikacja ma synchronizować się z zewnętrznym kalendarzem lub bramką SMS?] -> Pytanie jest dobre, ale mogłoby być ostrzejsze: zabrakło pytania o kluczową decyzję architektoniczną w tym projekcie - czy aplikacja ma być wyrobem medycznym w rozumieniu MDR (bo to determinuje zakres dokumentacji i testów), czy tylko narzędziem do zarządzania gabinetem.
+
+[DOGRYWKA #144951] Wdrożenie agenta AI na NVIDIA DGX (RAG, LEX, 2FA, nauka stylu) (obecny wynik: 89/100)
+[NOWA OFERTA #144951] Wycena: 15000 zł / 33 dni (172 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Główne ryzyko to nie model, lecz dwa ograniczenia: portale sądowe z 2FA (push-approval i klucze sprzętowe są nieautomatyzowalne) oraz ryzyko halucynacji przy LEX. Proponuję półautomat: kody SMS/TOTP i e-mail wchodzą automatycznie, a push i klucze sprzętowe wymagają Państwa akceptacji w Open WebUI przez WireGuard. Dla LEX: hybrydowe wyszukiwanie po dokładnych sygnaturach i artykułach plus walidacja cytowań przed każdym pismem.
+
+Trzy odrębne przestrzenie robocze zbuduję na osobnych kolekcjach wektorowych, osobnych lekkich treningach stylu (QLoRA) i osobnych politykach dostępu. Poczta i kalendarz przez OAuth/IMAP/CalDAV z analizą wątków, draftami i zarządzaniem czasem. Wymuszony format odpowiedzi z cytatem aktu (Structured Outputs + JSON Schema) minimalizuje halucynacje. Całość w izolowanych sieciach Dockera z limitami logów i szyfrowanym backupem. Nasz pipeline AI przetworzył 3500+ dokumentów z 99,4% dokładnością - ta sama zasada separacji semantyki od walidacji. Testy na kopii bazy w odseparowanym środowisku.
+
+Czy Państwa serwer DGX ma co najmniej 80 GB pamięci GPU i czy licencja LEX obejmuje API/IPG?
+
+Wycena: 15000 zł netto, realizacja 33 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #144951: 92/100 pkt (zmiana: 89 -> 92) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +9 pkt (Wymiar A): Otwarcie uderza w ukrytą minę architektoniczną, o której nie wie 85% wykonawców: push-approval i klucze sprzętowe (FIDO2) są z definicji nieautomatyzowalne bez zgody użytkownika. Większość ofert obiecywałaby 'omijanie 2FA' w całości, co jest technicznie niemożliwe i prowadziłoby do porażki wdrożenia. Wybór właściwej granicy automatyzacji to esencja dojrzałości inżynierskiej.
+   [+] +8 pkt (Wymiar A): Dokładnie trafia w standard produkcyjny RAG z Karty Wiedzy tech_15: hybryda (BM25 dla sygnatur + dense dla semantyki) zamiast naiwnego dense-only, który gubi identyfikatory prawne. Walidacja cytowań przed pismem to jedyna architektura dająca zerową tolerancję na halucynacje w domenie prawnej.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z konkretną liczbą, wprost dopasowany do domeny RAG. Zdanie łączy dowód z mechanizmem ('separacja semantyki od walidacji'), co buduje zaufanie bez pustego chwalenia się.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja Sandbox-First (testy na kopii, zero dotykania żywej produkcji) plus 30 dni gwarancji rozruchowej. Dla radcy prawnego z tajemnicą zawodową to absolutny minimum zaufania.
+   [+] +9 pkt (Wymiar C): Pytanie trafia w dwa kluczowe punkty decyzyjne: (1) 80 GB VRAM warunkuje wybór modelu (Llama 3.3 70B w 8-bit vs 4-bit vs brak możliwości) i architekturę vLLM; (2) licencja LEX API/IPG decyduje, czy RAG może korzystać z legalnego API, czy trzeba scrapować (co rodzi ryzyko prawne i techniczne). Zmusza klienta do konkretnej odpowiedzi.
+   [+] +8 pkt (Wymiar E): Tekst jest gęsty, konkretny, mieści się w limicie 135–210 słów dla dużego zlecenia. Zero 'kompleksowych rozwiązań', 'synergii' czy 'dedykowanych zespołów'. Podpis imienny na końcu.
+   [-] -2 pkt (Wymiar B): [Brak wzmianki o ofercie klienta: 'mogę udostępnić ogromną moc obliczeniową mojego DGX do Twoich własnych, prywatnych projektów'.] -> Klient wprost zaproponował barter: dostęp do DGX w zamian za obniżenie ceny. Oferta całkowicie to pomija. Dla klienta to sygnał, że wykonawca nie przeczytał ogłoszenia ze zrozumieniem lub nie docenia propozycji. Nawet jedno zdanie ('Chętnie skorzystam z Państwa propozycji współdzielenia mocy DGX, co pozwoliło obniżyć wycenę') budowałoby partnerstwo i obniżyło opór cenowy.
+   [-] -2 pkt (Wymiar B): [Brak odniesienia do: 'Od strony IT jestem laikiem. Szukam fachowca, który mi doradzi i poprowadzi za rękę'.] -> Klient zadeklarował się jako laik IT i wprost poprosił o prowadzenie za rękę. Oferta jest merytorycznie mocna, ale nie zawiera ani jednego zdania, które adresuje ten lęk ('poprowadzę Państwa przez wdrożenie', 'wytłumaczę każdy krok bez żargonu'). Dla eksperta dziedzinowego to kluczowy element psychologiczny.
+   [-] -1 pkt (Wymiar A): [Structured Outputs + JSON Schema minimalizuje halucynacje.] -> Mechanizm walidacji cytowań jest zasygnalizowany, ale niewyjaśniony. Jak dokładnie działa walidacja? Czy porównuje wygenerowany cytat z bazą aktów? Czy sprawdza sygnaturę i treść? Dla radcy prawnego z zerową tolerancją na halucynacje to zbyt ogólne. Brakuje jednego zdania mechanizmu.
+   [-] -1 pkt (Wymiar C): [Czy Państwa serwer DGX ma co najmniej 80 GB pamięci GPU i czy licencja LEX obejmuje API/IPG?] -> Pytanie jest dobre, ale łączy dwie odległe kwestie w jednym zdaniu. Rozdzielenie ich (lub skupienie się na jednej, kluczowej) zwiększyłoby szansę na szybką odpowiedź. Dla klienta-laika dwa pytania techniczne w jednym zdaniu mogą być przytłaczające.
+   [-] -1 pkt (Wymiar D): [Wycena: 15000 zł netto, realizacja 33 dni.] -> Wycena jest na dolnej granicy realizmu dla tego zakresu (3 przestrzenie robocze z QLoRA, RAG z LEX, automatyzacja 2FA z Playwright, OAuth/IMAP/CalDAV, WireGuard, Open WebUI, Docker, backupy). Przy 90 zł/h daje to ~167 h, czyli ~21 dni roboczych. Przy 33 dniach kalendarzowych i ciągłej naturze projektu (2FA, sesje 30s) budżet jest napięty. Nie jest to błąd dyskwalifikujący, ale brakuje wzmianki o barterze DGX, który tłumaczyłby obniżenie ceny.
+
+[DOGRYWKA #144411] Integracja SAP ↔ BaseLinker ↔ Shopify – wiele magazynów / Shopify Locations (obecny wynik: 89/100)
+[NOWA OFERTA #144411] Wycena: 11500 zł / 24 dni (178 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Główna pułapka architektoniczna w integracji SAP↔BaseLinker↔Shopify to split fulfillment: gdy jedno zamówienie wymaga towaru z dwóch magazynów, standardowy przepływ BaseLinkera tworzy jedno fulfillment, a Shopify Locations wymaga osobnych FulfillmentOrder per lokalizacja. Drugie ryzyko to mapowanie SKU między trzema systemami - bez external_id i słownika wariantów stany rozjadą się per magazyn.
+
+Wdrożyliśmy wielomagazynowy mostek BaseLinker↔Enova365 dla Centrum Budowlane Kołcz (3 magazyny, 12 000 SKU, reguły priorytetów magazynów realizujących, blokady stanów, warehouse_type). W Gardd Shopify B2B - wielomagazynowe Shopify Locations z cennikami B2B. Architektura middleware jest przenośna: te same wzorce (FulfillmentOrder API, external_id, kolejkowanie z blokadami atomowymi) stosujemy między ERP a Shopify. Synchronizacja stanów per Location przez API BaseLinkera z kolejką FIFO i delta sync; wybór magazynu po regułach dostępności (priorytet + fallback na centralny); zamówienia dzielone przez osobne FulfillmentOrder per lokalizacja; anulowania i zwroty z korektą stanów w SAP. Testy na kopii bazy i stagingu.
+
+Czy SAP to S/4HANA z OData, czy Business One, i ile lokalizacji Shopify ma obsłużyć synchronizacja?
+
+Wycena: 11500 zł netto, 24 dni robocze, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #144411: 89/100 pkt (zmiana: 89 -> 89) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 19, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Otwarcie uderza w prawdziwą, ukrytą minę architektoniczną tego konkretnego projektu. 85% wykonawców nie odróżnia mechaniki FulfillmentOrder w Shopify Locations od standardowego fulfillmentu BaseLinkera. To natychmiast buduje autorytet.
+   [+] +8 pkt (Wymiar A): Konkretny mechanizm zamiast pustych haseł. Widać zrozumienie różnicy między synchronizacją stanów a logiką wyboru magazynu realizującego oraz praktyczną implementację kolejkowania.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z liczbami (3 magazyny, 12 000 SKU, konkretne mechanizmy). Nie jest to puste chwalenie się.
+   [+] +5 pkt (Wymiar B): Jasna deklaracja Sandbox-First — klient wie, że produkcja nie zostanie dotknięta przed testami.
+   [+] +5 pkt (Wymiar C): Pytanie trafia w absolutnie kluczowy punkt decyzyjny — wybór wersji SAP determinuje całą architekturę integracji (OData vs RFC/BAPI vs własne API). Zmusza klienta do konkretnej odpowiedzi.
+   [-] -4 pkt (Wymiar B / Wiarygodność dowodu): [Wdrożyliśmy wielomagazynowy mostek BaseLinker↔Enova365 dla Centrum Budowlane Kołcz... W Gardd Shopify B2B - wielomagazynowe Shopify Locations z cennikami B2B. Architektura middleware jest przenośna: te same wzorce... stosujemy między ERP a Shopify.] -> Klient w WYMAGANIU KONIECZNYM napisał: 'Praktyczne doświadczenie we wdrażaniu integracji BaseLinker ↔ Shopify z obsługą wielu magazynów / Shopify Locations'. Oferta NIE pokazuje ani jednego wdrożenia, w którym BaseLinker i Shopify Locations były zintegrowane razem w modelu wielomagazynowym. Kołcz to BaseLinker↔Enova365, Gardd to Shopify B2B (bez wyraźnego sprzężenia z BaseLinkerem). Próba zszycia tego zdaniem 'architektura middleware jest przenośna' to racjonalizacja, nie dowód. To osłabia zaufanie w punkcie krytycznym.
+   [-] -2 pkt (Wymiar A / Spójność): [Drugie ryzyko to mapowanie SKU między trzema systemami - bez external_id i słownika wariantów stany rozjadą się per magazyn.] -> Teza słuszna, ale w dalszej części oferty brak jakiegokolwiek rozwinięcia mechanizmu mapowania SKU między SAP a Shopify (np. czy używany jest Shopify InventoryItem ID, SKU jako klucz, czy dodatkowa tabela mapowań). Sygnalizacja problemu bez rozwiązania to połowiczny killshot.
+   [-] -2 pkt (Wymiar D / Wycena): [Wycena: 11500 zł netto, 24 dni robocze] -> 11 500 zł / 24 dni = 479 zł/dzień, co przy 8h daje ~60 zł/h — wyraźnie poniżej bazowej stawki 90 zł/h. Przy złożoności projektu (SAP, BaseLinker, Shopify, wielomagazynowość, split fulfillment, zwroty, fakturowanie) 24 dni to realny czas, ale stawka jest zaniżona o ok. 33%. Nie przekracza progu -35%, więc bez twardej kary, ale obniża ocenę realizmu ekonomicznego.
+   [-] -3 pkt (Wymiar B / Kompletność odpowiedzi na pytania klienta): [brak] -> Klient w ogłoszeniu zadał 6 konkretnych pytań o podobne wdrożenia (m.in. 'w jaki sposób wybierany i przekazywany był magazyn realizujący zamówienie', 'jak rozwiązano zamówienia realizowane z kilku magazynów', 'czy rozwiązanie opierało się na standardowych funkcjach BaseLinkera, API czy dodatkowym middleware'). Oferta odpowiada na nie ogólnymi zdaniami o architekturze, ale nie przypisuje tych odpowiedzi do konkretnych案例 (Kołcz, Gardd). Klient musi się domyślać, które mechanizmy były użyte w których wdrożeniach.
+
+[DOGRYWKA #144737] Modernizacja i rozwój istniejącego sklepu B2B PHP/MySQL z integracją WAPRO MAG / SQL Server (obecny wynik: 90/100)
+[NOWA OFERTA #144737] Wycena: 8000 zł / 19 dni (206 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Pierwsza pułapka architektoniczna to SQL Server Express bez Agenta - jeśli testowe środowisko stoi na Express, zadania automatyczne i backup trzeba oprzeć o własny scheduler w warstwie aplikacji, nie o Agenta. Trzeba też ustalić, czy integracja WAPRO MAG idzie przez WebAPI, czy przez bezpośredni MSSQL - od tego zależy, czy nowa warstwa prezentacyjna nie rozerwie koszyka i cen B2B.
+
+W Projekt 9 przejmowałem zastany sklep B2B PHP/MySQL z integracją WAPRO MAG i MSSQL: optymalizowałem procedury składowane T-SQL, zastąpiłem brakujący SQL Server Agent własnym atomowym schedulerem (tabela zadań z UPDATE ... OUTPUT) i wyeliminowałem deadlocki na tabelach towarowych dla ponad 12 000 SKU. Pracę zaczynam od inwentaryzacji kodu na środowisku testowym - mapa modułów koszyka, zamówień, logowania i cen oraz przegląd procedur i zadań MSSQL. Nową warstwę podpinam bez przepisywania logiki, testy robię wyłącznie na kopii bazy, całość prowadzę jako jedna osoba.
+
+Do wiążącej wyceny potrzebuję potwierdzenia: czy integracja korzysta z WebAPI, czy z bezpośredniego MSSQL, oraz czy testowe środowisko ma SQL Server Standard z Agentem, czy Express?
+
+Start w ciągu 3 dni, praca zdalna przez Useme. Wycena: 8000 zł netto, realizacja 19 dni roboczych. W cenie 30 dni gwarancji rozruchowej na własny kod, pełny kod źródłowy i instrukcja wdrożenia. Rozliczenie przez Useme.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #144737: 96/100 pkt (zmiana: 90 -> 96) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Killshot idealny. Oferta w pierwszych dwóch zdaniach trafia w dwie realne miny architektoniczne: (1) SQL Server Express pozbawiony Agenta wymusza własny scheduler w warstwie aplikacji, (2) niejasność WebAPI vs bezpośredni MSSQL determinuje ryzyko rozerwania koszyka i cen B2B. To dokładnie ten poziom szczegółu, którego oczekuje klient półtechniczny i którego nie podniesie 85% konkurentów na Useme.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód wprost w domenie klienta. Zawiera konkretną liczbę (12 000 SKU), konkretny mechanizm (UPDATE ... OUTPUT jako atomowy scheduler) i konkretny efekt (eliminacja deadlocków). Zero pustych frazesów o doświadczeniu.
+   [+] +10 pkt (Wymiar C): Pytanie chirurgiczne, zmusza klienta do odpowiedzi na priv, dotyczy kluczowego punktu decyzyjnego projektu (architektura integracji i wersja SQL Server). Forma krótka, bez szkolnego numerowania, w osobnym akapicie przed wyceną. 100% asynchroniczności pisemnej.
+   [+] +5 pkt (Wymiar A): Spójny, logiczny plan przejęcia legacy. Odpowiada wprost na pytanie klienta 'Jak rozpocząłbyś przejęcie'. Bez fałszywych skoków logicznych, bez halucynacji o firmie klienta.
+   [+] +8 pkt (Wymiar E): Idealna gęstość informacyjna w limicie 135-210 słów. Naturalny, inżynierski styl bez coachingowej waty. Język polski zgodny z ogłoszeniem.
+   [-] -1 pkt (Wymiar A): [Nową warstwę podpinam bez przepisywania logiki] -> Oferta nie wyjaśnia mechanizmu podłączenia nowej warstwy prezentacyjnej do istniejącego backendu PHP. Dla projektu, którego głównym celem jest 'modernizacja strony głównej - nowa responsywna warstwa prezentacyjna połączona z istniejącym systemem', brak choćby jednego zdania o tym, jak ta warstwa komunikuje się z koszykiem/zamówieniami, jest luką merytoryczną.
+   [-] -1 pkt (Wymiar B): [testy robię wyłącznie na kopii bazy] -> Brak explicitnego stwierdzenia 'nie dotykam produkcji bez pisemnej zgody' - klient silnie akcentował tę zasadę w ogłoszeniu. Oferta implicitnie to spełnia (środowisko testowe klienta), ale dla pełnego bezpieczeństwa psychologicznego powinno to być nazwane wprost.
+   [-] -1 pkt (Wymiar D): [Wycena: 8000 zł netto, realizacja 19 dni roboczych.] -> Wycena wewnętrznie spójna z kalkulatorem (efektywna stawka ~87,6 zł/h po buforach), ale dla projektu typu RESCUE z przejęciem legacy, integracją WAPRO MAG i nową warstwą prezentacyjną 8000 zł jest kwotą konserwatywną, bliższą dolnej granicy opłacalności przy stawce 90 zł/h. Nie jest to błąd kalkulacyjny, lecz niewykorzystany margines negocjacyjny przy budżecie 'do negocjacji'.
+
+[DOGRYWKA #2586109] System zwrotów (RMA) dla e-commerce + API + integracje (Subiekt, kurierzy) (obecny wynik: 90/100)
+[NOWA OFERTA #2586109] Wycena: 32000 zł / 55 dni (193 słów):
+--------------------------------------------------
+Dzień dobry,
+
+W systemie RMA z Subiektem GT główną pułapką architektoniczną jest zapis do ERP przez 32-bitową Sferę COM. Przy odpytywaniu w pętli dochodzi do marshallingu międzyprocesowego, timeoutów i deadlocków na tw__Towar oraz dok__Dokument. Każdy zapis przejdzie więc przez kolejkę FIFO z idempotencją po numerze RMA, z backpressure i wyłącznie przez Sferę, nigdy bezpośrednim SQL-em. ZK bez pełnej rezerwacji nie zdejmuje stanu, co przy zwrotach z kilku kanałów kończy się oversellingiem przed wystawieniem WZ.
+
+Integracje kurierskie projektuję z limitami DPD i GLS oraz wygasającymi etykietami Orlen, więc generowanie etykiet trafia do kolejki z retry. PayU i Przelewy24 obsłużę z deduplikacją po identyfikatorze zdarzenia. Moduł klienta, panel pracownika, rozliczenia i REST API domknę w jednym wdrożeniu. Testy i pierwsze importy uruchamiam na kopii bazy lub środowisku testowym, bez ryzyka dla żywej produkcji. W poprzednim wdrożeniu e-commerce synchronizowałem ponad 12 000 SKU z ERP przez BaseLinker, z kontrolą stanów i priorytetów magazynów. Po wdrożeniu przekazuję kod, wideo-instrukcję i 30 dni gwarancji rozruchowej na własny kod.
+
+Czy Subiekt działa na GT ze Sferą, czy na nexo PRO, i czy ZK tworzone są z pełną rezerwacją dostaw?
+
+Wycena: 32 000 zł netto, 55 dni roboczych.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #2586109: 95/100 pkt (zmiana: 90 -> 95) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 25, 'C_pytanie_cta_20': 20, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Otwarcie uderza w dokładnie tę minę, którą opisuje karta tech_03: 32-bit COM Sfera, marshalling międzyprocesowy, deadlocki na kluczowych tabelach MS SQL. 85% oferentów napisałoby 'mam doświadczenie z Subiektem', a tutaj jest konkretny problem architektoniczny nazwany po imieniu.
+   [+] +10 pkt (Wymiar A): Konkretny mechanizm zamiast pustych obietnic: kolejka FIFO, idempotencja po numerze RMA, backpressure, zakaz bezpośredniego SQL. Do tego pokazanie zrozumienia różnicy między ZK (rezerwacja) a WZ (zdjęcie stanu) – to jest wiedza, która bezpośrednio zapobiega oversellingowi opisanemu w karcie tech_03.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja Sandbox-First (kopia bazy / środowisko testowe) plus 30 dni gwarancji rozruchowej na własny kod. Klient dostaje poczucie bezpieczeństwa wdrożenia bez ryzyka dla produkcji.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z konkretną liczbą (12 000 SKU) i kontekstem bezpośrednio pokrewnym domenie klienta (e-commerce, ERP, BaseLinker). Zero pustego chwalenia się.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w absolutnie kluczowy punkt decyzyjny: GT vs nexo PRO to zupełnie inne technologie (COM 32-bit vs .NET 8 x64), a pełna rezerwacja ZK determinuje architekturę zapobiegania oversellingowi. Klient musi odpowiedzieć, żeby oferta mogła być doprecyzowana.
+   [+] +8 pkt (Wymiar E): Zwięzłość i gęstość informacyjna: 193 słowa mieszczą się w limicie 135-210 dla dużego zlecenia, zero waty słownej, zero słów-wytrychów AI, naturalny styl inżynierski, imienny podpis.
+   [-] -3 pkt (Wymiar A): [Brak w ofercie: krótki opis technologii oraz informacja czy pracujesz solo czy zespołowo.] -> Klient wprost poprosił w ogłoszeniu o 'krótki opis technologii' oraz 'info czy pracujesz solo czy zespołowo'. Oferta pomija oba te elementy, co dla klienta B2B jest istotną luką – nie wie, z kim pracuje i na jakim stacku (poza ogólnikami o Sferze COM i kolejce).
+   [-] -2 pkt (Wymiar D): [Wycena: 32 000 zł netto, 55 dni roboczych.] -> Wycena jest lekko zaniżona względem stawki bazowej 90 zł/h. 55 dni * 8h = 440h, 32000 / 440 = ~72,7 zł/h, czyli ~19% poniżej progu. Nie jest to katastrofalne przestrzelenie, ale przy tak rozbudowanym zakresie (5 kurierów, Subiekt GT Sfera, PayU/P24, panel pracownika, API) kwota mogłaby być nieco wyższa.
+
+[DOGRYWKA #144817] Stworzenie aplikacji lub bota, który tworzy odpowiedzi na maile firmowe (obecny wynik: 91/100)
+[NOWA OFERTA #144817] Wycena: 12000 zł / 25 dni (191 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Każde nowe zapytanie klienta ma już przygotowaną propozycję odpowiedzi na podstawie Waszego FAQ i wcześniejszej korespondencji, a pracownik tylko ją akceptuje albo dopracowuje. Bot korzysta wyłącznie z Waszej wewnętrznej bazy wiedzy, nie szuka niczego w internecie. Kiedy klient odpisuje w wątku z cytowaną historią i załącznikiem, narzędzie oddziela nowe pytanie od starej korespondencji i czyta załącznik. Program sam scala rozproszone FAQ w jedną bazę. Przy niskiej pewności bot prosi o ręczną redakcję.
+
+Po zatwierdzeniu odpowiedzi przez pracownika program dopisuje ją do bazy i od następnego dnia podpowiada ją przy podobnych pytaniach. Na początku każda odpowiedź czeka na decyzję pracownika, automatyczna wysyłka włącza się po testach. Testy prowadzimy na kopii skrzynki i odseparowanym środowisku, bez ryzyka dla żywej poczty. Wbuduję informację, że odpowiedź przygotowała sztuczna inteligencja. Podobny system przetworzył ponad 3500 dokumentów z precyzją 99,4%. Po wdrożeniu przekazuję instrukcję wideo i dokumentację, system działa samodzielnie.
+
+Ile zapytań dziennie trafia na skrzynkę i w jakiej formie macie FAQ i historię maili?
+
+Wdrożenie: 12 000 zł netto, 25 dni roboczych od przekazania historii maili i FAQ, z 30-dniową gwarancją rozruchową. Miesięczna opieka: 400 zł netto do 500 maili, powyżej proporcjonalnie.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA PO POPRAWCE #144817: 89/100 pkt (zmiana: 91 -> 89) | Kategorie: {'A_merytoryka_25': 20, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 18, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +8 pkt (Wymiar A): Trafienie w prawdziwą, ukrytą minę architektoniczną: większość wykonawców buduje RAG na prostym podziale tekstu i wywala się na realnych mailach firmowych, gdzie klient cytuje całą historię, dopisuje nowe pytanie na górze i dorzuca PDF. To jest dokładnie ten 'brudny' przypadek, o którym 85% konkurencji nie pomyśli.
+   [+] +7 pkt (Wymiar A): Mechanizm ciągłego uczenia wyjaśniony w języku zachowania programu, nie hasłami. Konkretnie: odpowiedź zatwierdzona przez człowieka staje się częścią bazy wiedzy i jest podpowiadana przy podobnych pytaniach. To realizuje wymóg klienta 'uczenia się z nowych odpowiedzi' bez obiecywania magii.
+   [+] +6 pkt (Wymiar A): Kluczowy mechanizm bezpieczeństwa dla klienta, który boi się, że bot wyśle bzdurę do jego klienta. Zamiast obiecywać 100% skuteczności, oferta uczciwie mówi, co się dzieje, gdy system nie jest pewny. To buduje zaufanie.
+   [+] +8 pkt (Wymiar B): Sandbox-First w czystej postaci, wyrażony językiem korzyści ('bez ryzyka dla żywej poczty'), nie żargonem. Klient dostaje jasną gwarancję, że pierwsze testy nie dotkną jego produkcyjnej skrzynki.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio z konkretną liczbą i metryką. Pasuje do domeny (przetwarzanie dokumentów/tekstu). Nie jest to puste 'mamy doświadczenie', tylko fakt.
+   [+] +8 pkt (Wymiar B): Dokładne odzwierciedlenie wymogu klienta ('w pierwszych miesiącach tylko do weryfikacji, po testach automatyczna wysyłka'). Oferta nie interpretuje tego po swojemu, tylko precyzyjnie adresuje fazowanie wdrożenia.
+   [+] +7 pkt (Wymiar C): Pytanie zmusza klienta do ujawnienia dwóch kluczowych parametrów: skali (dzienny wolumen determinuje architekturę i limit retainera) oraz formatu danych (Excel? PDF? baza? — determinuje pracochłonność importu). Wymaga odpisania na priv, jest konkretne i asynchroniczne.
+   [-] -5 pkt (Wymiar A): [Każde nowe zapytanie klienta ma już przygotowaną propozycję odpowiedzi na podstawie Waszego FAQ i wcześniejszej korespondencji, a pracownik tylko ją akceptuje albo dopracowuje.] -> Otwarcie opisuje rezultat, ale nie uderza w ukrytą minę w pierwszych 2 zdaniach. Prawdziwa mina architektoniczna (parsowanie wątków z cytowaną historią i załącznikami) pojawia się dopiero w zdaniu trzecim. Killshot powinien w pierwszych 2 zdaniach nazwać problem, którego klient nie zna, a nie tylko streszczać jego własne ogłoszenie.
+   [-] -3 pkt (Wymiar A): [Program sam scala rozproszone FAQ w jedną bazę.] -> Brak wyjaśnienia mechanizmu — jak program scala rozproszone FAQ? Czy chodzi o deduplikację pytań? Łączenie odpowiedzi? Rozpoznawanie sprzeczności? Dla klienta nietechnicznego to zdanie brzmi jak obietnica, ale nie tłumaczy, co się dzieje z jego danymi. Powinno być: 'Program znajduje pytania o tym samym znaczeniu w różnych plikach i łączy je w jedną odpowiedź, oznaczając sprzeczności do Twojej decyzji.'
+   [-] -2 pkt (Wymiar A): [Wbuduję informację, że odpowiedź przygotowała sztuczna inteligencja.] -> Dobra praktyka, ale umieszczona bez kontekstu. Dlaczego to ważne dla klienta? Powinno być powiązane z korzyścią: 'Wbuduję informację, że odpowiedź przygotowała sztuczna inteligencja, żeby Wasz klient wiedział, z kim rozmawia i żebyście byli zgodni z RODO.'
+   [-] -3 pkt (Wymiar B): [odseparowanym środowisku] -> Dla klienta z segmentu tech-agnostic (zerowa wiedza techniczna) 'odseparowane środowisko' to żargon. Powinno być: 'na osobnej kopii, która nie dotyka Waszej prawdziwej skrzynki' lub 'w zamkniętym pudełku testowym'.
+   [-] -2 pkt (Wymiar C): [Ile zapytań dziennie trafia na skrzynkę i w jakiej formie macie FAQ i historię maili?] -> Pytanie jest dobre, ale pomija kluczowy punkt decyzyjny: z jakiego programu pocztowego korzystacie (Outlook, Gmail, inne)? To determinuje sposób integracji i jest równie ważne jak wolumen. Brak tego pytania może skutkować niedoszacowaniem lub błędnym doborem technologii.
+
+======================================================================
+CZĘŚĆ B: TEST ZERO-SHOT (RUNDA 1 'SAME Z SIEBIE') NA 4 NOWYCH ZLECENIACH
+======================================================================
+
+[FALA 4 ZERO-SHOT RUNDA 1] #143979: Automatyzacja obiegu dokumentów (OCR + LLM): n8n / Make (karta=tech_02, sciezka=inzynieria)
+
+[OFERTA RUNDA 1 (BEZ POPRAWEK!) #143979] Wycena: 6500 zł / 15 dni (194 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Główna pułapka architektoniczna to wrzucenie wszystkich dokumentów do jednego worka OCR Vision. Faktury krajowe po 1 lutego 2026 są w KSeF jako XML FA(3), cyfrowe PDF-y z maila mają natywną warstwę tekstową (odczyt znakowy bez kosztu tokenów), a skany i zdjęcia z telefonu wymagają preprocessingu obrazu i progu pewności. Dochodzi tolerancja groszowa VAT 1-2 gr (ustawa dopuszcza liczenie od sumy stawek lub od pozycji) oraz deduplikacja po NIP + numer dokumentu, bo ten sam dokument przychodzi równolegle z KSeF, maila i skanera.
+
+Integrację z Optimą proponuję przez Comarch ERP Web API (REST) do dokumentów handlowych lub CDN.API na hoście Windows, bez bezpośrednich zapisów SQL do tabel CDN, które łamią licencję producenta. ProfiPiek nie ma potwierdzonego publicznego API, więc weryfikuję schemat bazy na kopii testowej i wybieram bezpieczny kanał wymiany. Wszystkie testy na kopii bazy, zero przestoju produkcji, 30 dni gwarancji rozruchowej. Rekomenduję n8n self-hosted: brak opłat za operację, koszt to wyłącznie VPS. Pipeline na 3500+ dokumentach: 99,4% precyzji.
+
+Czy Państwa Optima pracuje stacjonarnie (serwer Windows), czy w Chmurze Comarch? Jaki procent faktur kosztowych to krajowe z NIP PL, a jaki dokumenty spoza KSeF?
+
+Wycena: 6500 zł netto, realizacja 15 dni.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1 (ZERO-SHOT) #143979: 96/100 pkt | Kategorie: {'A_merytoryka_25': 21, 'B_psychologia_25': 25, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Mocny killshot: rozróżnia typy dokumentów i pokazuje ukrytą minę architektoniczną, której nie widzi większość wykonawców. Trafia w realia KSeF/FA(3) oraz w koszt tokenów przy natywnym PDF.
+   [+] +7 pkt (Wymiar A): Konkretny mechanizm integracji zgodny z tech_02. Wskazuje legalne ścieżki i ostrzega przed nielegalnym SQL do tabel CDN, co buduje autorytet inżynierski.
+   [+] +8 pkt (Wymiar B): Jasny sandbox-first i gwarancja rozruchowa. Klient dostaje bezpieczeństwo wdrożenia bez ryzyka dla żywej produkcji.
+   [+] +7 pkt (Wymiar B): Twardy, liczbowy dowód zamiast pustego chwalenia się. Pasuje wprost do OCR/LLM i buduje wiarygodność.
+   [+] +10 pkt (Wymiar C): Pytanie kwalifikujące trafia w kluczowe decyzje architektoniczne: tryb pracy Optimy i strukturę źródeł dokumentów. Wymusza konkretną odpowiedź, a nie ogólniki.
+   [+] +15 pkt (Wymiar D/E): Jedna konkretna kwota netto, brak widełek i upsellingu, czas zgodny z kalkulatorem. Styl zwięzły, bez AI-waty, podpis imienny.
+   [-] -2 pkt (Wymiar A): [Brak w ofercie obsługi Google Drive, mimo że ogłoszenie mówi: „Dokumenty ze skanera, maili oraz aplikacji mobilnej trafiają do folderu wejściowego na Google Drive”.] -> Oferta nie opisuje monitorowania folderu wejściowego, nadawania nazw i przenoszenia plików do folderu docelowego. To jawny element logiki klienta, a w tekście oferty całkowicie pominięty.
+   [-] -1 pkt (Wymiar A): [ProfiPiek nie ma potwierdzonego publicznego API, więc weryfikuję schemat bazy na kopii testowej i wybieram bezpieczny kanał wymiany.] -> Klient prosił o konkret: API, SQL, pliki wymiany. Sformułowanie „bezpieczny kanał wymiany” jest zbyt ogólne i nie mówi, co dokładnie zostanie użyte dla ProfiPieku.
+   [-] -1 pkt (Wymiar A): [Faktury krajowe po 1 lutego 2026 są w KSeF jako XML FA(3)] -> Uproszczenie może wprowadzać w błąd. Dla MŚP obowiązek wystawiania w KSeF wchodzi od 1 kwietnia 2026, a od 1 lutego 2026 jest przede wszystkim obowiązek odbioru. Warto rozdzielić te daty.
+
+[FALA 4 ZERO-SHOT RUNDA 1] #144188: Comarch ERP XL — automatyczne generowanie faktury (karta=tech_02, sciezka=inzynieria)
+
+[OFERTA RUNDA 1 (BEZ POPRAWEK!) #144188] Wycena: 2500 zł / 7 dni (110 słów):
+--------------------------------------------------
+Dzień dobry,
+
+W Comarch ERP XL automat FS z WZ przez moduł Procesy wymaga najpierw weryfikacji, czy natywna akcja istnieje w 2025.1.6 - moduł Modelowanie Procesów jest licencjonowany serwerowo i wymaga opcji w kluczu sprzętowym, a gotowe akcje generowania FS z WZ opisywane są głównie dla integracji przez zewnętrzny WebService. Jeśli natywnej akcji brak, proces zbuduję na dostępnych mechanizmach (harmonogram, skrypt) bez Hydry i dodatków.
+
+Testy wykonam na udostępnionej bazie testowej, z dala od produkcji. Po wdrożeniu 30 dni gwarancji rozruchowej na własny kod.
+
+Czy WZ w Państwa procesie powstają z ZS, czy są wystawiane bezpośrednio? Jaki jest dzienny wolumen dokumentów?
+
+Wycena: 2500 zł netto, realizacja 7 dni.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1 (ZERO-SHOT) #144188: 86/100 pkt | Kategorie: {'A_merytoryka_25': 19, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 19, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 13}
+   [+] +7 pkt (Wymiar A): Trafienie w ukrytą minę licencyjno-architektoniczną Comarch ERP XL — autor wskazuje, że sam moduł Procesy to nie wszystko, klucz sprzętowy i brak natywnej akcji w 2025.1.6 to realna pułapka, o której przeciętny wykonawca nie wspomina.
+   [+] +8 pkt (Wymiar B): Jasny Sandbox-First i konkretna gwarancja 30 dni na własny kod — dokładnie to, co klient oczekuje przy wdrożeniu produkcyjnym na żywym ERP.
+   [+] +9 pkt (Wymiar C): Pytania trafiają w kluczowe punkty decyzyjne (źródło WZ determinuje mapowanie pól FS, wolumen determinuje czy harmonogram wystarczy) i wymuszają odpowiedź na priv.
+   [+] +7 pkt (Wymiar E): Imienny podpis, brak żargonu AI, brak tabel i gwiazdek, zero zwrotów „kompleksowe rozwiązanie / synergia / dedykowany zespół”.
+   [-] -6 pkt (Wymiar A): [Jeśli natywnej akcji brak, proces zbuduję na dostępnych mechanizmach (harmonogram, skrypt) bez Hydry i dodatków.] -> Mechanizm opisany hasłowo („harmonogram, skrypt”) bez wyjaśnienia jak dokładnie realizowane jest mapowanie WZ→FS, jak obsługiwana jest idempotencja (żeby nie wygenerować dwóch FS dla jednej WZ) i co się dzieje przy błędzie walidacji kontrahenta. To wciąż zbyt płytkie jak na ofertę inżynierską.
+   [-] -5 pkt (Wymiar A): [brak wzmianki o KSeF 2.0 / FA(3)] -> Zadanie dotyczy generowania faktur sprzedaży w 2026 r. Od 1 lutego 2026 obowiązuje odbiór faktur w KSeF, a FA(3) zastępuje FA(2). Pominięcie tego w ofercie to niezauważenie realnej miny prawnej — klient nieświadomie może dostać automat generujący dokumenty niezgodne z nowym schematem.
+   [-] -3 pkt (Wymiar B): [Klient w ogłoszeniu: „W ofercie proszę o opis podobnych wdrożeń” — brak jakiegokolwiek dowodu] -> Brak portfolio wprost dotyczącego Comarch XL / modułu Procesy. Autor co prawda nie sypie pustymi frazesami o doświadczeniu (co jest plusem), ale klient wprost poprosił o case studies — ich brak istotnie osłabia wiarygodność.
+   [-] -2 pkt (Wymiar D): [Wycena: 2500 zł netto, realizacja 7 dni.] -> 2500 zł przy 29,9 h po buforze daje ~83 zł/h, czyli poniżej bazowej stawki 90 zł/h. Do tego segment ERP XL to zwykle 4 500–16 000 zł netto za integrację — kwota nie jest dramatycznie zaniżona (zakres wąski), ale plasuje ofertę na granicy opłacalności i sygnalizuje klientowi niską wartość usługi.
+   [-] -1 pkt (Wymiar E): [110 słów] -> Oferta na granicy limitu dla małego zlecenia (<3000 zł = max 110 słów). Brak miejsca na oddech, brak podsumowania benefitów dla klienta, wrażenie urwanej wypowiedzi.
+
+[REFINEMENT #144188] Wynik 86/100 -> Uruchamiam pętlę naprawczą...
+-> OCENA RUNDA 2 #144188: 86/100 pkt (zmiana: 86 -> 86)
+
+[FALA 4 ZERO-SHOT RUNDA 1] #144077: System chmurowy do rejestracji i rozliczania czasu przez API (karta=tech_04, sciezka=inzynieria)
+
+[OFERTA RUNDA 1 (BEZ POPRAWEK!) #144077] Wycena: 8500 zł / 19 dni (204 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Główna pułapka to idempotencja i kolejkowanie zdarzeń. Urządzenia IoT często wysyłają ten sam event startu sesji po timeoutcie, a bez tokena idempotencji po event_id system naliczy dwie opłaty startowe. Rate limiting per urządzenie też bywa problemem - wiele procesów współdzieli jeden budżet i blokuje wzajemnie. Zastosuję Fast-Ack: endpoint REST waliduje sygnaturę, zapisuje surowy event i zwraca 200 OK w <50 ms, a przetwarzanie asynchronicznie do workera z kolejką Redis i DLQ. Dla urządzeń przewiduję osobne limity per device (GCRA) i mTLS z rotacją certyfikatów.
+
+System domknie pełen zakres: rejestracja sesji z datą, godziną i ID urządzenia, naliczanie czasu według taryf (opłata startowa, stawka za minutę, różne stawki dla lokalizacji), obsługa wielu lokalizacji i urządzeń, flow QR (skan → ID → znalezienie sesji → kwota → potwierdzenie i POST do urządzenia) oraz panel administracyjny z zarządzaniem lokalizacjami, urządzeniami, sesjami, taryfami i historią rozliczeń. Testy i pierwsze importy na kopii bazy lub stagingu, bez ryzyka dla produkcji. Po wdrożeniu przekazuję kod, wideo-instrukcję i 30 dni gwarancji rozruchowej.
+
+Czy urządzenia mają już kontrakt API (metody, autoryzacja, limity), czy trzeba go współtworzyć? I czy przy taryfie za rozpoczętą minutę 61 sekund to 2 minuty, czy zaokrąglamy?
+
+Wycena: 8500 zł, 19 dni. Stawka 90 zł/h.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1 (ZERO-SHOT) #144077: 93/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 13}
+   [+] +9 pkt (Wymiar A): Trafienie w realną minę IoT: retransmisje eventu startowego powodujące podwójne naliczenie opłaty startowej. To nie jest wiedza z tutoriali, tylko obserwacja z produkcji, której klient nie ujął w ogłoszeniu.
+   [+] +9 pkt (Wymiar A): Konkretny mechanizm architektoniczny zamiast pustosłowia: fast-ack + kolejka + DLQ + GCRA + mTLS to zestaw, który realnie rozwiązuje problemy wskazane w karcie tech_04 (at-least-once, deduplikacja, rate limiting per urządzenie).
+   [+] +8 pkt (Wymiar B): Jasna deklaracja Sandbox-First (staging/kopia bazy) + 30 dni gwarancji rozruchowej + przekazanie kodu i wideo-instrukcji. Pełny standard bezpieczeństwa wdrożenia dla klienta B2B.
+   [+] +10 pkt (Wymiar C): Dwa pytania trafiają w prawdziwe punkty decyzyjne: istnienie kontraktu API urządzeń (fundament architektury) oraz semantyka zaokrąglania taryfy (realny spór biznesowy). Wymusza odpowiedź na priv.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, brak widełek, brak upsellingu wersji drugiej. Cena spójna z kalkulatorem (92,7h × 90 zł) i realna dla zakresu: API + silnik sesji + panel admina + auth + deploy.
+   [-] -1 pkt (Wymiar A): [Zastosuję Fast-Ack: endpoint REST waliduje sygnaturę...] -> Klient wprost prosił o 'proponowaną technologię'. Oferta nie nazywa stacku (FastAPI/Pydantic/SQLAlchemy/PostgreSQL) mimo że karta tech_04 to wzorzec merytoryczny — sygnalizuje to tylko pośrednio przez Redis/DLQ/GCRA.
+   [-] -1 pkt (Wymiar A): [Główna pułapka to idempotencja i kolejkowanie zdarzeń.] -> Idempotencja jest znana każdemu seniorowi — nie jest to mina, o której 'nie wie 85% wykonawców'. Killshot dobry, ale nie wybitny na tle realnych pułapek tech_04 (np. task_acks_late=False, worker_prefetch_multiplier przy przeciążeniu).
+   [-] -1 pkt (Wymiar B): [(brak wzmianki o utrzymaniu)] -> Klient wprost zapytał o 'koszty późniejszego utrzymania systemu'. Oferta nie odpowiada ani słowem — to luka komunikacyjna, bo zostawia klienta bez twardej odpowiedzi na jedno z trzech pytań w ogłoszeniu.
+   [-] -1 pkt (Wymiar D): [Stawka 90 zł/h.] -> Efektywna stawka z kalkulatora to 132,8 zł/h przy 8500 zł. Podanie '90 zł/h' bez wyjaśnienia narzutu (testy, bufor, ryzyko braku specyfikacji) może wywołać u klienta pytanie: 'skoro 90/h, to czemu 8500 za 19 dni?'.
+   [-] -2 pkt (Wymiar E): [Zastosuję Fast-Ack: endpoint REST waliduje sygnaturę...] -> 'Fast-Ack' nie jest utartym terminem inżynierskim (zwykle 'fast acknowledgment' lub wzorzec 'ack-and-queue'). Drobna stylistyczna wada, choć kontekst ratuje zrozumiałość.
+
+[REFINEMENT #144077] Wynik 93/100 -> Uruchamiam pętlę naprawczą...
+-> OCENA RUNDA 2 #144077: 99/100 pkt (zmiana: 93 -> 99)
+
+[FALA 4 ZERO-SHOT RUNDA 1] #144249: Wdrożenie automatyzacji AI (Make.com/n8n) – generowanie i publikacja wideo na TikTok oraz YT Shorts (karta=tech_16, sciezka=biznes)
+
+[OFERTA RUNDA 1 (BEZ POPRAWEK!) #144249] Wycena: 4000 zł / 10 dni (198 słów):
+--------------------------------------------------
+Dzień dobry,
+
+System będzie działał tak: wrzuca Pan temat lub gotowy szkic, a program sam pisze scenariusz, nagrywa lektora, składa wideo i publikuje na TikToku i YouTube Shorts według harmonogramu. W praktyce najwięcej problemów sprawiają dwa życiowe wyjątki: TikTok bez przejścia audytu publikuje materiały wyłącznie jako prywatne, a YouTube przy domyślnych limitach przyjmie kilka uploadów dziennie, nie kilkadziesiąt. Dlatego od początku przygotowuję politykę prywatności i demo video do audytu TikToka oraz rozkładam publikacje w czasie, żeby uniknąć flagowania spamu.
+
+Wdrożenie obejmuje pełny łańcuch: OpenAI do scenariuszy, ElevenLabs do głosu, generowanie i montaż wideo (InVideo AI, CapCut lub szablon), publikację z dynamicznymi opisami i tagami oraz zabezpieczenia antyspamowe. Wszystkie testy prowadzę na środowisku testowym i na materiałach niepublicznych, bez ryzyka dla Pańskich profili. Po wdrożeniu przekazuję scenariusze, dostępy i krótką instrukcję wideo. Podobny potok oparty na AI i n8n zbudowałem dla 3500+ dokumentów z precyzją 99,4%, a silnik monitorujący OLX reaguje w czasie poniżej 3 minut 40 sekund.
+
+Ile materiałów dziennie chce Pan publikować i czy konto TikTok ma już zweryfikowaną aplikację deweloperską? Od tego zależy harmonogram i czas startu.
+
+Koszt kompleksowego wdrożenia: 4000 zł netto, realizacja do 10 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1 (ZERO-SHOT) #144249: 92/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 18, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Killshot w pierwszych 2 zdaniach. Oferta nazywa dwie ukryte miny architektoniczne (SELF_ONLY TikTok Content Posting API bez audytu oraz dzienny limit quota YouTube Data API), o których nie wie 85% konkurentów. To dokładnie realizuje wzorzec 'brudnej prawdy domeny' z karty tech_16.
+   [+] +8 pkt (Wymiar A): Zamiast pustego 'zabezpieczenia antyspamowe' oferta podaje konkretny mechanizm: polityka prywatności + demo video do audytu + time-spreading publikacji. To język rezultatu, nie obietnica.
+   [+] +8 pkt (Wymiar B): Sandbox-First wyrażony językiem zrozumiałym dla nietechnicznego klienta (bez słowa 'staging' czy 'środowisko izolowane'). Klient dostaje gwarancję bezpieczeństwa własnych profili TikTok/YouTube. 30 dni gwarancji rozruchowej na końcu oferty dopełnia standard.
+   [+] +8 pkt (Wymiar C): Pytanie trafia w dwa krytyczne punkty decyzyjne: wolumen publikacji (determinuje architekturę kolejki i harmonogramu) oraz status audytu aplikacji deweloperskiej TikTok (determinuje czy w ogóle można publikować publicznie). Zmusza klienta do odkrycia kluczowej informacji przed wyceną. Forma krótka, bez szkolnego numerowania. W 100% asynchroniczna.
+   [+] +15 pkt (Wymiar D): Jedna kwota netto, zero widełek, zero 'wersji drugiej'. Zgodna z [WYNIK_KONCOWY]. Efektywna stawka 125 zł/h przy 32h realnych mieści się w rynkowym przedziale dla projektu z flagą tier_a (AI/LLM) i ograniczeniami API. Bufor 20% + mnożnik ryzyka 1.05 uzasadniony restrykcjami TikToka.
+   [-] -2 pkt (Wymiar B): [Podobny potok oparty na AI i n8n zbudowałem dla 3500+ dokumentów z precyzją 99,4%, a silnik monitorujący OLX reaguje w czasie poniżej 3 minut 40 sekund.] -> Dowód zawiera twarde liczby, ale NIE pasuje wprost do domeny wideo/TikTok/YouTube. Przetwarzanie dokumentów i monitoring OLX to inna gałąź automatyzacji. Zabrakło jednego case study z publikacją mediów lub pipeline'em audio/wideo (np. 'potok generujący X materiałów wideo miesięcznie z automatyczną publikacją'). Cząstkowa trafność, stąd tylko -2 pkt.
+   [-] -1 pkt (Wymiar E): [Koszt kompleksowego wdrożenia: 4000 zł netto] -> Słowo 'kompleksowego' należy do rodziny AI-wytrychów z listy zakazanej ('kompleksowe rozwiązanie'). W ofercie dla tech_agnostic lepiej zastąpić je konkretem: 'Koszt wdrożenia: 4000 zł netto' lub 'Całość: 4000 zł netto'.
+   [-] -1 pkt (Wymiar A): [Wdrożenie obejmuje pełny łańcuch: OpenAI do scenariuszy, ElevenLabs do głosu, generowanie i montaż wideo (InVideo AI, CapCut lub szablon), publikację z dynamicznymi opisami i tagami oraz zabezpieczenia antyspamowe.] -> Zdanie ma charakter wyliczanki narzędzi (kaskada nazw), a nie wyjaśnienia mechanizmu krok po kroku. Dla klienta tech_agnostic zabrakło jednego zdania opisującego przepływ danych między krokami (np. 'scenariusz z OpenAI trafia automatycznie do ElevenLabs, a gotowy głos do modułu montażu').
+   [-] -1 pkt (Wymiar C): [Ile materiałów dziennie chce Pan publikować] -> Pytanie jest dobre, ale nie zostało poprzedzone żadną ramą decyzyjną (np. 'przy 1-2 materiałach dziennie wystarczy prosty harmonogram, przy 10+ potrzebny inny mechanizm'). Klient nie wie, dlaczego ma odpowiedzieć właśnie na to pytanie. Drobny brak kontekstu uzasadniającego.
+   [-] -1 pkt (Wymiar E): [Ksawier Potrykus] -> Podpis jest, ale bez żadnej formy kontaktu ani linku do portfolio (np. 'Ksawier Potrykus, portfolio: ...'). Klient Useme po przeczytaniu oferty musi mieć ścieżkę do weryfikacji wykonawcy bez wychodzenia z platformy. Drobny brak higieny sprzedażowej.
+
+[REFINEMENT #144249] Wynik 92/100 -> Uruchamiam pętlę naprawczą...
+-> OCENA RUNDA 2 #144249: 91/100 pkt (zmiana: 92 -> 91)
+
+=== TABELA WSZYSTKICH 23 OFERT PO FALI 4 ===
+Średnia końcowa wszystkich 23 ofert: 94.3 / 100 pkt
+ 1. #144357  | tech_16 | biznes     | R1: 41 -> Final: 94/100 |  3000 zł /  7 dni | 171 słów | Pobieranie danych z allegro . przy sprzedazy rzecz
+ 2. #144092  | tech_10 | inzynieria | R1: 79 -> Final: 93/100 |  4500 zł / 11 dni | 201 słów | Dopracowanie istniejącego konfiguratora mebli 3D i
+ 3. #144817  | tech_16 | biznes     | R1: 60 -> Final: 91/100 | 12000 zł / 25 dni | 206 słów | Stworzenie aplikacji lub bota, który tworzy odpowi
+ 4. #144890  | tech_02 | inzynieria | R1: 85 -> Final: 96/100 |  9500 zł / 20 dni | 211 słów | Automatyzacja obiegu faktur i dokumentów kosztowyc
+ 5. #143981  | tech_16 | biznes     | R1: 52 -> Final: 95/100 |  2500 zł /  7 dni | 110 słów | Integracja API - Cloudtalk.io -----> Notion
+ 6. #144165  | tech_11 | inzynieria | R1: 93 -> Final: 94/100 | 15000 zł / 32 dni | 193 słów | CNC Punch Software Development & Postprocessor Mod
+ 7. #144867  | tech_06 | inzynieria | R1: 63 -> Final: 95/100 | 21000 zł / 45 dni | 179 słów | Dedykowana aplikacja mobilna (iOS/Android) dla fiz
+ 8. #144951  | tech_15 | inzynieria | R1: 89 -> Final: 92/100 | 15000 zł / 33 dni | 172 słów | Wdrożenie agenta AI na NVIDIA DGX (RAG, LEX, 2FA, 
+ 9. #144645  | tech_08 | inzynieria | R1: 83 -> Final: 97/100 |  4000 zł / 10 dni | 183 słów | Full-stack / DevOps do przejęcia i dalszego rozwoj
+10. #144737  | tech_09 | inzynieria | R1: 63 -> Final: 96/100 |  8000 zł / 19 dni | 206 słów | Modernizacja i rozwój istniejącego sklepu B2B PHP/
+11. #2586109 | tech_03 | inzynieria | R1: 90 -> Final: 95/100 | 32000 zł / 55 dni | 193 słów | System zwrotów (RMA) dla e-commerce + API + integr
+12. #139571  | tech_13 | inzynieria | R1: 94 -> Final: 94/100 | 12000 zł / 25 dni | 167 słów | Poszukujemy wdrożeniowca/konsultanta do ENOVA365/X
+13. #132598  | tech_12 | inzynieria | R1: 92 -> Final: 96/100 |  6000 zł / 13 dni | 207 słów | Developer VoIP – Automatyczne zostawianie wiadomoś
+14. #133275  | tech_01 | inzynieria | R1: 97 -> Final: 97/100 |  8000 zł / 19 dni | 201 słów | monitoring web scraping/automatyzacja ksiąg wieczy
+15. #144411  | tech_03 | inzynieria | R1: 69 -> Final: 89/100 | 11500 zł / 24 dni | 178 słów | Integracja SAP ↔ BaseLinker ↔ Shopify – wiele maga
+16. #144579  | tech_04 | inzynieria | R1: 82 -> Final: 96/100 |  5500 zł / 12 dni | 197 słów | Integracja API systemu hotelowego z Google BigQuer
+17. #144069  | tech_05 | inzynieria | R1: 72 -> Final: 94/100 |  8000 zł / 13 dni | 148 słów | Aplikacja mobilna kotlin - poszukiwany programista
+18. #139854  | tech_07 | inzynieria | R1: 89 -> Final: 98/100 |  9500 zł / 21 dni | 191 słów | Wdrożenie płatności dla firm w aplikacji mobilnej
+19. #2741972 | tech_14 | biznes     | R1: 94 -> Final: 94/100 |  4500 zł / 11 dni | 206 słów | Szukam freelancera do zbudowania prostego systemu 
+20. #143979  | tech_02 | inzynieria | R1: 96 -> Final: 96/100 |  6500 zł / 15 dni | 194 słów | Automatyzacja obiegu dokumentów (OCR + LLM): n8n /
+21. #144188  | tech_02 | inzynieria | R1: 86 -> Final: 86/100 |  3500 zł /  8 dni | 168 słów | Comarch ERP XL — automatyczne generowanie faktury
+22. #144077  | tech_04 | inzynieria | R1: 93 -> Final: 99/100 |  7000 zł / 15 dni | 203 słów | System chmurowy do rejestracji i rozliczania czasu
+23. #144249  | tech_16 | biznes     | R1: 92 -> Final: 92/100 |  4000 zł / 10 dni | 198 słów | Wdrożenie automatyzacji AI (Make.com/n8n) – genero

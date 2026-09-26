@@ -1,0 +1,89 @@
+
+============================================================
+[DOGRYWKA RUNDA 3] #144411: Integracja SAP ↔ BaseLinker ↔ Shopify – wiele magazynów / Shopify Locations (poprzedni wynik: 86/100)
+============================================================
+
+[NOWA OFERTA #144411 (RUNDA 3)] Wycena: 8000 zł / 17 dni (172 słów):
+--------------------------------------------------
+Dzień dobry,
+
+W integracji wielomagazynowej Shopify najczęstsza pułapka to założenie, że jedna pozycja trafia do jednej lokalizacji. Od kwietnia 2025 Shopify pozwala dzielić ilość pozycji między lokalizacje, a integracje oparte na legacy Fulfillment API tego nie obsługują. Drugie ryzyko to brak unikalnego SKU, bo duplikaty rozsypują stany per magazyn, zanim ktokolwiek zauważy overselling.
+
+W mostku BaseLinker↔Enova365 dla Centrum Budowlane Kołcz (3 magazyny, 12 000 SKU, synchronizacja przez warehouse_type i stock_edition, kolejkowanie z blokadami atomowymi) oraz w integracji PrestaShop↔Allegro przetestowaliśmy dokładnie te mechanizmy: wybór magazynu po regułach dostępności (najbliższy z dostępnym stanem, fallback na centralny), obsługa zamówień dzielonych przez FulfillmentOrder API, mapowanie SKU przez external_id. To dedykowany middleware z logiką biznesową, bo standard BaseLinkera nie pokrywa split fulfillmentu ani fakturowania w SAP. Testujemy na kopii bazy i środowisku stagingowym.
+
+Czy pracują Państwo na Shopify Plus czy Standard, czy SAP to S/4HANA z API OData, czy Business One, oraz czy integracja ma być przez OData, IDoc czy RFC?
+
+Wycena: 8000 zł netto, 17 dni roboczych, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 3 #144411: 89/100 pkt (zmiana: 86 -> 89) | Kategorie: {'A_merytoryka_25': 21, 'B_psychologia_25': 21, 'C_pytanie_cta_20': 20, 'D_wycena_15': 12, 'E_styl_zwiezlosc_15': 15}
+   [+] +8 pkt (Wymiar A1): Otwarcie uderza w ukrytą minę architektoniczną, o której nie wie większość wykonawców: split fulfillment i migracja z legacy Fulfillment API na FulfillmentOrder API. Klient w ogłoszeniu wprost pyta o zamówienia realizowane z kilku magazynów, więc trafienie w ten punkt od razu buduje autorytet.
+   [+] +9 pkt (Wymiar A2): Konkret mechanizmu zamiast pustych obietnic. Wymienione są dokładne API i reguły działania, co pokazuje praktyczną znajomość tematu, a nie ogólniki.
+   [+] +9 pkt (Wymiar B1): Ton Senior Inżyniera rozmawiającego z CTO. Brak coachingowej waty, jest twarda ocena ograniczeń standardowego BaseLinkera i uzasadnienie potrzeby middleware. Idealne dla ścieżki inżynieria.
+   [+] +8 pkt (Wymiar B2): Jasna deklaracja Sandbox-First (kopia bazy, staging) oraz 30 dni gwarancji rozruchowej. Klient dostaje bezpieczeństwo wdrożenia bez dotykania produkcji.
+   [+] +10 pkt (Wymiar C1): Pytanie trafia w trzy kluczowe punkty decyzyjne: plan Shopify (Plus vs Standard determinuje dostęp do API), wersja SAP (S/4HANA vs Business One determinuje architekturę), metoda integracji (OData/IDoc/RFC). Zmusza klienta do konkretnej odpowiedzi i pokazuje głębokie rozeznanie.
+   [+] +5 pkt (Wymiar C2): Jedno krótkie pytanie w osobnym akapicie przed wyceną, bez szkolnego numerowania. Forma idealna.
+   [+] +5 pkt (Wymiar C3): Zero propozycji rozmów zdalnych. 100% asynchroniczności pisemnej.
+   [+] +7 pkt (Wymiar D2): Dokładnie jedna kwota netto, zero widełek, zero upsellingu wersji drugiej. Wszystkie standardy bezpieczeństwa w cenie bazowej.
+   [+] +8 pkt (Wymiar E1): Mieści się w przedziale 135–210 słów dla dużych zleceń. Zwięzłe, treściwe akapity.
+   [+] +7 pkt (Wymiar E2): Naturalny styl człowieka, zero słów-wytrychów AI, zero długich pauz, zero gwiazdek i tabel. Imienny podpis na końcu. Język polski zgodny z ogłoszeniem.
+   [-] -4 pkt (Wymiar B3): [W mostku BaseLinker↔Enova365 dla Centrum Budowlane Kołcz (3 magazyny, 12 000 SKU...) oraz w integracji PrestaShop↔Allegro] -> Klient w ogłoszeniu stawia WYMAGANIE KONIECZNE: praktyczne doświadczenie we wdrażaniu integracji BaseLinker ↔ Shopify z obsługą wielu magazynów / Shopify Locations. Oferta podaje case study BaseLinker↔Enova365 oraz PrestaShop↔Allegro, które nie są integracjami z Shopify. Brakuje twardego dowodu na doświadczenie dokładnie w BaseLinker↔Shopify z Locations, co przy 12 konkurentach może kosztować odrzucenie oferty.
+   [-] -3 pkt (Wymiar D1): [Wycena: 8000 zł netto, 17 dni roboczych] -> 8000 zł przy 17 dniach roboczych daje efektywną stawkę ~59 zł/h (8000 / (17×8)), co jest poniżej bazowej stawki 90 zł/h. Jak na integrację SAP (OData/IDoc/RFC, fakturowanie, split fulfillment, wiele magazynów) wycena jest zaniżona. Przy 90 zł/h realny koszt to ok. 12 240 zł.
+   [-] -4 pkt (Wymiar A3): [Od kwietnia 2025 Shopify pozwala dzielić ilość pozycji między lokalizacje] -> Twierdzenie o konkretnej dacie (kwiecień 2025) jest bardzo precyzyjne, ale żadna z dostarczonych kart wiedzy (tech_03 dotyczy Subiekta, tech_15 dotyczy RAG) nie obejmuje Shopify. Brak weryfikowalnego źródła w materiale wejściowym sprawia, że jest to potencjalna halucynacja. Nawet jeśli zgodna z rzeczywistością, nie wynika logicznie z dostarczonego researchu.
+
+============================================================
+[DOGRYWKA RUNDA 3] #144579: Integracja API systemu hotelowego z Google BigQuery (Python) (poprzedni wynik: 87/100)
+============================================================
+
+[NOWA OFERTA #144579 (RUNDA 3)] Wycena: 5500 zł / 12 dni (197 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Cloud Run w trybie usługi ma twardy timeout 5 minut, a wywołanie z Cloud Scheduler maksymalnie 30 minut - pełny snapshot dostępności na rok do przodu dla kilku obiektów to przekracza i skrypt zostanie ucięty w połowie. Pipeline stawiam na Cloud Run Jobs z limitem 24 godzin, z przyrostowym, idempotentnym przetwarzaniem w partiach i checkpointem po każdej partii.
+
+Rezerwacje trafiają do BigQuery przez MERGE po stabilnym kluczu rezerwacji, więc zmiany statusów i anulacje są widoczne, a nie duplikowane. Dostępność zapisuję jako snapshoty z datą odczytu, dzięki czemu historia tempa sprzedaży zostaje nienaruszona. Zapis przez Storage Write API, gdzie pierwsze 2 TiB miesięcznie jest bez opłat, zamiast insert_rows_json liczonego od wiersza. Synchronizacja trzyma znacznik modyfikacji i wznawia się po przerwie, zamiast pobierać wszystko od zera.
+
+Wszystkie pierwsze uruchomienia i backfill robimy na środowisku demo, zanim cokolwiek trafi do produkcyjnego BigQuery. Przykład podobnej integracji: mostek sprzedaży z ERP Enova365 i BaseLinker dla Centrum Budowlane Kołcz, synchronizacja stanów i dokumentów z kolejką ponowień oraz blokadami przeciw duplikatom.
+
+Czy API demo pozwala filtrować rezerwacje po dacie modyfikacji, czy trzeba pobierać pełne zakresy dat?
+
+Wycena: 5500 zł netto, realizacja 12 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 3 #144579: 96/100 pkt (zmiana: 87 -> 96) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 15}
+   [+] +9 pkt (Wymiar A): Otwarcie uderza w realną minę architektoniczną, której większość oferentów nie diagnozuje: klient sam wskazał Cloud Run + Cloud Scheduler, a oferta pokazuje konsekwencję (ucięcie snapshotu) i przekierowuje na Cloud Run Jobs. To buduje natychmiastowy autorytet inżynierski.
+   [+] +10 pkt (Wymiar A): Każdy element rozwiązania tłumaczy mechanizm: MERGE dla inkrementalnych zmian i anulacji, snapshoty dla historii tempa sprzedaży, Storage Write API z konkretnym progiem bez opłat vs koszt per-wiersz, checkpointy dla wznowienia. Zero pustych obietnic.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja sandbox-first (środowisko demo przed produkcją) plus 30 dni gwarancji rozruchowej na kod. Klient dostaje konkretny bufor bezpieczeństwa wdrożenia.
+   [+] +6 pkt (Wymiar B): Twardy, weryfikowalny dowód z nazwą klienta i opisem technicznym (kolejka ponowień, blokady deduplikacyjne) zbieżny z mechanizmami oferowanymi w tej ofercie.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny projektu: czy da się zrobić inkrementalny sync po dacie modyfikacji, czy trzeba ciągnąć pełne zakresy (co zmienia architekturę checkpointów i koszt API). Zmusza klienta do odpisania na priv.
+   [+] +5 pkt (Wymiar C): Jedno krótkie pytanie w osobnym akapicie przed wyceną, bez numeracji szkolnej.
+   [+] +5 pkt (Wymiar C): 100% asynchronicznie - zero propozycji rozmów telefonicznych, spotkań wideo czy zdzwaniania się.
+   [+] +8 pkt (Wymiar D): Kwota zgodna z kalkulatorem (41h real, ~59h po mnożnikach), efektywna stawka 134 zł/h plasuje się powyżej bazy 90 zł/h co jest uzasadnione specjalizacją tier A i ograniczeniami API hotelowego. 12 dni realne dla trzech modułów.
+   [+] +7 pkt (Wymiar D): Dokładnie jedna kwota netto, bez widełek, bez upsellingu wersji drugiej, wszystkie standardy bezpieczeństwa (sandbox, gwarancja) w cenie bazowej.
+   [+] +8 pkt (Wymiar E): Mieści się w oknie 135-210 słów dla zleceń >= 3000 zł. Krótkie akapity, konkretne, bez powtarzania ogłoszenia klienta.
+   [+] +7 pkt (Wymiar E): Brak słów-wytrychów AI, brak markdown, brak em-dash, język zgodny z ogłoszeniem (PL), imienny podpis na końcu. Ton Senior Inżyniera do technicznego klienta B2B.
+   [-] -2 pkt (Wymiar A): [Cloud Run w trybie usługi ma twardy timeout 5 minut] -> Nieścisłość techniczna: Cloud Run w trybie usługi ma domyślny timeout 300 s, ale konfigurowalny do 3600 s - nie jest to 'twardy' limit. Realnym twardym ograniczeniem w tej architekturze (Cloud Run + Cloud Scheduler) jest maksymalnie 30 minut z Cloud Scheduler, co oferta słusznie zauważa, ale framing 'twardy 5 minut' dla Cloud Run wprowadza drobną nieprecyzję.
+   [-] -1 pkt (Wymiar B): [Przykład podobnej integracji: mostek sprzedaży z ERP Enova365 i BaseLinker] -> Klient wprost prosił o 'przykłady podobnych integracji (API do hurtowni danych)'. Podany przykład to integracja API-do-API (ERP ↔ BaseLinker), a nie API-do-hurtowni, więc dopasowanie domenowe jest częściowe.
+
+=== PODSUMOWANIE WSZYSTKICH 19 OFERT (16/16 KART TECH) ===
+ 1. #144357  | tech_16 | biznes     | R1: 41 -> Final: 94/100 |  3000 zł /  7 dni | 171 słów | Pobieranie danych z allegro . przy sprzedazy rzeczy 
+ 2. #144092  | tech_10 | inzynieria | R1: 79 -> Final: 93/100 |  4500 zł / 11 dni | 201 słów | Dopracowanie istniejącego konfiguratora mebli 3D i p
+ 3. #144817  | tech_16 | biznes     | R1: 60 -> Final: 91/100 | 12000 zł / 25 dni | 206 słów | Stworzenie aplikacji lub bota, który tworzy odpowied
+ 4. #144890  | tech_02 | inzynieria | R1: 85 -> Final: 96/100 |  9500 zł / 20 dni | 211 słów | Automatyzacja obiegu faktur i dokumentów kosztowych
+ 5. #143981  | tech_16 | biznes     | R1: 52 -> Final: 95/100 |  2500 zł /  7 dni | 110 słów | Integracja API - Cloudtalk.io -----> Notion
+ 6. #144165  | tech_11 | inzynieria | R1: 93 -> Final: 94/100 | 15000 zł / 32 dni | 193 słów | CNC Punch Software Development & Postprocessor Modif
+ 7. #144867  | tech_06 | inzynieria | R1: 63 -> Final: 89/100 | 21000 zł / 45 dni | 220 słów | Dedykowana aplikacja mobilna (iOS/Android) dla fizjo
+ 8. #144951  | tech_15 | inzynieria | R1: 89 -> Final: 89/100 | 15000 zł / 33 dni | 177 słów | Wdrożenie agenta AI na NVIDIA DGX (RAG, LEX, 2FA, na
+ 9. #144645  | tech_08 | inzynieria | R1: 83 -> Final: 97/100 |  4000 zł / 10 dni | 183 słów | Full-stack / DevOps do przejęcia i dalszego rozwoju 
+10. #144737  | tech_09 | inzynieria | R1: 63 -> Final: 90/100 |  8000 zł / 19 dni | 200 słów | Modernizacja i rozwój istniejącego sklepu B2B PHP/My
+11. #2586109 | tech_03 | inzynieria | R1: 90 -> Final: 90/100 |  3000 zł /  7 dni | 211 słów | System zwrotów (RMA) dla e-commerce + API + integrac
+12. #139571  | tech_13 | inzynieria | R1: 94 -> Final: 94/100 | 12000 zł / 25 dni | 167 słów | Poszukujemy wdrożeniowca/konsultanta do ENOVA365/XDE
+13. #132598  | tech_12 | inzynieria | R1: 92 -> Final: 96/100 |  6000 zł / 13 dni | 207 słów | Developer VoIP – Automatyczne zostawianie wiadomości
+14. #133275  | tech_01 | inzynieria | R1: 97 -> Final: 97/100 |  8000 zł / 19 dni | 201 słów | monitoring web scraping/automatyzacja ksiąg wieczyst
+15. #144411  | tech_03 | inzynieria | R1: 69 -> Final: 89/100 |  8000 zł / 17 dni | 172 słów | Integracja SAP ↔ BaseLinker ↔ Shopify – wiele magazy
+16. #144579  | tech_04 | inzynieria | R1: 82 -> Final: 96/100 |  5500 zł / 12 dni | 197 słów | Integracja API systemu hotelowego z Google BigQuery 
+17. #144069  | tech_05 | inzynieria | R1: 72 -> Final: 94/100 |  8000 zł / 13 dni | 148 słów | Aplikacja mobilna kotlin - poszukiwany programista
+18. #139854  | tech_07 | inzynieria | R1: 89 -> Final: 98/100 |  9500 zł / 21 dni | 191 słów | Wdrożenie płatności dla firm w aplikacji mobilnej
+19. #2741972 | tech_14 | biznes     | R1: 94 -> Final: 94/100 |  4500 zł / 11 dni | 206 słów | Szukam freelancera do zbudowania prostego systemu or

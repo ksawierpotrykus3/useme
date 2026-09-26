@@ -1,0 +1,49 @@
+{
+  "retry_max": 3,
+  "slots": [
+    {
+      "id": "01",
+      "name": "Research sieciowy",
+      "opis": "AI z dostępem do internetu zbiera aktualne fakty (API, stawki, progi, ryzyka, amunicja do oferty) z dowodami URL/cytat.",
+      "prompt_file": "generatory/agent_01_research.md",
+      "context_files": [],
+      "enabled": true,
+      "role": "generator",
+      "output_key": "research",
+      "model": "deepseek-v4-pro-search"
+    },
+    {
+      "id": "02b",
+      "name": "Wycena i dni",
+      "opis": "AI proponuje stawkę i liczbę dni pracy dla zlecenia na podstawie budżetu, zakresu i researchu.",
+      "prompt_file": "generatory/agent_02b_wycena_dni.md",
+      "context_files": ["kontekst/mechanika_wyceniania.md"],
+      "enabled": true,
+      "role": "generator",
+      "output_key": "wycena_dni",
+      "requires": ["research"]
+    },
+    {
+      "id": "02a",
+      "name": "Tresc oferty",
+      "opis": "AI pisze pełną treść odpowiedzi na ogłoszenie, dopasowaną do klienta, zakresu prac i researchu.",
+      "prompt_file": "generatory/agent_02a_opis_oferty.md",
+      "context_files": ["kontekst/jak_pisac_oferty.md", "kontekst/lore.md", "kontekst/portfolio_baza.md"],
+      "enabled": true,
+      "role": "generator",
+      "output_key": "opis",
+      "requires": ["wycena_dni", "research"]
+    },
+    {
+      "id": "08",
+      "name": "Weryfikator zasad",
+      "opis": "AI sprawdza ofertę i wycenę względem twardych zasad (jak_pisac_oferty, mechanika_wyceniania) i wskazuje konkretne poprawki.",
+      "prompt_file": "walidatory/agent_08_weryfikacja_zasad.md",
+      "context_files": ["kontekst/jak_pisac_oferty.md", "kontekst/mechanika_wyceniania.md"],
+      "enabled": true,
+      "role": "validator",
+      "requires": ["opis", "wycena_dni", "research"],
+      "on_fail": "retry_from_02a"
+    }
+  ]
+}

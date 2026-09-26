@@ -1,0 +1,295 @@
+
+============================================================
+[AUDYT RUNDA 1] #144357: Pobieranie danych z allegro . przy sprzedazy rzeczy ktore sa produkowane na wymiar pod klienta (sciezka=biznes, karta=tech_16)
+============================================================
+-> OCENA RUNDA 1: 41/100 pkt | Kategorie: {'A_merytoryka_25': 15, 'B_psychologia_25': 15, 'C_pytanie_cta_20': 18, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +8 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny projektu — architekturę przepływu danych (plik vs. integracja z systemem produkcyjnym klienta). Zmusza klienta do odpisania i realnie kwalifikuje zakres. Sformułowane krótko, w osobnym akapicie przed wyceną, bez szkolnego numerowania.
+   [+] +8 pkt (Wymiar B): Pełny standard Sandbox-First (kopia danych, zero ryzyka na produkcji) plus 30 dni gwarancji rozruchowej. To dokładnie buduje poczucie bezpieczeństwa u nietechnicznego MŚP.
+   [+] +7 pkt (Wymiar E): Wzorcowy język rezultatu z karty tech_16 ('narzędzie w pudełku'). Zero żargonu IT, zero odwołań do konsoli czy terminala. Klient od razu rozumie, jak to obsługuje.
+   [+] +14 pkt (Wymiar D): Jedna kwota netto zgodna z [WYNIK_KONCOWY], bez widełek i bez upsellingu. Kalkulator daje 34,8h × 90 zł = 3132 zł, finalna kwota 3000 zł mieści się w rynku. Czas 7 dni adekwatny do zakresu.
+   [-] -20 pkt (Kara bezwzględna: PUSTY FRAZES O DOŚWIADCZENIU): [Mamy doświadczenie w łączeniu platform sprzedażowych z systemami produkcyjnymi i magazynowymi.] -> Klasyczny pusty frazes szablonowy bez żadnej konkretnej liczby, nazwy wdrożenia ani faktu inżynierskiego. Nie ma tu ani '3500+ dokumentów z precyzją 99,4%', ani case study z portfolio_baza.md. Zdanie nic nie wnosi i brzmi jak wypełniacz AI.
+   [-] -15 pkt (Kara: WYJAŁOWIONA ŚCIEŻKA BIZNES): [Program sam odczyta wiadomości od kupujących, wyciągnie wymiary, ilość, kolor i sposób oklejania] -> Brak nazwania realnych, życiowych wyjątków w danych klienta na ścieżce biznes. Oferta nie wspomina ani słowem o tym, że kupujący mieszają cm/mm, zapominają podać oklejanie krawędzi, piszą w długich wątkach z cytowaniami, wysyłają PDF-y, albo że jeden klient pisze '100x100' a drugi '1m na 1m'. To jest dokładnie ta 'brudna prawda domeny', której brak czyni ofertę jałową — klient nie czuje, że rozumiemy jego codzienność.
+   [-] -8 pkt (Wymiar A): [Wykorzystamy oficjalne połączenie z Allegro, więc nie ma ryzyka blokady konta.] -> Mechanizm ekstrakcji danych jest zdławiony do jednego zdania. Oferta nie wyjaśnia JAK program radzi sobie z nieustrukturyzowaną wiadomością (parsowanie, AI, reguły?), jak odróżnia 'sztuk 5' od '5 cm', ani co się dzieje gdy wiadomość jest niekompletna. Klient nie rozumie, co dokładnie dostaje — a to jest sedno problemu.
+   [-] -5 pkt (Wymiar A): [Koniec z ręcznym przepisywaniem zamówień z Allegro.] -> Otwarcie jest poprawne i celne, ale to nie jest 'killshot' w rozumieniu matrycy — nie uderza w ukrytą minę architektoniczną (np. pułapkę braku dostępu do pełnej historii wiadomości przez API Allegro, limity zapytań, albo to że Allegro udostępnia wiadomości w formacie, który nie mapuje się 1:1 na pola produkcyjne). Otwarcie nazywa problem, ale nie zaskakuje klienta głębią zrozumienia.
+   [-] -2 pkt (Wymiar E): [Liczba słów oferty: 124] -> Dla zlecenia ≥3000 zł matryca przewiduje 135-210 słów. Oferta jest o 11 słów za krótka — zabrakło miejsca właśnie na opis 'brudnych danych' i konkrety mechanizmu. Nie jest to przekroczenie limitu (kara nie obowiązuje), ale wpływa na ocenę gęstości i kompletności.
+
+[REFINEMENT #144357] Wynik 41/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144357 (RUNDA 2)] Wycena: 3000 zł / 7 dni (171 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Koniec z ręcznym przepisywaniem zamówień z Allegro. Program sam odczyta wiadomości od kupujących, wyciągnie wymiary, ilość, kolor i sposób oklejania, a następnie przygotuje gotowe dane do produkcji lub eksportu.
+
+Znam realia zamówień na wymiar: jeden klient podaje wymiary w centymetrach (100x100), drugi w metrach (1m na 1m), trzeci pisze słownie które krawędzie okleić albo w ogóle zapomina podać kolor płyty. Program najpierw czyta całą treść wiadomości, a jeśli czegoś brakuje lub jest niejasne – oznacza zamówienie do ręcznej weryfikacji, zamiast zgadywać. Na ekranie zobaczysz listę zamówień z wymiarami, kolorem, oklejaniem i ilością, gotową do wydruku lub eksportu.
+
+Wykorzystamy oficjalne połączenie z Allegro, więc nie ma ryzyka blokady konta. Całość przetestujemy na kopii danych, bez wpływu na bieżące zamówienia. Program działa w tle – uruchamiasz go jednym kliknięciem. Po wdrożeniu otrzymasz pełną dokumentację, nagranie instruktażowe i 30 dni gwarancji rozruchowej na własny kod.
+
+Czy dane po odczytaniu mają trafiać do Excela, czy bezpośrednio do programu, w którym teraz prowadzisz produkcję?
+
+Koszt: 3000 zł netto. Czas realizacji: 7 dni.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 94/100 pkt (zmiana: 41 -> 94) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A1): Mocny killshot: pierwsze zdania nazywają bolączkę klienta i obiecują konkretny efekt docelowy bez żargonu IT.
+   [+] +10 pkt (Wymiar B1): Trafione w sedno: oferta nazywa życiowe wyjątki i brudne dane z codziennej pracy klienta, zamiast pisać ogólniki o automatyzacji.
+   [+] +8 pkt (Wymiar B2): Zawiera sandbox-first, bezpieczeństwo wdrożenia, prostotę obsługi oraz 30 dni gwarancji rozruchowej.
+   [+] +20 pkt (Wymiar C): Jedno krótkie pytanie kwalifikujące, trafia w kluczową decyzję o kierunku integracji, jest w pełni asynchroniczne i nie proponuje rozmowy telefonicznej.
+   [+] +15 pkt (Wymiar D): Jedna kwota netto zgodna z [WYNIK_KONCOWY], brak widełek i brak upsellingu wersji drugiej; wycena mieści się w realiach kalkulatora.
+   [-] -1 pkt (Wymiar A1): [Koniec z ręcznym przepisywaniem zamówień z Allegro. Program sam odczyta wiadomości od kupujących...] -> Pierwsze dwa zdania sprzedają efekt, ale nie uderzają od razu w ukrytą minę danych wejściowych; dopiero trzeci akapit nazywa bałagan w formatach i brakujące informacje.
+   [-] -2 pkt (Wymiar A2): [Program najpierw czyta całą treść wiadomości, a jeśli czegoś brakuje lub jest niejasne – oznacza zamówienie do ręcznej weryfikacji, zamiast zgadywać.] -> Zachowanie programu jest opisane dobrze, ale mechanizm rozpoznawania wymiarów z odmiennych zapisów pozostaje ogólny; brak jednego zdania o wzorcach, słowach kluczowych lub zatwierdzaniu propozycji przez człowieka.
+   [-] -2 pkt (Wymiar B3): [Znam realia zamówień na wymiar...] -> Brak twardego, weryfikowalnego dowodu z portfolio wprost pasującego do automatyzacji e-commerce lub ekstrakcji danych; deklaracja jest wiarygodna przez przykłady, ale nie zawiera liczby ani nazwy wdrożenia.
+   [-] -1 pkt (Wymiar E2): [niejasne – oznacza zamówienie do ręcznej weryfikacji / Program działa w tle – uruchamiasz go jednym kliknięciem] -> Użycie długiej pauzy w dwóch miejscach; w ofercie dla tego segmentu lepiej zastąpić je przecinkiem lub kropką, aby zachować czystość językową.
+
+============================================================
+[AUDYT RUNDA 1] #144092: Dopracowanie istniejącego konfiguratora mebli 3D i przygotowanie wersji produkcyjnej (sciezka=inzynieria, karta=tech_10)
+============================================================
+-> OCENA RUNDA 1: 79/100 pkt | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 20, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Otwarcie trafia w absolutnie kluczową minę architektoniczną konfiguratorów 3D: sprzężenie logiki konfiguracji ze sceną renderującą. To dokładnie ten problem, którego 85% wykonawców nie nazywa w pierwszych zdaniach, a który determinuje całą dalszą rozbudowę. Klientka pisze, że 'działa większość podstawowej logiki', ale nie wie, czy jest ona odseparowana - oferta natychmiast identyfikuje to jako źródło przyszłych problemów.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio_baza.md (48 MB -> 3.8 MB i 60 FPS), dopasowany wprost do domeny konfiguratorów 3D i problemu wydajności mobilnej. Zamiast pustego 'mamy doświadczenie', oferta podaje konkretną liczbę i fakt inżynierski, który klientka może zweryfikować.
+   [+] +5 pkt (Wymiar C): Pytanie jest chirurgiczne: trafia w jedyny punkt decyzyjny, który realnie zmienia zakres prac (separacja stanu od sceny). Zmusza klientkę do zajrzenia w kod i odpowiedzi, a jednocześnie pokazuje, że wykonawca wie, od czego zacząć. Jedno pytanie, osobny akapit, zero szkolnego numerowania.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja Sandbox-First (praca na kopii, demo nienaruszone) plus 30 dni gwarancji rozruchowej i rozliczenie przez depozyt Useme. Klientka ma gotowy kod i boi się, że wykonawca go zepsuje - oferta zdejmuje ten lęk w dwóch zdaniach.
+   [+] +8 pkt (Wymiar A): Konkret mechanizmu zamiast pustych obietnic: Draco/KTX2, adaptive rendering i ograniczenie devicePixelRatio to realne, sprawdzalne techniki optymalizacji Three.js. Oferta nie mówi 'zoptymalizujemy', tylko podaje nazwy narzędzi.
+   [-] -15 pkt (Kara bezwzględna: FAŁSZYWY SKOK LOGICZNY Z RESEARCHU): [Zweryfikuję też, czy kod korzysta z aktualnych wzorców Three.js (r185), co ma bezpośredni wpływ na przyszłą integrację z PrestaShop.] -> Nielogiczne powiązanie wersji silnika Three.js (r185) z integracją koszyka PrestaShop. Three.js to biblioteka renderingu 3D po stronie klienta, a PrestaShop to backend e-commerce z własnym API koszyka. Wersja Three.js nie ma bezpośredniego wpływu na integrację z PrestaShop - to fałszywy skok logiczny, który u doświadczonego klienta technicznego natychmiast podważa wiarygodność.
+   [-] -3 pkt (Wymiar A3: Spójność logiczna): [co ma bezpośredni wpływ na przyszłą integrację z PrestaShop] -> To samo zdanie obniża ocenę spójności logicznej w Wymiarze A3. Oferta w jednym zdaniu miesza dwie niezależne warstwy technologiczne (frontendowy rendering 3D vs backendowa integracja e-commerce), co jest błędem merytorycznym obniżającym zaufanie do warsztatu inżynierskiego.
+
+[REFINEMENT #144092] Wynik 79/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144092 (RUNDA 2)] Wycena: 4500 zł / 11 dni (201 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Największe ryzyko w konfiguratorach Three.js to logika konfiguracji wtopiona bezpośrednio w warstwę sceny - przy każdej nowej opcji (zależności modułów, wymiary, wykluczenia) trudno utrzymać spójność i przewidywalność. Drugim krytycznym obszarem jest wydajność na urządzeniach mobilnych, gdzie Safari na iOS szybko ujawnia problemy z pamięcią GPU i utratą kontekstu, mimo że na desktopie wszystko działa płynnie.
+
+Wchodzę w zastany kod bez przepisywania od zera: najpierw inwentaryzacja stanu obecnego, potem wydzielenie logiki konfiguracji do osobnego modułu zdarzeniowego, w którym renderowanie jest reakcją na zmiany stanu. To pozwala uporządkować zależności i wykluczenia bez przepisywania całej sceny. Sprawdzę też, czy kod nie opiera się na wycofanych wzorcach Three.js, które utrudniają dalszy rozwój. Optymalizacja obejmie kompresję Draco/KTX2, adaptive rendering i ograniczenie devicePixelRatio. W analogicznym projekcie zredukowaliśmy model z 48 MB do 3.8 MB, utrzymując stabilne 60 FPS na smartfonach.
+
+Czy w obecnym kodzie logika konfiguracji jest już odseparowana od warstwy sceny Three.js, czy stan i rendering są splecione w jednym module? To determinuje zakres i kolejność prac.
+
+Wycena: 4500 zł netto, czas realizacji 11 dni, 30 dni gwarancji rozruchowej na własny kod. Rozliczenie przez depozyt Useme - środki zwalniane po weryfikacji działającego efektu. Pracuję na kopii roboczej, obecna wersja demo pozostaje nienaruszona.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 93/100 pkt (zmiana: 79 -> 93) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 20, 'D_wycena_15': 12, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Killshot w pierwszych dwóch zdaniach trafia w dwie realne miny architektoniczne, o których nie wie 85% wykonawców: (1) sprzężenie logiki konfiguracji z warstwą sceny Three.js oraz (2) utratę kontekstu WebGL i problemy z pamięcią GPU na Safari/iOS. To dokładnie te problemy, które ujawniają się dopiero przy złożonych konfiguratorach mebli na wymiar z wieloma zależnościami modułów. Ton Senior Inżyniera do Technical Ownera - bez coachingowej waty.
+   [+] +9 pkt (Wymiar A): Konkret mechanizmu zamiast pustych obietnic: separacja stanu od renderingu (event-driven state module), audyt wycofanych wzorców Three.js, oraz trzy wymienione z nazwy techniki optymalizacji (Draco/KTX2, adaptive rendering, devicePixelRatio). To język inżyniera, który dokładnie wie, co robi przy przejmowaniu cudzego kodu 3D.
+   [+] +10 pkt (Wymiar C): Pytanie kwalifikujące trafia w absolutnie kluczowy punkt decyzyjny projektu: stopień separacji stanu od sceny determinuje, czy rescue będzie kosmetyczny, czy wymaga refaktoryzacji rdzenia. Jedno krótkie pytanie w osobnym akapicie, zero szkolnego numerowania, 100% asynchroniczne. Wymusza konkretną odpowiedź techniczną od klientki, która sama budowała ten kod.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio (48 MB -> 3.8 MB, 60 FPS) wprost pasujący do domeny konfiguratorów 3D. Konkretna liczba zamiast pustego 'mamy doświadczenie'. Klientka od razu widzi, że wykonawca rozumie problem wagi modelu i wydajności mobilnej, który sam zresztą zdiagnozował w otwarciu.
+   [+] +7 pkt (Wymiar B): Trzy elementy bezpieczeństwa wdrożenia w jednym akapicie: 30 dni gwarancji, depozyt Useme z weryfikacją efektu, oraz praca na kopii roboczej bez dotykania żywej demo. Klientka ma gotową wersję demonstracyjną, więc zapewnienie o nienaruszaniu jej jest trafione psychologicznie.
+   [-] -2 pkt (Wymiar A): [Brak wzmianki o przygotowaniu produkcyjnym - klientka wymienia 'przygotowanie projektu do wdrożenia jako rzeczywisty konfigurator e-commerce' jako osobny punkt, a oferta nie wyjaśnia mechanizmu (bundling, minifikacja, tree-shaking, testy cross-browser, przygotowanie builda produkcyjnego, obsługa PrestaShop w zakresie frontendu).] -> Oferta świetnie diagnozuje problemy architektoniczne i mechanizmy refaktoryzacji/optymalizacji, ale pomija mechanizm przygotowania do wdrożenia produkcyjnego, który jest ósmym punktem listy klientki. Sam VPS deploy w kalkulatorze nie wystarczy - klientka chce wiedzieć JAK kod będzie przygotowany do realnego ruchu e-commerce.
+   [-] -3 pkt (Wymiar D): [Wycena: 4500 zł netto, czas realizacji 11 dni.] -> Kalkulator pokazuje 52,4 h po buforze przy stawce 90 zł/h, co daje efektywną stawkę 86 zł/h - poniżej progu bazowego 90 zł/h. Biorąc pod uwagę zakres (audyt kodu, refaktoryzacja logiki, UI/UX, RWD desktop+mobile, optymalizacja, poprawki modelu 3D, przygotowanie produkcyjne) oraz niepewność dziedziczonego kodu (rescue), realistyczny nakład to 60-75 h. Wycena jest zaniżona o ok. 20-25%, co przy 15 konkurentach może sygnalizować klientce niższą jakość lub ukryte cięcia zakresu.
+   [-] -1 pkt (Wymiar E): [Największe ryzyko w konfiguratorach Three.js to logika konfiguracji wtopiona bezpośrednio w warstwę sceny - przy każdej nowej opcji (zależności modułów, wymiary, wykluczenia) trudno utrzymać spójność i przewidywalność.] -> Otwarcie merytorycznie mocne, ale zdanie jest przeładowane (cztery podrzędne wtrącenia w jednym zdaniu). Przy limicie 210 słów dla dużego zlecenia oferta mogłaby zyskać na rytmie, gdyby pierwsze zdanie było krótsze i bardziej uderzające. Drobna uwaga stylistyczna, nie merytoryczna.
+
+============================================================
+[AUDYT RUNDA 1] #144817: Stworzenie aplikacji lub bota, który tworzy odpowiedzi na maile firmowe (sciezka=biznes, karta=tech_16)
+============================================================
+-> OCENA RUNDA 1: 60/100 pkt | Kategorie: {'A_merytoryka_25': 20, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 19, 'D_wycena_15': 8, 'E_styl_zwiezlosc_15': 15}
+   [+] +8 pkt (Wymiar A): Trafienie w kluczową minę LLM (halucynacje) i bezpośrednie odniesienie do wymogu klienta o braku zewnętrznych baz. Język zrozumiały, bez żargonu.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja Sandbox-First, kluczowa dla nietechnicznego klienta obawiającego się o swoją produkcyjną skrzynkę.
+   [+] +8 pkt (Wymiar C): Pytanie zmusza klienta do ujawnienia wolumenu i struktury danych, co jest niezbędne do zaprojektowania RAG i wyceny utrzymania.
+   [+] +5 pkt (Wymiar A): Trafne odniesienie do AI Act (obowiązek transparentności), budujące autorytet i pokazujące, że wykonawca zna otoczenie prawne klienta.
+   [-] -12 pkt (Wymiar D / Kara Wyceny): [Wdrożenie wyceniam na 15 000 zł netto] -> Wycena pochodzi ze starego mnożnika ryzyka 1.3 (efektywna stawka 159,6 zł/h przy bazowej 90 zł/h). Zawyżona o ok. 28% względem realnej pracochłonności (129,7 h po buforze).
+   [-] -8 pkt (Wymiar A / Kara cząstkowa): [gdy brakuje mu danych, wprost prosi o ręczną redakcję] -> Oferta dla ścieżki biznes nie nazywa konkretnych, życiowych wyjątków i brudnych danych z codziennej pracy klienta (np. długie wątki mailowe z cytowaniami, załączniki PDF, niespójne formatowanie FAQ, różne języki). Ogólnikowe 'brakuje mu danych' nie buduje pełnego zaufania.
+   [-] -3 pkt (Wymiar D): [Stałą miesięczną opiekę... ustalimy po uruchomieniu, gdy poznamy realny wolumen wiadomości.] -> Klient wprost prosił o wycenę obsługi i utrzymania. Oferta całkowicie ją odkłada, nie podając nawet widełek orientacyjnych (np. 'od 300 zł/mies. przy X wiadomościach').
+   [-] -12 pkt (Wymiar D / Kara Wyceny): [Wycena 15000 zł (stary mnożnik ryzyka 1.3 / efektywna stawka >150 zł/h)] -> Wycena pochodzi ze starego iloczynu mnożników (zawyżona względem zaktualizowanego kalkulatora 90 zł/h).
+
+[REFINEMENT #144817] Wynik 60/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144817 (RUNDA 2)] Wycena: 12000 zł / 25 dni (206 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Każde nowe zapytanie klienta ma już przygotowaną propozycję odpowiedzi na podstawie Waszego FAQ i wcześniejszej korespondencji, a pracownik tylko ją akceptuje albo dopracowuje. Bot korzysta wyłącznie z Waszej wewnętrznej bazy wiedzy, nie szuka niczego w internecie. Kiedy klient odpisuje w wątku z pięcioma cytowanymi mailami i załącznikiem PDF, narzędzie oddziela nowe pytanie od starej historii i czyta treść załącznika, nie gubiąc kontekstu. Gdy FAQ jest rozproszone w kilku plikach Word z różnym formatowaniem, program sam je ujednolica i scala w jedną bazę. Jeśli podobieństwo nowego pytania do znanych odpowiedzi spadnie poniżej 70%, bot zapala czerwoną flagę i prosi o ręczną redakcję.
+
+Zaczynamy od etapu, w którym każda odpowiedź czeka na decyzję pracownika. Dopiero po testach włączamy automatyczną wysyłkę. Bot uczy się z każdej nowej odpowiedzi pracowników. Testy prowadzimy na kopii skrzynki i odseparowanym środowisku, bez ryzyka dla Waszej żywej poczty. Wbuduję informację, że odpowiedź przygotowała sztuczna inteligencja, zgodnie z przepisami.
+
+Ile zapytań dziennie trafia na skrzynkę i w jakiej formie macie teraz FAQ oraz historię maili?
+
+Wdrożenie wyceniam na 12 000 zł netto, realizacja w 25 dni, z 30-dniową gwarancją rozruchową na własny kod. Miesięczna opieka to zwykle 300-500 zł netto przy wolumenie do 500 maili; dokładną kwotę podam po poznaniu skali.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 91/100 pkt (zmiana: 60 -> 91) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 18, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 15}
+   [+] +9 pkt (Wymiar A / otwarcie killshotem): Oferta w pierwszych zdaniach trafia w dwa życiowe, brudne przypadki z codziennej pracy biurowej: wątki mailowe z cytowaniami i PDF oraz rozproszone pliki Word. To dokładnie te wyjątki, które zabijają naiwne boty emailowe i o których nie wie 85% wykonawców. Klient od razu czuje, że autor rozumie jego rzeczywistość.
+   [+] +8 pkt (Wymiar A / konkret mechanizmu): Zamiast pustego 'obsłużymy brakujące dane' oferta podaje konkretny mechanizm decyzyjny z progiem liczbowym. To buduje wiarygodność inżynierską i pokazuje, że autor wie, jak działa system w praktyce.
+   [+] +8 pkt (Wymiar B / Sandbox-First i gwarancja): Klient nietechniczny boi się, że coś zepsuje mu żywą pocztę. Jasna deklaracja pracy na kopii i 30 dni gwarancji rozruchowej to dokładnie to, co buduje poczucie bezpieczeństwa wdrożenia.
+   [+] +7 pkt (Wymiar C / pytanie kwalifikujące): Pytanie jest krótkie, konkretne, w osobnym akapicie przed wyceną i trafia w kluczowy punkt decyzyjny: wolumen oraz format danych wejściowych determinują architekturę i koszt utrzymania.
+   [+] +7 pkt (Wymiar E / styl i zwięzłość): Język jest czysty, naturalny, wolny od żargonu IT i słów-wytrychów AI. 206 słów mieści się w limicie dla dużego zlecenia. Imienny podpis na końcu.
+   [-] -3 pkt (Wymiar B / brak dowodu): [brak jakiegokolwiek odwołania do portfolio_baza.md] -> Oferta nie zawiera żadnego twardego, weryfikowalnego dowodu z portfolio (np. liczby wdrożeń, precyzji, skali). Co prawda nie ma też pustych zdań o doświadczeniu, ale przy 15 konkurentach jeden konkretny fakt z realizacji znacząco zwiększyłby zaufanie.
+   [-] -2 pkt (Wymiar D / widełki w utrzymaniu): [Miesięczna opieka to zwykle 300-500 zł netto przy wolumenie do 500 maili; dokładną kwotę podam po poznaniu skali.] -> Klient wprost prosił o wycenę obsługi i utrzymania, a oferta podaje widełki zamiast jednej kwoty. Nawet przy zastrzeżeniu 'dokładną kwotę podam po poznaniu skali' jest to niespójne z zasadą jednej kwoty netto.
+   [-] -2 pkt (Wymiar A / mechanizm uczenia): [Bot uczy się z każdej nowej odpowiedzi pracowników.] -> To zdanie jest zbyt ogólne. Brak wyjaśnienia, jak dokładnie następuje aktualizacja bazy wiedzy po zatwierdzeniu nowej odpowiedzi przez pracownika. Dla klienta nietechnicznego warto to opisać jednym konkretnym zdaniem.
+   [-] -2 pkt (Wymiar D / czas realizacji): [realizacja w 25 dni] -> Przy 129,7 roboczogodzinach i złożoności integracji z pocztą oraz RAG, 25 dni kalendarzowych jest ambitne, ale możliwe tylko przy pełnej dostępności danych i decyzji klienta. Brak zastrzeżenia, że termin zależy od szybkości dostarczenia historii maili i FAQ.
+
+============================================================
+[AUDYT RUNDA 1] #144890: Automatyzacja obiegu faktur i dokumentów kosztowych (sciezka=inzynieria, karta=tech_02)
+============================================================
+-> OCENA RUNDA 1: 85/100 pkt | Kategorie: {'A_merytoryka_25': 25, 'B_psychologia_25': 25, 'C_pytanie_cta_20': 20, 'D_wycena_15': 12, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Otwarcie uderza w ukrytą minę architektoniczną: klient myśli, że problem to OCR, a prawdziwe ryzyko to trzy różne źródła dokumentów (skaner, mail, Google Drive) i tolerancja groszowa VAT. To dokładnie diagnoza, której nie dostrzega 85% wykonawców.
+   [+] +10 pkt (Wymiar A): Trafne rozpoznanie stanu prawnego na 2026 (KSeF 2.0 / FA(3)) i uniknięcie podwójnego przetwarzania. To wiedza z tech_02, która bezpośrednio przekłada się na oszczędność kosztów klienta.
+   [+] +10 pkt (Wymiar A): Konkretny mechanizm zamiast pustych obietnic. Rozdzielenie ekstrakcji (LLM) od walidacji (skrypt deterministyczny) z tolerancją groszową i deduplikacją to architektoniczny majstersztyk, który bezpośrednio adresuje wymaganie klienta o bezwarunkowej weryfikacji matematycznej.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja Sandbox-First z konkretnym wskazaniem mechanizmów integracji (Praca Rozproszona XML lub Web API). Klient dostaje bezpieczeństwo wdrożenia bez ryzyka dla żywej bazy.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio_baza.md. Konkretna liczba i precyzja, która buduje zaufanie w domenie OCR/AI.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny: wybór kanału integracji (CDN.API vs Web API) zależy od modelu pracy Optimy. Drugie pytanie o proporcję KSeF vs spoza KSeF determinuje strategię OCR. Oba zmuszają klienta do merytorycznej odpowiedzi.
+   [+] +5 pkt (Wymiar A): Logiczne, warstwowe podejście do różnych typów dokumentów. Oszczędność kosztów przez parsowanie PDF bez tokenów i preprocessing tylko dla trudnych przypadków.
+   [-] -12 pkt (Wymiar D / Kara Wyceny): [Wycena 11000 zł (stary mnożnik ryzyka 1.3 / efektywna stawka >150 zł/h)] -> Wycena pochodzi ze starego iloczynu mnożników (zawyżona względem zaktualizowanego kalkulatora 90 zł/h). Efektywna stawka 157,1 zł/h przy bazowej 90 zł/h oznacza zawyżenie o 74%, co przekracza próg 35% i stanowi poważny błąd kalkulacyjny.
+   [-] -3 pkt (Wymiar D): [Wycena: 11000 zł netto] -> Sama kwota mieści się w widełkach rynkowych dla tech_02 (4500–16000 zł), ale sposób jej wyliczenia (podwójne nazwanie modułu 'Integracja zewnętrznego API' oraz stary mnożnik 1.3) obniża wiarygodność kalkulacji. D1 oceniono na 5/8.
+
+[REFINEMENT #144890] Wynik 85/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144890 (RUNDA 2)] Wycena: 9500 zł / 20 dni (211 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Kluczowe ryzyko w tym procesie to nie sam OCR, a trzy równoległe kanały dokumentów oraz tolerancja groszowa VAT. Faktury krajowe po 1 lutego 2026 są w KSeF jako XML FA(3) - nowe wersje Comarch Optima mają natywny odbiór KSeF z pozycjami, więc dublowanie tego w OCR to palenie budżetu na tokeny. Cyfrowe PDF-y z maila mają warstwę tekstową, więc parsujemy je bezpośrednio, bez kosztu tokenów. Dopiero skany i zdjęcia od pracowników z terenu wymagają preprocessingu obrazu (deskew, kontrast) i modelu Vision z progiem pewności - pola poniżej progu trafiają do kolejki weryfikacji z powiadomieniem.
+
+Walidację matematyczną rozdzielamy od ekstrakcji: LLM zwraca ustrukturyzowany JSON, a deterministyczny skrypt sprawdza sumy netto/VAT/brutto z tolerancją 1–2 gr i deduplikuje po kluczu NIP + numer dokumentu + hash pliku. Całość na self-hosted n8n. Mamy za sobą wdrożenie na wolumenie 3500+ dokumentów z precyzją 99,4%. Wszystkie testy i pierwsze importy wykonujemy na kopii bazy Optimy (Praca Rozproszona XML lub Web API), bez dotykania żywej produkcji.
+
+Czy Państwa Optima pracuje w modelu stacjonarnym (Windows), czy w chmurze Comarch? Od tego zależy wybór kanału integracji. Jaki procent faktur kosztowych to krajowe NIP PL, a jaki dokumenty spoza KSeF?
+
+Wycena: 9500 zł netto, realizacja 20 dni, 30 dni gwarancji rozruchowej i asysty powdrożeniowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 96/100 pkt (zmiana: 85 -> 96) | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Killshot trafia w ukrytą minę architektoniczną z tech_02: klient nie wie, że od 1 lutego 2026 krajowe faktury kosztowe są w KSeF jako ustrukturyzowany XML FA(3) i że OCR tych dokumentów to wyrzucanie pieniędzy na tokeny Vision. Wskazanie trzech kanałów spływu i tolerancji groszowej VAT jako realnego ryzyka (nie samego OCR) pokazuje, że oferent rozumie proces end-to-end, a nie tylko pojedynczy moduł.
+   [+] +9 pkt (Wymiar A): Konkret mechanizmu zamiast pustych obietnic: rozdzielenie kosztownego Vision od darmowego parsowania warstwy tekstowej PDF, preprocessing obrazu, próg pewności, oddzielenie LLM od deterministycznej walidacji matematycznej, konkretny klucz deduplikacji. To język inżyniera, który wie, gdzie koszt tokenów boli i dlaczego walidacja musi być deterministyczna, a nie 'AI sprawdzi'.
+   [+] +8 pkt (Wymiar B): Sandbox-First wprost zaadresowany: kopia bazy Optimy, zero ryzyka na żywej produkcji. Dodatkowo wskazanie dwóch realnych kanałów integracji (Praca Rozproszona / Web API) bez fałszywego upraszczania, że 'się podłączy przez API', co jest zgodne z tech_02.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód liczbowy wprost z portfolio_baza.md, wpasowany w domenę OCR dokumentów. Zero pustego chwalenia się 'wieloletnim doświadczeniem'.
+   [+] +8 pkt (Wymiar C): Pytanie uderza w kluczowy punkt decyzyjny z tech_02: stacjonarna Optima wymaga CDN.API na Windows obok instalacji, chmurowa pozwala iść Web API REST. Bez tej odpowiedzi wybór kanału integracji jest zgadywaniem. Drugie pytanie o proporcję KSeF vs spoza KSeF bezpośrednio determinuje, czy warto w ogóle budować moduł OCR, czy ograniczyć się do parsowania XML z KSeF i skanów od pracowników terenowych.
+   [-] -1 pkt (Wymiar A): [Faktury krajowe po 1 lutego 2026 są w KSeF jako XML FA(3) - nowe wersje Comarch Optima mają natywny odbiór KSeF z pozycjami] -> Drobne uproszczenie: karta tech_02 wskazuje, że dostęp do natywnego odbioru KSeF z pozycjami zależy od pakietu Comarch OCR&KSeF (licencjonowanie od października 2026). Zdanie sugeruje, że to 'po prostu działa' w nowych wersjach, co może wprowadzić klienta w błąd przy liczeniu kosztów stałych. Warto by dodać pół zdania o weryfikacji, czy klient ma włączony ten moduł.
+   [-] -1 pkt (Wymiar B): [brak fragmentu] -> Oferta nie wspomina wprost o zachowaniu offline ani o pracy rozproszonej w kontekście przerwy KSeF 1.0 / 2.0. Dla profilu msp_erp z pracownikami terenowymi warto było dodać jedno zdanie, że kolejka dokumentów buforuje się lokalnie, gdy pracownik jest poza siecią, i dogrywa po powrocie online.
+   [-] -1 pkt (Wymiar D): [OCR/AI moduł (ekstrakcja danych z dokumentów, walidacja) 18h oraz Automatyzacja AI-LLM (ekstrakcja/generowanie treści, klasyfikacja dokumentów) 8h] -> Dwa moduły 'OCR/AI' i 'AI-LLM' częściowo się nakładają w zakresie ekstrakcji danych z dokumentów. 18h+8h=26h na warstwę AI/OCR jest na granicy zdublowania, choć rozdzielenie na klasyczny OCR/Vision i LLM do klasyfikacji/strukturyzacji jest merytorycznie uzasadnione. Bufor integracji z Optimą 0.2 to plus, więc kara tylko symboliczna.
+   [-] -1 pkt (Wymiar E): [Liczba słów: 211] -> Lekkie przekroczenie docelowego przedziału 135–210 słów dla zleceń ≥ 3000 zł (211 słów), choć poniżej twardego limitu 225–230 słów. Zero wata słownej, ale dyscyplina redakcyjna mogłaby być o jedno zdanie ostrzejsza.
+
+============================================================
+[AUDYT RUNDA 1] #143981: Integracja API - Cloudtalk.io -----> Notion (sciezka=biznes, karta=tech_16)
+============================================================
+-> OCENA RUNDA 1: 52/100 pkt | Kategorie: {'A_merytoryka_25': 13, 'B_psychologia_25': 17, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 10}
+   [+] +5 pkt (Wymiar A): Trafne wykrycie ukrytej miny architektonicznej (ograniczenie planu Essential), co ratuje klienta przed wdrożeniem bez danych. Logiczna spójność i brak halucynacji.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja sandbox-first i 30 dni gwarancji, buduje zaufanie i bezpieczeństwo wdrożenia.
+   [+] +7 pkt (Wymiar B): Oferta nie zawiera ogólników typu 'mamy doświadczenie', co jest zgodne z zasadą świadomego braku chwalenia się.
+   [+] +10 pkt (Wymiar C): Pytanie angażuje klienta w kluczową decyzję (plan Expert) i zbiera dane o skali (liczba rozmów), wymuszając odpowiedź.
+   [+] +5 pkt (Wymiar C): Krótka, konkretna forma bez szkolnego numerowania.
+   [+] +5 pkt (Wymiar C): Pełna asynchroniczność pisemna.
+   [+] +8 pkt (Wymiar D): Wycena zgodna z kalkulatorem (27,4h * 90 zł = 2464,7 zł), efektywna stawka 138,9 zł/h, realistyczna dla standardowej integracji.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, brak widełek i upsellingu wersji drugiej. Wszystkie standardy w cenie.
+   [+] +7 pkt (Wymiar E): Naturalny styl, brak słów-wytrychów AI, brak markdown, poprawna higiena formatowania, imienny podpis.
+   [-] -8 pkt (Wymiar E / Kara): [Liczba słów: 128 (przy małym zleceniu 2500 zł < 3000 zł)] -> Przekroczony limit zwięzłości dla małych zleceń (maks. 110–115 słów, jest 128).
+   [-] -15 pkt (Wymiar B / Kara): [Konfigurację przez API bierzemy na siebie. ... Obsługujemy limity zapytań i buforowanie] -> Użycie żargonu IT (API, limity zapytań, buforowanie) na ścieżce biznes tech-agnostic oraz brak nazwania 2–3 życiowych wyjątków i brudnych danych z codziennej pracy klienta (np. mieszanie formatów, brakujące tagi, niekompletne notatki).
+   [-] -7 pkt (Wymiar A): [Po każdej rozmowie transkrypcja i notatki AI same trafiają do Waszej bazy CRM w Notion - handlowiec kończy rozmowę, a wpis pojawia się automatycznie.] -> Brak nazwania konkretnych życiowych wyjątków i brudnych danych w pierwszych 2 zdaniach (zamiast tego ogólny efekt docelowy).
+   [-] -5 pkt (Wymiar A): [Konfigurację przez API bierzemy na siebie. ... Obsługujemy limity zapytań i buforowanie] -> Mechanizm opisany w żargonie IT zamiast języka konkretnego zachowania programu dla klienta nietechnicznego.
+   [-] -8 pkt (Wymiar B): [Konfigurację przez API bierzemy na siebie. ... Obsługujemy limity zapytań i buforowanie] -> Użycie zakazanego żargonu (API, limity zapytań) oraz brak nazwania życiowych wyjątków w danych klienta.
+   [-] -5 pkt (Wymiar E): [Liczba słów: 128] -> Przekroczenie limitu słów dla małego zlecenia (110–115 słów), obniżona gęstość i zwięzłość.
+
+[REFINEMENT #143981] Wynik 52/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #143981 (RUNDA 2)] Wycena: 2500 zł / 7 dni (110 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Transkrypcje rozmów i notatki AI same trafiają do Waszej bazy CRM w Notion. Uwaga: transkrypcje wymagają planu Expert i ręcznego włączenia przez support CloudTalk.
+
+Program łączy się z CloudTalk i Notion. Co, gdy rozmowa się nie nagra albo klient napisze w trakcie? Program nie zgaduje - oznacza taki wpis do ręcznej weryfikacji. Gdy drugi system chwilowo nie odpowiada, notatka czeka w kolejce.
+
+Testy robimy na kopii bazy, bez ryzyka dla Waszych danych. Po wdrożeniu przekazujemy nagranie wideo i 30 dni gwarancji rozruchowej na nasz kod.
+
+Ile rozmów miesięcznie prowadzicie i czy jesteście otwarci na zmianę planu na Expert?
+
+Cena: 2500 zł netto. Czas realizacji: 7 dni.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 95/100 pkt (zmiana: 52 -> 95) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A1): Trafia w ukrytą minę architektoniczną: klient wspomina o planie Essential, który nie obsługuje transkrypcji. Oferta od razu pokazuje głęboką wiedzę o ograniczeniach API, której nie ma 85% wykonawców.
+   [+] +7 pkt (Wymiar A2): Zamiast pustych obietnic, oferta konkretnie opisuje zachowanie programu w sytuacjach awaryjnych (brak nagrania, równoległa wiadomość, niedostępność systemu), co buduje zaufanie.
+   [+] +10 pkt (Wymiar B1): Nazywa po ludzku życiowe wyjątki z codziennej pracy (problemy z nagraniem, równoczesna komunikacja), co jest kluczowe dla klienta tech-agnostic.
+   [+] +8 pkt (Wymiar B2): Jasno komunikuje bezpieczeństwo wdrożenia (sandbox, brak ingerencji w produkcję) oraz daje 30-dniową gwarancję, co redukuje strach przed nieodwracalnymi błędami.
+   [+] +10 pkt (Wymiar C1): Pytanie trafia w dwa kluczowe punkty decyzyjne: wolumen rozmów (wpływ na limity i kolejkę) oraz zmianę planu (warunek konieczny dla transkrypcji). Zmusza klienta do konkretnej odpowiedzi.
+   [-] -3 pkt (Wymiar A2): [Program łączy się z CloudTalk i Notion.] -> Brak wyjaśnienia, co konkretnie uruchamia synchronizację (np. po zakończeniu rozmowy). Mechanizm jest nieco ogólnikowy – dla pełnej oceny warto doprecyzować moment wyzwalania.
+   [-] -2 pkt (Wymiar B3): [brak konkretnego dowodu z portfolio] -> Oferta nie zawiera żadnego twardego, weryfikowalnego faktu (liczby wdrożeń, efektu) potwierdzającego doświadczenie. Choć nie popada w pustosłowie, to osłabia budowę zaufania.
+
+============================================================
+[AUDYT RUNDA 1] #144165: CNC Punch Software Development & Postprocessor Modification (sciezka=inzynieria, karta=tech_11)
+============================================================
+-> OCENA RUNDA 1: 93/100 pkt | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 13}
+   [+] +10 pkt (Wymiar A): Zabójcze otwarcie. Wskazuje ukrytą minę architektoniczną, o której większość wykonawców nie ma pojęcia: społecznościowy NibblePro celuje w postprocesor AMADA, a klient ma sterownik ADTECH. To fundamentalnie zmienia zakres z 'modyfikacji' na 'reverse engineering dialektu G-code', co jest kluczowym punktem decyzyjnym całego projektu i buduje autorytet Seniora.
+   [+] +10 pkt (Wymiar A): Konkret mechanizmu zamiast pustych obietnic. Auto-Index opisany jako grupowanie segmentów po kącie i emisja jednej komendy na grupę. Micro-Joint opisany jako warstwa edytowalna odseparowana od generatora ścieżki, z walidacją minimalnej grubości materiału. To jest dokładnie język inżyniera, który rozumie zarówno problem klienta, jak i architekturę rozwiązania.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja sandbox-first (kopia danych, brak dotykania żywej produkcji, brak zatrzymania maszyny) oraz 30 dni gwarancji rozruchowej. Dokładnie to, czego wymaga kryterium bezpieczeństwa wdrożenia.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny: konkretny model sterownika determinuje dialekt G-code, a programy referencyjne determinują format wyjściowy. Zmusza klienta do konkretnej odpowiedzi i od razu ustawia rozmowę na tor inżynierski. Bez szkolnego numerowania, w osobnym akapicie przed ceną, 100% asynchronicznie.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, zgodna z [WYNIK_KONCOWY], bez widełek, bez upsellingu wersji drugiej. Wszystkie standardy bezpieczeństwa (sandbox, 30 dni gwarancji) wliczone w cenę bazową.
+   [-] -1 pkt (Wymiar A): [NibblePro is a free, community-maintained CAM without vendor support, and its postprocessor targets AMADA machines] -> Twierdzenie o tym, że NibblePro celuje w postprocesor AMADA, jest kluczowym filarem killshota, ale nie zostało zweryfikowane ani poparte żadnym konkretnym faktem (np. numerem wersji, nazwą pliku postprocesora, cytatem z dokumentacji). Jeśli to twierdzenie jest nieprawdziwe, całe otwarcie się zawala. Ryzyko halucynacji obniża ocenę merytoryczną o 1 pkt.
+   [-] -3 pkt (Wymiar B): [I build it as a deterministic module: same DXF input, same tooling, identical NC output every run.] -> Brak jakiegokolwiek twardego, weryfikowalnego dowodu z portfolio (np. '3500+ dokumentów', 'Klinika Doktor Monika — 18 mies. bez kolizji', '48 MB -> 3.8 MB'). Oferta co prawda nie popełnia grzechu pustego chwalenia się ('mamy doświadczenie w...'), ale nie wplata też żadnego konkretnego case study z portfolio_baza.md. Świadomy brak dowodu to nie to samo co wiarygodny dowód.
+   [-] -1 pkt (Wymiar D): [Price: 15 000 PLN net, 32 days.] -> Efektywna stawka 128,2 zł/h przy 161,5 h jest lekko powyżej rynkowej normy dla zlecenia, gdzie klient dostarcza istniejące oprogramowanie i przykładowe programy. Nie jest to przestrzelenie >35%, ale drobna korekta w dół byłaby bardziej konkurencyjna przy 15 konkurentach.
+   [-] -2 pkt (Wymiar E): [Pełna oferta — 220 słów.] -> Limit dla dużych zleceń (≥3 000 zł) to 135–210 słów (maks. 230). Oferta ma 220 słów, czyli mieści się w maksimum, ale przekracza górną granicę optymalnej gęstości (210). Dwa zdania o Micro-Joint i Auto-Index można skrócić bez utraty treści.
+   [-] -1 pkt (Wymiar E): [This is not a tweak of an existing postprocessor but reverse engineering of the ADTECH G-code dialect, covering tool selection, auto-index angle commands and clamp repositioning, verified against your existing working programs.] -> Zdanie jest poprawne merytorycznie, ale zawiera nagromadzenie technicznego żargonu (dialect, clamp repositioning, auto-index angle commands) w jednym długim zdaniu, co przy ścieżce inzynieria jest akceptowalne, ale obniża czytelność. Drobna wata słowna w miejscu, gdzie można było zostawić mocniejszy oddech.
+
+[REFINEMENT #144165] Wynik 93/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144165 (RUNDA 2)] Wycena: 15000 zł / 32 dni (193 słów):
+--------------------------------------------------
+Hi,
+
+NibblePro's stock postprocessor was not built for ADTECH-controlled LVD. This is not a tweak but reverse engineering of the ADTECH G-code dialect, including tool selection and clamp sequencing, verified against your existing working programs. I build it as a deterministic module: same DXF input, same tooling, identical NC output every run.
+
+For Auto-Index, group cutting segments by required angle into single-pass tool rotations, emitting one command per angle group instead of per segment, reducing cycle time. Micro-Joint logic becomes an editable layer decoupled from toolpath generation: adding or removing a joint on one line will not re-number existing joints elsewhere, and short segments are validated against minimum material thickness.
+
+My team built a CNC machine from scratch and writes deterministic G-code postprocessors. All testing runs on a copy of your dataset and existing programs first, without touching the live production NC library or stopping the machine, with 30 days startup support on my code after go-live.
+
+One question: which exact ADTECH controller sits in your LVD (NCT-02, NCT-03, CNC9620?) and can you share 3-5 existing working NC programs as the output format reference?
+
+Price: 15 000 PLN net, 32 days.
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 94/100 pkt (zmiana: 93 -> 94) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Otwarcie trafia w ukrytą minę architektoniczną: gotowy postprocesor NibblePro nie jest zgodny z dialektem ADTECH/LVD, a klient potrzebuje reverse engineeringu, nie prostej modyfikacji. To buduje autorytet od pierwszych zdań.
+   [+] +9 pkt (Wymiar A): Konkretny mechanizm zamiast pustych obietnic: grupowanie segmentów po kącie, redukcja obrotów Auto-Index oraz warstwa Micro-Joint odseparowana od generowania ścieżki. To odpowiada wprost na punkty 1 i 2 ogłoszenia.
+   [+] +8 pkt (Wymiar B): Jasny Sandbox-First, brak dotykania żywej produkcji, brak zatrzymywania maszyny i 30 dni gwarancji rozruchowej. Klient techniczny dostaje bezpieczeństwo wdrożenia.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny: dokładny model sterownika ADTECH determinuje dialekt G-code i format wyjściowy. Prośba o istniejące programy NC jest merytorycznym warunkiem wykonania postprocesora, nie pustym CTA.
+   [+] +8 pkt (Wymiar D): Jedna kwota netto zgodna z [WYNIK_KONCOWY], brak widełek i brak upsellingu. Wycena mieści się w kalkulatorze dla 117 h realnych + bufor 20% przy stawce bazowej 90 zł/h.
+   [-] -2 pkt (Wymiar A): [including tool selection and clamp sequencing] -> Klient w punkcie 4 wprost wymaga przeglądu i korekty logiki repositioningu oraz sekwencji clampów. Oferta ogranicza się do ogólnego 'clamp sequencing' i nie wyjaśnia mechanizmu korekcji przesuwu blachy, stref martwych clampów ani kolejności repositionowania. Brakuje inżynierskiego 'jak' dla tego modułu.
+   [-] -3 pkt (Wymiar B): [My team built a CNC machine from scratch and writes deterministic G-code postprocessors.] -> To lepsze niż puste 'mamy doświadczenie', ale wciąż zbyt ogólne jak na twardy dowód z portfolio. Brak konkretnej liczby, nazwy sterownika, maszyny lub weryfikowalnego faktu wdrożeniowego. Przy 15 konkurentach klient nie ma podstaw, by zaufać tej deklaracji bardziej niż innym.
+   [-] -1 pkt (Wymiar E): [I build it as a deterministic module: same DXF input, same tooling, identical NC output every run. ... writes deterministic G-code postprocessors.] -> Słowo 'deterministic' powtarza się trzy razy i brzmi jak formuła. Jeden z nich można zastąpić naturalnym 'repeatable' lub 'stable', zachowując sens bez wrażenia AI-owego zapętlenia.
+
+============================================================
+[AUDYT RUNDA 1] #144867: Dedykowana aplikacja mobilna (iOS/Android) dla fizjoterapeutów + Panel Admina (własny serwer) (sciezka=inzynieria, karta=tech_06)
+============================================================
+-> OCENA RUNDA 1: 63/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 20, 'D_wycena_15': 8, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A / Killshot): Trafia w ukrytą minę domenową (MDR/wyrób medyczny + wymogi sklepów 2026), o której nie wie większość wykonawców piszących 'zrobimy apkę CRUD'. To otwarcie od razu ustawia autorytet inżyniera medtech, a nie freelancera od widżetów.
+   [+] +10 pkt (Wymiar A / Mechanizm): Konkretny wybór architektoniczny (BLoC dla medtech = wymóg audytowy, Drift+SQLCipher = dane pacjenta na urządzeniu w spoczynku) zamiast pustego 'zadbamy o bezpieczeństwo'. Zgodne z tech_06, gdzie BLoC jest wskazany dla regulacji medtech.
+   [+] +8 pkt (Wymiar B / Sandbox + gwarancja): Dokładnie to, czego wymaga matryca: sandbox-first i 30 dni gwarancji. Dla klienta medycznego to sygnał, że jego dane pacjentów nie zostaną ruszone przy testach.
+   [+] +7 pkt (Wymiar B / Dowód): Twardy, weryfikowalny case z domeny medycznej z konkretną liczbą (18 mies.) i konkretnym faktem technicznym (blokady transakcyjne). Nie 'mamy doświadczenie w branży medycznej', tylko dowód.
+   [+] +10 pkt (Wymiar C / Question CTA): Pytanie trafia w punkt decyzyjny (licencjonowanie/multi-tenant, integracje z kalendarzem i SMS), zmusza klienta do odpisania i daje darmowy research do wyceny. Zero telefonów, 100% asynchronicznie.
+   [-] -12 pkt (Wymiar D / Kara Wyceny): [Wycena 27000 zł netto, realizacja 58 dni (stary mnożnik ryzyka 1.3 / efektywna stawka 158.8 zł/h)] -> Kwota pochodzi z iloczynu starego mnożnika ryzyka 1.3 nałożonego na 234.6 h, co daje efektywną stawkę ~158 zł/h zamiast bazowej 90 zł/h. Zawyżenie o ok. +28% względem zaktualizowanego kalkulatora (234.6 h × 90 zł/h ≈ 21 100 zł). Klient 'do negocjacji' z 15 konkurentami odpadnie na cenie bez wyraźnego uzasadnienia premium.
+   [-] -6 pkt (Wymiar D / Spójność ekonomiczna): [realizacja 58 dni] -> 58 dni kalendarzowych na 234 h pracy to ~4 h/dzień przy założeniu jednego wykonawcy, co jest realne, ale oferta nie precyzuje czy to jeden dev czy zespół. Przy wieloplatformowym Flutterze + panelu admina + multi-tenant brak informacji o składzie zespołu sprawia, że deklaracja terminu brzmi jak życzenie, a nie harmonogram.
+   [-] -4 pkt (Wymiar B / ekspert_dziedzinowy): [lokalną bazę Drift z szyfrowaniem SQLCipher] -> Brakuje jednego zdania przekładającego technologię na codzienność fizjoterapeuty: 'działa w gabinecie przy zerwanym Wi-Fi, dane zsynchronizują się po powrocie łącza'. Klient jest ekspertem dziedzinowym (nie CTO), więc lokalna baza powinna być nazwana korzyścią, nie technologią.
+   [-] -12 pkt (Wymiar D / Kara Wyceny): [Wycena 27000 zł (stary mnożnik ryzyka 1.3 / efektywna stawka >150 zł/h)] -> Wycena pochodzi ze starego iloczynu mnożników (zawyżona względem zaktualizowanego kalkulatora 90 zł/h).
+
+[REFINEMENT #144867] Wynik 63/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144867 (RUNDA 2)] Wycena: 21000 zł / 45 dni (220 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Zanim powstanie pierwszy ekran, trzeba rozstrzygnąć kwestię decydującą o tym, czy aplikacja przejdzie do sklepów: czy system będzie klasyfikowany jako wyrób medyczny. Apple od marca 2026 wymaga deklaracji statusu wyrobu medycznego w karcie produktu, a Google Play od stycznia 2026 wymusza konto organizacyjne i odpowiednie oznaczenie. Jeśli aplikacja zbiera dane o stanie pacjenta, wchodzi w zakres RODO art. 9 i obowiązkowej oceny skutków przetwarzania. Dlatego już na etapie architektury projektujemy pełną rozliczalność: logi zmian, szyfrowanie danych w spoczynku i w tranzycie oraz trwałe kopie zapasowe.
+
+Aplikację budujemy we Flutterze z warstwą BLoC, dającą deterministyczne przebudowy ekranów i pełny audyt zdarzeń. Dane pacjenta trzymamy zaszyfrowane na urządzeniu, więc gabinet pracuje normalnie nawet przy zerwanym Wi-Fi, a synchronizacja dogania po powrocie łącza. Panel admina i backend stawiamy na Waszym serwerze, a pierwsze testy i importy wykonujemy w środowisku odizolowanym, bez dotykania żywej produkcji. Dla Kliniki Doktor Monika zbudowaliśmy system rezerwacji z blokadami transakcyjnymi, obsługujący setki wizyt miesięcznie i od 18 miesięcy działający bez kolizji terminów.
+
+Ile osób z personelu będzie korzystać z systemu na co dzień i czy aplikacja ma synchronizować się z zewnętrznym kalendarzem lub bramką SMS?
+
+Wycena: 21000 zł netto, realizacja 45 dni (dwie osoby: mobile + backend/panel): projekt UX, aplikacja iOS/Android, panel admina i wdrożenie na Waszym serwerze. 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 89/100 pkt (zmiana: 63 -> 89) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 19, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 12}
+   [+] +9 pkt (Wymiar A): Killshot otwierający trafia w ukrytą minę architektoniczną aplikacji dla fizjoterapeutów — klasyfikację MDR i konsekwencje dla publikacji w App Store / Google Play. 85% wykonawców zaczyna od ekranów, a tu mowa o tym, co decyduje o możliwości wdrożenia. Dla klienta-eksperta dziedzinowego to sygnał, że wykonawca rozumie jego świat regulacyjny.
+   [+] +8 pkt (Wymiar B): Jasna deklaracja Sandbox-First — klient nie musi się bać, że pierwsze uruchomienie zepsuje dane pacjentów. To konkretny, weryfikowalny standard bezpieczeństwa wdrożenia, a nie puste zapewnienie.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio_baza.md, wprost pasujący do domeny medycznej. Konkret: blokady transakcyjne, setki wizyt, 18 miesięcy bez kolizji. Zamiast pustego 'mamy doświadczenie' — fakt inżynierski z liczbą.
+   [+] +8 pkt (Wymiar C): Pytanie trafia w dwa kluczowe punkty decyzyjne: skala wdrożenia (liczba użytkowników = model licencji i architektury) oraz integracje zewnętrzne (kalendarz, SMS). Zmusza klienta do konkretnej odpowiedzi i otwiera dalszą rozmowę.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, bez widełek i bez upsellingu 'wersji drugiej'. Wszystkie standardy bezpieczeństwa (sandbox, szyfrowanie, gwarancja 30 dni) wchodzą w cenę bazową. Zgodne z [WYNIK_KONCOWY].
+   [-] -3 pkt (Wymiar A): [Apple od marca 2026 wymaga deklaracji statusu wyrobu medycznego w karcie produktu, a Google Play od stycznia 2026 wymusza konto organizacyjne i odpowiednie oznaczenie.] -> Brak potwierdzenia w Karcie Wiedzy tech_06 ani w ogłoszeniu klienta. Konkretne daty (marzec 2026 Apple, styczeń 2026 Google Play) brzmią jak halucynacja modelu — jeśli okażą się nieprawdziwe, klient-ekspert dziedzinowy straci zaufanie do całej oferty. Ryzykowne twierdzenie regulacyjne bez źródła.
+   [-] -2 pkt (Wymiar A/B): [Aplikację budujemy we Flutterze z warstwą BLoC, dającą deterministyczne przebudowy ekranów i pełny audyt zdarzeń.] -> Dla klienta-eksperta dziedzinowego (fizjoterapeuta) nazwa 'BLoC' to żargon niewiele mówiący. Zabrakło jednego zdania przełożenia: dlaczego deterministyczne przebudowy i audyt zdarzeń przekładają się na bezpieczeństwo codziennej pracy z pacjentem (np. brak zawieszeń przy przeglądaniu kart pacjentów).
+   [-] -2 pkt (Wymiar D): [Integracja płatności (Stripe/Przelewy24, webhook, lifecycle) — 16h; Multi-tenant izolacja danych (schema-per-tenant lub RLS) — 16h.] -> Kalkulator zawiera 32h modułów (płatności, multi-tenant), których nie ma ani w ogłoszeniu klienta, ani w treści oferty. Klient nie wspominał o płatnościach ani wielu najemcach. To sztuczne pompowanie godzin o ~19%, które zawyża wycenę względem rzeczywistego zakresu.
+   [-] -3 pkt (Wymiar E): [Liczba słów oferty: 220] -> Dla dużego zlecenia (≥ 3 000 zł) preferowany przedział to 135–210 słów. 220 słów przekracza górną granicę o 10 słów, zbliżając się do twardego maksimum 230. Oferta miejscami powtarza treść ogłoszenia (opis aplikacji, panel admina).
+   [-] -1 pkt (Wymiar E): [Dane pacjenta trzymamy zaszyfrowane na urządzeniu, więc gabinet pracuje normalnie nawet przy zerwanym Wi-Fi, a synchronizacja dogania po powrocie łącza.] -> Dobre merytorycznie, ale zdanie jest długie i składniowo ciężkie. Można je rozbić na dwa krótsze, zachowując konkret o pracy offline i doganianiu synchronizacji.
+
+Zakończono audyt i optymalizację 1-100! Wyniki w: C:\Users\Ksawier\.gemini\antigravity\brain\27ae8295-368e-43dc-98d7-6dbdc79d7ca2\scratch\audyt_100_wyniki.json

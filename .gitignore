@@ -1,6 +1,7 @@
 # --- SEKRETY: NIGDY nie wrzucac na GitHub ---
-tech/cookies.json
-tech/cookies2.json
+kod/tech/cookies.json
+kod/tech/cookies2.json
+kod/tech/cookies_zleceniodawca.json
 *.cookies
 .env
 # cookies.json w KAZDYM katalogu (lab/, testy itd.) - moga zawierac sesje
@@ -9,11 +10,13 @@ cookies.json
 cookies*.json
 
 # --- Dane robocze / historia dzialania bota ---
-magazyn/
-marker.json
-debug/
-dane_badania/
-*.log
+kod/marker.json
+kod/debug/
+kod/data/
+
+# --- Dane operacyjne i badawcze (dane klientow, surowe scrapowanie) ---
+badania/baza/
+badania/rynek/
 
 # --- Cache / kompilacja ---
 __pycache__/
@@ -24,6 +27,4 @@ __pycache__/
 # --- Pliki tymczasowe ---
 *.tmp
 .tmp_*
-_batch*_result.txt
 _*_result.txt
-_show_result.txt

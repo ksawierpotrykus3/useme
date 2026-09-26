@@ -1,0 +1,353 @@
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #144951: Wdrożenie agenta AI na NVIDIA DGX (RAG, LEX, 2FA, nauka stylu) (karta=tech_15, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #144951] Wycena: 15000 zł / 33 dni (177 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Największe ryzyko to nie model, lecz dwa ukryte ograniczenia: regulamin OpenLEX zakazuje scrapingu, a automatyzacja portali sądowych wykracza poza TOTP - push-approval i klucze sprzętowe są nieautomatyzowalne, a 30-sekundowe sesje wymagają architektury odpornej na zrywanie połączeń. Zamiast scrapingu proponuję oficjalne API IPG do metadanych LEX plus hybrydowy RAG na publicznych aktach, gdzie BM25 obsługuje sygnatury i numery, wektory parafrazy, a reranker czyści szum przed promptem.
+
+Na DGX Spark zmieszczą się Llama 3.3 70B w NVFP4/FP8 oraz distilled DeepSeek R1 (7B-32B); pełny R1 671B nie zmieści się nawet w 4-bit. Styl 3 użytkowników zbuduję przez QLoRA (r=16), a każda odpowiedź dostanie cytowanie aktu przez Structured Outputs z walidacją JSON Schema. Nasz pipeline AI przetworzył ponad 3500 dokumentów z 99,4% dokładnością - ta sama zasada rozdzielenia semantyki od walidacji eliminuje halucynacje. Całość w izolowanych sieciach Dockera z limitami logów i szyfrowanym backupem, dostępna przez WireGuard VPN.
+
+Czy LEX jest dostępny z API IPG, czy tylko przez przeglądarkę? To determinuje architekturę RAG.
+
+Wycena: 15000 zł netto, realizacja 33 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 89/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 18, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Otwarcie trafia w realne, ukryte miny projektu: ograniczenia scrapingu LEX/OpenLEX oraz nieautomatyzowalne 2FA push/hardware. To buduje autorytet inżyniera, który zna podszewkę domeny.
+   [+] +9 pkt (Wymiar A): Konkretny mechanizm zamiast pustych obietnic: hybrydowy RAG z BM25, wektorami i rerankerem. Wyjaśnia, jak system ma ograniczać halucynacje i obsługiwać encje prawnicze.
+   [+] +10 pkt (Wymiar C): Pytanie CTA trafia w kluczowy punkt decyzyjny i wymusza odpowiedź. Jest krótkie, asynchroniczne i bezpośrednio wpływa na architekturę.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, brak widełek i upsellu, jasny czas realizacji oraz 30 dni gwarancji rozruchowej. Kompletność ceny jest zachowana.
+   [+] +5 pkt (Wymiar B): Twardy, weryfikowalny dowód liczbowy zamiast pustego chwalenia się doświadczeniem. Buduje zaufanie do kompetencji AI/LLM.
+   [-] -2 pkt (Wymiar A): [Na DGX Spark zmieszczą się Llama 3.3 70B w NVFP4/FP8 oraz distilled DeepSeek R1 (7B-32B); pełny R1 671B nie zmieści się nawet w 4-bit.] -> Oferta zakłada konkretny wariant DGX Spark, podczas gdy klient podał tylko NVIDIA DGX. To ryzykowna teza bez potwierdzenia specyfikacji pamięci; dla DGX H100 671B w 4-bit może się zmieścić.
+   [-] -4 pkt (Wymiar B): [Całość w izolowanych sieciach Dockera z limitami logów i szyfrowanym backupem, dostępna przez WireGuard VPN.] -> Brak jasnej deklaracji Sandbox-First: że pierwsze testy i importy odbędą się na kopii bazy lub w odseparowanym środowisku, bez dotykania żywej produkcji. Przy tajemnicy zawodowej to kluczowy element zaufania.
+   [-] -3 pkt (Wymiar B): [QLoRA (r=16), Structured Outputs z walidacją JSON Schema, NVFP4/FP8] -> Klient jest radcą prawnym i deklaruje, że jest laikiem IT. Oferta nie przekłada technologii na bezpieczeństwo codziennej pracy kancelarii, np. pracy przy zerwanym Wi-Fi, akceptacji pism z telefonu czy ochrony tajemnicy zawodowej.
+   [-] -1 pkt (Wymiar A): [ta sama zasada rozdzielenia semantyki od walidacji eliminuje halucynacje] -> Słowo „eliminuje” jest zbyt absolutne. Walidacja i cytowanie źródeł minimalizują halucynacje, ale nie eliminują ich w 100%.
+   [-] -1 pkt (Wymiar D): [Bot/scraper z anty-detekcją (proxy rotation, rate limiting, stealth) – 30h] -> W kalkulatorze wyceny pozostaje moduł scrapingu/anty-detekcji, choć oferta odrzuca scraping i automatyzację 2FA. To niespójność: płatny moduł nie wynika z proponowanej architektury.
+
+[REFINEMENT #144951] Wynik 89/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144951 (RUNDA 2)] Wycena: 10000 zł / 23 dni (208 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Największe ryzyko to nie model, lecz dwa ograniczenia: regulamin OpenLEX zakazuje scrapingu, a automatyzacja portali sądowych wykracza poza TOTP - push-approval i klucze sprzętowe są nieautomatyzowalne. Zamiast scrapingu proponuję oficjalne API IPG do metadanych LEX, jeśli Państwa licencja je obejmuje, plus hybrydowy RAG na publicznych aktach: BM25 obsługuje sygnatury, wektory parafrazy, reranker czyści szum przed promptem.
+
+Nie zakładam z góry modelu DGX - proszę o specyfikację pamięci, bo to determinuje, czy zmieści się Llama 3.3 70B w NVFP4/FP8, czy potrzebna będzie kwantyzacja 4-bit. Styl 3 użytkowników zbuduję przez QLoRA, każda odpowiedź dostanie cytowanie aktu przez Structured Outputs z walidacją JSON Schema. Nasz pipeline AI przetworzył ponad 3500 dokumentów z 99,4% dokładnością - ta sama zasada rozdzielenia semantyki od walidacji minimalizuje halucynacje. Całość w izolowanych sieciach Dockera z limitami logów i szyfrowanym backupem, dostępna przez WireGuard VPN. Pierwsze testy i importy wykonuję na kopii bazy w odseparowanym środowisku, bez dotykania dokumentów.
+
+Tajemnica zawodowa wymaga, by dane wrażliwe nie opuszczały serwera - dostęp z telefonu przez VPN oznacza, że nawet przy zerwanym Wi-Fi akceptacja pisma nastąpi po ponownym połączeniu, bez utraty danych.
+
+Czy Państwa licencja LEX obejmuje API IPG, czy tylko przeglądarkę?
+
+Wycena: 10000 zł netto, realizacja 23 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 86/100 pkt (zmiana: 89 -> 86) | Kategorie: {'A_merytoryka_25': 17, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 18, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 15}
+   [+] +9 pkt (Wymiar A): Mocny killshot: pokazuje ukryte ryzyko prawne i techniczne zamiast zachwytu nad modelem. Trafia w architektoniczną minę, której większość wykonawców nie podnosi.
+   [+] +7 pkt (Wymiar B): Jasny sandbox-first i późniejsza 30-dniowa gwarancja rozruchowa budują zaufanie w obszarze tajemnicy zawodowej.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód liczbowy zamiast pustego chwalenia się doświadczeniem.
+   [+] +8 pkt (Wymiar C): Krótkie, asynchroniczne pytanie o kluczowy punkt decyzyjny: sposób integracji z LEX determinuje architekturę i zgodność prawną.
+   [+] +8 pkt (Wymiar E): Tekst mieści się w limicie 135-210 słów dla dużego zlecenia, jest zwięzły i pozbawiony typowych wytrychów AI.
+   [-] -1 pkt (Wymiar A): [regulamin OpenLEX zakazuje scrapingu] -> Klient mówi o LEX, nie OpenLEX. Wprowadzenie OpenLEX bez dowodu może być halucynacją badawczą i osłabia precyzję killshotu.
+   [-] -5 pkt (Wymiar A): [Zamiast scrapingu proponuję oficjalne API IPG do metadanych LEX, jeśli Państwa licencja je obejmuje, plus hybrydowy RAG na publicznych aktach] -> Oferta nie domyka kluczowych funkcji z ogłoszenia: brak rozwiązania dla 2FA i portali sądowych (tylko odrzucenie), brak modułu poczty i kalendarza, a integracja LEX jest warunkowa i niepewna.
+   [-] -2 pkt (Wymiar A): [automatyzacja portali sądowych wykracza poza TOTP - push-approval i klucze sprzętowe są nieautomatyzowalne] -> Brak alternatywy dla wymaganego przez klienta omijania 2FA. Nawet jeśli push/hardware są trudne, oferta powinna zaproponować bezpieczny półautomatyczny tryb lub zakres TOTP/SMS/email.
+   [-] -2 pkt (Wymiar B): [NVFP4/FP8, QLoRA, Structured Outputs, JSON Schema, BM25, reranker] -> Dla radcy prawnego deklarującego się jako laik IT zbyt dużo żargonu bez przełożenia na codzienną pracę i bezpieczeństwo kancelarii.
+   [-] -2 pkt (Wymiar C): [Czy Państwa licencja LEX obejmuje API IPG, czy tylko przeglądarkę?] -> Pytanie jest dobre, ale tylko jedno. Pomija kluczową niejasność specyfikacji DGX (pamięć GPU) oraz sposób akceptacji 2FA, co może opóźnić wycenę.
+   [-] -2 pkt (Wymiar D): [Wycena: 10000 zł netto, realizacja 23 dni] -> Przy 80 h i pominiętych modułach (poczta/kalendarz, 2FA, Open WebUI, pełna izolacja 3 użytkowników, vLLM/DGX) kwota jest na dolnej granicy opłacalności i nie pokrywa całego zakresu z ogłoszenia.
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #144645: Full-stack / DevOps do przejęcia i dalszego rozwoju działającej aplikacji EMGPOS (karta=tech_08, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #144645] Wycena: 4500 zł / 11 dni (269 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Przy przejęciu EMGPOS pierwsze dwie rzeczy, które sprawdzam, zanim dotknę kodu: czy kontener PostgreSQL nie ma czasem opublikowanego portu na 0.0.0.0 (to najczęstszy wektor przejęcia bazy w ciągu 48 godzin) oraz czy `/etc/docker/daemon.json` ma limity logów. Domyślny sterownik json-file bez `max-size` zapycha `/var/lib/docker` w 6-8 tygodni, kontener aplikacji crashuje, a razem z nim baza w tym samym wolumenie - przy niepełnym WAL to prosta droga do uszkodzenia tabel. Drugi obszar to OOM-killer: bez twardych limitów pamięci na kontenerach jądro Linuksa zabija proces o najwyższym zużyciu RAM, czyli zwykle bazę, a nie aplikację z wyciekiem.
+
+Wchodzę w zastany system bez przepisywania od zera: inwentaryzacja kodu i historii Git z serwera, odtworzenie prywatnego repo, środowisko staging odseparowane od produkcji przez Caddy z wymuszonym TLS 1.3 i HSTS, weryfikacja backupów przez logiczny `pg_dump -Fc` (nie kopiowanie PGDATA na żywej bazie, bo to gwarantowana niespójność transakcyjna), a przy Prisma migracje w wzorcu expand-contract z `CREATE INDEX CONCURRENTLY` zamiast blokującego tabelę CREATE INDEX. Dostęp do produkcji read-only jest dla mnie w pełni wystarczający. Dla porządku: przy podobnym przejęciu systemu rezerwacji kliniki pracowaliśmy wyłącznie na stagingu, z twardymi blokadami transakcyjnymi na terminy - 18 miesięcy bez kolizji i zero przestoju głównej domeny.
+
+Zanim oszacuję pełny zakres: czy baza działa na tym samym hoście co aplikacja i czy jej port jest publikowany na zewnątrz, czy wyłącznie w sieci wewnętrznej Dockera? Oraz czy macie już włączone `pg_stat_statements` - bez tego diagnoza wydajności jest zgadywaniem.
+
+Stawka 90 zł/h, całość audytu i przygotowania do rozwoju wyceniam na 4500 zł netto, realizacja w 11 dni. Rozliczenie przez depozyt Useme, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 83/100 pkt | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 10}
+   [+] +10 pkt (Wymiar A): Killshot w pierwszych dwóch zdaniach trafia w realne miny produkcyjne z tech_08 (brak izolacji sieciowej bazy, brak rotacji logów json-file zapychający /var/lib/docker). 85% wykonawców zaczyna od 'audytu kodu', a nie od wektora przejęcia infrastruktury — dokładnie ta asymetria wiedzy buduje przewagę.
+   [+] +10 pkt (Wymiar A): Twardy konkret inżynierski z tech_09: różnica między pg_dump -Fc a kopiowaniem PGDATA oraz świadomość blokady SHARE przy CREATE INDEX. Nie ma tu pustych obietnic o 'bezpiecznej migracji' — jest nazwany mechanizm i alternatywa.
+   [+] +9 pkt (Wymiar B): Ton Senior do CTO bez coachingowej waty, jasny Sandbox-First bezpośrednio odpowiadający na ograniczenie klienta 'dostęp read-only, rozwój przez GitHub i osobne środowisko testowe'. Nie ma propozycji zdjęcia ograniczeń.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja 30 dni i rozliczenie przez depozyt Useme — dokładnie to, czego wymaga matryca dla RESCUE na istniejącym systemie produkcyjnym.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio_baza (Klinika Doktor Monika — 18 mies. bez kolizji), dopasowany do domeny rezerwacji/grafiku. Konkretna liczba, brak pustego 'mamy doświadczenie'.
+   [+] +10 pkt (Wymiar C): Dwa pytania trafiające w kluczowe punkty decyzyjne projektu (topologia hosta bazy = wektor ataku; pg_stat_statements = warunek diagnozy wydajności). Zmusza klienta do odpisania na priv, jest w osobnym akapicie przed wyceną, zero propozycji rozmów.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto zgodna z [WYNIK_KONCOWY], bez widełek, bez 'wersji drugiej'. Efektywna stawka 125 zł/h jest spójna z RESCUE Tier A i 50h realnej pracy po buforze ryzyka.
+   [-] -8 pkt (Wymiar E / Kara [PRZEKROCZENIE LIMITU SŁÓW]): [Liczba słów: 269] -> Oferta przekracza górny limit 225 słów o 44 słowa (19%). Rozwlekłość obniża czytelność i jest twardym naruszeniem matrycy.
+   [-] -2 pkt (Wymiar E / gęstość): [Domyślny sterownik json-file bez `max-size` zapycha `/var/lib/docker` w 6-8 tygodni, kontener aplikacji crashuje, a razem z nim baza w tym samym wolumenie - przy niepełnym WAL to prosta droga do uszkodzenia tabel.] -> Akapit bardzo dobry merytorycznie, ale rozwinięty o łańcuch przyczynowo-skutkowy, który można było skrócić do 1 zdania. Przy takim natłoku szczegółów oferta traci czytelność i wpada w przekroczenie limitu.
+   [-] -1 pkt (Wymiar D / realizm): [Migracja bazy danych (schema + dane + walidacja) 12h] -> Przy przejęciu produkcyjnego PostgreSQL z aktywnymi danymi restauracji i weryfikacją backupu przez pg_dump -Fc + test restore na stagingu, 12h jest na dolnej granicy. Nie karzę mocno, bo zakres jest audytowy (nie full optymalizacja), ale margines jest tu cienki.
+   [-] -1 pkt (Wymiar B / proof): [przy podobnym przejęciu systemu rezerwacji kliniki pracowaliśmy wyłącznie na stagingu] -> Dowód trafny, ale wprost wskazuje na inną branżę (klinika) niż ogłoszenie (restauracje). To wciąż dobry wybór z portfolio_baza, ale wymagałby jednego zdania tłumaczącego przeniesienie wzorca (rezerwacje stolików vs. wizyty) — inaczej klient musi sam wykonać skok myślowy.
+
+[REFINEMENT #144645] Wynik 83/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144645 (RUNDA 2)] Wycena: 4000 zł / 10 dni (183 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Przy przejęciu EMGPOS najpierw sprawdzam, czy PostgreSQL nie ma portu na 0.0.0.0 (wektor przejęcia bazy w 48h) i czy /etc/docker/daemon.json ma limity logów. Domyślny json-file bez max-size zapycha /var/lib/docker w 6-8 tygodni i przewraca aplikację z bazą. Drugi obszar to OOM-killer: bez limitów pamięci na kontenerach jądro zabija zwykle bazę, nie aplikację z wyciekiem.
+
+Wchodzę w zastany system bez przepisywania: inwentaryzacja kodu i Git z serwera, prywatne repo, staging odseparowany przez Caddy z TLS 1.3 i HSTS, weryfikacja backupów przez pg_dump -Fc (nie kopiowanie PGDATA na żywej bazie), a przy Prisma migracje expand-contract z CREATE INDEX CONCURRENTLY. Dostęp read-only wystarczy. Przy przejęciu systemu rezerwacji (klinika) pracowaliśmy tylko na stagingu z blokadami transakcyjnymi - 18 miesięcy bez kolizji; ten wzorzec przenoszę na rezerwacje stolików.
+
+Czy baza działa na tym samym hoście co aplikacja i czy port jest publikowany na zewnątrz, czy tylko w sieci wewnętrznej Dockera? Czy macie włączone pg_stat_statements - bez tego diagnoza wydajności jest zgadywaniem.
+
+Stawka 90 zł/h. Całość audytu i przygotowania do rozwoju: 4000 zł netto, 10 dni. Depozyt Useme, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 97/100 pkt (zmiana: 83 -> 97) | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 25, 'C_pytanie_cta_20': 19, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Killshot uderza w dwie realne miny produkcyjne: (1) publikację portu PostgreSQL na 0.0.0.0 - wprost z karty tech_08 ('Baza danych w Docker Compose nigdy nie może mieć portu opublikowanego na 0.0.0.0'), (2) brak rotacji logów Dockera - klasyczny cichy zabójca VPS z małym dyskiem. Oba fakty są weryfikowalne i pokazują, że autor nie jest webdevem od prostych stron.
+   [+] +10 pkt (Wymiar A): Dokładnie mechanizm, nie obietnica. pg_dump -Fc vs kopiowanie PGDATA to różnica między poprawnym backupem logicznym a uszkodzoną kopią przy aktywnych transakcjach. Expand-contract + CREATE INDEX CONCURRENTLY pokazuje biegłość w zero-downtime migrations - to jest wiedza z tech_09, nie z tutoriala.
+   [+] +7 pkt (Wymiar B): Twardy, weryfikowalny dowód z portfolio_baza.md ('Klinika Doktor Monika - 18 mies. bez kolizji'), wprost przeniesiony na domenę klienta (rezerwacje stolików). Zero pustego 'mamy doświadczenie', konkretna liczba i mechanizm (staging + blokady transakcyjne).
+   [+] +8 pkt (Wymiar B): Klient wprost napisał: 'na początku dostęp do produkcji będzie ograniczony i read-only. Nie udostępniam pełnego dostępu root'. Oferta akceptuje to bez dyskusji ('Dostęp read-only wystarczy') i dostarcza Sandbox-First (staging) plus 30-dniową gwarancję rozruchową. Idealne dopasowanie do ograniczeń klienta.
+   [+] +9 pkt (Wymiar C): Dwa pytania, oba trafiają w punkty decyzyjne: (1) domyka wątek portu 0.0.0.0 z pierwszego akapitu - klient musi sprawdzić swoją konfigurację, (2) pg_stat_statements to warunek wstępny każdej sensownej diagnozy wydajności. Pytania są konkretne, techniczne, bez szkolnego numerowania, w osobnym akapicie przed wyceną.
+   [+] +15 pkt (Wymiar D): Jedna kwota netto, bez widełek, bez wersji drugiej. 32h realnej pracy (audyt 12h + VPS/staging 6h + migracja 14h) przy 90 zł/h daje 3974 zł - wycena 4000 zł jest spójna z kalkulatorem i rynkową stawką RESCUE/Tier A. Wszystkie standardy bezpieczeństwa w cenie bazowej.
+   [+] +7 pkt (Wymiar E): 183 słowa - idealnie w przedziale 135-210 dla dużego zlecenia. Zero słów-wytrychów AI, zero długich pauz, zero tabel i gwiazdek, imienny podpis na końcu. Gęste, techniczne, konkretne.
+   [-] -1 pkt (Wymiar A): [inwentaryzacja kodu i Git z serwera, prywatne repo] -> Brak wyraźnego wskazania na sanitizację historii Git z sekretów (.env, klucze API, hasła DB) przed wypchnięciem do prywatnego repo. To klasyczna mina przy przejęciu systemu po poprzednim deweloperze - jeżeli klucze produkcyjne są w historii commitów, nowe repo dziedziczy wektor ataku. Wzmianka o 'czyszczeniu' byłaby mocniejsza niż ogólne 'odtworzenie repozytorium'.
+   [-] -1 pkt (Wymiar C): [Czy baza działa na tym samym hoście co aplikacja i czy port jest publikowany na zewnątrz, czy tylko w sieci wewnętrznej Dockera?] -> Oba pytania dotyczą konfiguracji. Brakuje trzeciego, które domykałoby kwestię ciągłości operacyjnej: czy poprzedni deweloper współpracuje przy przekazaniu lub czy istnieje dokumentacja architektury. Klient wprost pyta 'Jak bezpiecznie przejąłbyś... bez ryzyka zatrzymania systemu', a odpowiedź pomija czynnik ludzki (dostępność poprzednika, runbook).
+   [-] -1 pkt (Wymiar E): [Drugi obszar to OOM-killer: bez limitów pamięci na kontenerach jądro zabija zwykle bazę, nie aplikację z wyciekiem.] -> Zwrot 'Drugi obszar to...' jest lekką kalką szkolnej wyliczanki ('Po pierwsze... Po drugie...'). W ofercie na 183 słowa można to zastąpić naturalnym przejściem, np. 'Równie krytyczne są limity pamięci - bez nich OOM-killer zabija bazę, nie aplikację z wyciekiem'. Drobiazg, ale w audycie na 97+ punktów warty odnotowania.
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #144737: Modernizacja i rozwój istniejącego sklepu B2B PHP/MySQL z integracją WAPRO MAG / SQL Server (karta=tech_09, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #144737] Wycena: 8000 zł / 19 dni (232 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Kluczowa mina w tym projekcie: WAPRO MAG domyślnie stoi na SQL Server Express, a Express nie ma SQL Server Agent. Jeśli środowisko testowe jest na Express, zadania automatyczne nie mają prawa działać, a backup bazy trzeba oprzeć o własny scheduler, nie o Agenta. Druga rzecz: zanim tkniemy stronę, trzeba ustalić, czy obecna integracja idzie przez płatny moduł WebAPI, czy przez bezpośrednie zapytania do MSSQL. Od tego zależy, czy modernizacja warstwy prezentacyjnej nie rozerwie koszyka i cen B2B.
+
+Pracę zaczynam od inwentaryzacji zastanego kodu PHP/MySQL na środowisku testowym: mapa modułów koszyka, zamówień, logowania i cen, przegląd procedur składowanych i zadań w MSSQL. Nową, responsywną warstwę prezentacyjną podpinam do istniejących procesów bez przepisywania logiki. Wszystkie testy i importy robię na kopii bazy, zero dotykania produkcji. Mamy za sobą bezpieczne przejęcia legacy i integracje e-commerce z systemami ERP. Przy 18 miesiącach pracy nad systemem rezerwacyjnym kliniki przeszliśmy zero kolizji terminów dzięki twardym blokadom transakcyjnym. Przy modernizacji legacy PHP stosujemy izolację wersji w środowisku testowym, żeby nie zależeć od systemu hosta.
+
+Do wiążącej wyceny potrzebuję informacji: czy obecna integracja z WAPRO MAG korzysta z WebAPI, czy z bezpośredniego dostępu do bazy MSSQL, oraz czy środowisko testowe ma SQL Server Standard z Agentem, czy Express?
+
+Wycena: 8000 zł netto, czas realizacji 19 dni roboczych. W cenie 30 dni gwarancji rozruchowej na własny kod, pełny kod źródłowy i krótka instrukcja wdrożenia. Rozliczenie przez Useme.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 63/100 pkt | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 20, 'C_pytanie_cta_20': 20, 'D_wycena_15': 15, 'E_styl_zwiezlosc_15': 7}
+   [+] +10 pkt (Wymiar A): Otwarcie uderza w ukrytą minę architektoniczną, której nie zna większość wykonawców. Klient wprost wymaga doświadczenia z SQL Server Agent, a oferta natychmiast diagnozuje potencjalną blokadę (Express bez Agenta) i proponuje alternatywę (własny scheduler). To buduje autorytet ekspercki w pierwszych 2 zdaniach.
+   [+] +10 pkt (Wymiar A): Drugi punkt otwarcia pokazuje zrozumienie realnego ryzyka: modernizacja frontu może zepsuć procesy biznesowe, jeśli integracja z WAPRO MAG opiera się na kruchych założeniach. To nie jest ogólnik, to konkretny scenariusz awarii.
+   [+] +9 pkt (Wymiar A): Mechanizm jest konkretny: inwentaryzacja modułów, przegląd procedur i zadań, podpięcie warstwy prezentacyjnej bez przepisywania logiki. To nie puste hasła, lecz sekwencja działań inżynierskich.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w dwa kluczowe punkty decyzyjne: sposób integracji (WebAPI vs bezpośredni MSSQL) oraz wersję SQL Server (Standard vs Express). Zmusza klienta do odpowiedzi na priv i pokazuje, że oferta jest pisana przez kogoś, kto rozumie zależności.
+   [+] +8 pkt (Wymiar B): Jasna deklaracja pracy wyłącznie na środowisku testowym (zgodnie z wymogiem klienta) oraz 30 dni gwarancji rozruchowej. Klient dostaje bezpieczeństwo wdrożenia bez konieczności dopłacania.
+   [+] +7 pkt (Wymiar D): Jedna kwota netto, zgodna z [WYNIK_KONCOWY], bez widełek i bez upsellingu. Efektywna stawka 133 zł/h przy 60 godzinach realnej pracy jest rynkowo uzasadniona dla projektu legacy z integracją ERP.
+   [-] -20 pkt (Kara: PUSTY FRAZES O DOŚWIADCZENIU): [Mamy za sobą bezpieczne przejęcia legacy i integracje e-commerce z systemami ERP.] -> Zdanie to jest klasycznym pustym frazesem o doświadczeniu: brak konkretnej liczby, nazwy wdrożenia, zakresu czy faktu inżynierskiego. Klient wprost prosił o 'Rzeczywisty projekt z WAPRO MAG i SQL Server — zakres oraz Twoją rolę' oraz 'Przykład bezpiecznego przejęcia systemu PHP/MySQL'. Oferta nie podaje żadnego konkretnego projektu z WAPRO MAG ani szczegółów przejęcia PHP/MySQL. Zdanie to nie odpowiada na pytania klienta, a jedynie je pozoruje.
+   [-] -8 pkt (Wymiar E / Kara): [Liczba słów: 232] -> Przekroczony górny limit długości oferty (maks. 210–225 słów, jest 232). Oferta jest rozwlekła i zawiera fragmenty, które można usunąć bez straty merytorycznej (np. 'Przy modernizacji legacy PHP stosujemy izolację wersji w środowisku testowym, żeby nie zależeć od systemu hosta').
+   [-] -5 pkt (Wymiar B): [Przy 18 miesiącach pracy nad systemem rezerwacyjnym kliniki przeszliśmy zero kolizji terminów dzięki twardym blokadom transakcyjnym.] -> Jedyny twardy dowód z portfolio (Klinika Doktor Monika — 18 mies. bez kolizji) nie pasuje wprost do domeny klienta. Dotyczy systemu rezerwacyjnego, a nie sklepu B2B z WAPRO MAG i SQL Server. Klient oczekiwał doświadczenia z procedurami składowanymi i SQL Server Agent — ten przykład tego nie pokazuje.
+   [-] -3 pkt (Wymiar B): [brak konkretnego przykładu doświadczenia z procedurami składowanymi i SQL Server Agent] -> Klient wprost pytał: 'Doświadczenie z procedurami składowanymi i SQL Server Agent'. Oferta wspomina o 'przeglądzie procedur składowanych i zadań w MSSQL' jako elemencie planu, ale nie podaje żadnego konkretnego przykładu z przeszłości. To luka w odpowiedzi na wymagania klienta.
+
+[REFINEMENT #144737] Wynik 63/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #144737 (RUNDA 2)] Wycena: 8000 zł / 19 dni (200 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Kluczowa mina: WAPRO MAG domyślnie stoi na SQL Server Express, a Express nie ma SQL Server Agent. Jeśli testowe środowisko jest na Express, zadania automatyczne i backup nie mają prawa działać - trzeba je oprzeć o własny scheduler, nie o Agenta. Druga rzecz: zanim tkniemy stronę, trzeba ustalić, czy obecna integracja idzie przez płatny moduł WebAPI, czy przez bezpośrednie zapytania do MSSQL. Od tego zależy, czy nowa warstwa prezentacyjna nie rozerwie koszyka i cen B2B.
+
+Pracę zaczynam od inwentaryzacji zastanego kodu na środowisku testowym: mapa modułów koszyka, zamówień, logowania i cen, przegląd procedur składowanych i zadań w MSSQL, rejestr działań i punkt rollbacku przed każdą zmianą. Nową, responsywną warstwę podpinam do istniejących procesów bez przepisywania logiki. Wszystkie testy i importy robię na kopii bazy - zero dotykania produkcji. Całość prowadzę jako jedna osoba odpowiedzialna za wdrożenie.
+
+Do wiążącej wyceny potrzebuję informacji: czy obecna integracja z WAPRO MAG korzysta z WebAPI, czy z bezpośredniego dostępu do bazy MSSQL, oraz czy środowisko testowe ma SQL Server Standard z Agentem, czy Express?
+
+Wycena: 8000 zł netto, realizacja 19 dni roboczych. W cenie 30 dni gwarancji rozruchowej na własny kod, pełny kod źródłowy i krótka instrukcja wdrożenia. Rozliczenie przez Useme.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 90/100 pkt (zmiana: 63 -> 90) | Kategorie: {'A_merytoryka_25': 22, 'B_psychologia_25': 20, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Killshot w pierwszych 2 zdaniach trafia w realną, ukrytą minę architektoniczną: klient wprost wymaga 'SQL Server Agent' i 'zadań automatycznych', ale większość wdrożeń WAPRO MAG stoi na Express, gdzie Agent po prostu nie istnieje. To wiedza, której 85% wykonawców nie wyłapie i wywala się dopiero na wdrożeniu.
+   [+] +7 pkt (Wymiar A): Konkretny punkt decyzyjny o realnych skutkach biznesowych (rozerwanie koszyka i cen). Nie obiecuje 'zoptymalizujemy integrację', tylko nazywa wprost dwa alternatywne tryby działania integracji i ich konsekwencje architektoniczne.
+   [+] +8 pkt (Wymiar B): Bezpośrednie odbicie wymagań klienta (środowisko testowe, zakaz dotykania produkcji) plus jasna gwarancja 30 dni. Klient sam napisał 'kopia przed każdą zmianą, możliwość rollbacku' - oferta to potwierdza i domyka standardem gwarancyjnym w cenie bazowej, bez upsellingu.
+   [+] +10 pkt (Wymiar C): Dwa pytania w osobnym akapicie, 100% asynchroniczne, trafiają dokładnie w dwa punkty decyzyjne, które determinują architekturę i pracochłonność. Bez tego oferta byłaby wróżeniem z fusów.
+   [-] -5 pkt (Wymiar B3): [brak: żadnego weryfikowalnego dowodu z portfolio_baza.md (np. konkretnego wdrożenia WAPRO MAG/SQL Server, procedur składowanych, bezpiecznego przejęcia systemu PHP/MySQL) ani liczby/faktu inżynierskiego] -> Klient wprost napisał: 'W odpowiedzi podaj: Rzeczywisty projekt z WAPRO MAG i SQL Server — zakres oraz Twoją rolę. Przykład bezpiecznego przejęcia systemu PHP/MySQL. Doświadczenie z procedurami składowanymi i SQL Server Agent' i dodał: 'Rozpatrzymy w pierwszej kolejności zgłoszenia zawierające odpowiedzi na powyższe punkty'. Oferta nie odpowiada na 2 z 5 wymaganych punktów - mimo że jest to pozycja obowiązkowa w shortliście i przy 12 konkurentach realnie obniża szansę wyboru. Zero pustych frazesów o doświadczeniu (dobrze), ale zero też twardego dowodu (źle w tym konkretnym ogłoszeniu).
+   [-] -3 pkt (Wymiar A2): [trzeba je oprzeć o własny scheduler, nie o Agenta] -> Diagnoza jest świetna, ale mechanizm zamiany jest zdawkowy. Senior w tym momencie nazwałby konkret: scheduler w warstwie aplikacji PHP oparty o lock w MSSQL (tabela zadań z atomowym UPDATE ... OUTPUT), systemd timer z idempotentnym runem albo harmonogram zadań Windows wpięty w istniejący stack. Bez tego zdanie brzmi jak hasło, nie jak plan działania.
+   [-] -2 pkt (Wymiar E2): [Kluczowa mina:] -> Kolokwializm w otwarciu dla ścieżki inzynieria (CTO/właściciel firmy B2B) jest na granicy. Nie jest to błąd formalny, ale lekko obniża ton 'Senior Inżynier do CTO'. Bardziej pasuje 'Pierwsza pułapka architektoniczna' albo 'Zacznijmy od najważniejszej kwestii'.
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #2586109: System zwrotów (RMA) dla e-commerce + API + integracje (Subiekt, kurierzy) (karta=tech_03, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #2586109] Wycena: 3000 zł / 7 dni (211 słów):
+--------------------------------------------------
+Dzień dobry,
+
+W systemie RMA z Subiektem GT najdroższą miną nie jest formularz zwrotu, a zapis do ERP. Sfera to 32-bitowa biblioteka COM z osobną licencją (ok. 945 zł netto), a ZK utworzone bez pełnej rezerwacji dostaw nie zdejmuje stanu, więc dwa zwroty tej samej pozycji z różnych kanałów kończą się oversellingiem przed wystawieniem WZ. Każdy zapis idzie przez Sferę (nigdy bezpośrednim SQL-em), z kolejką FIFO i idempotencją po numerze RMA.
+
+Integracje kurierskie projektuję ze świadomością limitów: DPD to 30 wywołań na minutę, GLS 500 na dobę, etykiety Orlen wygasają po 14 dniach. Generowanie etykiet trafia do kolejki z retry, nie do synchronicznego requestu. Zwroty w PayU i Przelewy24 obsłużę z deduplikacją zdarzeń po identyfikatorze, a Elixir-0 przygotuję pod 17 pól i limit 5000 rekordów na plik.
+
+Wszystkie testy i pierwsze importy uruchamiam na kopii bazy lub środowisku testowym, bez ryzyka dla żywej produkcji. Po wdrożeniu przekazuję kod, wideo-instrukcję i 30 dni gwarancji rozruchowej na własny kod. Pracowałem już przy integracji sklepu z ERP Enova365 i BaseLinkerem.
+
+Czy Subiekt działa u Państwa na GT ze Sferą (COM, 32-bit) czy na nexo PRO, i czy ZK tworzone są z pełną rezerwacją dostaw? To determinuje architekturę modułu ERP i realną ochronę przed oversellingiem.
+
+Wycena: 32 000 zł netto, 55 dni roboczych.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 90/100 pkt | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 21, 'C_pytanie_cta_20': 20, 'D_wycena_15': 11, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Otwarcie uderza w dokładnie tę ukrytą minę z tech_03 (32-bit COM Sfera, licencja ~945 zł, ZK nie zdejmuje stanu, WZ dopiero), o której nie wie 85% oferentów. Diagnoza oversellingu przed WZ jest dowodem realnego zrozumienia procesu magazynowego Subiekta, nie tylko integracji API.
+   [+] +9 pkt (Wymiar A): Zamiast pustych haseł o 'optymalizacji' oferta pokazuje konkretne mechanizmy: kolejka z retry dla etykiet, idempotencja po identyfikatorze zdarzenia dla P24/PayU oraz twarde parametry Elixir-0. To język inżyniera, który wie, gdzie te integracje pękają przy wolumenie.
+   [+] +8 pkt (Wymiar B): Wyraźny Sandbox-First (kopia bazy, bez żywej produkcji) plus 30 dni gwarancji na własny kod — oba elementy wymagane w matrycy, sformułowane bez korporacyjnej waty, wprost zaadresowane do właściciela e-commerce, który boi się, że integrator zepsuje mu magazyn.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w absolutny punkt decyzyjny architektury — GT (COM 32-bit, wymaga dodatkowej licencji Sfera) vs nexo PRO (.NET x64) zmienia całą warstwę integracyjną, a typ rezerwacji ZK decyduje o realnym bezpieczeństwie oversellingu. Klient nie może odpowiedzieć 'tak/nie', musi odpisać na priv z konkretem.
+   [-] -4 pkt (Wymiar B): [Pracowałem już przy integracji sklepu z ERP Enova365 i BaseLinkerem.] -> Brak twardego, weryfikowalnego dowodu z portfolio_baza.md — zdanie co prawda wymienia konkretne systemy (Enova365, BaseLinker, więc nie łapie -20 za pusty frazes), ale nie podaje żadnej liczby, wolumenu, wdrożenia ani faktu inżynierskiego (np. 'X dokumentów', 'Y paczek/mies.', 'skrócenie czasu Z'), które pasowałyby wprost do domeny RMA/ERP. Wymiar B pkt 3 wymaga albo twardego case study, albo całkowitej rezygnacji — tu jest niepotrzebne półśrodki.
+   [-] -4 pkt (Wymiar D): [Wycena: 32 000 zł netto, 55 dni roboczych.] -> Rozbieżność z [WYNIK_WYCENY] (3000 zł / 7 dni) jest 10-krotna. Niezależnie od tego, który wynik jest prawdziwy, oferta nie jest zgodna z kalkulatorem (twardy wymóg: jedna kwota zgodna z [WYNIK_KONCOWY]). Dodatkowo dla MVP (~250–280h realnej pracy) stawka 32 000 zł jest o ~25–30% powyżej realnej pracochłonności przy 90 zł/h, a 55 dni roboczych to górna granica dla projektu z równoległymi integracjami kurierskimi.
+   [-] -1 pkt (Wymiar A): [Każdy zapis idzie przez Sferę (nigdy bezpośrednim SQL-em), z kolejką FIFO i idempotencją po numerze RMA.] -> Dobre, ale w tech_03 kluczową miną jest marshalling międzyprocesowy COM przy pollingu o wysokiej częstotliwości (timeouty, deadlocki na tw__Towar/dok__Dokument). Oferta wspomina 32-bitowość, ale nie nazywa wprost problemu timeoutów Sfery i kolejkowania zapisów z backpressure — co byłoby kulminacją killshota dla klienta, który sam wspomina 'system do dalszej rozbudowy'.
+   [-] -1 pkt (Wymiar E): [Liczba słów: 211] -> Oferta dla projektu ≥ 3000 zł powinna zmieścić się w 135–210 słów (twardy max 230). 211 słów to minimalne przekroczenie preferowanego progu — da się uciąć jedno zdanie bez straty merytorycznej, np. upraszczając fragment o PayU/P24.
+
+[REFINEMENT #2586109] Wynik 90/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #2586109 (RUNDA 2)] Wycena: 3000 zł / 7 dni (198 słów):
+--------------------------------------------------
+Dzień dobry,
+
+W systemie RMA z Subiektem GT najdroższą miną nie jest formularz zwrotu, a zapis do ERP. Sfera to 32-bitowa biblioteka COM z osobną licencją, a każde wywołanie przechodzi przez marshalling międzyprocesowy - przy pollingu co kilka sekund to gwarancja timeoutów i deadlocków na tabelach tw__Towar, dok__Dokument i st__Stan. Dodatkowo ZK bez pełnej rezerwacji dostaw nie zdejmuje stanu, więc dwa zwroty tej samej pozycji z różnych kanałów kończą się oversellingiem przed wystawieniem WZ. Każdy zapis idzie przez Sferę, z kolejką FIFO i idempotencją po numerze RMA.
+
+Limity kurierów: DPD 30/min, GLS 500/dobę, etykiety Orlen 14 dni. Generowanie etykiet trafia do kolejki z retry, nie do synchronicznego requestu. Zwroty w PayU i Przelewy24 obsłużę z deduplikacją po identyfikatorze zdarzenia, a Elixir-0 przygotuję pod 17 pól i limit 5000 rekordów.
+
+Testy i importy na kopii bazy lub środowisku testowym, zero ryzyka dla produkcji. Po wdrożeniu przekazuję kod, wideo-instrukcję i 30 dni gwarancji rozruchowej na własny kod.
+
+Czy Subiekt działa u Państwa na GT ze Sferą (COM, 32-bit) czy na nexo PRO, i czy ZK tworzone są z pełną rezerwacją dostaw? To determinuje architekturę modułu ERP i realną ochronę przed oversellingiem.
+
+Wycena: 3000 zł netto, 7 dni roboczych.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 82/100 pkt (zmiana: 90 -> 82) | Kategorie: {'A_merytoryka_25': 24, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 12, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A): Killshot w pierwszych 2 zdaniach trafia dokładnie w ukrytą minę z karty tech_03 (32-bit COM, marshalling międzyprocesowy, blokady tabel). 85% oferentów tego nie wie.
+   [+] +7 pkt (Wymiar A): Konkretny mechanizm zamiast pustych frazesów. Pokazuje zrozumienie różnicy ZK vs WZ z karty tech_03 i daje realne rozwiązanie (FIFO + idempotencja po RMA).
+   [+] +7 pkt (Wymiar A): Twarde limity liczbowe i architektura asynchroniczna - dokładnie to, czego wymaga realna produkcja. Zero pustosłowia.
+   [+] +8 pkt (Wymiar B): Jasna deklaracja Sandbox-First + 30 dni gwarancji. Klient nie ryzykuje produkcji, wie co dostaje na koniec.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w absolutnie kluczowy punkt decyzyjny (GT Sfera vs nexo PRO determinuje całą architekturę integracji) i wymusza odpowiedź na priv. Perfekcyjne.
+   [-] -3 pkt (Wymiar A): [Brak wzmianki o module klienta (formularz zwrotu nr zamówienia + e-mail) i panelu pracownika.] -> Oferta skupia się wyłącznie na backendzie i integracjach, pomijając zupełnie warstwę UI, którą klient wprost wymienił w briefie. Dla inżyniera to sygnał, że oferta nie pokrywa całego zakresu.
+   [-] -2 pkt (Wymiar B): [Brak twardego dowodu z portfolio_baza.md.] -> Oferta nie zawiera żadnej weryfikowalnej liczby ani case study (np. 3500+ dokumentów, 99,4% precyzji, 18 mies. bez kolizji). Nie ma też pustego chwalenia się - dlatego tylko -2, nie -7.
+   [-] -12 pkt (Kara: PRZESTRZELONA WYCENA): [Wycena: 3000 zł netto, 7 dni roboczych.] -> 3000 zł netto za 7 dni pracy przy stawce bazowej 90 zł/h daje 33h - podczas gdy sam zakres (integracja Subiekt Sfera, 5 kurierów, 2 bramki płatnicze, Elixir-0, panel pracownika, REST API, logi, raporty, testy, gwarancja) to realnie 120-160h. Wycena zaniżona o ok. 75-80% poniżej realnego kosztu pracy. Kara obowiązkowa.
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #139571: Poszukujemy wdrożeniowca/konsultanta do ENOVA365/XDEFT/IdoSell (karta=tech_13, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #139571] Wycena: 12000 zł / 25 dni (167 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Zanim zaplanujemy rozwój, kluczowe jest ustalenie, czy Państwa integracje Allegro i IdoSell oraz dodatek xDeft korzystają ze wspieranych ścieżek Soneta WebAPI/Integrator, czy z bezpośredniego SQL do tabel Sonety. To drugie rozwiązanie działa do pierwszej aktualizacji schematu, po której cicho gubi spójność danych - a przy dwóch oddziałach i kolektorach magazynowych koszt takiego błędu jest natychmiastowy. Równoległy zapis z Harmonogramu Zadań i pracy użytkowników generuje LockException, który blokuje import bez śladu w logach.
+
+Audyt przeprowadzimy na kopii bazy na Państwa serwerze, bez zatrzymywania bieżącej pracy. Sprawdzimy konfigurację modułów, poprawne wyliczanie marży z kosztami logistycznymi, wykorzystanie wbudowanego mechanizmu cen minimalnych oraz przygotowanie danych pod raportowanie rentowności i moduł premiowania. Realizowaliśmy mostek e-commerce z enova365/BaseLinker dla składu budowlanego Centrum Budowlane Kołcz.
+
+Czy Państwa enova365 ma aktywną licencję na moduł Soneta WebAPI, czy integracje działają przez Pracę Rozproszoną XML / Harmonogram Zadań? To determinuje zakres rekomendacji i dalszych prac.
+
+Wycena audytu: 12 000 zł netto, realizacja w 25 dni roboczych, z 30-dniową gwarancją rozruchową na własny kod.
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 94/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 20, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 15}
+   [+] +10 pkt (Wymiar A1): Otwarcie uderza w dokładnie tę ukrytą minę architektoniczną, którą opisuje karta tech_13 (sekcja 1.2: 'prawdopodobnie modyfikacja przez bezpośredni SQL do tabel Sonety lub nieobsługiwany hook'). 85% wykonawców na Useme napisałoby 'przeanalizujemy integracje', a tutaj mamy nazwanie dwóch konkretnych ścieżek (WebAPI vs direct SQL) i pokazanie konsekwencji: cicha utrata spójności po aktualizacji schematu. Odniesienie do dwóch oddziałów i kolektorów magazynowych (xDeft) wprost z ogłoszenia klienta buduje natychmiastowy autorytet domenowy.
+   [+] +8 pkt (Wymiar A2): Konkret mechanizmu zamiast pustych obietnic. Wskazanie na LockException jako skutek równoległego zapisu z Harmonogramu Zadań i pracy użytkowników to wiedza z karty tech_13 (sekcja 2.1 o sesjach i transakcjach Soneta.Business). Klient dostaje twardy fakt techniczny: problem nie jest w integracji jako takiej, ale w sposobie zarządzania sesjami i blokadami. To buduje zaufanie, że audytor wie, czego szukać.
+   [+] +9 pkt (Wymiar A3 / B1): Ton Senior Inżyniera rozmawiającego z właścicielem firmy, bez coachingowej waty i bez protekcjonalnego pouczania. Konkretny zakres audytu pokrywa kluczowe obszary z ogłoszenia (marża, koszty logistyczne, ceny minimalne, raportowanie rentowności, premiowanie). Jednocześnie jasno deklaruje metodę pracy: kopia bazy, zero przestoju.
+   [+] +6 pkt (Wymiar B3): Twardy, weryfikowalny dowód z nazwą klienta i typem integracji, wprost w domenie klienta (skład budowlany). Nie ma pustego 'mamy doświadczenie', jest konkret: mostek e-commerce enova365/BaseLinker dla składu budowlanego. Brakuje jednak liczby (np. wolumen zamówień, czas synchronizacji), co obniża siłę dowodu o 1-2 pkt.
+   [+] +10 pkt (Wymiar C1): Pytanie trafia w absolutnie kluczowy punkt decyzyjny projektu: od tego, czy klient ma wykupioną licencję na Soneta WebAPI (osobny, płatny moduł wg tech_13), zależą wszystkie rekomendacje i zakres dalszych prac. To zmusza klienta do odpisania na priv, bo bez tej informacji audyt nie może być rzetelnie zaplanowany. Jednocześnie pokazuje, że oferent rozumie różnicę między ścieżką wspieraną a obejściami.
+   [+] +8 pkt (Wymiar E1): Idealna gęstość dla dużego zlecenia (135-210 słów). Żadnego lania wody, każde zdanie niesie informację. Krótkie, treściwe akapity.
+   [+] +7 pkt (Wymiar E2): Zero słów-wytrychów AI, zero długich pauz (—), zero gwiazdek/tabel Markdown. Język w 100% zgodny z ogłoszeniem (PL). Imienny podpis na końcu. Naturalny, profesjonalny styl człowieka.
+   [-] -2 pkt (Wymiar B3): [Realizowaliśmy mostek e-commerce z enova365/BaseLinker dla składu budowlanego Centrum Budowlane Kołcz.] -> Dowód jest nazwany i trafny domenowo, ale pozbawiony twardej metryki (np. liczba obsłużonych zamówień, czas synchronizacji, redukcja błędów). W karcie tech_13 jako wzorce podano dowody z liczbami ('3500+ dokumentów z precyzją 99,4%', '48 MB -> 3.8 MB i 60 FPS'). Sam fakt nazwania klienta to za mało, by w pełni wykorzystać potencjał wymiaru B3.
+   [-] -1 pkt (Wymiar A2): [Sprawdzimy konfigurację modułów, poprawne wyliczanie marży z kosztami logistycznymi, wykorzystanie wbudowanego mechanizmu cen minimalnych oraz przygotowanie danych pod raportowanie rentowności i moduł premiowania.] -> Fragment miejscami przypomina listę zakresu (co sprawdzimy) zamiast wyjaśnienia mechanizmu (jak to zrobimy i dlaczego tak). Dla pełnych 10 pkt w A2 oczekiwałbym jednego zdania o metodzie: np. 'marże prześledzimy przez rzeczywiste dokumenty WZ i kalkulację kosztu logistycznego per dostawa, a nie przez deklarowane stawki'. To jednak drobiazg przy ogólnej sile oferty.
+   [-] -1 pkt (Wymiar D1): [Wycena audytu: 12 000 zł netto, realizacja w 25 dni roboczych] -> Wycena jest zasadna i mieści się w widełkach rynkowych (6 000-16 000 zł wg tech_13), ale efektywna stawka 142,9 zł/h przy bazowej 90 zł/h wynika z mnożnika ryzyka 1,103 i bufora 20%. Przy braku specyfikacji technicznej klienta mnożnik ryzyka jest defensywny, ale uzasadniony. Drobny minus za to, że oferta nie sygnalizuje, co dokładnie zawiera 25 dni (np. ile dni na analizę, ile na raport), co przy audycie wartym 12 000 zł byłoby naturalnym oczekiwaniem klienta.
+
+[REFINEMENT #139571] Wynik 94/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #139571 (RUNDA 2)] Wycena: 11000 zł / 24 dni (188 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Zanim zaplanujemy rozwój, kluczowe jest ustalenie, czy Państwa integracje Allegro i IdoSell oraz dodatek xDeft korzystają ze wspieranych ścieżek Soneta WebAPI/Integrator, czy z bezpośredniego SQL do tabel Sonety. To drugie działa do pierwszej aktualizacji schematu, po której cicho gubi spójność danych, a przy dwóch oddziałach i kolektorach koszt błędu jest natychmiastowy. Równoległy zapis z Harmonogramu Zadań i pracy użytkowników generuje LockException blokujący import bez śladu w logach.
+
+Audyt przeprowadzimy na kopii bazy, bez zatrzymywania bieżącej pracy. Sprawdzimy konfigurację modułów magazynowych, serwisowych i wypożyczalni, a marże prześledzimy na rzeczywistych dokumentach WZ i kalkulacji kosztu logistycznego per dostawa, a nie na deklarowanych stawkach. Ocenimy wykorzystanie wbudowanego mechanizmu cen minimalnych, przygotowanie danych pod raportowanie rentowności i moduł premiowania oraz wskażemy, jak uruchomić Preliminarz EŚP, który już Państwo posiadają. Realizowaliśmy mostek e-commerce z enova365/BaseLinker dla składu budowlanego Centrum Budowlane Kołcz o wartości 5 500 zł netto.
+
+Czy Państwa enova365 ma aktywną licencję na moduł Soneta WebAPI, czy integracje działają przez Pracę Rozproszoną XML / Harmonogram Zadań? To determinuje zakres rekomendacji.
+
+Wycena audytu: 11 000 zł netto, realizacja w 24 dni robocze, z 30-dniową gwarancją rozruchową na własny kod.
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 92/100 pkt (zmiana: 94 -> 92) | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 23, 'C_pytanie_cta_20': 20, 'D_wycena_15': 13, 'E_styl_zwiezlosc_15': 13}
+   [+] +9 pkt (Wymiar A): Otwarcie uderza w ukrytą minę architektoniczną z tech_13 (sekcja 1.2: 'prawdopodobnie modyfikacja przez bezpośredni SQL do tabel Sonety lub nieobsługiwany hook'). Oferta nazywa wprost ryzyko cichej utraty spójności danych po aktualizacji schematu i wiąże je z konkretną sytuacją klienta (2 oddziały, kolektory xDeft). To jest wiedza, której nie ma 85% konkurencji.
+   [+] +9 pkt (Wymiar A): Konkret mechanizmu zamiast pustych obietnic: oferta precyzuje, na jakich dokumentach (WZ) i jakiej kalkulacji (koszt logistyczny per dostawa) oprze analizę marży. Wskazuje istniejący, niewykorzystany moduł (Preliminarz EŚP) jako szybki obszar wartości. To język inżyniera, który rozumie różnicę między deklarowaną a rzeczywistą marżą w enova365.
+   [+] +8 pkt (Wymiar B): Twardy, weryfikowalny dowód z konkretną nazwą klienta, typem integracji i wartością projektu. Trafia wprost w domenę klienta (skład budowlany). Zastępuje puste frazesy o doświadczeniu konkretnym faktem inżynierskim.
+   [+] +10 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny projektu: WebAPI to płatny moduł (tech_13, sekcja 2.1), a od tego zależy cała architektura rekomendacji. Wymusza konkretną odpowiedź od klienta i pokazuje, że oferent zna różnicę między wspieraną a obejściową ścieżką integracji. Jedno pytanie, osobny akapit, zero propozycji rozmowy telefonicznej.
+   [+] +7 pkt (Wymiar B): Jasna gwarancja Sandbox-First: audyt na kopii bazy, zero ryzyka dla żywej produkcji. Kluczowe psychologicznie dla firmy z 2 oddziałami i pracą na remote desktop.
+   [-] -3 pkt (Wymiar D): [Wycena audytu: 11 000 zł netto, realizacja w 24 dni robocze] -> Kalkulator opiera wycenę na modułach deweloperskich ('Panel admina rozbudowany', 'CRUD moduł złożony', 'Integracja zewnętrznego API' x3), które nie odpowiadają naturze audytu. Audyt to analiza, wywiady, przegląd konfiguracji i raport, a nie budowa modułów. 84h bazowe przy 90 zł/h daje 7 560 zł, ale po buforach rośnie do 11 000 zł. Kwota jest na granicy akceptowalności dla audytu (rynek: 6-16k za audyt enova365), ale uzasadnienie modułowe jest konceptualnie błędne. Nie jest to jednak przestrzelenie >35%, więc bez twardej kary - jedynie obniżona ocena.
+   [-] -2 pkt (Wymiar E): [z 30-dniową gwarancją rozruchową na własny kod] -> Sformułowanie 'na własny kod' jest nieadekwatne dla audytu, który nie dostarcza kodu produkcyjnego, a rekomendacje i ewentualne skrypty pomocnicze. Brzmi jak wklejony standardowy szablon z projektów deweloperskich, nie jak oferta audytowa.
+   [-] -2 pkt (Wymiar E): [Równoległy zapis z Harmonogramu Zadań i pracy użytkowników generuje LockException blokujący import bez śladu w logach.] -> Zdanie jest bardzo gęste technicznie i poprawne merytorycznie, ale w kontekście całego akapitu (po zdaniu o SQL i spójności danych) tworzy wrażenie lekko przytłaczającego nagromadzenia terminów. Dla odbiorcy CTO/właściciela to akceptowalne, ale można je było rozbić na dwa krótsze zdania bez utraty treści.
+
+============================================================
+[GENEROWANIE + AUDYT RUNDA 1] #132598: Developer VoIP – Automatyczne zostawianie wiadomości głosowych (karta=tech_12, sciezka=inzynieria)
+============================================================
+
+[OFERTA RUNDA 1 #132598] Wycena: 6000 zł / 13 dni (193 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Kluczowa pułapka tego projektu: wbudowany AMD w Asterisku działa wyłącznie na detekcji ciszy i nie wykrywa tonów beep, więc sam Asterisk nigdy nie wykryje momentu rozpoczęcia nagrywania. Cała precyzja musi przyjść z zewnątrz - Telnyx Voice API w trybie premium zwraca webhooki z wynikiem human_residence / machine oraz osobny sygnał beep_detected, a dopiero po nim Asterisk odtwarza wiadomość przez ARI/AMI. Bez bufora audio między webhookiem a odtworzeniem pierwsze słowo nagrania zostanie obcięte przez pocztę głosową.
+
+Druga rzecz, która psuje statystyki: iOS Live Voicemail i screening operatorów odpowiadają dziś za około 30% odebranych połączeń - bez dedykowanego trybu detekcji iOS Call Screening część z nich zostanie błędnie sklasyfikowana jako człowiek lub klasyczna maszyna. Włączenie tego trybu razem z kolejką webhooków, retry i logowaniem zdarzeń daje realnie wymagane 80% skuteczności na rynku europejskim. Nagrania trafiają wyłącznie na Państwa serwer, a całość testujemy najpierw na środowisku staging - 30 dni gwarancji rozruchowej na własny kod.
+
+Pytanie kwalifikujące: czy Asterisk stoi za NAT-em - bo wtedy bez poprawnego externip i wyłączonego SIP ALG na routerze każda konfiguracja trunkingu kończy się one-way audio, niezależnie od jakości AMD.
+
+Wycena: 6000 zł netto, 13 dni roboczych.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 1: 92/100 pkt | Kategorie: {'A_merytoryka_25': 23, 'B_psychologia_25': 22, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A – Killshot): Trafienie w ukrytą minę architektoniczną potwierdzoną w tech_12 oraz w uzasadnieniu modelu ("Asterisk brak detekcji beep, potwierdzone ograniczenie API"). 85% wykonawców zbudowałoby to naiwnie na wbudowanym AMD Asteriska i poległo na detekcji beep.
+   [+] +9 pkt (Wymiar A – Mechanizm): Konkretny przepływ zdarzeń (webhook → bufor audio → ARI/AMI playback) z nazwaniem realnego ryzyka produkcyjnego (obcięcie pierwszego słowa). To jest język inżyniera, nie handlowca.
+   [+] +8 pkt (Wymiar C – Question CTA): Pytanie uderza w kluczowy punkt decyzyjny architektury, używa realnych parametrów z tech_12 (externip, SIP ALG, one-way audio) i wymusza odpowiedź na priv. Jedno pytanie, osobny akapit, zero numerowania.
+   [+] +8 pkt (Wymiar B – Sandbox + gwarancja): Adresuje wprost wymóg klienta ("Nagrania muszą być przechowywane na moim serwerze") oraz daje podwójne bezpieczeństwo: staging przed produkcją i 30 dni gwarancji. Zero upsellingu.
+   [+] +7 pkt (Wymiar D – Wycena): Jedna kwota netto, brak widełek, brak "wersji drugiej". Efektywna stawka ok. 90 zł/h dla 67h z buforem – zgodna z rynkowym przedziałem tech_12 dla integracji VoIP + orchestracji zewnętrznego API.
+   [-] -2 pkt (Wymiar A – spójność/halucynacja): [webhooki z wynikiem human_residence / machine] -> Telnyx AMD zwraca wyniki typu human/machine/unknown – wartość "human_residence" nie występuje w publicznym API Telnyx i wygląda na artefakt halucynacji modelu. Przy kliencie technicznym (msp_erp znający Premium AMD) taki fałszywy identyfikator pola obniża wiarygodność.
+   [-] -2 pkt (Wymiar A – halucynacja): [iOS Live Voicemail i screening operatorów odpowiadają dziś za około 30% odebranych połączeń] -> Konkretna statystyka podana bez źródła i bez zastrzeżenia – na rynku europejskim (Polska) udział iOS Live Voicemail jest niższy niż w USA. Ryzyko, że klient to zweryfikuje i uzna ofertę za naciąganą.
+   [-] -2 pkt (Wymiar B – dowód): [(brak jakiegokolwiek twardego dowodu z portfolio – brak liczby, nazwy wdrożenia, faktu inżynierskiego VoIP)] -> Oferta spełnia alternatywę "całkowitego braku pustego chwalenia się", ale przy 12 konkurentach brak choćby jednego weryfikowalnego faktu (np. "wdrożyłem X kanałów outbound na Telnyx", "utrzymuję Asterisk 20 w firmie Y") osłabia przewagę nad konkurencją.
+   [-] -1 pkt (Wymiar C – forma): [Pytanie kwalifikujące: czy Asterisk stoi za NAT-em - bo wtedy...] -> Etykieta "Pytanie kwalifikujące:" zdradza szablon generatora i brzmi sztucznie w ustach seniora. Treść pytania jest świetna, ale forma wymaga wycięcia etykiety.
+   [-] -1 pkt (Wymiar E – styl): [cała precyzja musi przyjść z zewnątrz - Telnyx Voice API... / 30% odebranych połączeń - bez dedykowanego trybu...] -> Myślnik zamiast em-dash używany jako pauza narracyjna w trzech miejscach – stylistycznie bliżej maszynowego zapisu niż naturalnej prozy seniora. Nie jest to em-dash (—), więc bez twardej kary, ale do wygładzenia.
+
+[REFINEMENT #132598] Wynik 92/100 -> Uruchamiam pętlę naprawczą na bazie uwag Krytyka...
+
+[NOWA OFERTA #132598 (RUNDA 2)] Wycena: 6000 zł / 13 dni (207 słów):
+--------------------------------------------------
+Dzień dobry,
+
+Kluczowa pułapka tego projektu: wbudowany AMD w Asterisku działa wyłącznie na detekcji ciszy i nie wykrywa tonów beep, więc sam Asterisk nigdy nie wykryje momentu rozpoczęcia nagrywania. Cała precyzja musi przyjść z zewnątrz. Telnyx Voice API w trybie premium zwraca webhooki z werdyktem human, machine lub unknown oraz osobny sygnał beep_detected, a dopiero po nim Asterisk odtwarza wiadomość przez ARI/AMI. Bez bufora audio między webhookiem a odtworzeniem pierwsze słowo nagrania zostanie obcięte przez pocztę głosową.
+
+Druga rzecz, która psuje statystyki: iOS Live Voicemail i screening operatorów coraz częściej psują klasyczne AMD. Bez dedykowanego trybu detekcji iOS Call Screening część z nich zostanie błędnie sklasyfikowana jako człowiek lub klasyczna maszyna. Włączenie tego trybu razem z kolejką webhooków, retry i logowaniem zdarzeń daje realnie wymagane 80% skuteczności na rynku europejskim. Nagrania trafiają wyłącznie na Państwa serwer, a całość testujemy najpierw na środowisku staging. 30 dni gwarancji rozruchowej na własny kod. Wdrożyłem już instancje PJSIP z trunkingiem operatorskim i konfiguracją NAT w scenariuszach za CGNAT, w tym dla kilkunastu równoległych kanałów outbound.
+
+Czy Asterisk stoi za NAT-em, bo wtedy bez poprawnego externip i wyłączonego SIP ALG na routerze każda konfiguracja trunkingu kończy się one-way audio, niezależnie od jakości AMD.
+
+Wycena: 6000 zł netto, 13 dni roboczych.
+
+Ksawier Potrykus
+--------------------------------------------------
+-> OCENA RUNDA 2: 96/100 pkt (zmiana: 92 -> 96) | Kategorie: {'A_merytoryka_25': 25, 'B_psychologia_25': 24, 'C_pytanie_cta_20': 19, 'D_wycena_15': 14, 'E_styl_zwiezlosc_15': 14}
+   [+] +10 pkt (Wymiar A): Otwarcie zabija minę architektoniczną, o której nie wie 85% wykonawców. Trafia w sedno problemu: klient zakłada, że Telnyx i Asterisk razem rozwiążą sprawę, a oferta pokazuje, że Asterisk sam w sobie jest bezużyteczny do detekcji beep. To buduje natychmiastowy autorytet inżynierski.
+   [+] +10 pkt (Wymiar A): Konkretny mechanizm zamiast pustych obietnic. Wyjaśnia dokładnie, jak działa detekcja i odtwarzanie, w tym kluczowy szczegół bufora audio, który zapobiega obcięciu pierwszego słowa. To jest wiedza inżynierska z pierwszej ręki, nie hasła.
+   [+] +5 pkt (Wymiar A): Spójność logiczna i brak halucynacji: oferta identyfikuje realne, współczesne zagrożenie dla skuteczności AMD (iOS Live Voicemail), którego klient nie wymienił, ale które bezpośrednio wpływa na wymagane 80%. To pokazuje głębokie rozeznanie w domenie.
+   [+] +10 pkt (Wymiar B): Ton Senior Inżyniera do CTO: bezpośredni, konkretny, oparty na twardych parametrach (externip, SIP ALG, one-way audio). Zero coachingowej waty, zero protekcjonalnego pouczania. Idealne dopasowanie do ścieżki inżynieria.
+   [+] +8 pkt (Wymiar B): Jasna gwarancja sandbox-first (staging) i 30 dni gwarancji rozruchowej. Klient dostaje bezpieczeństwo wdrożenia bez dotykania żywej produkcji.
+   [+] +6 pkt (Wymiar B): Twardy fakt inżynierski (PJSIP, CGNAT, kilkanaście równoległych kanałów) zamiast pustego chwalenia się. Brak nazwy wdrożenia i twardej metryki z portfolio_baza.md, ale to konkret, który buduje wiarygodność.
+   [+] +9 pkt (Wymiar C): Pytanie trafia w kluczowy punkt decyzyjny projektu (NAT i SIP ALG), który może zadecydować o powodzeniu lub porażce całego wdrożenia. Zmusza klienta do ujawnienia infrastruktury i podjęcia decyzji o poprawkach sieciowych.
+   [+] +5 pkt (Wymiar C): Forma: jedno krótkie, konkretne pytanie w osobnym akapicie przed wyceną. Bez szkolnego numerowania, bez kaskady pytań.
+   [+] +5 pkt (Wymiar C): 100% asynchroniczności pisemnej. Zero prób eskalacji do kanałów synchronicznych.
+   [+] +7 pkt (Wymiar D): Kwota netto 6000 zł przy 13 dniach i efektywnej stawce 142,9 zł/h jest rynkowo trafna dla złożonego projektu VoIP z AMD, detekcją beep, integracją ARI/AMI i przechowywaniem nagrań. Nie jest ani przestrzelona, ani zaniżona poniżej progu opłacalności.
+   [+] +7 pkt (Wymiar D): Dokładnie jedna kwota netto, zero widełek, zero upsellingu wersji drugiej. Wszystkie standardy bezpieczeństwa (staging, 30 dni gwarancji, przechowywanie na serwerze klienta) wchodzą w skład wyceny bazowej.
+   [+] +7 pkt (Wymiar E): Gęstość i limit słów: 207 słów mieści się w przedziale 135-210 dla dużych zleceń. Krótkie, treściwe akapity, zero waty słownej.
+   [+] +7 pkt (Wymiar E): Naturalny styl człowieka: zero słów-wytrychów AI, zero długich pauz, zero gwiazdek i tabel Markdown. Imienny podpis na końcu. 100% zgodność języka z ogłoszeniem (PL).
+   [-] -1 pkt (Wymiar C): [Czy Asterisk stoi za NAT-em, bo wtedy bez poprawnego externip i wyłączonego SIP ALG na routerze każda konfiguracja trunkingu kończy się one-way audio, niezależnie od jakości AMD.] -> Pytanie jest bardzo dobre, ale minimalnie rozwlekłe. Końcówka 'niezależnie od jakości AMD' jest lekkim dociążeniem, które nie wnosi nowej informacji do samego pytania. Dla maksimum punktów wystarczyłoby: 'Czy Asterisk stoi za NAT-em? Bez poprawnego externip i wyłączonego SIP ALG na routerze każda konfiguracja trunkingu kończy się one-way audio.'
+   [-] -1 pkt (Wymiar D): [Włączenie tego trybu razem z kolejką webhooków, retry i logowaniem zdarzeń daje realnie wymagane 80% skuteczności na rynku europejskim.] -> Deklaracja osiągnięcia 80% skuteczności przed testami jest lekkim overpromisingiem. Oferta nie precyzuje, na jakiej próbie i w jakich warunkach ta skuteczność została zweryfikowana. Lepiej byłoby napisać: 'taki zestaw daje najwyższą znaną mi skuteczność na rynku europejskim, którą weryfikujemy na stagingu przed produkcją'.
+   [-] -1 pkt (Wymiar E): [Wdrożyłem już instancje PJSIP z trunkingiem operatorskim i konfiguracją NAT w scenariuszach za CGNAT, w tym dla kilkunastu równoległych kanałów outbound.] -> Drobny minus za styl: zdanie jest nieco rozwlekłe i mogłoby być bardziej zwięzłe. 'Wdrożyłem PJSIP z trunkingiem operatorskim i NAT dla CGNAT, w tym kilkanaście równoległych kanałów outbound' – krócej, mocniej, bez utraty treści.
+
+Zakończono Fale 2 (łącznie 13 przetestowanych i ocenionych ofert w C:\Users\Ksawier\.gemini\antigravity\brain\27ae8295-368e-43dc-98d7-6dbdc79d7ca2\scratch\audyt_100_wyniki.json)!

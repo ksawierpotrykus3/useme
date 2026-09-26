@@ -1,0 +1,475 @@
+{
+  "client_totals": {
+    "TYP_A_BIZNESMEN_NIETECHNICZNY": {
+      "wygrana": 29,
+      "przegrana": 208,
+      "total": 237
+    },
+    "TYP_D_STARTUPOWIEC_MVP": {
+      "wygrana": 6,
+      "przegrana": 45,
+      "total": 51
+    },
+    "TYP_C_ECOMMERCE_MANAGER": {
+      "wygrana": 10,
+      "przegrana": 84,
+      "total": 94
+    },
+    "TYP_B_TECH_LEAD_CTO_PM": {
+      "wygrana": 6,
+      "przegrana": 39,
+      "total": 45
+    },
+    "TYP_E_QUICK_FIX": {
+      "wygrana": 5,
+      "przegrana": 38,
+      "total": 43
+    }
+  },
+  "tech_totals": {
+    "TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 6,
+      "przegrana": 46,
+      "total": 52
+    },
+    "TECH_4_MOBILE_APPS": {
+      "wygrana": 6,
+      "przegrana": 18,
+      "total": 24
+    },
+    "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 15,
+      "przegrana": 96,
+      "total": 111
+    },
+    "TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 15,
+      "przegrana": 142,
+      "total": 157
+    },
+    "TECH_5_WEB_APPS_SAAS": {
+      "wygrana": 3,
+      "przegrana": 27,
+      "total": 30
+    },
+    "TECH_6_LEGACY_INNE": {
+      "wygrana": 11,
+      "przegrana": 85,
+      "total": 96
+    }
+  },
+  "matrix_2d": {
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 4,
+      "przegrana": 29,
+      "total": 33
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_4_MOBILE_APPS": {
+      "wygrana": 3,
+      "przegrana": 9,
+      "total": 12
+    },
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 9,
+      "przegrana": 64,
+      "total": 73
+    },
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_4_MOBILE_APPS": {
+      "wygrana": 3,
+      "przegrana": 6,
+      "total": 9
+    },
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 5,
+      "przegrana": 57,
+      "total": 62
+    },
+    "TYP_C_ECOMMERCE_MANAGER__x__TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 8,
+      "przegrana": 69,
+      "total": 77
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_5_WEB_APPS_SAAS": {
+      "wygrana": 1,
+      "przegrana": 5,
+      "total": 6
+    },
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_6_LEGACY_INNE": {
+      "wygrana": 8,
+      "przegrana": 47,
+      "total": 55
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_5_WEB_APPS_SAAS": {
+      "wygrana": 2,
+      "przegrana": 15,
+      "total": 17
+    },
+    "TYP_C_ECOMMERCE_MANAGER__x__TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 1,
+      "przegrana": 7,
+      "total": 8
+    },
+    "TYP_E_QUICK_FIX__x__TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 3,
+      "przegrana": 8,
+      "total": 11
+    },
+    "TYP_E_QUICK_FIX__x__TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 1,
+      "przegrana": 9,
+      "total": 10
+    },
+    "TYP_C_ECOMMERCE_MANAGER__x__TECH_6_LEGACY_INNE": {
+      "wygrana": 1,
+      "przegrana": 4,
+      "total": 5
+    },
+    "TYP_E_QUICK_FIX__x__TECH_6_LEGACY_INNE": {
+      "wygrana": 1,
+      "przegrana": 16,
+      "total": 17
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 1,
+      "przegrana": 7,
+      "total": 8
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 1,
+      "przegrana": 4,
+      "total": 5
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 1,
+      "przegrana": 7,
+      "total": 8
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 1,
+      "przegrana": 3,
+      "total": 4
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_2_AUTOMATYZACJE_BOTY_SCRAPING": {
+      "wygrana": 1,
+      "przegrana": 10,
+      "total": 11
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_6_LEGACY_INNE": {
+      "wygrana": 1,
+      "przegrana": 5,
+      "total": 6
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_6_LEGACY_INNE": {
+      "wygrana": 0,
+      "przegrana": 13,
+      "total": 13
+    },
+    "TYP_E_QUICK_FIX__x__TECH_4_MOBILE_APPS": {
+      "wygrana": 0,
+      "przegrana": 1,
+      "total": 1
+    },
+    "TYP_A_BIZNESMEN_NIETECHNICZNY__x__TECH_5_WEB_APPS_SAAS": {
+      "wygrana": 0,
+      "przegrana": 5,
+      "total": 5
+    },
+    "TYP_D_STARTUPOWIEC_MVP__x__TECH_3_ECOMMERCE_CMS": {
+      "wygrana": 0,
+      "przegrana": 4,
+      "total": 4
+    },
+    "TYP_C_ECOMMERCE_MANAGER__x__TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 0,
+      "przegrana": 4,
+      "total": 4
+    },
+    "TYP_B_TECH_LEAD_CTO_PM__x__TECH_4_MOBILE_APPS": {
+      "wygrana": 0,
+      "przegrana": 2,
+      "total": 2
+    },
+    "TYP_E_QUICK_FIX__x__TECH_5_WEB_APPS_SAAS": {
+      "wygrana": 0,
+      "przegrana": 2,
+      "total": 2
+    },
+    "TYP_E_QUICK_FIX__x__TECH_1_ERP_CAD_SYSTEMY": {
+      "wygrana": 0,
+      "przegrana": 2,
+      "total": 2
+    }
+  },
+  "records_sample": [
+    {
+      "status": "wygrana",
+      "id": "144834",
+      "title": "Szukamy freelancera / specjalisty TopSolid, który pomoże nam zintegrować internetowy konfigurator mebli z procesem przyg",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_1_ERP_CAD_SYSTEMY",
+      "price": "8500,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "144788",
+      "title": "Aplikacja Mobilna/Webowa - Mental Health",
+      "client_type": "TYP_D_STARTUPOWIEC_MVP",
+      "tech_type": "TECH_4_MOBILE_APPS",
+      "price": "34000,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "131302",
+      "title": "Olx bot pomoc w rejestracji aplikacji w portalu deweloperskim olx",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "300,00 PLN",
+      "thread_size": 373
+    },
+    {
+      "status": "wygrana",
+      "id": "144069",
+      "title": "Aplikacja mobilna kotlin - poszukiwany programista",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_4_MOBILE_APPS",
+      "price": "10000,00 PLN",
+      "thread_size": 1
+    },
+    {
+      "status": "wygrana",
+      "id": "142251",
+      "title": "Konfigurator wyglądu/personalizacji produktu na stronie internetowej Shoper Storefront",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "3150,00 PLN",
+      "thread_size": 7
+    },
+    {
+      "status": "wygrana",
+      "id": "140943",
+      "title": "Programista Computer Vision (OpenCV, OCR, Windows/Android)",
+      "client_type": "TYP_D_STARTUPOWIEC_MVP",
+      "tech_type": "TECH_4_MOBILE_APPS",
+      "price": "15000,00 PLN",
+      "thread_size": 35
+    },
+    {
+      "status": "wygrana",
+      "id": "132662",
+      "title": "Otwarcie panelu B2B IdoSell dla klientów bez rejestracji",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "1600,00 PLN",
+      "thread_size": 173
+    },
+    {
+      "status": "wygrana",
+      "id": "139854",
+      "title": "Wdrożenie płatności dla firm w aplikacji mobilnej",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_4_MOBILE_APPS",
+      "price": "6000,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "137013",
+      "title": "Zlecenie: MVP aplikacji webowej do screeningu danych względem list referencyjnych",
+      "client_type": "TYP_D_STARTUPOWIEC_MVP",
+      "tech_type": "TECH_5_WEB_APPS_SAAS",
+      "price": "14000,00 PLN",
+      "thread_size": 16
+    },
+    {
+      "status": "wygrana",
+      "id": "138653",
+      "title": "Airtable Consultancy",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "2300,00 PLN",
+      "thread_size": 10
+    },
+    {
+      "status": "wygrana",
+      "id": "139433",
+      "title": "Senior Node.js Developer (vanilla, bez frameworków) — dokończenie i wdrożenie platformy SaaS do produkcji",
+      "client_type": "TYP_B_TECH_LEAD_CTO_PM",
+      "tech_type": "TECH_5_WEB_APPS_SAAS",
+      "price": "7000,00 PLN",
+      "thread_size": 8
+    },
+    {
+      "status": "wygrana",
+      "id": "139571",
+      "title": "Poszukujemy wdrożeniowca/konsultanta do ENOVA365/XDEFT/IdoSell",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_1_ERP_CAD_SYSTEMY",
+      "price": "5500,00 PLN",
+      "thread_size": 1
+    },
+    {
+      "status": "wygrana",
+      "id": "139121",
+      "title": "Zaprojektowanie i wdrożenie sklepu Premium na platformie Shopify (Nowa marka GARDD™)",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "3929,16 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "138703",
+      "title": "Automatyzacja pozyskiwania partnerów",
+      "client_type": "TYP_E_QUICK_FIX",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "2500,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "136604",
+      "title": "Aktualizacja i optymalizacja sklepów PrestaShop (multistore B2B/B2C)",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "5500,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "136428",
+      "title": "Modyfikacja prostej strony internetowej - wdrożenie systemu płatności",
+      "client_type": "TYP_E_QUICK_FIX",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "400,00 PLN",
+      "thread_size": 4
+    },
+    {
+      "status": "wygrana",
+      "id": "136582",
+      "title": "Stworzenie arkusza kalkulacyjnego do tworzenia kosztorysów",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "1500,00 PLN",
+      "thread_size": 21
+    },
+    {
+      "status": "wygrana",
+      "id": "136480",
+      "title": "Wdrożenie CRM + automatyzacja sprzedaży",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "2200,00 PLN",
+      "thread_size": 5
+    },
+    {
+      "status": "wygrana",
+      "id": "136810",
+      "title": "walka z bossem pokewars",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "400,00 PLN",
+      "thread_size": 23
+    },
+    {
+      "status": "wygrana",
+      "id": "136688",
+      "title": "Wdrożenie envova365, integracja i automatyzacja procesów",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_1_ERP_CAD_SYSTEMY",
+      "price": "7500,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "136640",
+      "title": "Program do wydruku kuponów",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "7500,00 PLN",
+      "thread_size": 1
+    },
+    {
+      "status": "wygrana",
+      "id": "136744",
+      "title": "Zbudowanie strony od zera na podstawie obecnej - WordPress, nowa architektura URL, katalog sprzętu budowlanego",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "3500,00 PLN",
+      "thread_size": 3
+    },
+    {
+      "status": "wygrana",
+      "id": "136769",
+      "title": "Audyt strony + poprawa UX",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "600,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "136612",
+      "title": "Testy ABCDE i integracja z istniejącą platformą edukacyjną",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "6500,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "136607",
+      "title": "Aplikacja mobilna sklepu – wdrożenie DPD Pickup i punktów lojalnościowych.",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "6000,00 PLN",
+      "thread_size": 2
+    },
+    {
+      "status": "wygrana",
+      "id": "135836",
+      "title": "Aplikacja mobilna ogłoszenia",
+      "client_type": "TYP_D_STARTUPOWIEC_MVP",
+      "tech_type": "TECH_4_MOBILE_APPS",
+      "price": "7000,00 PLN",
+      "thread_size": 16
+    },
+    {
+      "status": "wygrana",
+      "id": "136462",
+      "title": "System rezerwacji online dla gabinetu Medycznego — Calendly API, własny front, SMS-OTP, Tpay",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "12100,00 PLN",
+      "thread_size": 4
+    },
+    {
+      "status": "wygrana",
+      "id": "134541",
+      "title": "Bitrix - wdrożenie",
+      "client_type": "TYP_E_QUICK_FIX",
+      "tech_type": "TECH_6_LEGACY_INNE",
+      "price": "2400,00 PLN",
+      "thread_size": 10
+    },
+    {
+      "status": "wygrana",
+      "id": "135049",
+      "title": "Zlecę analizę forensic dysku systemowego Windows (serwer) – podejrzenie sabotażu przez pendrive",
+      "client_type": "TYP_A_BIZNESMEN_NIETECHNICZNY",
+      "tech_type": "TECH_2_AUTOMATYZACJE_BOTY_SCRAPING",
+      "price": "3300,00 PLN",
+      "thread_size": 1
+    },
+    {
+      "status": "wygrana",
+      "id": "134891",
+      "title": "Fix the duplicated events on Shopify/Google & YouTube App",
+      "client_type": "TYP_C_ECOMMERCE_MANAGER",
+      "tech_type": "TECH_3_ECOMMERCE_CMS",
+      "price": "200,00 EUR",
+      "thread_size": 5
+    }
+  ]
+}

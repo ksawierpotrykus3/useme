@@ -1,0 +1,46 @@
+=== KROK 1: SELEKCJA AI #1 (filter_offers) ===
+[SELEKCJA AI] Z 2 ofert zakwalifikowano 2: [('144890', 'Tier A', 'inzynieria', 'msp_erp', 'tech_02', []), ('144817', 'Tier A', 'biznes', 'tech_agnostic', 'tech_16', [])]
+
+============================================================
+START GENEROWANIA #144890: Automatyzacja obiegu faktur i dokumentów kosztowych
+Tier=A | sciezka=inzynieria | typ_klienta=msp_erp | karta_tech=tech_02 | resolved_02a=['tech_02', 'tech_04']
+============================================================
+[CHECKPOINT] Usunięto checkpoint #144890 po pełnym sukcesie łańcucha.
+
+[WYNIK #144890] (347.0s) Wycena: 11000 zł | Dni: 24 | Słów: 208 | Znaków: 1373
+------------------------------------------------------------
+Dzień dobry,
+
+Kluczowe ryzyko w tym procesie to nie sam OCR, a trzy równoległe kanały dokumentów oraz tolerancja groszowa VAT. Faktury krajowe po 1 lutego 2026 są w KSeF jako XML FA(3) - nowe wersje Comarch Optima mają natywny odbiór KSeF z pozycjami, więc dublowanie tego w OCR to palenie budżetu na tokeny. Cyfrowe PDF-y z maila mają warstwę tekstową, więc parsujemy je bezpośrednio, bez kosztu tokenów. Dopiero skany i zdjęcia od pracowników z terenu wymagają preprocessingu obrazu (deskew, kontrast) i modelu Vision z progiem pewności - pola poniżej progu trafiają do kolejki weryfikacji z powiadomieniem.
+
+Walidację matematyczną rozdzielamy od ekstrakcji: LLM zwraca ustrukturyzowany JSON, a deterministyczny skrypt sprawdza sumy netto/VAT/brutto z tolerancją 1–2 gr i deduplikuje po kluczu NIP + numer dokumentu + hash pliku. Całość na self-hosted n8n. Mamy za sobą wdrożenie na wolumenie 3500+ dokumentów z precyzją 99,4%. Wszystkie testy i pierwsze importy wykonujemy na kopii bazy Optimy (Praca Rozproszona XML lub Web API), bez dotykania żywej produkcji.
+
+Czy Państwa Optima pracuje w modelu stacjonarnym (Windows), czy w chmurze Comarch? Od tego zależy wybór kanału integracji. Jaki procent faktur kosztowych to krajowe NIP PL, a jaki dokumenty spoza KSeF?
+
+Wycena: 11000 zł netto, realizacja 24 dni, 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+------------------------------------------------------------
+
+============================================================
+START GENEROWANIA #144817: Stworzenie aplikacji lub bota, który tworzy odpowiedzi na maile firmowe
+Tier=A | sciezka=biznes | typ_klienta=tech_agnostic | karta_tech=tech_16 | resolved_02a=['tech_16']
+============================================================
+[CHECKPOINT] Usunięto checkpoint #144817 po pełnym sukcesie łańcucha.
+
+[WYNIK #144817] (186.0s) Wycena: 15000 zł | Dni: 33 | Słów: 204 | Znaków: 1424
+------------------------------------------------------------
+Dzień dobry,
+
+Wyobraźcie sobie, że każde nowe zapytanie klienta ma już przygotowaną propozycję odpowiedzi na podstawie Waszego FAQ i wcześniejszej korespondencji, a pracownik tylko ją akceptuje albo dopracowuje. Bot korzysta wyłącznie z Waszej wewnętrznej bazy wiedzy, nie szuka niczego w internecie, a gdy brakuje mu danych, wprost prosi o ręczną redakcję, zamiast wymyślać treść.
+
+Zaczynamy od etapu, w którym każda odpowiedź czeka na decyzję pracownika. Dopiero po okresie testów włączamy automatyczną wysyłkę z progiem pewności, poniżej którego bot sam się wycofuje i zgłasza brak danych. Bot uczy się na bieżąco z każdej nowej odpowiedzi pracowników. Wszystkie testy i pierwsze uruchomienia prowadzimy na kopii skrzynki i odseparowanym środowisku, bez ryzyka dla Waszej żywej poczty. Od 2 sierpnia 2026 przepisy wymagają, żeby automatyczna odpowiedź zawierała czytelną informację, że przygotowała ją sztuczna inteligencja, więc wbuduję to od razu, żebyście byli zgodni z prawem.
+
+Ile zapytań dziennie trafia na skrzynkę i w jakiej formie macie teraz FAQ oraz historię maili, w jednym pliku czy rozproszone w folderach?
+
+Wdrożenie wyceniam na 15 000 zł netto, realizacja w 33 dni, z 30-dniową gwarancją rozruchową na własny kod. Stałą miesięczną opiekę, obejmującą utrzymanie serwera, koszty działania bota, monitoring i drobne poprawki, ustalimy po uruchomieniu, gdy poznamy realny wolumen wiadomości.
+
+Ksawier Potrykus
+------------------------------------------------------------
+
+Zapisano pełne wyniki do: C:\Users\Ksawier\.gemini\antigravity\brain\27ae8295-368e-43dc-98d7-6dbdc79d7ca2\scratch\wyniki_live_v4.json

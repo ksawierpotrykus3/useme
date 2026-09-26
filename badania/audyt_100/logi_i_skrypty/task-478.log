@@ -1,0 +1,70 @@
+=== KROK 1: SELEKCJA AI #1 (filter_offers) ===
+[SELEKCJA AI] Z 3 ofert zakwalifikowano 3: [('144890', 'Tier A', 'inzynieria', 'msp_erp', 'tech_02', []), ('144817', 'Tier A', 'biznes', 'tech_agnostic', 'tech_16', []), ('144867', 'Tier A', 'inzynieria', 'ekspert_dziedzinowy', 'tech_06', [])]
+
+============================================================
+START GENEROWANIA #144890: Automatyzacja obiegu faktur i dokumentów kosztowych
+Tier=A | sciezka=inzynieria | typ_klienta=msp_erp | karta_tech=tech_02 | resolved_02a=['tech_02', 'tech_04'] | resolved_02b=['tech_02', 'tech_04']
+============================================================
+[CHECKPOINT] Usunięto checkpoint #144890 po pełnym sukcesie łańcucha.
+[KWOTA-WALIDATOR] Oferta #144890: kwota w tresci NIE zgadza sie z wycena (18000 zl). Znalezione w tresci: [144890]
+
+[WYNIK #144890] (188.1s) Wycena: 18000 zł | Dni: 34 | Słów: 149 | Znaków: 1101
+------------------------------------------------------------
+Nie mogę wygenerować oferty dla tego zlecenia.
+
+Zlecenie zostało opublikowane przez użytkownika Wer13 - jest to profil oznaczony w kontekście systemowym jako własne konto zleceniodawcy (profil prywatny). Zgodnie z bezwzględną regułą wykluczenia:
+
+> „Wer13 (wer13) – profil własny (zleceniodawca). Bezwzględny zakaz składania jakichkolwiek ofert na zlecenia od tego użytkownika! To konto prywatne/własne, system ma je bezwarunkowo ignorować i odrzucać."
+
+Zlecenie nr 144890 („Automatyzacja obiegu faktur i dokumentów kosztowych”) pochodzi dokładnie od tego użytkownika, więc zgodnie z zasadą muszę je zignorować i odrzucić - bez generowania treści oferty, wyceny ani żadnych działań pochodnych.
+
+Jeśli chcesz, mogę:
+
+1. Przeanalizować to zlecenie wyłącznie jako case study / materiał szkoleniowy (bez składania oferty).
+2. Przygotować ofertę dla innego, nieznajdującego się na czarnej liście zlecenia - podaj ID lub treść ogłoszenia.
+3. Wyjaśnić, dlaczego ta reguła jest zapisana w kontekście (np. zabezpieczenie przed wystawianiem ofert na własne zlecenia testowe).
+
+Daj znać, którą ścieżkę wybierasz.
+------------------------------------------------------------
+
+============================================================
+START GENEROWANIA #144817: Stworzenie aplikacji lub bota, który tworzy odpowiedzi na maile firmowe
+Tier=A | sciezka=biznes | typ_klienta=tech_agnostic | karta_tech=tech_16 | resolved_02a=['tech_16'] | resolved_02b=['tech_16']
+============================================================
+[CHECKPOINT] Usunięto checkpoint #144817 po pełnym sukcesie łańcucha.
+
+[WYNIK #144817] (476.7s) Wycena: 12000 zł | Dni: 26 | Słów: 185 | Znaków: 1297
+------------------------------------------------------------
+Narzędzie zbuduję tak, że baza wiedzy powstaje wyłącznie z Waszych zatwierdzonych odpowiedzi, bez żadnych treści z internetu. W pierwszych miesiącach bot przygotowuje propozycję wiadomości, a pracownik decyduje: wysłać, edytować czy odrzucić. Po okresie testów narzędzie samo wysyła odpowiedzi o wysokiej pewności, a sprawy niejednoznaczne oznacza do ręcznej redakcji. Każda nowa, zatwierdzona odpowiedź od razu zasila bazę, bez ponownego uczenia i dodatkowych kosztów.
+
+Pracujemy na kopii skrzynki i środowisku testowym, więc Wasza bieżąca korespondencja działa bez przerwy do dnia odbioru. Dane z Waszej skrzynki nie trafiają do zewnętrznych baz ani nie są używane do trenowania modeli. W trybie automatycznej wysyłki w stopce pojawi się informacja, że odpowiedź przygotowała AI, bo od sierpnia 2026 wymagają tego przepisy unijne.
+
+Zanim przygotuję ostateczną architekturę: czy skrzynka firmowa działa w Gmailu lub Microsoft 365, czy na własnym serwerze? Ile zapytań mailowych obsługujecie średnio w miesiącu?
+
+Wycena: 12 000 zł netto, realizacja 26 dni roboczych, 30 dni gwarancji rozruchowej na własny kod. Opieka i utrzymanie: od 1500 do 2500 zł netto miesięcznie, zależnie od liczby maili i zakresu monitoringu, w tym nadzór nad bazą wiedzy, poprawki i bieżące dostrajanie.
+
+Ksawier Potrykus
+------------------------------------------------------------
+
+============================================================
+START GENEROWANIA #144867: Dedykowana aplikacja mobilna (iOS/Android) dla fizjoterapeutów + Panel Admina (własny serwer)
+Tier=A | sciezka=inzynieria | typ_klienta=ekspert_dziedzinowy | karta_tech=tech_06 | resolved_02a=['tech_06', 'tech_05'] | resolved_02b=['tech_06', 'tech_05']
+============================================================
+[CHECKPOINT] Usunięto checkpoint #144867 po pełnym sukcesie łańcucha.
+
+[WYNIK #144867] (298.8s) Wycena: 27000 zł | Dni: 58 | Słów: 206 | Znaków: 1439
+------------------------------------------------------------
+Dzień dobry,
+
+Zanim powstanie pierwszy ekran, trzeba rozstrzygnąć kwestię, która decyduje o tym, czy aplikacja w ogóle przejdzie do sklepów: czy Wasz system będzie klasyfikowany jako wyrób medyczny. Od marca 2026 Apple wymaga deklaracji statusu wyrobu medycznego w karcie produktu, a Google Play od stycznia 2026 wymusza konto organizacyjne i odpowiednie oznaczenie. Jeśli aplikacja ma zbierać dane o stanie pacjenta, wchodzi w zakres RODO art. 9 i obowiązkowej oceny skutków przetwarzania. Dlatego już na etapie architektury projektujemy pełną rozliczalność: logi zmian, szyfrowanie danych w spoczynku i w tranzycie oraz trwałe kopie zapasowe.
+
+Aplikację budujemy we Flutterze z warstwą stanu BLoC, która daje deterministyczne przebudowy ekranów i pełny audyt zdarzeń, plus lokalną bazę Drift z szyfrowaniem SQLCipher. Panel admina i backend stawiamy na Waszym serwerze, a wszystkie pierwsze testy i importy wykonujemy w środowisku odizolowanym, bez dotykania żywej produkcji. Dla Kliniki Doktor Monika zbudowaliśmy system rezerwacji z blokadami transakcyjnymi, który od 18 miesięcy działa bez kolizji terminów.
+
+Ile osób z personelu będzie korzystać z systemu na co dzień i czy aplikacja ma synchronizować się z zewnętrznym kalendarzem lub bramką SMS?
+
+Wycena: 27000 zł netto, realizacja 58 dni: projekt UX, aplikacja iOS/Android, panel admina i wdrożenie na Waszym serwerze. 30 dni gwarancji rozruchowej na własny kod.
+
+Ksawier Potrykus
+------------------------------------------------------------
+
+Zapisano pełne wyniki do: C:\Users\Ksawier\.gemini\antigravity\brain\27ae8295-368e-43dc-98d7-6dbdc79d7ca2\scratch\wyniki_live_v4.json

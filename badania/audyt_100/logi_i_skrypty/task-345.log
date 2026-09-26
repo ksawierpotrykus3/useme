@@ -1,0 +1,33 @@
+1. Running filter_offers on REAL 144890.json (NO ProfiPiek)...
+[SELEKCJA AI] Z 1 ofert zakwalifikowano 1: [('144890-real', 'Tier A', 'inzynieria', 'msp_erp', [])]
+   -> TIER: A | ŚCIEŻKA: inzynieria | PROFIL: msp_erp | MODYFIKATORY: []
+2. Running generate_proposal (02b -> 02a -> 08)...
+[CHECKPOINT] Znaleziono checkpoint dla #144890-real (ostatni ukończony slot: 01)
+[CHECKPOINT] Wznawiam od slotu 1/4 (pomijam 1 slotów)
+[CHECKPOINT] Usunięto checkpoint #144890-real po pełnym sukcesie łańcucha.
+
+=== GENERATED OFFER ON REAL 144890 (in 272.0s) ===
+Cena: 7000 PLN | Dni: 16
+--------------------------------------------------------------------------------
+Dzień dobry,
+
+W Pana procesie widzę trzy różne strumienie dokumentów, które wymagają odmiennego podejścia technicznego, zamiast pchania wszystkiego przez jeden drogi mechanizm OCR. To od razu przekłada się na koszty miesięczne i na jakość odczytu.
+
+Pierwszy strumień to cyfrowe PDF-y przychodzące mailem. One mają natywną warstwę tekstową, więc parsujemy je bezpośrednio, bez angażowania modelu Vision. Efekt to stuprocentowa dokładność znakowa i zero kosztu tokenów. Drugi strumień to skany papierowe oraz zdjęcia od pracowników w terenie. Tu stosujemy preprocessing obrazu (prostowanie skosu, poprawa kontrastu) i dopiero potem model Vision z progiem pewności dla każdego pola. Trzeci strumień, czyli pliki z Google Drive, obsługujemy przez n8n self-hosted, który pobiera, rename'uje i archiwizuje dokumenty zgodnie z Pana schematem.
+
+Kluczowa jest u Pana bezwarunkowa walidacja matematyczna. Rozdzielam semantykę od matematyki: model Vision wyciąga dane do JSON-a, a sztywny skrypt waliduje sumy netto, VAT i brutto z tolerancją 1–2 groszy. Ta tolerancja wynika wprost z ustawy o VAT, która dopuszcza liczenie podatku od sumy stawek albo od pojedynczych pozycji. Jeśli suma pozycji nie zgadza się z podsumowaniem, dokument trafia do osobnego folderu z powiadomieniem, zamiast blokować cały proces.
+
+Połączenie z Comarch Optima robię przez strukturę Pracy Rozproszonej XML, a nie przez bezpośredni zapis do tabel SQL produkcyjnej bazy. Insert do bazy rozwala numerację rejestrów i narusza gwarancję producenta. Praca Rozproszona XML przenosi bezpiecznie zarówno rejestry zakupu VAT, jak i dokumenty magazynowe WZ, PZ, RW, PW. Dla Pana oznacza to, że obecne fakturowanie działa bez przerwy, a automatyzacja zasila Optimę w tle.
+
+Mam za sobą wdrożenie pipeline'u dokumentowego na wolumenie ponad 3500 dokumentów z precyzją 99,4 procent. Dokładnie ten sam wzorzec: self-hosted n8n, rozdzielenie ekstrakcji od walidacji, obsługa ponowień i logowanie błędów. W Pana przypadku dodaję warstwę dedykowaną dla Optimy, więc pierwszy etap to testy na kopii bazy lub środowisku testowym na próbce realnych dokumentów.
+
+Proponuję również prosty test przedumowny: może Pan podesłać mi prywatnie jeden lub dwa zanonimizowane skany (mogą być z zamazanymi danymi wrażliwymi). W ciągu jednego dnia roboczego odeślę plik JSON z odczytanymi pozycjami i wynikiem walidacji matematycznej. To czysta próbka techniczna na danych testowych, bez przekazywania kodu produkcyjnego i bez przetwarzania Pana bieżących dokumentów firmowych.
+
+Czas realizacji: 16 dni roboczych. Kwota: 7000 zł netto za pełne wdrożenie wraz z testami na rzeczywistych dokumentach i krótkim okresem asysty powdrożeniowej. Po odbiorze udzielam 30-dniowej gwarancji rozruchowej na własny kod.
+
+Osobno, jako potencjalne rozszerzenia w wersji drugiej, mogę zaproponować: po pierwsze, pobieranie faktur ustrukturyzowanych bezpośrednio z KSeF jako XML (Comarch Optima w nowych wersjach ma już natywny odbiór KSeF, więc w n8n nie dublowałbym tego mechanizmu, a jedynie uzupełnił go o automatyczne przypisanie MPK i parowanie z WZ). Po drugie, weryfikację kontrahenta w Białej Liście VAT. Po trzecie, deduplikację po kluczu NIP plus numer dokumentu plus suma kontrolna pliku, co blokuje podwójne wprowadzenie tej samej faktury ze skanera, maila i KSeF. Te elementy wyceniam osobno, jeśli będzie Pan nimi zainteresowany.
+
+Żeby precyzyjnie potwierdzić zakres, potrzebuję od Pana dwóch informacji. Po pierwsze, jaką dokładnie wersję Comarch Optima Pan posiada i czy ma Pan aktywne rozszerzenie Pracy Rozproszonej XML albo dostęp do API. Po drugie, ile dokumentów dziennie średnio spływa i czy synchronizacja ma być jednokierunkowa (tylko zasilanie Optimy), czy dwukierunkowa z blokadą stanów magazynowych.
+
+Ksawier Potrykus
+--------------------------------------------------------------------------------

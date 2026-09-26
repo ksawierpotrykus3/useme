@@ -1,0 +1,81 @@
+================================================================================
+ETAP 1: TEST SELEKCJONERA AI (Dual-Track + Taksonomia Klientów + Modyfikatory)
+================================================================================
+[SELEKCJA AI] Z 4 ofert zakwalifikowano 3: [('144890-test', 'Tier A', 'inzynieria', 'msp_erp', []), ('144817-test', 'Tier A', 'biznes', 'tech_agnostic', []), ('144867-test', 'Tier A', 'inzynieria', 'ekspert_dziedzinowy', [])]
+
+Czas selekcji: 4.7s
+  -> ID: 144890-test | TIER: A | ŚCIEŻKA: inzynieria | PROFIL: msp_erp | MODYFIKATORY: []
+     POWÓD: Automatyzacja OCR+LLM (n8n/Make) dla firmy piekarniczej z integracją Comarch Optima i ProfiPiek. Konkretny stack, realny proces biznesowy, działający biznes MŚP/ERP. Budżet 'do negocjacji' – brak przesłanek Phantom. Wysoka marża, klient decyzyjny.
+  -> ID: 144817-test | TIER: A | ŚCIEŻKA: biznes | PROFIL: tech_agnostic | MODYFIKATORY: []
+     POWÓD: Bot LLM/RAG do automatycznych odpowiedzi mailowych z FAQ i historią korespondencji, z fazą human-in-the-loop. Klient opisuje efekt biznesowy, nie stack – ścieżka biznes. Realny problem operacyjny, wdrożenie i utrzymanie. Tier A (AI/LLM).
+  -> ID: 144867-test | TIER: A | ŚCIEŻKA: inzynieria | PROFIL: ekspert_dziedzinowy | MODYFIKATORY: []
+     POWÓD: Dedykowana aplikacja mobilna iOS/Android dla fizjoterapeutów + panel admina na własnym serwerze. Aplikacje mobilne ZAWSZE Tier A, branża medyczna = profil flagowy (dane wrażliwe, RODO). Budżet do negocjacji, realny projekt.
+
+================================================================================
+ETAP 2: GENEROWANIE OFERTY #144890 (Mystery Shopping - ProfiPiek + Optima)
+================================================================================
+[CHECKPOINT] Znaleziono checkpoint dla #144890-test (ostatni ukończony slot: 01)
+[CHECKPOINT] Wznawiam od slotu 1/4 (pomijam 1 slotów)
+[CHECKPOINT] Usunięto checkpoint #144890-test po pełnym sukcesie łańcucha.
+
+[SUKCES #144890] Czas: 425.6s | Wycena: 8500 PLN | Dni: 19
+--------------------------------------------------------------------------------
+Dzień dobry,
+
+Wasz proces ma dwa krytyczne punkty integracyjne, które zdecydują o powodzeniu wdrożenia: ProfiPiek nie posiada publicznego API i opiera się na bazie MS SQL, natomiast Comarch Optima wymaga albo wykupienia licencji operatora do Web API, albo pracy przez obiekty COM na hoście. To nie są rzeczy, które można „jakoś ogarnąć po drodze” – dlatego zaczynam od ich rozpoznania, zanim cokolwiek zbuduję.
+
+Rekomenduję n8n na własnym serwerze. Przy wolumenie dokumentów typowym dla piekarni koszt Make rósłby z każdą operacją, a n8n po postawieniu na VPS działa bez limitu przetworzeń. Koszt utrzymania serwera to kilka dolarów miesięcznie, plus około godziny pracy serwisowej miesięcznie na aktualizacje i kopie zapasowe. To realnie najtańsza opcja w dłuższej perspektywie.
+
+Architektura procesu, którą proponuję:
+
+Po pierwsze, dokumenty ze skanera, maili i aplikacji mobilnej trafiają do folderu wejściowego. Automatyzacja rozpoznaje typ dokumentu na podstawie zawartości, nie nazwy pliku – faktura kosztowa, zamówienie, dokument dostawy. Dla faktur od polskich kontrahentów, które od lutego 2026 obowiązkowo przechodzą przez KSeF, proponuję pobieranie ich bezpośrednio jako ustrukturyzowany XML z KSeF. To eliminuje potrzebę OCR dla tych dokumentów, daje 100% dokładności i oszczędza koszty tokenów LLM. OCR zostaje dla dokumentów spoza KSeF – faktur zagranicznych, WZ, zamówień papierowych.
+
+Po drugie, ekstrakcja danych. Model Vision wyciąga wyłącznie strukturę – kontrahenta, NIP, kwoty netto i brutto, VAT, pozycje. Matematyka jest walidowana osobnym sztywnym skryptem z tolerancją jednego grosza, ponieważ ustawa VAT dopuszcza liczenie podatku od sumy stawek lub od pojedynczych pozycji i mogą wystąpić legalne różnice zaokrągleń. Deduplikacja działa po kluczu NIP plus numer dokumentu, co blokuje podwójne wprowadzenie tej samej faktury, jeśli trafi jednocześnie ze skanera i maila.
+
+Po trzecie, połączenie z ProfiPiek. Skoro system nie ma publicznego API, integracja odbędzie się przez bezpośrednie zapytania do bazy MS SQL. To wymaga wcześniejszej weryfikacji schematu na kopii bazy – nie na produkcji. Chcę zobaczyć, jak wyglądają tabele faktur kosztowych, kontrahentów i czy istnieje tabela buforowa dla importu. Jeśli ProfiPiek posiada wbudowany mechanizm importu z plików wymiany, wykorzystam go zamiast pisać bezpośrednio do tabel – to bezpieczniejsze przy aktualizacjach systemu.
+
+Po czwarte, Comarch Optima. Tutaj zależy mi na tym, żebyście przed podjęciem decyzji wiedzieli o koszcie ukrytym: integracja przez Web API wymaga wykupienia licencji operatora, czyli dodatkowego stanowiska w Optimie. Alternatywą jest zakup gotowego API partnerskiego, ale to wydatek rzędu kilku tysięcy złotych. Jeśli macie już wykupioną licencję Comarch OCR, możemy ją wykorzystać zamiast budować własny pipeline OCR – to upraszcza architekturę i może obniżyć koszt wdrożenia. Import danych do Optimy proponuję przez oficjalne struktury XML lub obiekty COM, a nie przez ślepy zapis do tabel SQL, który wysypuje się przy każdej aktualizacji systemu.
+
+Wdrożenie przebiega dwuetapowo. Najpierw środowisko testowe na kopii bazy ProfiPiek i Optimy – testujemy na waszych rzeczywistych dokumentach, bez zatrzymywania bieżącego fakturowania. Po waszej akceptacji przenosimy konfigurację na produkcję. Po uruchomieniu dostajecie 30 dni gwarancji rozruchowej na własny kod oraz krótką instrukcję dla pracowników obsługi.
+
+Koszt kompleksowy: 8500 zł netto. Obejmuje zaprojektowanie automatyzacji, postawienie i konfigurację n8n na serwerze, zbudowanie integracji z ProfiPiek i Comarch Optima, wdrożenie, testy na rzeczywistych dokumentach oraz 30-dniową gwarancję rozruchową. Czas realizacji: 19 dni roboczych od przekazania dostępów do środowisk testowych.
+
+Po okresie gwarancyjnym oferuję wsparcie serwisowe w modelu miesięcznym – utrzymanie serwera, monitoring procesu, reakcja na błędy po aktualizacjach Optimy lub ProfiPieku. Aktualizacje Optimy potrafią łamać integracje, dlatego traktuję to jako stały element współpracy, a nie opcję dodatkową.
+
+Zanim wycenię ostatecznie, potrzebuję dwóch informacji: jaką wersję Comarch Optima posiadacie i czy macie wykupioną licencję Sfery lub Web API, oraz czy ProfiPiek posiada jakikolwiek mechanizm importu faktur kosztowych z plików wymiany, czy pozostaje wyłącznie bezpośredni dostęp do bazy SQL.
+
+Ksawier Potrykus
+--------------------------------------------------------------------------------
+
+================================================================================
+ETAP 3: GENEROWANIE OFERTY #144817 (Bot do maili firmowych - ścieżka BIZNES)
+================================================================================
+[CHECKPOINT] Znaleziono checkpoint dla #144817-test (ostatni ukończony slot: 01)
+[CHECKPOINT] Wznawiam od slotu 1/4 (pomijam 1 slotów)
+[CHECKPOINT] Usunięto checkpoint #144817-test po pełnym sukcesie łańcucha.
+
+[SUKCES #144817] Czas: 180.3s | Wycena: 13000 PLN | Dni: 26
+--------------------------------------------------------------------------------
+Dzień dobry,
+
+Odpowiadanie na maile klientów to często powtarzalna praca, która pochłania czas zespołu. Pana opis wskazuje na potrzebę narzędzia, które przejmie część tego obciążenia, ale w bezpieczny sposób: bot uczy się wyłącznie z firmowych materiałów, proponuje odpowiedzi, a pracownik decyduje, czy je wysłać.
+
+Zbudujemy aplikację webową, która połączy się z Państwa skrzynką mailową. Na początku wgra Pan FAQ oraz historię dotychczasowych zapytań i odpowiedzi. Bot przeanalizuje te dane i stworzy wewnętrzną bazę wiedzy. Przy nowym mailu od klienta automatycznie przygotuje propozycję odpowiedzi. Pracownik zobaczy ją w prostym panelu, będzie mógł ją zaakceptować, poprawić lub odrzucić. Każda poprawka sprawi, że bot będzie uczył się lepiej.
+
+Przez pierwsze miesiące narzędzie będzie działać w trybie szkiców. Żadna wiadomość nie zostanie wysłana bez zgody pracownika. Po okresie testów, gdy dokładność będzie wystarczająca, bot zacznie samodzielnie wysyłać odpowiedzi na powtarzalne pytania. Jeśli natrafi na nietypowe zapytanie, poinformuje pracownika i poprosi o ręczną redakcję.
+
+Całość działa w zamkniętym środowisku, bez dostępu do internetu. Dane mailowe i baza wiedzy pozostają wyłącznie w firmie. Dostęp do panelu będzie zabezpieczony i ograniczony do uprawnionych osób.
+
+Wycena projektu to 13 000 zł netto. Czas realizacji to 26 dni roboczych. Po wdrożeniu oferujemy opiekę techniczną w formie miesięcznego abonamentu, którego koszt zależy od liczby obsługiwanych wiadomości i częstotliwości aktualizacji bazy wiedzy. Orientacyjnie jest to od 2500 do 5000 zł miesięcznie. W ramach wdrożenia zapewniamy 30-dniową gwarancję rozruchową na nasz kod.
+
+Jeśli chce Pan zobaczyć, jak bot radzi sobie z przykładowym mailem, możemy przygotować krótką demonstrację na podstawie 2-3 przykładowych zapytań i fragmentu FAQ. Wystarczą do tego dane testowe, bez angażowania Państwa prawdziwych skrzynek.
+
+Aby dokładniej dopasować rozwiązanie, proszę o odpowiedź: w jakim formacie przechowują Państwo obecnie FAQ i historię maili (np. pliki Excel, PDF, eksport z programu pocztowego) oraz czy może Pan podesłać na priv jeden przykładowy, zanonimizowany wątek mailowy?
+
+Pracujemy w tandemie dwóch inżynierów, co zapewnia podwójną kontrolę jakości i spokojny przebieg wdrożenia.
+
+Z poważaniem,
+Ksawier Potrykus
+--------------------------------------------------------------------------------
+
+Zapisano pełne wyniki do: C:\Users\Ksawier\.gemini\antigravity\brain\27ae8295-368e-43dc-98d7-6dbdc79d7ca2\scratch\wyniki_testu_live.json

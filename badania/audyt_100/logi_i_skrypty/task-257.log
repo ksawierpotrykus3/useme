@@ -1,0 +1,554 @@
+[OFFICIAL API] Key loaded from C:\Users\Ksawier\Pictures\Screenshots\Projekty_autorskie\deepseek-proxy\data\deepseek_api_key.txt
+[POOL RESET] Cały pool był bezczynny przez 678.5 min (>= 30 min) — zresetowano liczniki żądań.
+[CLOUD SHIELD] Aktualny tryb routingu: DIRECT (Pancerna Tarcza 2.0, Global IP Pacer)
+[STARTUP] Removed oversized auto-backup
+[STARTUP] Szybka weryfikacja tokenow 11 kont (GET /users/current)...
+Active accounts: 11 logged in (slots: [0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13]). Ready for requests.
+=================================================================
+  DEEPSEEK DUAL-PORT PROXY WYSTARTOWAL POMYSLNIE:
+  [1] http://127.0.0.1:4570  -> KODOWANIE & DEV (Trae / Cursor - wszystkie projekty)
+  [2] http://127.0.0.1:4571  -> CZYSTY PASSTHROUGH (Standalone skrypty / boty)
+=================================================================
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro-nothink"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 2000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=11352 chars: '--- KRYTERIA SELEKCJI ---\nSelekcja zleceń na platformach freelancerskich odbywa się przed jakimkolwiek pisaniem ofert. N'
+[DEBUG] no state for conv_key=bbeea01419d6944a02108931...
+[ROUTER] Model 'deepseek-v4-pro-nothink' -> model_type='default', thinking=False, search=False, vision=False
+[SLOT BALANCING] Candidates: [S0:idle42280s, S6:idle42240s, S8:idle42194s, S5:idle42154s, S10:idle42115s, S7:idle42072s, S13:idle42021s, S11:idle41994s, S9:idle41960s, S1:idle41778s, S12:idle40893s] -> Picked Slot 0 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 0 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42280.3s
+[POOL STATUS] S0:BUSY[SUB](1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:IDLE(0x) | S7:IDLE(0x) | S8:IDLE(0x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=bbeea01419d6944a02108931... acquired account_idx=0 (preferred=None)
+[DEBUG] _ensure_slot(slot=0) called, current in_progress=False
+[DEBUG] ap.is_valid(0) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=False, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[TOOLS] none available
+[CREATE SESSION] account=0 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "e5bcfe66-d174-4bca-afbf-af5bbdd665dc", "seq_id": 212574858, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411658.235, "updated_at": 1790411658.235}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[CONV] Pruned 1 old entries, keeping 500
+[NEW SESSION] account=0 e5bcfe66-d174-4bca-afbf-af5bbdd665dc prompt=16940 chars msgs=2 (1.0s)
+[TIMING] PoW+solve+stream setup...
+[POW] account=0 solved in 0.1s (difficulty=144000)
+[POW] prefetched for account=0 (expires in 298s)
+[TTFT] Slot 0: pierwsze dane po 0.63s (średnia=0.63s, próbki=1)
+[TIMING] Stream ready (2.1s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"updated_at":1790411659.665215}
+[RAW] {"v":{"response":{"message_id":2,"parent_id":1,"model":"","role":"ASSISTANT","thinking_enabled":false,"ban_edit":false,"ban_regenerate":false,"status":"WIP","incomplete_message":null,"accumulated_toke
+[TURN] FINAL outcome=complete finished=True retries=0 content=1620 chars thinking=0 chars resp=2
+[SUBAGENT] subagent_1 done in 3.6s
+[TIMING] Stream done (4.7s, 0 tools, wm=519cb5143180...)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=38669 chars: '--- kontekst/mechanika_wyceniania.md ---\nPlik zawiera kompletną mechanikę wyceniania zleceń. AI podąża za algorytmem kro'
+[DEBUG] no state for conv_key=16e3d03007a262a3719d9d9a...
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[SLOT RELEASED] Slot 0 | duration=4.6s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:IDLE(0x) | S7:IDLE(0x) | S8:IDLE(0x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[SLOT BALANCING] Candidates: [S6:idle42245s, S8:idle42198s, S5:idle42159s, S10:idle42119s, S7:idle42077s, S13:idle42026s, S11:idle41998s, S9:idle41964s, S1:idle41783s, S12:idle40898s, S0:idle0s] -> Picked Slot 6 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 6 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42244.7s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:BUSY[SUB](1x) | S7:IDLE(0x) | S8:IDLE(0x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=16e3d03007a262a3719d9d9a... acquired account_idx=6 (preferred=None)
+[DEBUG] _ensure_slot(slot=6) called, current in_progress=False
+[DEBUG] ap.is_valid(6) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[TOOLS] none available
+[CREATE SESSION] account=6 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "e7ab7b60-86ad-4f92-84f6-0f0e9653afca", "seq_id": 212574862, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411662.483, "updated_at": 1790411662.483}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[CONV] Pruned 1 old entries, keeping 500
+[NEW SESSION] account=6 e7ab7b60-86ad-4f92-84f6-0f0e9653afca prompt=43065 chars msgs=2 (0.5s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 43065 -> 15172 chars)
+[VISION] File file-63a926b4-aad0-4176-a457-e57cb1cf967e parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (29366 bytes) -> file-63a926b4-aad0-4176-a457-e57cb1cf967e
+[POW] account=6 solved in 0.0s (difficulty=144000)
+[TTFT] Slot 6: pierwsze dane po 0.53s (średnia=0.58s, próbki=2)
+[TIMING] Stream ready (4.3s, resp_id=2)
+[POW] prefetched for account=6 (expires in 298s)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-63a926b4-aad0-4176-a457-e57cb1cf967e","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":29366,"model_kind":"VISION","token_usage":9770,"error_code":null,"i
+[RAW] {"updated_at":1790411666.8939998}
+[TURN] FINAL outcome=complete finished=True retries=0 content=1480 chars thinking=22363 chars resp=2
+[SUBAGENT] subagent_2 done in 30.6s
+[TIMING] Stream done (34.0s, 0 tools, wm=50478f1b9a9b...)
+[SLOT RELEASED] Slot 6 | duration=34.0s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(0x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=46117 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] no state for conv_key=c78c8dd41fd6445e3acf6ad1...
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[SLOT BALANCING] Candidates: [S8:idle42251s, S5:idle42212s, S10:idle42172s, S7:idle42130s, S13:idle42079s, S11:idle42051s, S9:idle42017s, S1:idle41836s, S12:idle40951s, S0:idle53s, S6:idle19s] -> Picked Slot 8 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 8 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42251.5s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:BUSY[SUB](1x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=c78c8dd41fd6445e3acf6ad1... acquired account_idx=8 (preferred=None)
+[DEBUG] _ensure_slot(slot=8) called, current in_progress=False
+[DEBUG] ap.is_valid(8) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[TOOLS] none available
+[CREATE SESSION] account=8 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "2290164c-d94c-463d-b01d-13037dcbfcdb", "seq_id": 212574915, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411715.894, "updated_at": 1790411715.894}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[CONV] Pruned 1 old entries, keeping 500
+[NEW SESSION] account=8 2290164c-d94c-463d-b01d-13037dcbfcdb prompt=55399 chars msgs=2 (0.9s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 55399 -> 15172 chars)
+[VISION] File file-ae4c7267-9984-4e1c-93ae-8a7d3df2ebf8 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (42705 bytes) -> file-ae4c7267-9984-4e1c-93ae-8a7d3df2ebf8
+[POW] account=8 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=8 (expires in 298s)
+[TTFT] Slot 8: pierwsze dane po 0.56s (średnia=0.57s, próbki=3)
+[TIMING] Stream ready (5.0s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-ae4c7267-9984-4e1c-93ae-8a7d3df2ebf8","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":42705,"model_kind":"VISION","token_usage":13895,"error_code":null,"
+[RAW] {"updated_at":1790411721.193326}
+[TURN] FINAL outcome=complete finished=True retries=0 content=4706 chars thinking=7412 chars resp=2
+[SUBAGENT] subagent_3 done in 20.3s
+[TIMING] Stream done (24.2s, 0 tools, wm=d769440f9a87...)
+[SLOT RELEASED] Slot 8 | duration=24.2s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(0x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=54049 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] no state for conv_key=12d335f4fa227bc915163b4c...
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[SLOT BALANCING] Candidates: [S5:idle42255s, S10:idle42215s, S7:idle42172s, S13:idle42121s, S11:idle42094s, S9:idle42060s, S1:idle41878s, S12:idle40994s, S0:idle96s, S6:idle62s, S8:idle18s] -> Picked Slot 5 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 5 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42254.5s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:BUSY[SUB](1x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=12d335f4fa227bc915163b4c... acquired account_idx=5 (preferred=None)
+[DEBUG] _ensure_slot(slot=5) called, current in_progress=False
+[DEBUG] ap.is_valid(5) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[TOOLS] none available
+[CLOUD SHIELD] Aktualny tryb routingu: DIRECT (Pancerna Tarcza 2.0, Global IP Pacer)
+[CREATE SESSION] account=5 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "8cb198b5-143f-4692-ad43-a927307d21e5", "seq_id": 212574958, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411758.444, "updated_at": 1790411758.444}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[CONV] Pruned 1 old entries, keeping 500
+[NEW SESSION] account=5 8cb198b5-143f-4692-ad43-a927307d21e5 prompt=62798 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 62798 -> 15172 chars)
+[VISION] File file-7109f66d-a6a4-4eb4-bf72-740362031aeb parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (49753 bytes) -> file-7109f66d-a6a4-4eb4-bf72-740362031aeb
+[POW] account=5 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=5 (expires in 298s)
+[TTFT] Slot 5: pierwsze dane po 0.55s (średnia=0.57s, próbki=4)
+[TIMING] Stream ready (5.0s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-7109f66d-a6a4-4eb4-bf72-740362031aeb","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":49753,"model_kind":"VISION","token_usage":16596,"error_code":null,"
+[RAW] {"updated_at":1790411763.367523}
+[TURN] FINAL outcome=complete finished=True retries=0 content=360 chars thinking=11330 chars resp=2
+[SUBAGENT] subagent_4 done in 18.3s
+[TIMING] Stream done (22.4s, 0 tools, wm=e72467615204...)
+[SLOT RELEASED] Slot 5 | duration=22.4s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(0x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=38983 chars: '--- kontekst/mechanika_wyceniania.md ---\nPlik zawiera kompletną mechanikę wyceniania zleceń. AI podąża za algorytmem kro'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 6, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S10:idle42259s, S7:idle42217s, S13:idle42166s, S11:idle42138s, S9:idle42104s, S1:idle41923s, S12:idle41038s, S0:idle140s, S6:idle106s, S8:idle63s, S5:idle22s] -> Picked Slot 10 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 10 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42259.3s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:BUSY[SUB](1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=16e3d03007a262a3719d9d9a... acquired account_idx=10 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 6 to 10 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=10) called, current in_progress=False
+[DEBUG] ap.is_valid(10) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=16e3d03007a262a3719d9d9a... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=10 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "85a3ba9c-65ad-4e93-8798-e6b7def09999", "seq_id": 212575002, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411802.911, "updated_at": 1790411802.911}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=10 85a3ba9c-65ad-4e93-8798-e6b7def09999 prompt=43379 chars msgs=2 (1.0s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 43379 -> 15172 chars)
+[VISION] File file-73184ccc-11da-4e3d-be64-88e337115632 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (29692 bytes) -> file-73184ccc-11da-4e3d-be64-88e337115632
+[POW] account=10 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=10 (expires in 298s)
+[TTFT] Slot 10: pierwsze dane po 0.62s (średnia=0.58s, próbki=5)
+[TIMING] Stream ready (4.8s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-73184ccc-11da-4e3d-be64-88e337115632","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":29692,"model_kind":"VISION","token_usage":9892,"error_code":null,"i
+[RAW] {"updated_at":1790411807.02108}
+[TURN] FINAL outcome=complete finished=True retries=0 content=1363 chars thinking=21123 chars resp=2
+[SUBAGENT] subagent_5 done in 27.8s
+[TIMING] Stream done (31.6s, 0 tools, wm=3f675ad69852...)
+[SLOT RELEASED] Slot 10 | duration=31.6s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(0x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=46341 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 8, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S7:idle42269s, S13:idle42218s, S11:idle42190s, S9:idle42157s, S1:idle41975s, S12:idle41090s, S0:idle192s, S6:idle158s, S8:idle115s, S5:idle74s, S10:idle21s] -> Picked Slot 7 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 7 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42268.8s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:BUSY[SUB](1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[ACCOUNT] conv_key=c78c8dd41fd6445e3acf6ad1... acquired account_idx=7 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 8 to 7 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=7) called, current in_progress=False
+[DEBUG] ap.is_valid(7) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=c78c8dd41fd6445e3acf6ad1... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=7 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "eeed4902-8a32-4476-8368-37d7cecddf96", "seq_id": 212575055, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411855.012, "updated_at": 1790411855.012}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=7 eeed4902-8a32-4476-8368-37d7cecddf96 prompt=55623 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 55623 -> 15172 chars)
+[VISION] File file-a6378cb5-f383-4812-893e-fb600a1f064f parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (42936 bytes) -> file-a6378cb5-f383-4812-893e-fb600a1f064f
+[POW] account=7 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=7 (expires in 298s)
+[TTFT] Slot 7: pierwsze dane po 0.54s (średnia=0.57s, próbki=6)
+[TIMING] Stream ready (5.1s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-a6378cb5-f383-4812-893e-fb600a1f064f","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":42936,"model_kind":"VISION","token_usage":13990,"error_code":null,"
+[RAW] {"updated_at":1790411859.7604449}
+[TURN] FINAL outcome=complete finished=True retries=0 content=3594 chars thinking=3594 chars resp=2
+[SUBAGENT] subagent_6 done in 10.4s
+[TIMING] Stream done (14.5s, 0 tools, wm=a5927ac898b0...)
+[SLOT RELEASED] Slot 7 | duration=14.5s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(0x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=52821 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 5, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S13:idle42255s, S11:idle42227s, S9:idle42193s, S1:idle42012s, S12:idle41127s, S0:idle229s, S6:idle195s, S8:idle152s, S5:idle111s, S10:idle57s, S7:idle22s] -> Picked Slot 13 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 13 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42254.5s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:BUSY[SUB](1x)
+[ACCOUNT] conv_key=12d335f4fa227bc915163b4c... acquired account_idx=13 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 5 to 13 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=13) called, current in_progress=False
+[DEBUG] ap.is_valid(13) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=12d335f4fa227bc915163b4c... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=13 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "1fb975f7-9788-4037-b2ea-f3bd4b58a570", "seq_id": 212575091, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411891.752, "updated_at": 1790411891.752}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=13 1fb975f7-9788-4037-b2ea-f3bd4b58a570 prompt=61570 chars msgs=2 (0.9s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 61570 -> 15172 chars)
+[VISION] File file-f7945b7d-ead3-41ed-8c7a-cf36eb32a448 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (48472 bytes) -> file-f7945b7d-ead3-41ed-8c7a-cf36eb32a448
+[POW] account=13 solved in 0.1s (difficulty=144000)
+[POW] prefetched for account=13 (expires in 298s)
+[TTFT] Slot 13: pierwsze dane po 0.56s (średnia=0.57s, próbki=7)
+[TIMING] Stream ready (6.9s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-f7945b7d-ead3-41ed-8c7a-cf36eb32a448","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":48472,"model_kind":"VISION","token_usage":16200,"error_code":null,"
+[RAW] {"updated_at":1790411898.3215358}
+[TURN] FINAL outcome=complete finished=True retries=0 content=1833 chars thinking=20806 chars resp=2
+[SUBAGENT] subagent_7 done in 29.7s
+[TIMING] Stream done (35.2s, 0 tools, wm=c679a19afc56...)
+[SLOT RELEASED] Slot 13 | duration=35.2s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(0x) | S12:IDLE(0x) | S13:IDLE(1x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=40107 chars: '--- kontekst/mechanika_wyceniania.md ---\nPlik zawiera kompletną mechanikę wyceniania zleceń. AI podąża za algorytmem kro'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 10, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S11:idle42283s, S9:idle42250s, S1:idle42068s, S12:idle41183s, S0:idle285s, S6:idle251s, S8:idle208s, S5:idle167s, S10:idle114s, S7:idle79s, S13:idle21s] -> Picked Slot 11 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 11 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42283.4s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:BUSY[SUB](1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=16e3d03007a262a3719d9d9a... acquired account_idx=11 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 10 to 11 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=11) called, current in_progress=False
+[DEBUG] ap.is_valid(11) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=16e3d03007a262a3719d9d9a... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=11 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "ed40ef65-4a09-45dd-9344-21ea640a98a7", "seq_id": 212575148, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411948.024, "updated_at": 1790411948.024}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=11 ed40ef65-4a09-45dd-9344-21ea640a98a7 prompt=44503 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 44503 -> 15172 chars)
+[VISION] File file-6ea60049-8f92-42d8-9d88-e68c02211fbb parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (30878 bytes) -> file-6ea60049-8f92-42d8-9d88-e68c02211fbb
+[POW] account=11 solved in 0.0s (difficulty=144000)
+[TTFT] Slot 11: pierwsze dane po 0.51s (średnia=0.56s, próbki=8)
+[TIMING] Stream ready (5.7s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-6ea60049-8f92-42d8-9d88-e68c02211fbb","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":30878,"model_kind":"VISION","token_usage":10286,"error_code":null,"
+[RAW] {"updated_at":1790411953.4881768}
+[POW] prefetched for account=11 (expires in 298s)
+[TURN] FINAL outcome=complete finished=True retries=0 content=1516 chars thinking=16898 chars resp=2
+[SUBAGENT] subagent_8 done in 26.4s
+[TIMING] Stream done (30.4s, 0 tools, wm=612a2513ba65...)
+[SLOT RELEASED] Slot 11 | duration=30.3s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(0x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=46769 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 7, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S9:idle42299s, S1:idle42117s, S12:idle41232s, S0:idle335s, S6:idle301s, S8:idle257s, S5:idle216s, S10:idle163s, S7:idle128s, S13:idle70s, S11:idle19s] -> Picked Slot 9 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 9 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42298.9s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:BUSY[SUB](1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=c78c8dd41fd6445e3acf6ad1... acquired account_idx=9 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 7 to 9 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=9) called, current in_progress=False
+[DEBUG] ap.is_valid(9) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=c78c8dd41fd6445e3acf6ad1... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=9 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "9c42cfc5-8f75-4930-af17-7ac36f0a3c7c", "seq_id": 212575197, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790411997.311, "updated_at": 1790411997.311}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=9 9c42cfc5-8f75-4930-af17-7ac36f0a3c7c prompt=56051 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 56051 -> 15172 chars)
+[VISION] File file-91c02a84-367d-4f62-837c-b62676dd8b58 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (43404 bytes) -> file-91c02a84-367d-4f62-837c-b62676dd8b58
+[POW] account=9 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=9 (expires in 298s)
+[TTFT] Slot 9: pierwsze dane po 0.56s (średnia=0.56s, próbki=9)
+[TIMING] Stream ready (5.0s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-91c02a84-367d-4f62-837c-b62676dd8b58","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":43404,"model_kind":"VISION","token_usage":14142,"error_code":null,"
+[RAW] {"updated_at":1790412002.1801908}
+[TURN] FINAL outcome=complete finished=True retries=0 content=4357 chars thinking=2463 chars resp=2
+[SUBAGENT] subagent_9 done in 12.7s
+[TIMING] Stream done (16.6s, 0 tools, wm=7b9d4255bdcb...)
+[SLOT RELEASED] Slot 9 | duration=16.6s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(0x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=53708 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 13, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S1:idle42155s, S12:idle41271s, S0:idle373s, S6:idle339s, S8:idle295s, S5:idle255s, S10:idle201s, S7:idle166s, S13:idle108s, S11:idle57s, S9:idle22s] -> Picked Slot 1 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 1 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=42155.3s
+[POOL STATUS] S0:IDLE(1x) | S1:BUSY[SUB](1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=12d335f4fa227bc915163b4c... acquired account_idx=1 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 13 to 1 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=1) called, current in_progress=False
+[DEBUG] ap.is_valid(1) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=12d335f4fa227bc915163b4c... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=1 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "490c59da-1fa1-4db2-8420-d3c862b7e20c", "seq_id": 212575235, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790412035.451, "updated_at": 1790412035.451}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=1 490c59da-1fa1-4db2-8420-d3c862b7e20c prompt=62457 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 62457 -> 15172 chars)
+[VISION] File file-769106cf-cf81-42b4-9c03-7c2e1f830267 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (49436 bytes) -> file-769106cf-cf81-42b4-9c03-7c2e1f830267
+[POW] account=1 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=1 (expires in 298s)
+[TTFT] Slot 1: pierwsze dane po 0.53s (średnia=0.56s, próbki=10)
+[TIMING] Stream ready (4.8s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-769106cf-cf81-42b4-9c03-7c2e1f830267","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":49436,"model_kind":"VISION","token_usage":16478,"error_code":null,"
+[RAW] {"updated_at":1790412040.133127}
+[TURN] FINAL outcome=complete finished=True retries=0 content=1010 chars thinking=38667 chars resp=2
+[SUBAGENT CB] subagent_10 timeout: 49.1s > 45s (failures=1)
+[TIMING] Stream done (52.9s, 0 tools, wm=d6bf841bb821...)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=21808 chars: '--- kontekst/mechanika_wyceniania.md ---\nPlik zawiera kompletną mechanikę wyceniania zleceń. AI podąża za algorytmem kro'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 11, wybieram najdłużej nieużywane (rotacja)
+[SLOT RELEASED] Slot 1 | duration=52.9s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(0x) | S13:IDLE(1x)
+[SLOT BALANCING] Candidates: [S12:idle41324s, S0:idle426s, S6:idle392s, S8:idle348s, S5:idle308s, S10:idle254s, S7:idle219s, S13:idle161s, S11:idle110s, S9:idle74s, S1:idle0s] -> Picked Slot 12 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 12 (NEW) | role=SUBAGENT | Stats: total=1 (main=0, sub=1) | idle=41323.5s
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:BUSY[SUB](1x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=16e3d03007a262a3719d9d9a... acquired account_idx=12 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 11 to 12 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=12) called, current in_progress=False
+[DEBUG] ap.is_valid(12) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=16e3d03007a262a3719d9d9a... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CLOUD SHIELD] Aktualny tryb routingu: DIRECT (Pancerna Tarcza 2.0, Global IP Pacer)
+[CREATE SESSION] account=12 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "0bc59df2-eb90-4d2c-9bcf-7f0a171ded17", "seq_id": 212575288, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790412088.431, "updated_at": 1790412088.431}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=12 0bc59df2-eb90-4d2c-9bcf-7f0a171ded17 prompt=26204 chars msgs=2 (1.0s)
+[TIMING] PoW+solve+stream setup...
+[POW] account=12 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=12 (expires in 298s)
+[TTFT] Slot 12: pierwsze dane po 0.59s (średnia=0.56s, próbki=11)
+[TIMING] Stream ready (2.0s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"updated_at":1790412089.802104}
+[RAW] {"v":{"response":{"message_id":2,"parent_id":1,"model":"","role":"ASSISTANT","thinking_enabled":true,"ban_edit":false,"ban_regenerate":false,"status":"WIP","incomplete_message":null,"accumulated_token
+[TURN] FINAL outcome=complete finished=True retries=0 content=960 chars thinking=18788 chars resp=2
+[SUBAGENT] subagent_11 done in 26.6s
+[TIMING] Stream done (27.6s, 0 tools, wm=7094037e7fb0...)
+[SLOT RELEASED] Slot 12 | duration=27.5s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(1x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(1x) | S13:IDLE(1x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=27766 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 9, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S0:idle473s, S6:idle439s, S8:idle396s, S5:idle355s, S10:idle301s, S7:idle266s, S13:idle209s, S11:idle157s, S9:idle122s, S1:idle47s, S12:idle20s] -> Picked Slot 0 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 0 (NEW) | role=SUBAGENT | Stats: total=2 (main=0, sub=2) | idle=472.9s
+[POOL STATUS] S0:BUSY[SUB](2x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(1x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=c78c8dd41fd6445e3acf6ad1... acquired account_idx=0 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 9 to 0 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=0) called, current in_progress=False
+[DEBUG] ap.is_valid(0) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=c78c8dd41fd6445e3acf6ad1... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=0 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "f80eba56-4742-4ba5-a433-f5e2620c9139", "seq_id": 212575335, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790412135.641, "updated_at": 1790412135.641}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=0 f80eba56-4742-4ba5-a433-f5e2620c9139 prompt=37048 chars msgs=2 (0.9s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 37048 -> 15172 chars)
+[VISION] File file-7e31078d-8ca8-4664-bb7d-74ec3e21eef4 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (23537 bytes) -> file-7e31078d-8ca8-4664-bb7d-74ec3e21eef4
+[POW] account=0 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=0 (expires in 298s)
+[TTFT] Slot 0: pierwsze dane po 0.54s (średnia=0.56s, próbki=12)
+[TIMING] Stream ready (4.9s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-7e31078d-8ca8-4664-bb7d-74ec3e21eef4","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":23537,"model_kind":"VISION","token_usage":7477,"error_code":null,"i
+[RAW] {"updated_at":1790412140.0177898}
+[TURN] FINAL outcome=complete finished=True retries=0 content=2308 chars thinking=9731 chars resp=2
+[SUBAGENT] subagent_12 done in 20.2s
+[TIMING] Stream done (24.1s, 0 tools, wm=ff1272098d4b...)
+[SLOT RELEASED] Slot 0 | duration=24.1s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(2x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(1x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(1x) | S13:IDLE(1x)
+[RAW REQUEST BODY]
+  fields: ['model', 'messages', 'temperature', 'max_tokens', 'stream']
+  model: "deepseek-v4-pro"
+  messages: 2 items
+  temperature: 0.7
+  max_tokens: 3000
+  stream: True
+[REQUEST] port=4571 roles={'system', 'user'} tools=0 msgs=2 [CLEAN]
+  [user]  content=33300 chars: '--- kontekst/jak_pisac_oferty.md ---\n# Zasady Tworzenia Ofert na Useme (Zasada Negatywna: Zero Wzorców)\n\nDokument określ'
+[DEBUG] state: parent_id=2 msgs_len=2 req_len=2 resume_cond=parent_is_not_none len_not_ok
+[ROUTER] Model 'deepseek-v4-pro' -> model_type='default', thinking=True, search=False, vision=False
+[NEW CHAT] No assistant messages in request -> Forcing fresh DeepSeek session
+[NEW CHAT PIN] nowa konwersacja -> nie przypinam konta 1, wybieram najdłużej nieużywane (rotacja)
+[SLOT BALANCING] Candidates: [S6:idle483s, S8:idle440s, S5:idle399s, S10:idle345s, S7:idle310s, S13:idle253s, S11:idle202s, S9:idle166s, S1:idle92s, S12:idle64s, S0:idle20s] -> Picked Slot 6 (LRU rotation) | role=SUBAGENT
+[SLOT ACQUIRED] Slot 6 (NEW) | role=SUBAGENT | Stats: total=2 (main=0, sub=2) | idle=483.1s
+[POOL STATUS] S0:IDLE(2x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:BUSY[SUB](2x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(1x) | S13:IDLE(1x)
+[ACCOUNT] conv_key=12d335f4fa227bc915163b4c... acquired account_idx=6 (preferred=None)
+[ACCOUNT CHANGE] Account switched from 1 to 6 -> forcing fresh session
+[DEBUG] _ensure_slot(slot=6) called, current in_progress=False
+[DEBUG] ap.is_valid(6) = True
+[ROUTER] Final config: search_enabled=False, thinking_enabled=True, tools=0
+[HYBRID] Subagent detected (2 msgs) -> routing to web chat
+[NEW TURN] conv_key=12d335f4fa227bc915163b4c... old_msgs=2 cur_msgs=2
+[TOOLS] none available
+[CREATE SESSION] account=6 status=200 response={"code": 0, "msg": "", "data": {"biz_code": 0, "biz_msg": "", "biz_data": {"chat_session": {"id": "90afc5ec-17d1-43f5-a2f0-577668db322d", "seq_id": 212575379, "agent": "chat", "model_type": "default", "title": null, "title_type": "WIP", "version": 0, "current_message_id": null, "pinned": false, "inserted_at": 1790412179.901, "updated_at": 1790412179.901}, "ttl_seconds": 259200}}}
+[PORT 4571 - CLEAN PASSTHROUGH] Pure passthrough mode (no tools). Zero prompt injection. Request passed 1:1.
+[NEW SESSION] account=6 90afc5ec-17d1-43f5-a2f0-577668db322d prompt=42049 chars msgs=2 (0.8s)
+[TIMING] PoW+solve+stream setup...
+[ATTACHMENTS] Extracted 1 oversized block(s) into native documents (prompt 42049 -> 15172 chars)
+[VISION] File file-9cece5eb-8bae-4c74-9370-10b29096c652 parsed successfully (SUCCESS)
+[ATTACHMENTS] Uploaded context_payload.md (28154 bytes) -> file-9cece5eb-8bae-4c74-9370-10b29096c652
+[POW] account=6 solved in 0.0s (difficulty=144000)
+[POW] prefetched for account=6 (expires in 298s)
+[TTFT] Slot 6: pierwsze dane po 0.54s (średnia=0.56s, próbki=13)
+[TIMING] Stream ready (3.3s, resp_id=2)
+[RAW] {"request_message_id":1,"response_message_id":2,"model_type":"default"}
+[RAW] {"id":"file-9cece5eb-8bae-4c74-9370-10b29096c652","status":"SUCCESS","file_name":"context_payload.md","from_share":false,"file_size":28154,"model_kind":"VISION","token_usage":9407,"error_code":null,"i
+[RAW] {"updated_at":1790412182.6836479}
+[TURN] FINAL outcome=complete finished=True retries=0 content=4 chars thinking=52849 chars resp=2
+[SUBAGENT CB] subagent_13 timeout: 63.6s > 45s (failures=1)
+[TIMING] Stream done (65.9s, 0 tools, wm=4b748117f204...)
+[SLOT RELEASED] Slot 6 | duration=65.9s | status=OK | pool: 11/11 free
+[POOL STATUS] S0:IDLE(2x) | S1:IDLE(1x) | S2:IDLE(0x) | S3:IDLE(0x) | S4:IDLE(0x) | S5:IDLE(1x) | S6:IDLE(2x) | S7:IDLE(1x) | S8:IDLE(1x) | S9:IDLE(1x) | S10:IDLE(1x) | S11:IDLE(1x) | S12:IDLE(1x) | S13:IDLE(1x)
