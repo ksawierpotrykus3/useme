@@ -44,8 +44,8 @@ Każdy przyznany punkt (`+pkt`) i każdy odjęty punkt (`-pkt`) MUSI mieć dokł
    - Dokładnie jedna kwota netto (zero widełek „od X do Y zł"), zgodna z `[WYNIK_KONCOWY]`, a wszystkie standardy bezpieczeństwa danej domeny wchodzą w skład wyceny bazowej (brak upsellingu do „wersji drugiej").
 
 ### WYMIAR E: Rytm, Zwięzłość i Czystość Językowa (0–15 pkt)
-1. **Gęstość i limit słów (0–8 pkt):**
-   - Małe zlecenia (`< 3 000 zł`): `75–110 słów`. Średnie i duże zlecenia (`≥ 3 000 zł`): `130–205 słów`. Krótkie, treściwe akapity.
+1. **Gęstość i objętość adaptacyjna (0–8 pkt):**
+   - Małe zlecenia (`< 3 000 zł`): `120–220 słów`. Średnie i duże zlecenia inżynieryjne (`≥ 3 000 zł`): `350–600 słów`. Wyczerpujący, partnerski list inżynierski wyjaśniający architekturę, 2 etapy płatne po odbiorze i micro-przykłady bez lania wody.
 2. **Naturalny styl człowieka i higiena formatowania (0–7 pkt):**
    - Zero słów-wytrychów AI (*kompleksowe rozwiązanie, synergia, zoptymalizować, najwyższa jakość, dedykowany zespół*), zero długich pauz (`—`), zero gwiazdek/tabel Markdown, 100% zgodność języka z ogłoszeniem (PL/EN), naturalna proza inżynierska bez sztucznego upychania 10+ akronimów w jednym akapicie, imienny podpis na końcu.
 
@@ -55,12 +55,12 @@ Każdy przyznany punkt (`+pkt`) i każdy odjęty punkt (`-pkt`) MUSI mieć dokł
 Jeśli w ofercie wystąpi którykolwiek z poniższych błędów, **MUSISZ odjąć wskazane punkty** i wpisać je w `za_co_odjeto`:
 - **`-20 pkt` [PUSTY FRAZES O DOŚWIADCZENIU]:** Zdanie typu *„Mamy doświadczenie w łączeniu platform..."*, *„Zrealizowaliśmy wiele podobnych projektów"* bez żadnej konkretnej liczby, nazwy wdrożenia ani faktu inżynierskiego.
 - **`-20 pkt` [UPSELLING WERSJI DRUGIEJ]:** Wypychanie elementów architektury do *„potencjalnych rozszerzeń w wersji drugiej / wyceniam osobno"*.
-- **`-20 pkt` [RECYTOWANIE REGULAMINU / DARMOWE PLIKI]:** Pisanie *„To czysta próbka techniczna na danych testowych, bez przekazywania kodu produkcyjnego..."* lub proszenie o przesłanie 1–2 plików do darmowego przemielenia przed umową.
+- **`-20 pkt` [RECYTOWANIE REGULAMINU BOTA]:** Pisanie klientowi sztucznych formułek bota typu *„To czysta próbka techniczna na danych testowych, bez przekazywania kodu produkcyjnego..."*. (Uwaga: naturalna propozycja przetestowania 1–3 trudnych plików/dokumentów na sucho przed decyzją jest w pełni dozwolona i nagradzana).
 - **`-15 pkt` [WYJAŁOWIONA ŚCIEŻKA BIZNES LUB ŻARGON IT]:** Na `sciezka: biznes` brak nazwania konkretnych życiowych wyjątków w danych klienta (np. mieszania `cm/mm`, braków w wiadomościach kupujących, cytowań w mailach) ALBO użycie żargonu IT niewymienionego przez klienta.
 - **`-15 pkt` [FAŁSZYWY SKOK LOGICZNY Z RESEARCHU]:** Nielogiczne powiązanie dwóch faktów technicznych (np. że wersja biblioteki frontendowej wpływa na integrację z koszykiem sklepu).
 - **`-12 pkt` [PRZESTRZELONA WYCENA LUB WIDEŁKI]:** Wycena zawyżona o >35% przez zdublowane moduły w kalkulatorze, zaniżona poniżej realnego kosztu pracy lub podanie widełek cenowych zamiast jednej kwoty.
-- **`-10 pkt` [SZKOLNE WYLICZANKI]:** Zwroty *„Po pierwsze... Po drugie..."*, *„Pierwszy strumień... Drugi strumień..."* lub kaskada suchych nawiasów z hasłami bez wyjaśnienia mechanizmu.
-- **`-8 pkt` [PRZEKROCZENIE LIMITU SŁÓW / WATA SŁOWNA]:** Oferta przekraczająca twardy sufit słów (`>205 słów` dla dużych zleceń lub `>110 słów` dla małych `<3 000 zł`) lub powtarzająca zdania z ogłoszenia klienta.
+- **`-10 pkt` [SZKOLNE WYLICZANKI]:** Kaskada suchych nawiasów z hasłami bez wyjaśnienia mechanizmu lub etykiety typu *„Kluczowa mina:”*, *„Pytanie kwalifikujące:”*.
+- **`-8 pkt` [PRZEKROCZENIE LIMITU SŁÓW / WATA SŁOWNA]:** Oferta przekraczająca `750 słów` dla dużych zleceń lub `250 słów` dla małych `<3 000 zł`, albo wata słowna powtarzająca wprost zdania z ogłoszenia klienta.
 - **`-5 pkt` [PRZEŁADOWANIE AKRONIMAMI / KEYWORD STUFFING]:** Upychanie `>= 11` skrótów technicznych w jednym akapicie kosztem naturalnego rytmu wypowiedzi Senior Inżyniera.
 
 ---

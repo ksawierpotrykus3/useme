@@ -44,13 +44,11 @@ Oferta ma wchodzić od 1. zdania w sedno problemu klienta (językiem konkretu te
 
 #### 2c. Tani chwyt marketingowy przy demie / Recytowanie instrukcji wewnętrznej (Demo Guard)
 - Obiecywanie „klikalnego prototypu aplikacji mobilnej na telefon w 15 minut” przy dużych projektach i systemach → ZŁAMANE.
-- Proponowanie darmowego przetworzenia plików klienta przed zleceniem („proszę przesłać 1-2 pliki na priv, odeślę przetworzony wynik przed rozpoczęciem zlecenia") → ZŁAMANE (odrzut w audycie Red Team; zamiast tego wolno proponować bezpieczne testy na kopii bazy / środowisku testowym sandbox bez ryzyka dla produkcji).
-- Recytowanie klientowi wewnętrznych reguł promptu typu „To czysta próbka techniczna na danych testowych, bez przekazywania kodu produkcyjnego i bez przetwarzania Pana bieżących dokumentów firmowych" → ZŁAMANE (KRYTYCZNY FAIL — brzmi jak wypluty regulamin bota).
+- Propozycja bezpłatnego przetestowania 1–3 przykładowych, trudnych plików/dokumentów na sucho przed decyzją jest W PEŁNI DOZWOLONA i REKOMENDOWANA (zdejmuje ryzyko z klienta i buduje autorytet). ZAKAZANE jest jedynie recytowanie klientowi wewnętrznych instrukcji bota typu „To czysta próbka techniczna na danych testowych, bez przekazywania kodu produkcyjnego i bez przetwarzania Pana bieżących dokumentów firmowych" → ZŁAMANE.
 
 ### 3. Formatowanie AI i Szkolne Wyliczanki
 - Listy z gwiazdkami/punktami w treści oferty, nagłówki markdown, pogrubienia, kursywa, em dash (—) → ZŁAMANE.
-- Szkolne wyliczanki typu „Po pierwsze... Po drugie... Po trzecie..." lub „Pierwszy strumień... Drugi strumień... Trzeci strumień..." → ZŁAMANE (każ zastąpić naturalną spójnością zdań).
-- Ściana tekstu powyżej 240 słów (lub powyżej 120 słów przy małym zleceniu < 3000 zł) → ZŁAMANE (każ skrócić do zwięzłych 130–210 słów w 4 krótkich akapitach).
+- Długość oferty: dla małych zleceń (< 3 000 zł) optymalna objętość to 120–220 słów. Dla średnich i dużych zleceń (≥ 3 000 zł) dozwolona i rekomendowana jest wyczerpująca, partnerska oferta o długości 350–650 słów (wyjaśniająca architekturę, 2 etapy wdrożenia i zasady bezpieczeństwa). ZŁAMANE wyłącznie gdy oferta przekracza 750 słów (lanie wody) lub ma poniżej 100 słów (brak konkretów).
 
 ### 4. Parafraza ogłoszenia
 Oferta powtarza klientowi własnymi słowami to, co on napisał w ogłoszeniu.
@@ -67,7 +65,7 @@ Otwieranie oferty zaprzeczaniem patologiom wykonawców (np. deklaracje „nie b�
 - Jeśli w klasyfikacji zlecenia jest `sciezka: biznes` (np. `tech_agnostic`), a oferta zawiera niewymieniony przez klienta w ogłoszeniu żargon IT (nazwy frameworków, bibliotek, kontenerów, baz danych, protokołów typu *FastAPI, Docker, Playwright, PostgreSQL, REST API, webhook, cron, deployment*) → ZŁAMANE (wskaż w `POPRAW_OFERTA`, które terminy techniczne zastąpić prostym językiem efektu biznesowego).
 - Jeśli w klasyfikacji zlecenia jest `sciezka: biznes`, a oferta składa się wyłącznie z gładkich obietnic („program sam odczyta dane i zaoszczędzisz czas") i **nie nazywa po ludzku ani jednego życiowego wyjątku w danych klienta** (np. mieszania `cm` i `mm` lub brakujących wymiarów/obrzeży w wiadomościach z Allegro, oddzielania cytowanych wątków mailowych od nowego pytania, kolejkowania przy chwilowej niedostępności drugiego programu) → ZŁAMANE (każ dodać 2 konkretne życiowe przypadki z danych klienta opisane prostym językiem).
 - Jeśli w klasyfikacji zlecenia jest `sciezka: inzynieria`, a oferta jest całkowicie ogólnikowa i pomija konkret techniczny/architektoniczny → ZŁAMANE.
-- Jeśli oferta samowolnie dzieli projekt klienta na „Fazę 1 / PoC / MVP za ułamek kwoty", mimo że klient w ogłoszeniu nie prosił o wycenę samego MVP (obalony Mit 6) → ZŁAMANE.
+- Jeśli oferta samowolnie obcina zakres zlecenia do samego „MVP za ułamek ceny", mimo że klient prosił o pełny system → ZŁAMANE. Uwaga: rozbicie pełnej kwoty na 2 przejrzyste etapy płatne po odbiorze jest w 100% poprawne i zalecane.
 - Jeśli oferta zawiera protekcjonalne sformułowanie „Podkładka dla szefa" / „Podsumowanie dla zarządu" lub obiecuje 12-miesięczną darmową gwarancję na zewnętrzne API → ZŁAMANE.
 
 ## WYCENA (sprawdź liczby)
