@@ -24,25 +24,37 @@
       "requires": ["research"]
     },
     {
+      "id": "00",
+      "name": "Orchestrator strategii oferty",
+      "opis": "Analizuje ogłoszenie klienta ze zdrowym rozsądkiem, wyodrębnia jawne życzenia klienta i blokuje niepasujące elementy szablonowe przed napisaniem oferty.",
+      "prompt_file": "generatory/agent_00_orchestrator.md",
+      "context_files": ["kontekst/portfolio_baza.md"],
+      "enabled": true,
+      "role": "generator",
+      "output_key": "orchestrator_plan",
+      "model": "deepseek-v4-pro-nothink",
+      "requires": ["wycena_dni", "research"]
+    },
+    {
       "id": "02a",
       "name": "Tresc oferty",
-      "opis": "AI pisze pełną treść odpowiedzi na ogłoszenie, dopasowaną do klienta, zakresu prac i researchu.",
+      "opis": "AI pisze pełną treść odpowiedzi na ogłoszenie, dopasowaną do klienta, zakresu prac i wytycznych Orchestratora.",
       "prompt_file": "generatory/agent_02a_opis_oferty.md",
       "context_files": ["kontekst/jak_pisac_oferty.md", "kontekst/lore.md", "kontekst/portfolio_baza.md"],
       "enabled": true,
       "role": "generator",
       "output_key": "opis",
-      "requires": ["wycena_dni", "research"]
+      "requires": ["orchestrator_plan", "wycena_dni", "research"]
     },
     {
       "id": "08",
       "name": "Weryfikator zasad",
-      "opis": "AI sprawdza ofertę i wycenę względem twardych zasad (jak_pisac_oferty, mechanika_wyceniania) i wskazuje konkretne poprawki.",
+      "opis": "AI sprawdza ofertę i wycenę względem zasad oraz wytycznych Orchestratora i wskazuje konkretne poprawki.",
       "prompt_file": "walidatory/agent_08_weryfikacja_zasad.md",
       "context_files": ["kontekst/jak_pisac_oferty.md", "kontekst/mechanika_wyceniania.md"],
       "enabled": true,
       "role": "validator",
-      "requires": ["opis", "wycena_dni", "research"],
+      "requires": ["opis", "orchestrator_plan", "wycena_dni", "research"],
       "on_fail": "retry_from_02a"
     }
   ]

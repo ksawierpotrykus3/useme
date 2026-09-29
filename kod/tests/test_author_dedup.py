@@ -113,8 +113,10 @@ def test_blocked_author_wer13():
     assert config.is_blocked_author("wer13", "") is True
     assert config.is_blocked_author("", "Wer13") is True
     assert config.is_blocked_author("wer-13", "wer13") is True
+    assert config.is_blocked_author("naviproject", "Naviproject") is True
+    assert config.is_blocked_author("NAVIPROJECT", "naviproject") is True
     assert config.is_blocked_author("jan-kowalski", "Jan Kowalski") is False
-    print("[OK] test_blocked_author_wer13")
+    print("[OK] test_blocked_author_wer13_and_naviproject")
 
 
 if __name__ == "__main__":

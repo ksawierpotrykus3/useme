@@ -16,7 +16,7 @@ Architektura:
    - Zwraca transparentną ocenę `1-100 pkt` z rozbiciem na 5 wymiarów (A-E), dokładną listą
      `za_co_dodano` (+pkt + cytat + reasoning) oraz `za_co_odjeto` (-pkt + cytat/brak + reasoning).
 3. Pętla Samodoskonalenia (`run_adversarial_loop`):
-   - Jeśli oferta otrzyma `< target_score` (domyślnie `95/100`), przekazuje listę potrąceń
+   - Jeśli oferta otrzyma `< target_score` (domyślnie `92/100`, patrz `config.AUDYTOR_100_TARGET_SCORE`), przekazuje listę potrąceń
      i instrukcje naprawcze Krytyka z powrotem do generatora (`02b` przy błędnej wycenie,
      `02a` przy błędach treści/psychologii/merytoryki) i generuje udoskonaloną wersję,
      po czym ponownie poddaje ją ocenie Krytyka 1-100.
@@ -55,6 +55,7 @@ from chain_executor import (
 from wycena_kalkulator import formatuj_wynik, policz_wycene
 
 KRYTERIA_PATH = PROMPTS_DIR / "walidatory" / "kryteria_audytu_100.md"
+COMMON_SENSE_PATH = PROMPTS_DIR / "walidatory" / "sedzia_zdrowego_rozsadku.md"
 
 
 def _call_slot_with_optional_research(
@@ -83,35 +84,51 @@ def _call_slot_with_optional_research(
 FORBIDDEN_PATTERNS: List[Tuple[str, str, int]] = [
     (
         r"mamy\s+do[śs]wiadczenie\s+w\s+[łl][ąa]czeniu|zrealizowali[śs]my\s+wiele\s+podobnych",
-        "Pusty frazes szablonowy ('Mamy doświadczenie w...' bez konkretnego case study i liczby)",
+        "Pusty frazes szablonowy bez konkretnego faktu i liczby",
         -20,
     ),
     (
         r"w\s+wersji\s+drugiej|rozszerze[ńn]\s+w\s+wersji\s+drugiej|wyceniam\s+osobno\s+w\s+kolejnym",
-        "Upselling standardów domeny do 'wersji drugiej wycenianej osobno'",
+        "Upselling standardów domeny do wersji drugiej wycenianej osobno",
         -20,
     ),
     (
         r"to\s+czysta\s+pr[óo]bka\s+techniczna\s+na\s+danych\s+testowych,\s+bez\s+przekazywania\s+kodu",
-        "Recytowanie wewnętrznego regulaminu promptu (Demo Guard)",
+        "Recytowanie wewnętrznego regulaminu promptu",
         -20,
     ),
     (
         r"\bpo\s+pierwsze\b.*\bpo\s+drugie\b|\bpierwszy\s+strumie[ńn]\b.*\bdrugi\s+strumie[ńn]\b",
-        "Szkolna wyliczanka ('Po pierwsze / Po drugie' lub 'Pierwszy strumień / Drugi strumień')",
+        "Szkolna wyliczanka Po pierwsze / Po drugie",
         -10,
     ),
     (
-        r"three\.js\s*\(r\d+\)[^.]*prestashop",
-        "Fałszywy skok logiczny (łączenie wersji silnika Three.js bezpośrednio z integracją koszyka PrestaShop)",
+        r"three\.js\s*\(?r\d+\)?[^.]*prestashop",
+        "Fałszywy skok logiczny łączący wersję silnika Three.js bezpośrednio z integracją koszyka PrestaShop",
         -15,
     ),
     (
         r"\bnie\s+mamy\s+wprost\s+wdro[żz]enia\b|\bnie\s+robili[śs]my\s+dok[łl]adnie\b",
-        "Negatywny disclaimer otwierający akapit ('Nie mamy wprost wdrożenia...') zamiast bezpośredniego podania najbliższego case study z liczbami",
+        "Negatywny disclaimer otwierający akapit zamiast bezpośredniego opisu rozwiązania",
         -10,
     ),
+    (
+        r"\b(?:inżynier|inzynier)[a-ząćęłńóśźż]*\b",
+        "Nazywanie siebie inżynierem lub tandemem/zespołem inżynierskim (brak formalnego wykształcenia inżynierskiego)",
+        -20,
+    ),
 ]
+
+
+def _client_text_blob(zlecenie: Dict[str, Any]) -> str:
+    fields = zlecenie.get("fields") or {}
+    return (
+        str(zlecenie.get("title") or fields.get("title") or "")
+        + " "
+        + str(zlecenie.get("full_description") or zlecenie.get("description") or fields.get("description") or "")
+        + " "
+        + str(zlecenie.get("short_desc") or "")
+    ).lower()
 
 
 def deterministic_pre_audit(
@@ -121,37 +138,73 @@ def deterministic_pre_audit(
     dni: int,
     wycena_raw: str,
 ) -> List[Dict[str, Any]]:
-    """Twardy audyt w Pythonie wykrywający obiektywne naruszenia przed oceną AI."""
+    """Twardy audyt w Pythonie wykrywający obiektywne naruszenia przed oceną AI.
+
+    Uwaga: brak jakichkolwiek sztucznych limitów liczby słów oraz brak wymuszania
+    formułek o środowisku testowym tam, gdzie nie pasują.
+    """
     penalties: List[Dict[str, Any]] = []
-    words = len((opis or "").split())
     sciezka = str(zlecenie.get("sciezka") or "").strip().lower()
+    client_text = _client_text_blob(zlecenie)
+    text = opis or ""
 
-    # 1. Limit słów (zgodny 1:1 z agent_02a_opis_oferty.md: 110 dla <3000 zł, 205 dla >=3000 zł)
-    if wycena < 3000 and words > 110:
+    # 1. Całkowity zakaz EM DASH (— / –) oraz myślników ze spacjami ( - ) -> -20 pkt
+    m_dash = re.search(r"[—–\u2014\u2013]|\s+-\s+|^\s*-\s+", text, flags=re.MULTILINE)
+    if m_dash:
+        start_i = max(0, m_dash.start() - 25)
+        end_i = min(len(text), m_dash.end() + 25)
         penalties.append({
-            "rule_id": "PEN_WORD_LIMIT_SMALL",
-            "punkty": "-8 pkt (Wymiar E / Kara)",
-            "cytat": f"Liczba słów: {words} (przy małym zleceniu {wycena} zł < 3000 zł)",
-            "uzasadnienie": f"Przekroczony twardy limit zwięzłości dla małych zleceń (maks. 110 słów, jest {words}).",
-        })
-    elif wycena >= 3000 and words > 205:
-        penalties.append({
-            "rule_id": "PEN_WORD_LIMIT_LARGE",
-            "punkty": "-8 pkt (Wymiar E / Kara)",
-            "cytat": f"Liczba słów: {words}",
-            "uzasadnienie": f"Przekroczony twardy górny limit długości oferty (maks. 205 słów, jest {words}).",
-        })
-    elif wycena >= 3000 and 0 < words < 130:
-        penalties.append({
-            "rule_id": "PEN_WORD_TOO_SHORT",
-            "punkty": "-4 pkt (Wymiar E / Za krótka oferta)",
-            "cytat": f"Liczba słów: {words} (przy zleceniu {wycena} zł >= 3000 zł)",
-            "uzasadnienie": f"Zbyt skrótowa oferta dla projektu >= 3000 zł (wymagane min. 135–145 słów, jest {words}).",
+            "rule_id": "PEN_DASH_USED",
+            "punkty": "-20 pkt (Kara bezwzględna: użycie pauzy lub myślnika)",
+            "cytat": text[start_i:end_i].strip(),
+            "uzasadnienie": "W treści oferty obowiązuje całkowity zakaz używania pauz (—, –) oraz myślników ( - ). Ma być dokładnie 0 takich znaków.",
         })
 
-    # 2. Zakazane frazy / szablony
+    # 2. Całkowity zakaz nawiasów okrągłych ( ) -> -20 pkt
+    m_paren = re.search(r"[()]", text)
+    if m_paren:
+        start_i = max(0, m_paren.start() - 25)
+        end_i = min(len(text), m_paren.end() + 25)
+        penalties.append({
+            "rule_id": "PEN_PARENTHESES_USED",
+            "punkty": "-20 pkt (Kara bezwzględna: użycie nawiasów)",
+            "cytat": text[start_i:end_i].strip(),
+            "uzasadnienie": "W treści oferty obowiązuje całkowity zakaz używania nawiasów ( ). Nawiasy brzmią sztucznie.",
+        })
+
+    # 3. Zakaz proponowania instrukcji wideo, chyba że klient sam o to poprosił -> -20 pkt
+    client_asked_for_video = bool(re.search(r"\b(?:wideo|video|loom|nagrani[ea]|filmik|screencast)\b", client_text))
+    if not client_asked_for_video:
+        m_video = re.search(
+            r"\b(?:wideo[-\s]*instrukcj\w*|instrukcj\w*\s+wideo|kr[óo]tk\w+\s+wideo|nagrani\w+\s+wideo|wideo\s+z\s+obs[łl]ug\w*|filmik\w*\s+instrukta[żz]\w*|loom)\b",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if m_video:
+            penalties.append({
+                "rule_id": "PEN_UNSOLICITED_VIDEO",
+                "punkty": "-20 pkt (Kara bezwzględna: instrukcja wideo bez prośby klienta)",
+                "cytat": m_video.group(0),
+                "uzasadnienie": "Nigdy nie proponujemy instrukcji wideo po wdrożeniu, chyba że klient sam wyraźnie o to poprosił w ogłoszeniu.",
+            })
+
+    # 4. Gwarancja wyłącznie 30 dni (zakaz 12/24 miesięcy gwarancji) -> -20 pkt
+    m_warr = re.search(
+        r"\b(?:12|24|dwunast\w+|dwadzie[śs]cia\s+czter\w+)\s*miesi[ęe]c\w*[^.]{0,35}gwarancj\w*|\broczn\w+\s+gwarancj\w*",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if m_warr:
+        penalties.append({
+            "rule_id": "PEN_12M_WARRANTY",
+            "punkty": "-20 pkt (Kara bezwzględna: gwarancja inna niż 30 dni)",
+            "cytat": m_warr.group(0),
+            "uzasadnienie": "Obowiązuje wyłącznie 30-dniowa gwarancja rozruchowa. Zakaz obiecywania 12 lub 24 miesięcy gwarancji.",
+        })
+
+    # 5. Zakazane frazy / szablony
     for idx_pat, (pattern, reason, pts) in enumerate(FORBIDDEN_PATTERNS):
-        m = re.search(pattern, opis or "", flags=re.IGNORECASE | re.DOTALL)
+        m = re.search(pattern, text, flags=re.IGNORECASE | re.DOTALL)
         if m:
             penalties.append({
                 "rule_id": f"PEN_FORBIDDEN_{idx_pat}",
@@ -160,10 +213,10 @@ def deterministic_pre_audit(
                 "uzasadnienie": reason,
             })
 
-    # 2b. Zakaz widełek cenowych w treści oferty (np. '1500-2500 zł' lub 'od 3000 do 5000 zł')
+    # 6. Zakaz widełek cenowych w treści oferty (np. '1500-2500 zł' lub 'od 3000 do 5000 zł')
     m_range = re.search(
         r"\b\d{3,5}\s*[-–]\s*\d{3,5}\s*(?:z[łl]|pln)\b|\bod\s+\d[\d\s]*do\s+\d[\d\s]*(?:z[łl]|pln)\b",
-        opis or "",
+        text,
         flags=re.IGNORECASE,
     )
     if m_range:
@@ -174,13 +227,11 @@ def deterministic_pre_audit(
             "uzasadnienie": "Użyto widełek cenowych zamiast jednej konkretnej kwoty netto.",
         })
 
-    # 2c. Spójność liczby dni między tekstem oferty a kalkulatorem (DNI: dni)
-    if dni and dni > 0 and opis:
-        # Szukamy deklaracji dni w ostatniej części oferty (przy wycenie/realizacji)
-        tail = (opis or "")[-260:]
+    # 7. Spójność liczby dni między tekstem oferty a kalkulatorem (DNI: dni)
+    if dni and dni > 0 and text:
+        tail = text[-260:]
         for m_d in re.finditer(r"(\d{1,3})\s*dni(?:\s+robocz[eych]+|\s+kalendarzow[eych]+)?", tail, flags=re.IGNORECASE):
             val_d = int(m_d.group(1))
-            # Ignorujemy '30 dni gwarancji' oraz '3 dni' przy starcie ('start w ciągu 3 dni')
             ctx_window = tail[max(0, m_d.start() - 20): min(len(tail), m_d.end() + 25)].lower()
             if "gwarancj" in ctx_window or "asyst" in ctx_window or "start" in ctx_window or "ciągu" in ctx_window:
                 continue
@@ -193,45 +244,26 @@ def deterministic_pre_audit(
                 })
                 break
 
-    # 2d. Wymóg deklaracji bezpieczeństwa wdrożenia (Sandbox / kopia bazy / środowisko testowe / backup)
-    if words >= 60 and not re.search(
-        r"kopi[ai]|sandbox|[śs]rodowisk[auo]\s+testow|staging|backup|archiw|dry-run|baz[yę]\s+testow|testy\s+na",
-        opis or "",
-        flags=re.IGNORECASE,
-    ):
-        penalties.append({
-            "rule_id": "PEN_MISSING_SANDBOX",
-            "punkty": "-4 pkt (Wymiar B / Brak Sandbox-First)",
-            "cytat": "(brak deklaracji środowiska testowego / kopii bazy)",
-            "uzasadnienie": "Brak jasnej gwarancji wykonania pierwszych testów/importów na kopii bazy lub środowisku testowym (Sandbox-First).",
-        })
-
-    # 2e. Ochrona przed Keyword/Acronym Stuffing (Lexical Mirroring > 10 technicznych skrótów w jednym akapicie)
+    # 8. Ochrona przed Keyword/Acronym Stuffing (Lexical Mirroring > 10 technicznych skrótów w jednym akapicie)
     ignored_acronyms = {"PL", "UK", "IT", "AI", "B2B", "B2C", "OK", "UE", "RODO", "NIP", "VAT", "KSEF", "WZ", "FS", "ZK", "PLN", "USD", "EUR", "ull"}
-    for para in (opis or "").split("\n\n"):
+    for para in text.split("\n\n"):
         acronyms = [a for a in re.findall(r"\b[A-Z]{2,}[0-9]*\b", para) if a.upper() not in ignored_acronyms]
         if len(acronyms) >= 11:
             penalties.append({
                 "rule_id": "PEN_ACRONYM_STUFFING",
-                "punkty": "-4 pkt (Wymiar E / Przeładowanie skrótami w jednym akapicie)",
+                "punkty": "-5 pkt (Wymiar E / Przeładowanie skrótami w jednym akapicie)",
                 "cytat": ", ".join(acronyms[:10]),
-                "uzasadnienie": f"Zbyt duże zagęszczenie skrótów technicznych w jednym akapicie ({len(acronyms)} skrótów) — brzmi jak wyciąg z dokumentacji zamiast listu inżyniera.",
+                "uzasadnienie": f"Zbyt duże zagęszczenie skrótów technicznych w jednym akapicie ({len(acronyms)} skrótów).",
             })
             break
 
-    # 3. Sprawdzenie żargonu IT na ścieżce biznes
+    # 9. Sprawdzenie żargonu IT na ścieżce biznes
     if sciezka == "biznes":
-        fields = zlecenie.get("fields") or {}
-        client_text = (
-            str(zlecenie.get("title") or "")
-            + " "
-            + str(zlecenie.get("full_description") or zlecenie.get("description") or fields.get("description") or "")
-        ).lower()
         jargon_terms = [
             "fastapi", "docker", "kubernetes", "playwright", "postgresql", "redis",
             "redlock", "leaky bucket", "webhook", "endpoint", "oauth2", "cron", "sqlcipher",
         ]
-        leaked = [t for t in jargon_terms if t in (opis or "").lower() and t not in client_text]
+        leaked = [t for t in jargon_terms if t in text.lower() and t not in client_text]
         if leaked:
             penalties.append({
                 "rule_id": "PEN_JARGON_BIZNES",
@@ -240,7 +272,7 @@ def deterministic_pre_audit(
                 "uzasadnienie": f"Na ścieżce 'biznes' użyto żargonu IT niewymienionego przez klienta: {', '.join(leaked)}.",
             })
 
-    # 4. Sprawdzenie mnożnika wyceny (tylko jeśli pochodzi ze starego niekalibrowanego kalkulatora >= 1.3)
+    # 10. Sprawdzenie mnożnika wyceny (tylko jeśli pochodzi ze starego niekalibrowanego kalkulatora >= 1.3)
     if '"mnoznik_ryzyka": 1.3' in (wycena_raw or "") or '"mnoznik_ryzyka": 1.6' in (wycena_raw or ""):
         penalties.append({
             "rule_id": "PEN_OLD_MULTIPLIER",
@@ -250,6 +282,23 @@ def deterministic_pre_audit(
         })
 
     return penalties
+
+
+def _extract_common_sense_json(text: str) -> Optional[Dict[str, Any]]:
+    if not text:
+        return None
+    m = re.search(r"\[COMMON_SENSE_JSON\]\s*(\{.*?\})\s*\[/COMMON_SENSE_JSON\]", text, flags=re.DOTALL)
+    raw = m.group(1) if m else None
+    if not raw:
+        m2 = re.search(r"(\{\s*\"status\".*\})", text, flags=re.DOTALL)
+        raw = m2.group(1) if m2 else None
+    if not raw:
+        return None
+    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip())
+    try:
+        return json.loads(raw)
+    except Exception:
+        return None
 
 
 def _extract_audyt_json(text: str) -> Optional[Dict[str, Any]]:
@@ -269,6 +318,48 @@ def _extract_audyt_json(text: str) -> Optional[Dict[str, Any]]:
         return None
 
 
+def evaluate_common_sense_judge(
+    zlecenie: Dict[str, Any],
+    opis: str,
+    wycena: int,
+    dni: int,
+) -> Dict[str, Any]:
+    """Drugi Sędzia ('Ludzkie Oko / Zdrowy Rozsądek') z prostym, otwartym promptem bez listy kontrolnej.
+
+    Wykrywa elementy niepasujące do zlecenia (szablonowe wklejki z innych branż) oraz pominięcia
+    ważnych wymagań z ogłoszenia klienta, które mogłyby umknąć sędziemu 100-punktowemu.
+    """
+    if not COMMON_SENSE_PATH.exists() or not opis:
+        return {"status": "OK", "kara_pkt": 0}
+    sys_prompt = _read_text(COMMON_SENSE_PATH)
+    fields = zlecenie.get("fields") or {}
+    job_payload = {
+        "id": zlecenie.get("id"),
+        "title": zlecenie.get("title") or fields.get("title") or "",
+        "budget": zlecenie.get("budget") or fields.get("budget") or "",
+        "miejsce_wykonania": zlecenie.get("miejsce_wykonania") or (zlecenie.get("full_details") or {}).get("miejsce_wykonania") or "",
+        "description": (
+            zlecenie.get("full_description")
+            or zlecenie.get("description")
+            or fields.get("description")
+            or zlecenie.get("short_desc")
+            or ""
+        ),
+    }
+    usr_prompt = (
+        "--- OGŁOSZENIE KLIENTA ---\n"
+        + json.dumps(job_payload, ensure_ascii=False, indent=2)
+        + f"\n\n--- PROPONOWANA WYCENA: {wycena} zł netto / {dni} dni ---\n"
+        + "\n--- TREŚĆ OFERTY DO OCENY ---\n"
+        + (opis or "")
+    )
+    resp = call_deepseek(sys_prompt, usr_prompt, model="deepseek-v4-pro-nothink", timeout=120)
+    parsed = _extract_common_sense_json(resp or "")
+    if not isinstance(parsed, dict):
+        return {"status": "OK", "kara_pkt": 0}
+    return parsed
+
+
 def evaluate_offer_100(
     zlecenie: Dict[str, Any],
     opis: str,
@@ -276,13 +367,11 @@ def evaluate_offer_100(
     dni: int,
     wycena_raw: str = "",
 ) -> Dict[str, Any]:
-    """Uruchamia Niezależnego Krytyka 1-100 na wygenerowanej ofercie."""
+    """Uruchamia Niezależnego Krytyka 1-100 oraz 2. Sędziego Zdrowego Rozsądku na wygenerowanej ofercie."""
     pre_penalties = deterministic_pre_audit(zlecenie, opis, wycena, dni, wycena_raw)
     system_prompt = _read_text(KRYTERIA_PATH)
 
     tech_cards = _resolve_tech_cards(zlecenie, "02a")
-    # Dla Krytyka dorzucamy również kartę domenową nawet na ścieżce biznes,
-    # żeby wiedział jakie życiowe przypadki brzegowe istnieją w tej branży.
     all_cards = list(tech_cards)
     for c in _resolve_tech_cards(zlecenie, "02b"):
         if c not in all_cards:
@@ -301,13 +390,13 @@ def evaluate_offer_100(
     user_prompt = (
         "--- OGŁOSZENIE KLIENTA I KLASYFIKACJA ---\n"
         + json.dumps(slim_job, ensure_ascii=False, indent=2)
-        + "\n\n--- KARTY WIEDZY TECHNOLOGICZNEJ (WZORZEC MERYTORYCZNY I PSYCHOLOGICZNY) ---\n"
+        + "\n\n--- POMOCNICZE KARTY WIEDZY TECHNOLOGICZNEJ ---\n"
         + "\n\n".join(cards_text_parts)
         + "\n\n--- WYNIK WYCENY (SLOT 02b + KALKULATOR) ---\n"
         + f"KWOTA NETTO: {wycena} zł | CZAS: {dni} dni\n"
         + (wycena_raw or "")
         + "\n\n--- TWARDY PRE-AUDYT DETERMINISTYCZNY (PYTHON) ---\n"
-        + f"Liczba słów oferty: {words} | Liczba znaków: {chars}\n"
+        + f"Liczba słów oferty: {words} | Liczba znaków: {chars} (brak sztucznego limitu słów)\n"
         + (
             "Wykryte twarde naruszenia (OBOWIĄZKOWO uwzględnij je w `za_co_odjeto` i odejmij punkty!):\n"
             + json.dumps(pre_penalties, ensure_ascii=False, indent=2)
@@ -317,6 +406,7 @@ def evaluate_offer_100(
         + "\n\n--- OCENIANA TREŚĆ OFERTY (SLOT 02a) ---\n"
         + (opis or "")
         + "\n\nOceń powyższą ofertę surowo i sprawiedliwie w skali 1-100 pkt. "
+        "Odejmij dużo punktów (-20 do -30 pkt) za wszystko, co nie pasuje do tego ogłoszenia lub pomija wymagania klienta. "
         "Zwróć wyłącznie blok [AUDYT_JSON]...[/AUDYT_JSON]."
     )
 
@@ -339,14 +429,12 @@ def evaluate_offer_100(
                 "E_styl_zwiezlosc_15": 12,
             },
             "za_co_dodano": [],
-            "za_co_odjeto": pre_penalties,
+            "za_co_odjeto": list(pre_penalties),
             "werdykt": "POPRAW",
-            "popraw_oferta": "Dopracuj konkret domenowy i usuń ogólniki.",
+            "popraw_oferta": "Dopracuj konkret domenowy i usuń elementy niepasujące do zlecenia.",
             "popraw_wycena": "",
         }
     else:
-        # Naprawa błędu podwójnego odejmowania kar (-24 pkt zamiast -12 pkt):
-        # Sprawdzamy po słowach kluczowych i rule_id, czy Sędzia już wpisał dane przewinienie do za_co_odjeto.
         existing_blob = " ".join(
             f"{item.get('punkty', '')} {item.get('cytat', '')} {item.get('uzasadnienie', '')}".lower()
             for item in parsed.get("za_co_odjeto", [])
@@ -364,7 +452,10 @@ def evaluate_offer_100(
                 (rule_id and rule_id in existing_blob)
                 or (pen["cytat"][:20].lower() in existing_blob)
                 or ("mnożnik" in pen["uzasadnienie"].lower() and "mnożnik" in existing_blob)
-                or ("limit" in pen["uzasadnienie"].lower() and "słów" in existing_blob)
+                or ("pauz" in pen["uzasadnienie"].lower() and ("pauz" in existing_blob or "myślnik" in existing_blob))
+                or ("nawias" in pen["uzasadnienie"].lower() and "nawias" in existing_blob)
+                or ("wideo" in pen["uzasadnienie"].lower() and "wideo" in existing_blob)
+                or ("12" in pen["uzasadnienie"].lower() and "gwarancj" in existing_blob)
                 or ("żargon" in pen["uzasadnienie"].lower() and "żargon" in existing_blob)
                 or ("widełk" in pen["uzasadnienie"].lower() and "widełk" in existing_blob)
                 or ("dni" in pen["uzasadnienie"].lower() and "dni" in existing_blob)
@@ -372,6 +463,34 @@ def evaluate_offer_100(
             if not already_listed:
                 parsed.setdefault("za_co_odjeto", []).append(pen)
                 unaccounted_pts += pts_val
+
+        # Uruchomienie 2. Sędziego ("Sędzia Zdrowego Rozsądku / Ludzkie Oko")
+        cs_res = evaluate_common_sense_judge(zlecenie, opis, wycena, dni)
+        parsed["sedzia_zdrowego_rozsadku"] = cs_res
+        if str(cs_res.get("status", "")).upper() == "VETO":
+            try:
+                cs_pts = int(cs_res.get("kara_pkt", -20))
+                if cs_pts > 0:
+                    cs_pts = -cs_pts
+                if cs_pts == 0:
+                    cs_pts = -20
+            except Exception:
+                cs_pts = -20
+            cs_cytat = str(cs_res.get("cytat_lub_brak") or "(wskazanie Sędziego Zdrowego Rozsądku)")
+            cs_uzas = str(cs_res.get("uzasadnienie") or "Element niepasujący do ogłoszenia lub pominięcie wymogu klienta.")
+            cs_naprawa = str(cs_res.get("instrukcja_naprawy") or "")
+            parsed.setdefault("za_co_odjeto", []).append({
+                "rule_id": "PEN_COMMON_SENSE_VETO",
+                "punkty": f"{cs_pts} pkt (Sędzia #2 Zdrowego Rozsądku - VETO)",
+                "cytat": cs_cytat,
+                "uzasadnienie": cs_uzas,
+            })
+            unaccounted_pts += cs_pts
+            total_pre_pts += cs_pts
+            parsed["werdykt"] = "POPRAW"
+            if cs_naprawa:
+                cur_popraw = str(parsed.get("popraw_oferta") or "").strip()
+                parsed["popraw_oferta"] = (cur_popraw + " " + f"[SĘDZIA #2 VETO]: {cs_naprawa}").strip()
 
         # Spójność matematyczna wynik_100 z sumą kategorii (A+B+C+D+E) oraz sufitem kar pre-audytu
         kategorie = parsed.get("kategorie") or {}
@@ -391,10 +510,33 @@ def evaluate_offer_100(
 
 
 def _sanitize_opis(opis: str, wycena: Optional[int] = None, dni: Optional[int] = None) -> str:
-    """Deterministyczna sanitacja drobnych artefaktów językowych, widełek i rozjazdu dni."""
+    """Deterministyczna sanitacja pauz (— / –), myślników ( - ), nawiasów ( ), widełek i rozjazdu dni."""
     if not opis:
         return ""
-    out = opis.replace("—", "-").replace("–", "-").replace("\u2014", "-").replace("\u2013", "-").replace("**", "")
+    out = opis.replace("**", "")
+    # Zamiana ewentualnych widełek w zdaniu o utrzymaniu/retainerze (np. '1500-2500 zł/mies.' -> '1500 zł/mies.')
+    out = re.sub(r"\b(\d{3,5})\s*[-–—]\s*\d{3,5}\s*(z[łl](?:\s*netto)?\s*/\s*mies)", r"\1 \2", out, flags=re.IGNORECASE)
+    # Usunięcie pauz długich/półpauz oraz myślników otoczonych spacjami (nigdy nie zamieniamy '—' na '-'!)
+    out = re.sub(r"\s*[—–\u2014\u2013]\s*", ", ", out)
+    out = re.sub(r"\s+-\s+", ", ", out)
+    out = re.sub(r"(?m)^\s*-\s+", "", out)
+    # Usunięcie nawiasów okrągłych: wplecenie zawartości po przecinku
+    while "(" in out and ")" in out:
+        out = re.sub(r"\s*\(([^()]*)\)", r", \1", out)
+    out = out.replace("(", "").replace(")", "")
+    # Usunięcie pozostałości 12-miesięcznej gwarancji -> wyłącznie 30 dni
+    out = re.sub(
+        r"\s*(?:oraz|\+|i)\s*12\s*miesi[ęe]cy\s*(?:bezp[łl]atnej\s*)?gwarancji(?:\s+na\s+w[łl]asny\s+kod)?",
+        "",
+        out,
+        flags=re.IGNORECASE,
+    )
+    out = re.sub(
+        r"\b12\s*miesi[ęe]cy\s*(?:bezp[łl]atnej\s*)?gwarancji",
+        "30 dni gwarancji rozruchowej",
+        out,
+        flags=re.IGNORECASE,
+    )
     out = re.sub(r"(?i)\bpytanie\s+kwalifikuj[ąa]ce\s*:\s*", "", out)
     out = re.sub(r"(?i)\bkluczowa\s+mina\s*:\s*", "Główna pułapka architektoniczna: ", out)
     out = re.sub(r"(?i)\bnajdro[żz]sza\s+mina\s*:\s*", "Główne ryzyko produkcyjne: ", out)
@@ -402,8 +544,11 @@ def _sanitize_opis(opis: str, wycena: Optional[int] = None, dni: Optional[int] =
     out = re.sub(r"(?i)\bkompleksow(?:ego|e|ych|a|ą)\s+", "", out)
     out = re.sub(r"(?i)\bwed[łl]ug\s+mojej\s+wiedzy\s+z\s+", "w ", out)
     out = re.sub(r"(?i)\bwed[łl]ug\s+mojej\s+wiedzy\s*,?\s*", "", out)
-    # Zamiana ewentualnych widełek w zdaniu o utrzymaniu/retainerze (np. '1500-2500 zł/mies.' -> '1500 zł/mies.')
-    out = re.sub(r"\b(\d{3,5})\s*-\s*\d{3,5}\s*(z[łl](?:\s*netto)?\s*/\s*mies)", r"\1 \2", out, flags=re.IGNORECASE)
+    # Czyszczenie interpunkcji po usunięciu pauz i nawiasów
+    out = re.sub(r",\s*,+", ",", out)
+    out = re.sub(r"\.\s*,", ".", out)
+    out = re.sub(r",\s*\.", ".", out)
+    out = re.sub(r"[ \t]{2,}", " ", out)
     # Jeśli podano dni z kalkulatora, wyrównaj liczbę dni w końcowym zdaniu wyceny (np. '4 dni robocze' -> '7 dni')
     if dni and dni > 0:
         paragraphs = out.split("\n\n")
@@ -447,14 +592,12 @@ def regenerate_from_judge_feedback(
     research_text: str,
     audyt: Dict[str, Any],
 ) -> Tuple[str, int, int, str]:
-    """Poprawia wycenę (02b) i/lub ofertę (02a) na podstawie punktacji i uwag Krytyka 1-100."""
+    """Poprawia wycenę (02b) i/lub ofertę (02a) na podstawie punktacji i uwag Krytyka 1-100 oraz Sędziego #2."""
     config = _load_config()
     slots_by_id = {str(s["id"]): s for s in config["slots"]}
     slim_job = _slim_zlecenie(zlecenie)
     job_id = str(slim_job.get("id", "tmp"))
 
-    # Jeśli prev_wycena_raw jest puste, a w prev_opis jest już ustalona kwota i dni (i Sędzia nie każe zmieniać wyceny),
-    # odtwórz blok [WYNIK_KONCOWY] z treści oferty, aby nie zbić np. 32 000 zł do domyślnych 3 000 zł!
     popraw_wycena = str(audyt.get("popraw_wycena") or "").strip()
     if not prev_wycena_raw and not popraw_wycena:
         p_kw, p_dn = _extract_price_days_from_text(prev_opis)
@@ -509,6 +652,14 @@ def regenerate_from_judge_feedback(
             )
             context["wycena_dni"] = prev_wycena_raw
 
+    # 1b. Jeśli mamy slot 00 (Orchestrator), uruchom go, by wyznaczył blokady kontekstowe
+    if "00" in slots_by_id:
+        slot_00 = slots_by_id["00"]
+        sys_00, usr_00 = _build_prompt(slot_00, context)
+        odp_00 = call_deepseek(sys_00, usr_00, model=slot_00.get("model", "deepseek-v4-pro-nothink"), timeout=120)
+        if odp_00:
+            context["orchestrator_plan"] = odp_00
+
     # Wyciągnij aktualną kwotę i dni z wycena_dni (z fallbackiem do prev_opis)
     m_kw = re.search(r"KWOTA:\s*(\d+)", context["wycena_dni"])
     m_dn = re.search(r"DNI:\s*(\d+)", context["wycena_dni"])
@@ -516,22 +667,16 @@ def regenerate_from_judge_feedback(
     wycena_val = int(m_kw.group(1)) if m_kw else (p_kw or 3000)
     dni_val = int(m_dn.group(1)) if m_dn else (p_dn or 7)
 
-    # 2. Zbuduj precyzyjny feedback dla 02a z listy potrąceń Krytyka 1-100
-    prev_words = len((prev_opis or "").split())
+    # 2. Zbuduj precyzyjny feedback dla 02a z listy potrąceń Krytyka 1-100 oraz Sędziego #2
     deductions_lines = []
     for d in audyt.get("za_co_odjeto", []):
         deductions_lines.append(f"- {d.get('punkty')}: [{d.get('cytat')}] -> {d.get('uzasadnienie')}")
     if audyt.get("popraw_oferta"):
         deductions_lines.append(f"- INSTRUKCJA NAPRAWCZA AUDYTORA: {audyt['popraw_oferta']}")
-    if wycena_val >= 3000 and prev_words > 205:
-        deductions_lines.append(
-            f"- UWAGA NA DŁUGOŚĆ: Poprzednia wersja miała aż {prev_words} słów (przekroczenie limitu 210 słów!). "
-            "Bezwzględnie skondensuj zdania o 25–35 słów, aby nowa wersja miała 165–195 słów (absolutnie poniżej 205 słów) bez utraty konkretów technicznych!"
-        )
     deductions_lines.append(
         f"- Aktualna wycena z kalkulatora to DOKŁADNIE {wycena_val} zł netto i {dni_val} dni. "
         "Zachowaj wszystkie elementy za które Audytor przyznał punkty dodatnie (`za_co_dodano`), "
-        "wyeliminuj w 100% elementy za które odjęto punkty i zmieść się idealnie w limicie słów (150–195 słów dla dużych zleceń, 75–105 słów dla małych)!"
+        "wyeliminuj w 100% elementy za które odjęto punkty i pamiętaj o całkowitym zakazie używania myślników, pauz, nawiasów oraz proponowania instrukcji wideo bez prośby klienta!"
     )
 
     context["_feedback"]["02a"] = (
@@ -553,7 +698,7 @@ def regenerate_from_judge_feedback(
 
 
 def generate_initial_offer(zlecenie: Dict[str, Any]) -> Tuple[str, int, int, str, str]:
-    """Generuje pierwszą wersję oferty (01 Research -> 02b Wycena -> 02a Opis) dla nowego zlecenia z magazynu."""
+    """Generuje pierwszą wersję oferty (01 Research -> 02b Wycena -> 00 Orchestrator -> 02a Opis) dla nowego zlecenia z magazynu."""
     config = _load_config()
     slots_by_id = {str(s["id"]): s for s in config["slots"]}
     slim_job = _slim_zlecenie(zlecenie)
@@ -611,7 +756,16 @@ def generate_initial_offer(zlecenie: Dict[str, Any]) -> Tuple[str, int, int, str
     m_dn = re.search(r"DNI:\s*(\d+)", wycena_raw)
     wycena_val = int(m_kw.group(1)) if m_kw else 3000
     dni_val = int(m_dn.group(1)) if m_dn else 7
-    time.sleep(10)
+    time.sleep(8)
+
+    # 2b. Slot 00 (Orchestrator strategii oferty)
+    if "00" in slots_by_id:
+        slot_00 = slots_by_id["00"]
+        sys_00, usr_00 = _build_prompt(slot_00, context)
+        odp_00 = call_deepseek(sys_00, usr_00, model=slot_00.get("model", "deepseek-v4-pro-nothink"), timeout=120)
+        if odp_00:
+            context["orchestrator_plan"] = odp_00
+        time.sleep(8)
 
     # 3. Slot 02a (Opis oferty)
     slot_02a = slots_by_id["02a"]

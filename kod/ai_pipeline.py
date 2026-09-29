@@ -156,7 +156,7 @@ class SlotChainAIPipeline(BaseAIPipeline):
         if not offers:
             return []
 
-        # 1. Deterministyczny twardy filtr Red Ocean / Pułapek (z centralnego config.py)
+        # 1. Deterministyczny twardy filtr Red Ocean / Pułapek / Miejsca wykonania (z centralnego config.py)
         candidate_offers: List[Dict[str, Any]] = []
         for o in offers:
             desc = (
@@ -166,9 +166,15 @@ class SlotChainAIPipeline(BaseAIPipeline):
                 or o.get("description_short")
                 or ""
             )
-            hr = config.is_hard_reject(str(o.get("title", "")), str(desc))
+            miejsce_wyk = (
+                o.get("miejsce_wykonania")
+                or (o.get("full_details") or {}).get("miejsce_wykonania")
+                or ""
+            )
+            hr = config.is_hard_reject(str(o.get("title", "")), str(desc), str(miejsce_wyk))
             if hr:
                 print(f"[HARD-REJECT] Zlecenie #{o.get('id')} ({o.get('title')}) odrzucone deterministycznie przed AI #1 (wzorzec: {hr}).", flush=True)
+                o["rejection_reason"] = f"Deterministyczny filtr: {hr}"
                 continue
             candidate_offers.append(o)
 
@@ -193,7 +199,7 @@ class SlotChainAIPipeline(BaseAIPipeline):
         if stack_file.exists():
             user_parts.append("--- STACK I FILOZOFIA ---\n" + stack_file.read_text(encoding="utf-8-sig"))
 
-        # Zestawienie zleceń do oceny (z pełnym opisem)
+        # Zestawienie zleceń do oceny (z pełnym opisem i miejscem wykonania)
         zlecenia_do_analizy = []
         for o in candidate_offers:
             desc = (
@@ -203,13 +209,21 @@ class SlotChainAIPipeline(BaseAIPipeline):
                 or o.get("description_short")
                 or ""
             )
-            zlecenia_do_analizy.append({
+            miejsce_wyk = (
+                o.get("miejsce_wykonania")
+                or (o.get("full_details") or {}).get("miejsce_wykonania")
+                or ""
+            )
+            item_payload = {
                 "id": str(o.get("id", "")),
                 "title": o.get("title", ""),
                 "budget": o.get("budget", ""),
                 "category": o.get("category", ""),
                 "description": desc[:4000]
-            })
+            }
+            if miejsce_wyk:
+                item_payload["miejsce_wykonania"] = miejsce_wyk
+            zlecenia_do_analizy.append(item_payload)
 
         user_parts.append("--- NOWE ZLECENIA DO OCENY ---\n" + json.dumps(zlecenia_do_analizy, ensure_ascii=False, indent=2))
 
@@ -265,9 +279,9 @@ class SlotChainAIPipeline(BaseAIPipeline):
                     mods = [str(m).upper().strip() for m in mods_raw if m and str(m).upper().strip() in valid_mods]
                     # Profil flagowy (ekspert_dziedzinowy) zawsze otrzymuje priorytet Tier A
                     tier = "A" if ("TIER_A" in tier_raw or tier_raw == "A" or typ_klienta == "ekspert_dziedzinowy") else "B"
+                    powody[jid] = powod
                     if werdykt in ("BIERZEMY", "TAK", "YES", "EDGE CASE", "EDGE_CASE") or "BIERZEMY" in werdykt or "EDGE" in werdykt:
                         wybrane_id.add(jid)
-                        powody[jid] = powod
                         tiery[jid] = tier
                         sciezki[jid] = sciezka
                         typy_klientow[jid] = typ_klienta
@@ -289,6 +303,8 @@ class SlotChainAIPipeline(BaseAIPipeline):
                     o["karta_tech"] = karty_tech[oid]
                 o["modyfikatory"] = modyfikatory_map.get(oid, [])
                 zakwalifikowane.append(o)
+            else:
+                o["rejection_reason"] = powody.get(oid, "Odrzucona przez Selekcjonera AI #1")
 
         # Sortowanie: Tier A (nisze wysokomarżowe i ekspert dziedzinowy) ma bezwzględny priorytet przed Tier B
         zakwalifikowane.sort(key=lambda x: 0 if x.get("tier") == "A" else 1)
@@ -437,7 +453,11 @@ def _wyciagnij_kwoty_z_tekstu(tekst: str) -> list:
         raw = re.sub(r"[,.]\d{2}$", "", raw)  # usun grosze na koncu
         cyfry = re.sub(r"[^\d]", "", raw)
         if cyfry and len(cyfry) >= 3:
-            wyniki.append(int(cyfry))
+            val = int(cyfry)
+            # Ignoruj lata kalendarzowe (np. 2024, 2025, 2026), to nie są kwoty
+            if val in (2024, 2025, 2026, 2027, 2028, 2029):
+                continue
+            wyniki.append(val)
     return wyniki
 
 

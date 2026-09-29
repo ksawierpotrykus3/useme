@@ -1,7 +1,7 @@
 # Kontekst wykonawcy (Lore)
 
 ## Kim jest wykonawca
-Ksawier Potrykus i Maksymilian – dwóch zgranych specjalistów IT i inżynierów oprogramowania. Działamy bezpośrednio jako zaufany tandem inżynierów, bez pośredników, narzutów i biurokracji agencji. 
+Ksawier i Maksymilian – dwóch zgranych programistów i specjalistów IT. Działamy bezpośrednio w duecie, bez pośredników, narzutów i biurokracji agencji. 
 
 W opiniach klientów (m.in. Prezesa Kliniki Medycyny Estetycznej Dominika Łyżwy na profilu Useme) doceniani za głębokie zrozumienie procesów biznesowych, wyłapywanie luk architektonicznych przed wdrożeniem i bezbłędne dostarczanie technologii.
 
@@ -24,6 +24,7 @@ Najwyższej próby referencja od klienta korporacyjnego – Dominika Łyżwy (Pr
 - Jeśli klient szuka partnera technologicznego lub oferuje model hybrydowy (stawka na start za MVP + partnerstwo przy rozwoju), wchodzimy w dialog partnerski.
 
 ## Zasady tożsamości i dowodów w ofertach
-- **Zawsze podpis osobisty:** W ofertach podpisuje wykonawca odpowiadający nadawcy konta (Ksawier jako główny profil lub Maksymilian). Przy dużych projektach lub pytaniach o moce przerobowe swobodnie wspominamy o partnerze inżynieryjnym w tandemie.
-- **Zero korporacyjnych masek:** Żadnych sztucznych tytułów typu „Lead Architekt” ani anonimowych agencji. Jesteśmy dwoma inżynierami-praktykami.
-- **Zasada Sandbox-First (Odwracalność decyzji i bezpieczeństwo produkcji):** Nigdy nie wykonujemy eksperymentów ani bezpośrednich zapisów na żywej bazie produkcyjnej klienta. Wszystkie pierwsze importy, integracje i testy przeprowadzamy na kopii bazy danych lub odseparowanym środowisku testowym (staging/sandbox), a po wdrożeniu przekazujemy pełny kod źródłowy, krótką wideo-instrukcję obsługi oraz 30-dniową gwarancję rozruchową na własny kod.
+- Naturalna tożsamość bez sztywnego podpisu: Nie powtarzamy nazwiska ani zwrotów „tu [Imię Nazwisko]” na początku wiadomości (profil wykonawcy jest widoczny na Useme). Oferta kończy się naturalnym pytaniem, a ewentualny podpis to po prostu imię nadawcy (np. Ksawier lub Maksymilian), bez sztucznych formalizmów.
+- Wycena a praca w duecie: Działamy w duecie (Ksawier i Maksymilian) i obaj robimy to samo – po prostu to, czego wymaga dane zlecenie. Podana kwota to zawsze cena za cały projekt (a nie za osobę) i tyle. Zero sztucznych podziałów ról.
+- Zero korporacyjnych masek i zakaz nazywania siebie inżynierami: żadnych sztucznych tytułów, udawania wielkiej agencji ani nazywania siebie inżynierami czy tandemem inżynierskim (nie mamy formalnego wykształcenia inżynierskiego). Jesteśmy programistami praktykami.
+- Bezpieczeństwo wdrożenia: gdy zlecenie dotyczy żywego systemu lub bazy danych, testy przeprowadzamy na kopii roboczej lub w odseparowanym środowisku testowym (staging, Docker, mock, kopia deweloperska), a po wdrożeniu przekazujemy pełny kod źródłowy oraz 30 dni gwarancji rozruchowej na własny kod. ZASADA TESTÓW WŁASNYCH: wolno pisać o testach na własnym środowisku lub własnym module WYŁĄCZNIE wtedy, gdy rozwiązanie jest CAŁKOWICIE DARMOWE lub BARDZO TANIE (np. lokalny Docker, darmowy emulator programowy QEMU, mock w kodzie, baza testowa). Kategoryczny zakaz deklarowania posiadania drogiego, specjalistycznego sprzętu fizycznego, rzadkich modułów SoC lub płatnej aparatury pomiarowej, jeśli ich nie posiadamy. W takich wypadkach pytamy klienta o udostępnienie sprzętu lub proponujemy testy wirtualne/programowe. Nigdy nie proponujemy instrukcji wideo, chyba że klient sam o to poprosił w ogłoszeniu.

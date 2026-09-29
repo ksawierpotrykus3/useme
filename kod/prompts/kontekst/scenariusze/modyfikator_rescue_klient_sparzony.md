@@ -1,16 +1,13 @@
-# MODYFIKATOR OPERACYJNY: RESCUE / KLIENT SPARZONY (12.1% RYNKU)
+# MODYFIKATOR OPERACYJNY: RESCUE, KLIENT SPARZONY PO POPRZEDNIM WYKONAWCY
 
-## 1. Diagnoza Sytuacji
-Klient ma za sobą nieudane wdrożenie: poprzedni programista zniknął, zostawił rozgrzebany kod, przekroczył terminy albo system po wdrożeniu generuje błędy. Klient jest nieufny i boi się kolejnej straty pieniędzy oraz konieczności „przepisywania wszystkiego od zera".
+## 1. Diagnoza sytuacji
+Klient ma za sobą nieudane wdrożenie: poprzedni wykonawca przerwał kontakt, zostawił niedokończony kod albo system po wdrożeniu generuje błędy. Klient obawia się kolejnej straty pieniędzy oraz konieczności przepisywania wszystkiego od nowa.
 
-## 2. Obowiązkowe Elementy w Ofercie (Nakładka na Profil Bazowy)
-- **Zasada „Najpierw diagnoza i uporządkowanie, nie przepisywanie w ciemno":** Jasno zadeklaruj, że wchodzisz w zastany kod/system, robisz przegląd tego co działa, i naprawiasz/dokańczasz brakujące elementy bez burzenia całości.
-- **Bezpieczeństwo transakcyjne:** Podkreśl pracę na kopii roboczej (stagingu) oraz rozliczenie przez bezpieczny depozyt (escrow) Useme — klient zwalnia środki dopiero po weryfikacji działającego efektu.
-- Używaj spokojnego, rzeczowego słownictwa: **przejęcie kodu, inwentaryzacja stanu obecnego, dokończenie wdrożenia, izolacja błędów, środowisko testowe**.
+## 2. Kiedy i jakie argumenty warto wykorzystać, jeśli pasują do ogłoszenia
+- Zadeklaruj spokojną weryfikację zastanego systemu i naprawę lub dokończenie brakujących elementów bez burzenia tego, co już działa poprawnie.
+- Jeśli zlecenie dotyczy żywego systemu, podkreśl weryfikację poprawek na środowisku testowym lub kopii roboczej oraz bezpieczne rozliczenie przez depozyt Useme po odbiorze działającego efektu.
 
-## 3. Czego Kategorycznie UNIKAĆ
-- **Zakaz negatywnego prymowania:** Nie pisz „w przeciwieństwie do innych nie znikam po zaliczce" ani „nie będę naciągać godzin" (to budzi podejrzliwość). Zbuduj bezpieczeństwo przez twardą procedurę pracy na repozytorium i stagingu.
-- Zakaz obwiniania klienta za wybór poprzedniego wykonawcy i zakaz pustych obietnic „naprawię wszystko w 1 dzień bez patrzenia w kod".
-
-## 4. Dostosowanie Question CTA
-Poproś o wgląd w obecny stan (repozytorium Git, listę otwartych błędów lub dostęp do środowiska testowego), aby potwierdzić, które moduły są już ukończone, a co dokładnie blokuje wdrożenie.
+## 3. Czego kategorycznie unikać
+- Zakaz negatywnego porównywania się do innych wykonawców typu „w przeciwieństwie do innych nie znikam po zaliczce".
+- Zakaz proponowania płatnych audytów wstępnych przed naprawą.
+- Całkowity zakaz używania myślników, pauz oraz nawiasów w treści oferty.

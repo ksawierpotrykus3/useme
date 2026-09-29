@@ -29,31 +29,7 @@ from browser_driver import BrowserDriver
 from runner import Chain
 from form_driver import AuthenticationRequiredError, FormDriver
 from storage import Storage
-
-
-def czekaj_na_dostepnosc_useme(interval_s: int = 60, max_prob: int = 180) -> bool:
-    """Sprawdza co interval_s sekund, czy portal Useme działa (status 200).
-    
-    W przypadku awarii serwerowej (HTTP 503 'Oops!'), bot samoczynnie odczekuje
-    i sprawdza portal co minutę, ruszając natychmiast po jego przywróceniu.
-    """
-    from curl_cffi import requests as cffi_requests
-    print("[USEME MONITOR] Weryfikuję dostępność portalu Useme...", flush=True)
-    for proba in range(1, max_prob + 1):
-        if bezpieczenstwo.czy_stop():
-            print("[STOP] Wykryto plik STOP podczas oczekiwania na Useme.", flush=True)
-            return False
-        try:
-            r = cffi_requests.get("https://useme.com/pl/", impersonate="chrome120", timeout=15)
-            if r.status_code == 200 and "error-page" not in r.text.lower() and "oops" not in r.text.lower():
-                print(f"[USEME ONLINE] Portal Useme działa poprawnie (status 200). Uruchamiam proces!", flush=True)
-                return True
-            else:
-                print(f"[USEME OFFLINE] Portal Useme niedostępny (HTTP {r.status_code}, 'Oops!'). Czekam {interval_s}s... (próba {proba}/{max_prob})", flush=True)
-        except Exception as e:
-            print(f"[USEME OFFLINE] Błąd połączenia ({e}). Czekam {interval_s}s... (próba {proba}/{max_prob})", flush=True)
-        time.sleep(interval_s)
-    return False
+from monitor_useme import czekaj_na_dostepnosc_useme
 
 
 def run_pipeline(dry_run: bool = config.DRY_RUN, auto_wait_useme: bool = True) -> Dict[str, Any]:
@@ -180,6 +156,8 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                     if details.get("author_id"):
                         updates["author_id"] = details["author_id"]
                         updates["author"] = details.get("author", job.get("author", ""))
+                    if details.get("miejsce_wykonania"):
+                        updates["miejsce_wykonania"] = details["miejsce_wykonania"]
                     storage.update_job(job_id, updates)
                 except Exception as e:
                     krok.log(f"[WARN] Błąd pobierania detali #{job_id}: {e}")
@@ -190,7 +168,7 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
         # leżą świeże zlecenia z tego tygodnia ze statusem POBRANO_DETALE / NOWA, które nie zostały
         # jeszcze przetworzone (np. po restarcie serwera / bota) -> włączamy je do selekcji i kolejki!
         zlecenia_do_selekcji = list(nowe_zlecenia)
-        existing_ids = {str(x.get("id")) for x in zlecenia_do_selekcji}
+        existing_ids = {str(x.get("id")) for x in nowe_zlecenia}
         cutoff_date = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
         for kat in config.CATEGORY_URLS.keys():
             slug = storage._get_category_slug(kat)
@@ -225,7 +203,7 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                 except Exception:
                     pass
 
-        # Filtr Anty-Tłum (max 60 ofert) oraz Fast-Track VIP + Blokada własnych profili
+        # Filtr Lokalizacji (Miejsce wykonania), Anty-Tłum (max 60 ofert) oraz Fast-Track VIP + Blokada własnych profili
         przefiltrowane = []
         for z in zlecenia_do_selekcji:
             aid = str(z.get("author_id", "") or (z.get("list_details") or {}).get("author_id", ""))
@@ -235,12 +213,18 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                 storage.update_job(z.get("id"), {"status": "ODRZUCONA_WLASNY_PROFIL", "selekcja_powod": f"Własny profil ({aname or aid}) - bezwzględny zakaz składania ofert"})
                 continue
 
+            miejsce_wyk = str(z.get("miejsce_wykonania") or (z.get("full_details") or {}).get("miejsce_wykonania") or "").strip()
+            if config.is_onsite_location(miejsce_wyk):
+                print(f"[ODRZUT MIEJSCE WYKONANIA] Zlecenie #{z.get('id')} ({z.get('title')}) odrzucone: Miejsce wykonania = '{miejsce_wyk}'.", flush=True)
+                storage.update_job(z.get("id"), {"status": "ODRZUCONA_LOKALIZACJA", "selekcja_powod": f"Miejsce wykonania: {miejsce_wyk} (całkowity odrzut zleceń z miejscem wykonania)"})
+                continue
+
             offers_cnt = int(z.get("offers_count") or (z.get("list_details") or {}).get("offers_count") or 0)
             title_str = str(z.get("title", ""))
             desc_str = str(z.get("short_desc", "")) + " " + str(z.get("full_description", ""))
             full_text = (title_str + " " + desc_str).lower()
 
-            matched_trap = config.is_hard_reject(title_str, desc_str)
+            matched_trap = config.is_hard_reject(title_str, desc_str, miejsce_wyk)
             if matched_trap:
                 print(f"[FILTR PUŁAPEK / RED OCEAN] Zlecenie #{z.get('id')} odrzucone przed AI (wykryto wzorzec: '{matched_trap}').", flush=True)
                 storage.update_job(z.get("id"), {"status": "ODRZUCONA_PULAPKA", "selekcja_powod": f"Filtr pułapek / Red Ocean ({matched_trap})"})
@@ -267,6 +251,14 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         opis="AI czyta pełne opisy nowych ogłoszeń i decyduje, które pasują do naszych umiejętności — resztę odrzuca.") as krok:
             krok.narzedzie = "AI Pipeline"
             wybrane_oferty = ai.filter_offers(zlecenia_do_selekcji)
+            wybrane_ids_set = {str(o.get("id")) for o in wybrane_oferty}
+            for z in zlecenia_do_selekcji:
+                zid = str(z.get("id", ""))
+                if zid and zid not in wybrane_ids_set:
+                    storage.update_job(zid, {
+                        "status": "ODRZUCONA_AI",
+                        "selekcja_powod": z.get("rejection_reason", "Odrzucona przez Selekcjonera AI #1")
+                    })
             krok.wyjscie = f"AI zakwalifikowało {len(wybrane_oferty)} z {len(zlecenia_do_selekcji)} ofert"
             krok.log(krok.wyjscie)
 
@@ -301,7 +293,11 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                 except Exception:
                     pass
 
+        # Oferty z gotową propozycją AI (PRZYGOTOWANA) wysyłamy w pierwszej kolejności (zanim sesja wygaśnie podczas długich łańcuchów AI)
+        do_wyslania.sort(key=lambda j: 0 if ((j.get("ai_proposal") or {}).get("opis")) else 1)
+
         print(f"[KOLEJKA] Do wysłania w tym runie: {len(do_wyslania)} ofert z magazynu/selekcji", flush=True)
+        session_expired = False
         for job in do_wyslania:
             job_id = job["id"]
             try:
@@ -345,6 +341,12 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         storage.update_job(job_id, {"status": "ODRZUCONA_WLASNY_PROFIL", "selekcja_powod": f"Własny profil ({aname_after or aid_after})"})
                         report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "ODRZUCONA_WLASNY_PROFIL"})
                         continue
+                    loc_after = str(details.get("miejsce_wykonania", "")).strip()
+                    if config.is_onsite_location(loc_after):
+                        print(f"[ODRZUT MIEJSCE WYKONANIA] Zlecenie #{job_id} po pobraniu detali posiada Miejsce wykonania: '{loc_after}'. Pomijam!", flush=True)
+                        storage.update_job(job_id, {"status": "ODRZUCONA_LOKALIZACJA", "selekcja_powod": f"Miejsce wykonania: {loc_after}"})
+                        report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "ODRZUCONA_LOKALIZACJA"})
+                        continue
 
                 # Detekcja powtórki: ten sam klient (author_id) dostał już od nas ofertę?
                 author_id = str(job.get("author_id", "")).strip()
@@ -384,12 +386,16 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                     saved_prop = job.get("ai_proposal") or (storage.load_job(job_id) or {}).get("ai_proposal")
                     if saved_prop and saved_prop.get("opis"):
                         krok.log(f"Wczytano gotową propozycję z bazy dla #{job_id} ({saved_prop.get('wycena')} zł / {saved_prop.get('dni')} dni).")
+                        saved_meta = dict(saved_prop.get("metadata") or {})
+                        for k in ("audyt_100", "audyt_r1", "audyt_rundy", "audyt_wynik_100"):
+                            if saved_prop.get(k) and k not in saved_meta:
+                                saved_meta[k] = saved_prop[k]
                         proposal = ProposalResult(
                             opis=saved_prop["opis"],
                             wycena=saved_prop.get("wycena", 1500),
                             dni=saved_prop.get("dni", 7),
                             powod_wyboru=saved_prop.get("powod", "Zapisana w magazynie"),
-                            metadata=saved_prop.get("metadata")
+                            metadata=saved_meta
                         )
                     else:
                         if previous_offers:
@@ -417,17 +423,23 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "SANITY_BLOK", "error": powod_blok})
                         continue
 
+                    ai_prop_data = {
+                        "opis": proposal.opis,
+                        "wycena": proposal.wycena,
+                        "dni": proposal.dni,
+                        "powod": proposal.powod_wyboru,
+                        "tier": job.get("tier"),
+                        "sciezka": job.get("sciezka"),
+                        "typ_klienta": job.get("typ_klienta"),
+                        "modyfikatory": job.get("modyfikatory", []),
+                    }
+                    if isinstance(proposal.metadata, dict):
+                        for k in ("audyt_100", "audyt_r1", "audyt_rundy", "audyt_wynik_100"):
+                            if proposal.metadata.get(k):
+                                ai_prop_data[k] = proposal.metadata[k]
+
                     storage.update_job(job_id, {
-                        "ai_proposal": {
-                            "opis": proposal.opis,
-                            "wycena": proposal.wycena,
-                            "dni": proposal.dni,
-                            "powod": proposal.powod_wyboru,
-                            "tier": job.get("tier"),
-                            "sciezka": job.get("sciezka"),
-                            "typ_klienta": job.get("typ_klienta"),
-                            "modyfikatory": job.get("modyfikatory", []),
-                        },
+                        "ai_proposal": ai_prop_data,
                         "tier": job.get("tier"),
                         "sciezka": job.get("sciezka"),
                         "typ_klienta": job.get("typ_klienta"),
@@ -443,7 +455,7 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         stawka_z_rozbicia = meta.get("stawka")
                     except Exception:
                         pass
-                    storage.zapisz_oferte(job_id, {
+                    wpis_oferty = {
                         "job_id": str(job_id),
                         "konto": konto_id,
                         "tryb": tryb,
@@ -458,7 +470,17 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         "variation_seed": job.get("variation_seed"),
                         "dlugosc_opisu": len(proposal.opis or ""),
                         "opis": proposal.opis,
-                    })
+                    }
+                    if isinstance(proposal.metadata, dict):
+                        for k in ("audyt_100", "audyt_r1", "audyt_rundy", "audyt_wynik_100"):
+                            if proposal.metadata.get(k):
+                                wpis_oferty[k] = proposal.metadata[k]
+                    storage.zapisz_oferte(job_id, wpis_oferty)
+                    try:
+                        from pokaz_audyt import eksportuj_wszystkie_audyty_do_folderu
+                        eksportuj_wszystkie_audyty_do_folderu()
+                    except Exception:
+                        pass
                     krok.log(f"[ZAPIS] Oferta ({konto_id}, {tryb}): {proposal.wycena} zl / {proposal.dni} dni, "
                              f"{len(proposal.opis or '')} znakow.")
 
@@ -473,6 +495,11 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         print(f"[GLOBAL-DUP] blad sprawdzania: {e}", flush=True)
                     krok.wyjscie = f"Wycena: {proposal.wycena} PLN, Dni: {proposal.dni}"
                     krok.log(f"Treść oferty:\n{proposal.opis[:200]}...")
+
+                if session_expired:
+                    print(f"[SESJA WYGASŁA] Oferta #{job_id} zapisana jako PRZYGOTOWANA w magazynie (czeka na odświeżenie cookies).", flush=True)
+                    report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "PRZYGOTOWANA_CZEKA_NA_COOKIES"})
+                    continue
 
                 # Wypełnienie formularza (DRY-RUN)
                 with chain.step(f"Formularz Useme #{job_id} ({konto_id}, {'DRY-RUN' if dry_run else 'WYSYŁKA'})", typ="kod",
@@ -489,6 +516,7 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         now_dt = datetime.now()
                         if res.get("status") == "WYSLANO":
                             updates["data_wyslania"] = now_dt.isoformat()
+                            driver.save_cookies()
                         if res.get("status") in ("WYSLANO", "DRY_RUN_OK"):
                             det_raw = job.get("detected_at") or (job.get("full_details") or {}).get("scraped_at") or ""
                             if det_raw:
@@ -514,10 +542,10 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                             if delay_s > 0:
                                 time.sleep(delay_s)
                     except AuthenticationRequiredError as auth_err:
-                        krok.log(f"[STOP] {auth_err}")
-                        krok.wyjscie = "Wymagane logowanie (cookies wygasły)"
+                        krok.log(f"[STOP FORMULARZA] {auth_err}")
+                        krok.wyjscie = "Wymagane logowanie (cookies wygasły) - oferta zapisana jako PRZYGOTOWANA"
                         report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "AUTH_REQUIRED", "error": str(auth_err)})
-                        break  # Brak sesji uniemożliwia dalsze formularze
+                        session_expired = True  # Generuj kolejne oferty AI do magazynu, ale pomijaj formularze
                     except Exception as form_err:
                         krok.log(f"[BŁĄD FORMULARZA] {form_err}")
                         krok.wyjscie = f"BŁĄD: {form_err}"

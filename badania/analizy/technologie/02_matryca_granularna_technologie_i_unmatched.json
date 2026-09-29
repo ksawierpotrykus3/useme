@@ -1,376 +1,194 @@
 {
-  "summary": {
-    "total_jobs": 470,
-    "total_won": 56,
-    "total_lost": 414,
-    "tech_specified_jobs": 315,
-    "tech_agnostic_jobs": 155,
-    "tech_agnostic_pct": 33.0,
-    "tech_agnostic_won": 17,
-    "tech_agnostic_win_rate_pct": 10.97
-  },
-  "warning_sample_size": "OSTRZEŻENIE STATYSTYCZNE: Z powodu ograniczonej próby wygranych (n=56), wskaźniki Win Rate dla technologii o liczbie zleceń n < 15 obarczone są bardzo wysoką wariancją (+/- 25-35%). Nie stanowią one deterministycznych 'złotych strzałów', lecz wstępne hipotezy badawcze. Jedyną statystycznie istotną grupą wolumenową o niskim Win Rate jest WordPress/WooCommerce (n=104, WR=6.7%).",
-  "granular_technologies": {
+  "updated_at": "2026-09-28 14:34:38",
+  "total_jobs_analyzed": 481,
+  "technologies_28": {
     "WordPress / WooCommerce": {
-      "total": 104,
-      "wygrane": 7,
-      "przegrane": 97,
-      "win_rate_pct": 6.73
+      "total": 108,
+      "wins": 7,
+      "losses": 101,
+      "win_rate_pct": 6.5
     },
     "Laravel / PHP": {
-      "total": 44,
-      "wygrane": 5,
-      "przegrane": 39,
-      "win_rate_pct": 11.36
+      "total": 46,
+      "wins": 5,
+      "losses": 41,
+      "win_rate_pct": 10.9
     },
     "Shopify / Liquid": {
       "total": 31,
-      "wygrane": 4,
-      "przegrane": 27,
+      "wins": 4,
+      "losses": 27,
       "win_rate_pct": 12.9
     },
     "React / Next.js": {
       "total": 30,
-      "wygrane": 3,
-      "przegrane": 27,
+      "wins": 3,
+      "losses": 27,
       "win_rate_pct": 10.0
     },
     "Python / Django / FastAPI": {
-      "total": 27,
-      "wygrane": 5,
-      "przegrane": 22,
-      "win_rate_pct": 18.52
+      "total": 28,
+      "wins": 5,
+      "losses": 23,
+      "win_rate_pct": 17.9
+    },
+    "Bazy danych / SQL": {
+      "total": 28,
+      "wins": 2,
+      "losses": 26,
+      "win_rate_pct": 7.1
     },
     "DevOps / Docker / VPS": {
       "total": 27,
-      "wygrane": 3,
-      "przegrane": 24,
-      "win_rate_pct": 11.11
-    },
-    "Bazy danych / SQL": {
-      "total": 27,
-      "wygrane": 2,
-      "przegrane": 25,
-      "win_rate_pct": 7.41
+      "wins": 3,
+      "losses": 24,
+      "win_rate_pct": 11.1
     },
     "Make / n8n / Zapier": {
       "total": 26,
-      "wygrane": 1,
-      "przegrane": 25,
-      "win_rate_pct": 3.85
+      "wins": 1,
+      "losses": 25,
+      "win_rate_pct": 3.8
     },
     "Computer Vision / OCR / AI": {
       "total": 24,
-      "wygrane": 2,
-      "przegrane": 22,
-      "win_rate_pct": 8.33
+      "wins": 2,
+      "losses": 22,
+      "win_rate_pct": 8.3
     },
     "PrestaShop": {
-      "total": 23,
-      "wygrane": 3,
-      "przegrane": 20,
-      "win_rate_pct": 13.04
+      "total": 24,
+      "wins": 3,
+      "losses": 21,
+      "win_rate_pct": 12.5
     },
     "Kotlin / Android native": {
       "total": 22,
-      "wygrane": 6,
-      "przegrane": 16,
-      "win_rate_pct": 27.27
+      "wins": 6,
+      "losses": 16,
+      "win_rate_pct": 27.3
     },
     "Swift / iOS native": {
       "total": 20,
-      "wygrane": 4,
-      "przegrane": 16,
+      "wins": 4,
+      "losses": 16,
       "win_rate_pct": 20.0
     },
     "BaseLinker": {
       "total": 20,
-      "wygrane": 1,
-      "przegrane": 19,
+      "wins": 1,
+      "losses": 19,
       "win_rate_pct": 5.0
     },
     "Node.js / Express / Nest": {
-      "total": 16,
-      "wygrane": 1,
-      "przegrane": 15,
-      "win_rate_pct": 6.25
+      "total": 17,
+      "wins": 1,
+      "losses": 16,
+      "win_rate_pct": 5.9
     },
     "Scraping (Selenium/Playwright/Bs4)": {
       "total": 14,
-      "wygrane": 3,
-      "przegrane": 11,
-      "win_rate_pct": 21.43
+      "wins": 3,
+      "losses": 11,
+      "win_rate_pct": 21.4
     },
     "Figma / UI design": {
       "total": 13,
-      "wygrane": 2,
-      "przegrane": 11,
-      "win_rate_pct": 15.38
+      "wins": 2,
+      "losses": 11,
+      "win_rate_pct": 15.4
     },
     "Shoper": {
       "total": 10,
-      "wygrane": 1,
-      "przegrane": 9,
+      "wins": 1,
+      "losses": 9,
       "win_rate_pct": 10.0
     },
     "Framer / Webflow": {
       "total": 10,
-      "wygrane": 1,
-      "przegrane": 9,
+      "wins": 1,
+      "losses": 9,
       "win_rate_pct": 10.0
     },
     "IdoSell (IAI)": {
       "total": 9,
-      "wygrane": 3,
-      "przegrane": 6,
-      "win_rate_pct": 33.33
+      "wins": 3,
+      "losses": 6,
+      "win_rate_pct": 33.3
     },
     "Subiekt (GT / nexo / Sfera)": {
-      "total": 8,
-      "wygrane": 1,
-      "przegrane": 7,
-      "win_rate_pct": 12.5
+      "total": 9,
+      "wins": 1,
+      "losses": 8,
+      "win_rate_pct": 11.1
     },
     "Enova365": {
       "total": 7,
-      "wygrane": 2,
-      "przegrane": 5,
-      "win_rate_pct": 28.57
+      "wins": 2,
+      "losses": 5,
+      "win_rate_pct": 28.6
     },
     "Flutter / Dart": {
       "total": 7,
-      "wygrane": 0,
-      "przegrane": 7,
+      "wins": 0,
+      "losses": 7,
       "win_rate_pct": 0.0
     },
     "Vue / Nuxt": {
       "total": 6,
-      "wygrane": 1,
-      "przegrane": 5,
-      "win_rate_pct": 16.67
+      "wins": 1,
+      "losses": 5,
+      "win_rate_pct": 16.7
     },
     ".NET / C#": {
       "total": 6,
-      "wygrane": 0,
-      "przegrane": 6,
+      "wins": 0,
+      "losses": 6,
       "win_rate_pct": 0.0
     },
     "VoIP / Asterisk / SIP": {
       "total": 5,
-      "wygrane": 2,
-      "przegrane": 3,
+      "wins": 2,
+      "losses": 3,
       "win_rate_pct": 40.0
     },
     "Comarch (Optima / XL)": {
-      "total": 4,
-      "wygrane": 0,
-      "przegrane": 4,
+      "total": 5,
+      "wins": 0,
+      "losses": 5,
       "win_rate_pct": 0.0
     },
     "React Native": {
       "total": 3,
-      "wygrane": 0,
-      "przegrane": 3,
+      "wins": 0,
+      "losses": 3,
       "win_rate_pct": 0.0
     },
     "TopSolid / CAD / CAM": {
       "total": 2,
-      "wygrane": 1,
-      "przegrane": 1,
+      "wins": 1,
+      "losses": 1,
       "win_rate_pct": 50.0
     }
   },
-  "unmatched_won_samples": [
-    {
-      "title": "Zlecenie: MVP aplikacji webowej do screeningu danych względem list referencyjnych",
-      "price": "14000,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nSzukam wykonawcy do stworzenia MVP aplikacji webowej typu SaaS umożliwiającej screening produktów względem różnych list referencyjnych oraz gener"
-    },
-    {
-      "title": "Airtable Consultancy",
-      "price": "2300,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Projekty IT",
-      "desc_snippet": "Opis\n# Request for Quotation — Airtable consultancy\n## About us\nWe are a rental management company based in Krakow, managing apartments on behalf of p"
-    },
-    {
-      "title": "Automatyzacja pozyskiwania partnerów",
-      "price": "2500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nAutomatyzacja pozyskiwania partnerów\nChcę stworzyć system do:\nwyszukiwania określonych branż z Google Maps bądź katalogów np. kancelarii prawnych"
-    },
-    {
-      "title": "Stworzenie arkusza kalkulacyjnego do tworzenia kosztorysów",
-      "price": "1500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Projekty IT",
-      "desc_snippet": "Opis\nDam zlecenie na stworzenie arkusza kalkulacyjnego do tworzenia kosztorysów budowy domów jednorodzinnych.\nPosiadam arkusz wzorcowy na podstawie kt"
-    },
-    {
-      "title": "walka z bossem pokewars",
-      "price": "400,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nwitam.szukam osoby która podjeła by się stworzenia  prostego skryptu do gry\npokewars.pl\n. co powinien robić skrypt 1 logujemy się na konto naszej"
-    },
-    {
-      "title": "Audyt strony + poprawa UX",
-      "price": "600,00 PLN",
-      "won": true,
-      "category": "Serwisy internetowe · Sklepy internetowe",
-      "desc_snippet": "Opis\nMam gotowy projekt strony (zrobiony przez developera), ale:\nukład nie jest intuicyjny\nteksty nie brzmią sprzedażowo\ncałość nie oddaje klimatu mar"
-    },
-    {
-      "title": "Testy ABCDE i integracja z istniejącą platformą edukacyjną",
-      "price": "6500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nSzukam osoby, która stworzy funkcjonalność testów ABCDE i zintegruje ją z istniejącą platformą edukacyjną. Chodzi o moduł testów , który będzie o"
-    },
-    {
-      "title": "Aplikacja mobilna ogłoszenia",
-      "price": "7000,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Aplikacje mobilne",
-      "desc_snippet": "Opis\nWitam szukam oferty kto zrobi mi aplikacje mobilną podobna do tik tok tylko że będzie to portal ogłoszeniowy krótki filmik lub zdjęcie rzeczy któ"
-    },
-    {
-      "title": "Bitrix - wdrożenie",
-      "price": "2400,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nWitam poszukuję osoby która pomoże nam we wdrożeniu systemu Bitrix24 w firmie."
-    },
-    {
-      "title": "Zlecę analizę forensic dysku systemowego Windows (serwer) – podejrzenie sabotażu przez pendrive",
-      "price": "3300,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Administracja serwerami",
-      "desc_snippet": "Opis\nSzukam specjalisty od analizy kryminalistycznej (digital forensics) dysku systemowego Windows. Do systemu doszło do nieautoryzowanej ingerencji, "
-    },
-    {
-      "title": "Rozwój projektu zbudowanego w Bubble",
-      "price": "6500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nZapraszam do współpracy freelancera lub ew. agencję do rozwoju projektu zbudowanego w Bubble. Współpraca z potencjałem długoterminowym, która pol"
-    },
-    {
-      "title": "wykonanie UI bota do przenoszenia danych z portalu do Wapro Kaper",
-      "price": "8500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nChcemy wykonać dla nas UI bota / automatyzację, która będzie przenosiła określone dane z naszego własnego portalu księgowego do programu Asseco W"
-    },
-    {
-      "title": "Zlecenie: Automatyzacja testu online (quiz diagnostyczny dla liderów)",
-      "price": "2500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Projekty IT",
-      "desc_snippet": "Opis\nSzukam freelancera do zbudowania i zautomatyzowania prostego testu online (ok. 20 pytań), który automatycznie oblicza wyniki i generuje interpret"
-    },
-    {
-      "title": "Wykonanie połączenia oprogramowania PMS (recepcji hotelu) z Booking.com",
-      "price": "4200,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nInteresuje mnie bezpośrednie pobieranie danych z\nbooking.com\n.  Problemem nie jest wykonanie samego oprogramowania , ale dowiedzenie się jak to z"
-    },
-    {
-      "title": "Usunięcie danych posprzedażowych z zewnętrznych serwisów internetowych.",
-      "price": "1200,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nWitam,\nSzukam osoby, która pomoże mi uporządkować proces usuwania danych posprzedażowych z zewnętrznych serwisów internetowych.\nW skrócie: kupuję"
-    },
-    {
-      "title": "System rezerwacji terminów dla psychologów",
-      "price": "3500,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nModuł: Kalendarz rezerwacji usług psychologicznych\nCel systemu\nCelem systemu jest umożliwienie psychologowi / psychoterapeucie:\ndefiniowania dost"
-    },
-    {
-      "title": "szybka akcja gangsters.pl",
-      "price": "400,00 PLN",
-      "won": true,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nwitam.szukam osoby która wykonała by skrypt do gry\ngangsters.pl\n. co powinien robić skrypt 1 analizuje naszą siłę ataku 2 na jej podstawie wybier"
+  "unmatched_summary": {
+    "total_unmatched": 158,
+    "pct_of_all_jobs": 32.8,
+    "wins": 17,
+    "losses": 141,
+    "win_rate_pct": 10.8,
+    "categories_breakdown": {
+      "Programowanie i IT · Oprogramowanie": 40,
+      "Programowanie i IT · Aplikacje webowe": 40,
+      "Programowanie i IT · Projekty IT": 27,
+      "Serwisy internetowe · Strony internetowe": 22,
+      "Serwisy internetowe · Sklepy internetowe": 10,
+      "Serwisy internetowe · Obsługa sklepów internetowych": 7,
+      "Programowanie i IT · Administracja serwerami": 5,
+      "Programowanie i IT · Aplikacje mobilne": 3,
+      "Marketing · SEO": 2,
+      "Marketing · Sprzedaż i obsługa sprzedaży": 1,
+      "Marketing · Kampanie reklamowe": 1
     }
-  ],
-  "unmatched_lost_samples_top10": [
-    {
-      "title": "Wdrożenie centralnego systemu obsługi klienta dla e-commerce (Magento + IDEA Commerce)",
-      "price": "30000,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Projekty IT",
-      "desc_snippet": "Opis\n### Cel / priorytet rozwiązania\nGłównym priorytetem jest\ncentralizacja komunikacji z klientami\n: zebranie wszystkich kanałów (mail, czat, WhatsAp"
-    },
-    {
-      "title": "Rozbudowana gra mobilna premium – developer",
-      "price": "8000,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nSzukam osoby do dłuższej współpracy przy większym projekcie mobilnym. Projekt to gra osadzona w świecie królestwa, z rozbudowanymi mechanikami, r"
-    },
-    {
-      "title": "Migracja 5952 ogłoszeń z OTOMOTO na Allegro (Wymagane doświadczenie i gotowy skrypt)",
-      "price": "9000,00 PLN",
-      "won": false,
-      "category": "Serwisy internetowe · Obsługa sklepów internetowych",
-      "desc_snippet": "Opis\nSzukam profesjonalisty z gotowym, działającym skryptem, który przeprowadzi bezpieczną migrację 5952 ofert części samochodowych z mojego sklepu OT"
-    },
-    {
-      "title": "Projekt i wykonanie profesjonalnej strony internetowej b2b- eksport/import FMCG",
-      "price": "7000,00 PLN",
-      "won": false,
-      "category": "Serwisy internetowe · Strony internetowe",
-      "desc_snippet": "Opis\nSzukam freelancera lub niewielkiego studia do zaprojektowania i wykonania profesjonalnej strony internetowej dla mojej firmy zajmującej się rozwo"
-    },
-    {
-      "title": "Witam szukam programisty aplikacji mobilnej",
-      "price": "4500,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Aplikacje mobilne",
-      "desc_snippet": "Opis\nWitam szukam programisty aplikacji mobilnej do dokończenia aplikacji\nWymagane funkcje:\nZałożenie konta google i Apple\nSystem operacyjny:\nApi"
-    },
-    {
-      "title": "Projekt i wykonanie strony internetowej marki spożywczej – docelowo sklep internetowy",
-      "price": "6000,00 PLN",
-      "won": false,
-      "category": "Serwisy internetowe · Strony internetowe",
-      "desc_snippet": "Opis\nPoszukujemy osoby do zaprojektowania i wykonania nowoczesnej strony internetowej dla marki produktów spożywczych iGotowe.\nProdukujemy dania gotow"
-    },
-    {
-      "title": "System chmurowy do rejestracji i rozliczania czasu przez API",
-      "price": "12000,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nPoszukujemy wykonawcy do stworzenia chmurowego systemu do rejestracji zdarzeń i automatycznego rozliczania czasu.\nSystem ma odbierać dane z urząd"
-    },
-    {
-      "title": "Integracja API - Cloudtalk.io -----> Notion",
-      "price": "1200,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nhttps://www.cloudtalk.io/\ndo Notion. Transkrypcja rozmów i notatki AI ----_ do CRM Notion. Zlecę konfigurację przez API chyba. Plan Essential\nhtt"
-    },
-    {
-      "title": "Moodle — konfiguracja i automatyzacja przydzielania ankiet",
-      "price": "7000,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Aplikacje webowe",
-      "desc_snippet": "Opis\nZlecę wdrożenie w Moodle narzędzia do jednoczesnego przydzielania uczestnikom ankiet według zadanego klucza oraz sterowania ich dostępnością prze"
-    },
-    {
-      "title": "Stworzenie Inteligentnej Platformy AI do Zakupu i zarzadzadzania Bazami.",
-      "price": "5000,00 PLN",
-      "won": false,
-      "category": "Programowanie i IT · Oprogramowanie",
-      "desc_snippet": "Opis\nCelem projektu jest stworzenie inteligentnej platformy AI do zakupu samochodów, która pracuje automatycznie 24 godziny na dobę, 7 dni w tygodniu."
-    }
-  ]
+  }
 }

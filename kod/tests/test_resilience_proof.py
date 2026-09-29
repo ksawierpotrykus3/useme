@@ -54,6 +54,9 @@ def test_1_checkpoint_save_and_resume():
         elif "agent 02a" in sys_lower or "agent_02a" in sys_lower:
             called_slots.append("02a")
             return "Dzień dobry, z chęcią zrealizuję aplikację Flutter."
+        elif "agent 00" in sys_lower or "agent_00" in sys_lower or "reżyser kontekstowy" in sys_lower:
+            called_slots.append("00")
+            return "1. WYMOGI: Flutter.\n2. PLAN: Konkretne wdrożenie.\n3. BLOKADY: Brak plików.\n4. DYSCYPLINA: 0 myślników, 0 nawiasów."
         called_slots.append("other")
         return "PASS"
 
@@ -91,6 +94,8 @@ def test_2_fallback_21_chars_no_hang():
             return ""  # Zwracamy pusty wynik z researchu
         elif "agent 02b" in sys_lower or "agent_02b" in sys_lower:
             return "[WYCENA_JSON]\n{\"typ\": \"projekt\", \"moduly\": [{\"nazwa\": \"Fix\", \"godziny_real\": 10}], \"uzasadnienie\": \"ok\"}\n[/WYCENA_JSON]\n[WYNIK_KONCOWY]\nKWOTA: 1000\nDNI: 7\n[/WYNIK_KONCOWY]"
+        elif "agent 00" in sys_lower or "agent_00" in sys_lower or "orchestrator" in sys_lower:
+            return "1. WYMOGI: Fix.\n2. PLAN: Naprawa.\n3. BLOKADY: Brak baz.\n4. DYSCYPLINA: 0 myślników."
         elif "agent 02a" in sys_lower or "agent_02a" in sys_lower:
             return "Dzień dobry, z chęcią wykonam to zlecenie. Posiadam bogate doświadczenie i gwarantuję najwyższą jakość."
         elif "agent 08" in sys_lower or "agent_08" in sys_lower:

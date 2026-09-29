@@ -63,6 +63,18 @@ class BrowserDriver:
             except Exception as e:
                 print(f"[WARN] Błąd ładowania cookies z {self.cookies_path}: {e}")
 
+    def save_cookies(self):
+        """Zapisuje aktualne ciasteczka z kontekstu na dysk (np. po rotacji sessionid przez Useme)."""
+        if not self.context or not self.cookies_path:
+            return
+        try:
+            current_cookies = self.context.cookies()
+            if any(c.get("name") == "sessionid" for c in current_cookies):
+                with open(self.cookies_path, "w", encoding="utf-8") as f:
+                    json.dump(current_cookies, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[WARN] Błąd zapisu cookies do {self.cookies_path}: {e}")
+
     def close(self):
         if self.context:
             self.context.close()
@@ -143,6 +155,29 @@ class BrowserDriver:
                 return author, self._normalize_author(author)
             break
         return "", "anonim"
+
+    def _extract_location_from_details(self, soup) -> str:
+        """Wyciąga 'Miejsce wykonania' ze strony zlecenia Useme (jeśli występuje).
+
+        Na Useme zlecenia wymagające fizycznej obecności posiadają blok .jobs-summary__item
+        z etykietą 'Miejsce wykonania:' oraz wartością w .jobs-summary__item-text lub .jobs-summary__item-value.
+        """
+        for item in soup.select(".jobs-summary__item"):
+            label = item.select_one(".jobs-summary__item-label")
+            if not label or "miejsce wykonania" not in label.get_text(strip=True).lower():
+                continue
+            val_el = item.select_one(".jobs-summary__item-text, .jobs-summary__item-value")
+            if val_el:
+                loc = val_el.get_text(" ", strip=True)
+                if loc:
+                    return loc
+            # Fallback: tekst całego itemu po odjęciu etykiety
+            full_item_text = item.get_text(" ", strip=True)
+            label_text = label.get_text(" ", strip=True)
+            loc_fallback = full_item_text.replace(label_text, "", 1).strip(" :-")
+            if loc_fallback:
+                return loc_fallback
+        return ""
 
     def fetch_category_jobs(self, category_key: str, max_jobs: int = config.MAX_OFFERS_PER_CATEGORY, should_stop_fn: Optional[Callable[[str], bool]] = None) -> List[Dict[str, Any]]:
         """Pobiera listę najnowszych zleceń z danej kategorii.
@@ -310,6 +345,7 @@ class BrowserDriver:
 
             # Autor zlecenia – z etykiety "Zleceniodawca" (patrz _extract_author_from_details).
             author, author_id = self._extract_author_from_details(soup)
+            miejsce_wykonania = self._extract_location_from_details(soup)
 
             # Znalezienie linku do formularza składania oferty lub wykrycie już złożonej oferty
             already_offer_btn = page.locator("a:has-text('Twoja oferta')").first
@@ -326,6 +362,7 @@ class BrowserDriver:
                 "full_description": full_desc,
                 "author": author,
                 "author_id": author_id,
+                "miejsce_wykonania": miejsce_wykonania,
                 "has_add_offer_button": has_add_button,
                 "add_offer_href": add_offer_href,
                 "is_already_submitted": is_already_submitted,

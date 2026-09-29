@@ -1,20 +1,19 @@
-# PROFIL OPERACYJNY KLIENTA: AGENCJA / SOFTWARE HOUSE — PODWYKONAWSTWO B2B (agencja)
+# PROFIL OPERACYJNY KLIENTA: AGENCJA LUB SOFTWARE HOUSE, PODWYKONAWSTWO B2B
 
-## 1. Minimum Operacyjne (Kim jest i czego się boi)
-- **Kto to jest:** CTO, Tech Lead lub PM w software house / agencji interaktywnej, któremu pali się deadline przed klientem końcowym (np. wypadł developer w połowie sprintu albo zespół nie zna niszowej technologii jak Kotlin, Three.js, .NET).
-- **Główny lęk:** Kolejny niesamodzielny podwykonawca, którego trzeba niańczyć, tłumaczyć mu podstawy Git/Jira, albo który będzie chciał przepisywać zastany kod od zera zamiast dowieźć konkretny feature przed releasem.
-- **Stosunek do ceny:** Ma zatwierdzony budżet projektowy lub stawkę godzinową (u nas zawsze **90 zł/h**). Decyzję podejmuje bardzo szybko (1–3 wiadomości), jeśli widzi samodzielnego inżyniera.
+## 1. Charakterystyka klienta
+- CTO, Tech Lead lub Project Manager w software house albo agencji interaktywnej, któremu zależy na szybkim dowiezieniu konkretnego modułu lub zamknięciu sprintu.
+- Główna obawa: niesamodzielny podwykonawca, którego trzeba prowadzić za rękę, albo ktoś, kto chce przepisywać zastany kod od zera zamiast dowieźć konkretne zadanie.
+- Ma zatwierdzony budżet projektowy lub stawkę godzinową, która u nas wynosi zawsze 90 zł za godzinę.
 
-## 2. Konkret, który MUSI paść w ofercie
-- Komunikuj **pełną samodzielność operacyjną**: bezproblemowe wejście w zastane repozytorium, praca na branchach, czytelne PR-y, dowiezienie modułu na staging bez blokowania zespołu.
-- Odnieś się bezpośrednio do wymaganego stacku technicznego z ogłoszenia i wskaż, jak rozwiążesz główny problem architektoniczny.
-- Jeśli ogłoszenie wymaga stawki godzinowej lub modelu B2B, podaj wprost **90 zł/h** oraz gotowość do natychmiastowego wejścia w kod.
+## 2. Kiedy i jakie argumenty warto wykorzystać, jeśli pasują do ogłoszenia
+- Komunikuj pełną samodzielność operacyjną: sprawne wejście w zastane repozytorium, praca na gałęziach Git, czytelne Pull Requesty i dowiezienie modułu na środowisko testowe bez blokowania zespołu.
+- Odnieś się bezpośrednio do wymaganego stosu technologicznego z ogłoszenia i wskaż, jak rozwiążesz główny problem techniczny.
+- Jeśli ogłoszenie dotyczy rozliczenia godzinowego lub modelu B2B, podaj wprost stawkę 90 zł za godzinę obok wyceny całościowej.
 
-## 3. Czego kategorycznie UNIKAĆ
-- Zakaz pisania jak agencja do agencji („nasz zespół ekspertów kompleksowo zaopiekuje się Państwa projektem") — oni szukają konkretnego inżyniera do kodu, a nie pośrednika z narzutem.
-- Zakaz wykładów o metodologiach (Scrum/Agile) i lania wody. Pisz krótko: jak developer do Tech Leada.
+## 3. Czego kategorycznie unikać
+- Zakaz pisania jak wielka agencja do agencji, ponieważ oni szukają konkretnego inżyniera do kodu, a nie pośrednika.
+- Zakaz wykładów o metodologiach zarządzania i lania wody. Pisz rzeczowo, jak programista do Tech Leada.
+- Całkowity zakaz używania myślników, pauz oraz nawiasów w treści oferty.
 
-## 4. Konstrukcja Question CTA (na koniec oferty)
-Zadaj szybkie pytanie techniczno-procesowe umożliwiające start od ręki:
-- jak wygląda obecny stan repozytorium / dokumentacji API i które zadanie jest pierwszym blokerem na obecny sprint,
-- czy środowisko dev/staging jest już skonfigurowane do weryfikacji PR-ów.
+## 4. Przykładowy kierunek pytania na koniec oferty, jeśli pasuje do tematu
+Zadaj szybkie pytanie techniczno-procesowe umożliwiające start od ręki, na przykład o obecny stan repozytorium, dokumentację API lub o to, które zadanie jest pierwszym priorytetem na obecny sprint.

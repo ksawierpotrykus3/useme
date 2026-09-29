@@ -1,37 +1,33 @@
-# useme_core — Mapa projektu
+# docs/ — dokumentacja projektu useme_core
 
-## Struktura katalogów
+Ten folder opisuje **mechanikę i intencje** projektu. Nie zawiera liczb stanu (statusy, liczniki, daty "na dziś") — te żyją w kodzie i bazie.
 
-Root `useme_core/` zawiera trzy foldery: `kod/`, `docs/`, `badania/`.
+## Jak sprawdzić aktualny stan (komendy, nie pliki)
 
-### `kod/` — silnik bota (co się uruchamia)
-- `engine.py`, `ai_pipeline.py`, `chain_executor.py`, `wycena_kalkulator.py`, `browser_driver.py`, `form_driver.py`, `storage.py`, `config.py`, `bezpieczenstwo.py`
-- `kod/prompts/` — mózg AI (generatory, walidatory, kontekst)
-- `kod/lab/` — testy laboratoryjne silnika
-- `kod/tests/` — testy pytest
-- `kod/tech/` — dokumentacja techniczna, cookies
-- `kod/data/` — stany pipeline'ów zleceń
-- `kod/debug/` — zrzuty ekranu z wysyłek
+```bash
+# Status konfiguracji i flag
+python -c "import sys; sys.path.insert(0,'kod'); import config; print(config.DRY_RUN, config.ZBIERACZ_AKTYWNY)"
 
-### `docs/` — dokumentacja projektu
-- `MASTER.md` — pełna mapa projektu
-- `CHANGELOG_REFORMY.md` — historia zmian
-- `docs/info/` — plany, przepływ, lore, konta, struktura danych
-- `docs/trae/` — reasoning i hipotezy (Trae AI)
+# Liczba i statusy zleceń w bazie
+# (zobacz pliki w badania/baza/<konto>/01_ofertowarka/*.json)
 
-### `badania/` — dane, analizy i strategia
-- **`baza/`** — baza operacyjna (jedno źródło prawdy): `<konto>/<podział>/`
-  - `ksawierpotrykus3/` — `01_ofertowarka/`, `02_przegrane/`, `03_odpisane/`, `_paczki_i_probki/`
-  - `weronikabuchholc13/` — `04_moje_zlecenia/` (zlecenia testowe + oferty + wiadomości per zlecenie)
-- **`rynek/`** — dane o rynku Useme: kategorie, snapshoty, scrapowane podstrony, `katalog_ofert/`, `profil/`
-- **`skrypty/`** — skrypty Pythona do pobierania i analizowania danych
-- **`strategia/`** — wiedza biznesowa (patrz `strategia/README.md`):
-  - `00_rdzen_strategii/` — pliki operacyjne (kompendium, arsenal zamykania, strategia główna, plan portfolio, mystery shopping, lista zleceń)
-  - `01_material_dowodowy/` … `06_system_bazy_klientow/` — materiały szczegółowe
-  - `07_zrodla_unikalne/` — unikatowe źródła (profil, raport wywiadu, zasady pisania, lore)
-  - `_archiwum/` — duplikaty i pliki historyczne
+# Testy
+cd kod; python -m pytest -q
+```
 
-## Kontekst projektu
-Ksawier Potrykus — freelancer na Useme.com, działa w duecie z Maksymilianem.
-Specjalizacja: integracje ERP, automatyzacje, boty, konfiguratory 3D, e-commerce.
-Cel: zwiększenie konwersji ofert w przedziale 3 000 — 25 000 PLN.
+## Struktura
+
+| Folder/plik | Co zawiera |
+|---|---|
+| `architektura/` | Jak działa silnik: przepływ, wycena, selekcja |
+| `referencje/` | Trwała wiedza o platformie Useme i operacjach |
+| `plany/` | Pomysły i plany (STATUS: PLAN) — jeszcze nie wdrożone |
+| `historia/` | Zamrożona przeszłość (post-mortem, reformy) |
+| `STANDARD_DOKUMENTACJI.md` | Zasady trzymania porządku w docs |
+
+## Zasady (skrót)
+
+1. **Jedno źródło prawdy o liczbach** = kod (`config.py`, `wycena_kalkulator.py`). Dokumentacja cytuje, nie kopiuje.
+2. **Zero liczników "na dziś"** w plikach .md.
+3. **Każdy plik ma nagłówek** STATUS (AKTUALNE / PLAN / HISTORYCZNE).
+4. **Jeden temat = jeden plik.**

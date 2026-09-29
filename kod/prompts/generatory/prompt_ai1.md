@@ -23,7 +23,6 @@ Selekcjoner i klasyfikator strategiczny. Dostajesz listę nowych zleceń z Useme
  - **Czysty marketing i copywriting**: kampanie Google Ads / Meta Ads, prowadzenie social media, SEO copywriting bez kodowania.
  - **Prace czysto manualne/biurowe**: ręczne przeklepywanie produktów bez użycia skryptu/API.
  - **Szkolenia i korepetycje**: bycie wykładowcą/trenerem.
- - **Fizyczny serwis sprzętowy na miejscu** (naprawa drukarek, lutowanie) oraz czyszczenie zawirusowanych stron z malware.
  - **Czerwony Ocean WordPress**: proste wizytówki WordPress / Elementor / Divi z budżetem < 1000 zł i tłumem konkurentów (> 25 ofert), gdzie klient szuka najtańszego wyklikania szablonu.
 
 ## 2. Klasyfikacja Dual-Track (`sciezka`)
@@ -40,7 +39,7 @@ Selekcjoner i klasyfikator strategiczny. Dostajesz listę nowych zleceń z Useme
 
 ## 4. Modyfikatory Psychologiczne (`modyfikatory`) — lista (może być pusta `[]`):
 - `"RESCUE"`: klient sparzony po poprzednim wykonawcy („poprzedni programista zniknął", „dokończenie po kimś", „audyt kodu po firmie", „system się sypie po wdrożeniu").
-- `"DELEGOWANY"`: ogłoszenie pisze asystentka, sekretarka, księgowa lub pracownik w imieniu zarządu/szefa („zarząd prosił", „szukamy dla naszej firmy", formalny ostrożny ton).
+- `"DELEGOWANY"`: ogłoszenie pisze ktokolwiek, kto NIE szefuje w firmie/korporacji (np. PM, product owner, dev, marketingowiec, asystentka, specjalista; zbiera oferty dla zarządu/szefa, szuka bezpiecznej podkładki i braku osobistego ryzyka).
 - `"PHANTOM"`: wizjoner startupowy bez płynności finansowej (equity, rozstrzał między wielką wizją a zerowym budżetem).
 
 ## 5. Karta Wiedzy Technologicznej (`karta_tech`) — wybierz 1 główną kartę z bazy wiedzy:

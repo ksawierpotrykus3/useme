@@ -50,8 +50,8 @@ PROXY_BACKOFF_BASE = 2.0
 # Twardy limit czasu jednego wywolania slotu. Bez tego proxy trzymajace
 # otwarte polaczenie bez danych zawieszalo slot na domyslne 300s+.
 SLOT_TIMEOUT = 120
-# Globalny zegar śmierci na przetwarzanie pojedynczej oferty (10 minut max)
-MAX_CHAIN_WALL_CLOCK_S = 600
+# Globalny zegar śmierci na przetwarzanie pojedynczej oferty (15 minut max)
+MAX_CHAIN_WALL_CLOCK_S = 900
 
 _RESEARCH_QUERY_RE = re.compile(
     r"\[RESEARCH_QUERY\](.*?)(?:\[/RESEARCH_QUERY\]|$)", re.DOTALL | re.IGNORECASE
@@ -491,20 +491,28 @@ def _format_tech_card_for_slot(card_key: str, slot_id: str) -> str:
             if any(ch in stripped for ch in ("┌", "│", "└", "▼", "─", "──", "↓")):
                 continue
 
-        # Konwersja wierszy tabel Markdown | A | B | -> czysty tekst bez tabel
+        # Konwersja wierszy tabel Markdown | A | B | -> czysty tekst bez tabel i bez myślników
         if stripped.startswith("|") and stripped.endswith("|"):
             cells = [c.strip() for c in stripped.strip("|").split("|")]
             if all(re.match(r"^[-:]+$", c or "-") for c in cells):
                 continue
-            row_txt = " - ".join(c for c in cells if c)
+            row_txt = ", ".join(c for c in cells if c)
             if slot_id == "02b":
                 row_txt = re.sub(r"\b\d[\d\s–-]*zł\b", "", row_txt, flags=re.IGNORECASE)
-            kept_lines.append("- " + row_txt.replace("**", "").replace("—", "-"))
+            row_clean = row_txt.replace("**", "").replace(" — ", ", ").replace(" – ", ", ").replace(" - ", ", ").replace("—", ", ").replace("–", ", ")
+            if slot_id == "02a":
+                row_clean = re.sub(r"\s*\(([^()]*)\)", r", \1", row_clean)
+            kept_lines.append(row_clean)
             continue
 
         clean_line = line.replace("**", "")
         if slot_id == "02a":
-            clean_line = clean_line.replace("—", "-")
+            clean_line = clean_line.replace(" — ", ", ").replace(" – ", ", ").replace(" - ", ", ").replace("—", ", ").replace("–", ", ")
+            clean_line = re.sub(r"^\s*[-*•]\s+", "", clean_line)
+            while "(" in clean_line and ")" in clean_line:
+                clean_line = re.sub(r"\s*\(([^()]*)\)", r", \1", clean_line)
+            clean_line = clean_line.replace("(", "").replace(")", "")
+            clean_line = re.sub(r",\s*,", ",", clean_line)
         elif slot_id == "02b":
             clean_line = re.sub(r"\(\s*WYCENA[^)]*\)", "", clean_line, flags=re.IGNORECASE)
             clean_line = re.sub(r"\b\d[\d\s–-]*zł\b", "", clean_line, flags=re.IGNORECASE)
@@ -514,15 +522,14 @@ def _format_tech_card_for_slot(card_key: str, slot_id: str) -> str:
     out_text = re.sub(r"\n{3,}", "\n\n", out_text)
     if slot_id == "02a":
         header = (
-            f"--- KARTA WIEDZY TECHNOLOGICZNEJ ({card_key}: {filename}) ---\n"
-            "INSTRUKCJA: Wybierz z poniższej karty TYLKO 2-3 najbardziej trafne perełki merytoryczne "
-            "pasujące bezpośrednio do ogłoszenia klienta (wąskie gardło w 1-2 zdaniu, detale techniczne "
-            "w 2. akapicie, 1 chirurgiczne pytanie kwalifikujące w 3. akapicie). "
-            "Wszystkie elementy wchodzą w skład jednego kompletnego wdrożenia w wycenie bazowej - "
-            "ZAKAZ wypychania czegokolwiek do 'wersji drugiej wycenianej osobno' i ZAKAZ przekraczania limitu słów!\n\n"
+            f"--- POMOCNICZA BAZA WIEDZY TECHNOLOGICZNEJ: {card_key} ---\n"
+            "INSTRUKCJA: Poniższa baza wiedzy to wyłącznie materiał pomocniczy. "
+            "Wybierz z niej tylko to, co realnie pasuje do ogłoszenia klienta i jest zgodne z planem Orchestratora. "
+            "Jeśli dany mechanizm z karty nie dotyczy problemu klienta, całkowicie go pomiń. "
+            "Pamiętaj o całkowitym zakazie używania myślników, pauz oraz nawiasów w treści oferty.\n\n"
         )
         return header + out_text
-    return f"--- KARTA WIEDZY TECHNOLOGICZNEJ DLA WYCENY ({card_key}: {filename}) ---\n" + out_text
+    return f"--- KARTA WIEDZY TECHNOLOGICZNEJ DLA WYCENY: {card_key} ---\n" + out_text
 
 
 def _build_prompt(slot: Dict[str, Any], context: Dict[str, Any]) -> tuple[str, str]:
@@ -545,7 +552,7 @@ def _build_prompt(slot: Dict[str, Any], context: Dict[str, Any]) -> tuple[str, s
     # Dynamiczne wstrzyknięcie scenariusza klienta, modyfikatorów i Kart Wiedzy Technologicznej (tech_01..16)
     zlecenie = context.get("_zlecenie")
     slot_id = str(slot.get("id", ""))
-    if isinstance(zlecenie, dict) and slot_id in ("02a", "02b", "08", "20"):
+    if isinstance(zlecenie, dict) and slot_id in ("00", "02a", "02b", "08", "20"):
         sciezka = str(zlecenie.get("sciezka") or "").strip().lower()
         typ_klienta = str(zlecenie.get("typ_klienta") or "").strip().lower()
         tier = str(zlecenie.get("tier") or "").strip().upper()
@@ -557,25 +564,25 @@ def _build_prompt(slot: Dict[str, Any], context: Dict[str, Any]) -> tuple[str, s
         if sciezka or typ_klienta or tier or modyfikatory or tech_cards:
             meta_lines = []
             if tier:
-                meta_lines.append(f"- TIER: {tier}")
+                meta_lines.append(f"TIER: {tier}")
             if sciezka:
                 meta_lines.append(
-                    f"- ŚCIEŻKA KOMUNIKACJI (Dual-Track): {sciezka.upper()} "
+                    f"ŚCIEŻKA KOMUNIKACJI (Dual-Track): {sciezka.upper()} "
                     + (
-                        "(Język efektu biznesowego, ZERO żargonu IT niewymienionego przez klienta, Question CTA o proces/format danych)"
+                        "- język efektu biznesowego, zero żargonu IT niewymienionego przez klienta"
                         if sciezka == "biznes"
-                        else "(Język konkretu technicznego, precyzyjny stack, wąskie gardło w pierwszych 2 zdaniach, Question CTA o architekturę/API)"
+                        else "- język konkretu technicznego dopasowany do ogłoszenia klienta"
                     )
                 )
             if typ_klienta:
-                meta_lines.append(f"- TYP KLIENTA: {typ_klienta}")
+                meta_lines.append(f"TYP KLIENTA: {typ_klienta}")
             if tech_cards:
-                meta_lines.append(f"- AKTYWNE KARTY WIEDZY: {', '.join(tech_cards)}")
+                meta_lines.append(f"POWIĄZANE KARTY WIEDZY: {', '.join(tech_cards)}")
             if modyfikatory:
-                meta_lines.append(f"- AKTYWNE MODYFIKATORY: {', '.join(str(m) for m in modyfikatory)}")
+                meta_lines.append(f"AKTYWNE MODYFIKATORY: {', '.join(str(m) for m in modyfikatory)}")
             user_parts.append("--- KLASYFIKACJA STRATEGICZNA ZLECENIA ---\n" + "\n".join(meta_lines))
 
-        if slot_id in ("02a", "08"):
+        if slot_id in ("00", "02a", "08"):
             scen_dir = PROMPTS_DIR / "kontekst" / "scenariusze"
             if typ_klienta in SCENARIO_MAP:
                 scen_path = scen_dir / SCENARIO_MAP[typ_klienta]
@@ -842,10 +849,16 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                     krok.log(f"Generator zwrócił {err_desc} – ponawiam próbę ({empty_retries}/{retry_max})...")
                     continue
 
-                # Deterministyczne oczyszczenie oferty (02a) z pauz długich (— / –), pogrubień Markdown (**)
+                # Deterministyczne oczyszczenie oferty (02a) z pauz długich (— / –), myślników ( - ), nawiasów ( ) i pogrubień Markdown (**)
                 # oraz ewentualnych etykiet z promptu typu "Pytanie kwalifikujące:" i kolokwializmów.
                 if slot.get("id") == "02a" and odpowiedz:
-                    odpowiedz = odpowiedz.replace("—", "-").replace("–", "-").replace("\u2014", "-").replace("\u2013", "-").replace("**", "").strip()
+                    odpowiedz = odpowiedz.replace("**", "").strip()
+                    odpowiedz = re.sub(r"\s*[—–\u2014\u2013]\s*", ", ", odpowiedz)
+                    odpowiedz = re.sub(r"\s+-\s+", ", ", odpowiedz)
+                    odpowiedz = re.sub(r"(?m)^\s*-\s+", "", odpowiedz)
+                    while "(" in odpowiedz and ")" in odpowiedz:
+                        odpowiedz = re.sub(r"\s*\(([^()]*)\)", r", \1", odpowiedz)
+                    odpowiedz = odpowiedz.replace("(", "").replace(")", "")
                     odpowiedz = re.sub(r"(?i)\bpytanie\s+kwalifikuj[ąa]ce\s*:\s*", "", odpowiedz)
                     odpowiedz = re.sub(r"(?i)\bkluczowa\s+mina\s*:\s*", "Główna pułapka architektoniczna: ", odpowiedz)
                     odpowiedz = re.sub(r"(?i)\bnajdro[żz]sza\s+mina\s*:\s*", "Główne ryzyko produkcyjne: ", odpowiedz)
@@ -853,6 +866,9 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                     odpowiedz = re.sub(r"(?i)\bkompleksow(?:ego|e|ych|a|ą)\s+", "", odpowiedz)
                     odpowiedz = re.sub(r"(?i)\bwed[łl]ug\s+mojej\s+wiedzy\s+z\s+", "w ", odpowiedz)
                     odpowiedz = re.sub(r"(?i)\bwed[łl]ug\s+mojej\s+wiedzy\s*,?\s*", "", odpowiedz)
+                    odpowiedz = re.sub(r",\s*,+", ",", odpowiedz)
+                    odpowiedz = re.sub(r"\.\s*,", ".", odpowiedz)
+                    odpowiedz = re.sub(r"[ \t]{2,}", " ", odpowiedz)
 
                 output_key = slot.get("output_key")
                 if output_key:

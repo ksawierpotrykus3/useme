@@ -27,15 +27,14 @@ KLASYFIKACJA STRATEGICZNA (OBOWIĄZKOWA DLA KAŻDEGO ZLECENIA):
 - Typ klienta (`typ_klienta`): `ekspert_dziedzinowy`, `msp_erp`, `ecommerce`, `agencja`, `tech_agnostic`, `quick_fix`.
 - Modyfikatory (`modyfikatory`):
   * `"RESCUE"` – klient sparzony po ucieczce lub błędach poprzedniego wykonawcy (12.1% rynku – wymaga spokojnej diagnozy i pracy na stagingu).
-  * `"DELEGOWANY"` – pracownik/asystentka pisząca w imieniu zarządu/szefa (4.3% rynku – wymaga przejrzystego planu gotowego do położenia prezesowi na biurku).
+  * `"DELEGOWANY"` – ktokolwiek, kto NIE szefuje w firmie/korporacji (pracownik, PM, product owner, dev, asystentka; 4.3% rynku – wymaga przejrzystego planu i bezpiecznej podkładki do pokazania przełożonemu).
   * `"PHANTOM"` – wizjoner startupowy bez budżetu.
 
 CZEGO NIE BIERZEMY (WERDYKT: ODRZUT / TIER C):
 1. Czysty marketing i reklamy (kampanie Google Ads, Meta Ads, SEO copywriting).
 2. Prace asystenckie/biurowe bez programowania (np. manualne wklepywanie produktów do sklepu).
 3. Prowadzenie szkoleń i bycie trenerem (np. szkolenie z MariaDB).
-4. Fizyczny serwis sprzętowy i naprawy mechaniczne na miejscu (UWAGA: oprogramowanie CAD/CAM, generowanie G-kodu i integracje CNC bierzemy w Tier A).
-5. Sprzątanie wirusów i serwerownia (czyszczenie zawirusowanego WordPressa, usuwanie malware).
+4. Sprzątanie wirusów (czyszczenie zawirusowanego WordPressa, usuwanie malware).
 6. Bezbudżetowi wizjonerzy startupowi (Phantom Leads: "szukam wspólnika / programisty za udziały", "mam pomysł na Facebooka, brak budżetu"): ODRZUT – 90% odpisów z tego segmentu kończy się pustką bez wpłaty escrow.
 7. Pułapki ogłoszeniowe: ukryte rekrutacje na etat ("praca na stałe", "ATS", "umowa o pracę", "dołączenie do zespołu na pełny etat") oraz formalne zbieranie ofert do wniosków dotacyjnych bez intencji wdrożenia.
 8. Czerwony Ocean WordPress (Win Rate 6.73%): proste strony WordPress, wizytówki na Elementorze, poprawki banerów/grafiki, proste instalacje szablonów z zalanym rynkiem. WordPress dopuszczalny wyłącznie przy dedykowanym kodzie (custom wtyczka, integracja API/ERP) z budżetem > 1500 zł.

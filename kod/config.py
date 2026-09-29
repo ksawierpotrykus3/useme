@@ -41,12 +41,14 @@ ACCOUNTS = [
         "id": "konto1",
         "nazwa": "Ksawier",
         "podpis": "Ksawier",
+        "baza_id": "ksawierpotrykus3",
         "cookies_path": BASE_DIR / "tech" / "cookies.json",
     },
     {
         "id": "konto2",
-        "nazwa": "Konto 2",
-        "podpis": "Maksymilian",
+        "nazwa": "Konto 2 (zleceniodawca/testowe)",
+        "podpis": "Konto 2",
+        "baza_id": "weronikabuchholc13",
         "cookies_path": BASE_DIR / "tech" / "cookies2.json",
     },
 ]
@@ -116,8 +118,29 @@ USE_AUDYTOR_100 = True
 AUDYTOR_100_TARGET_SCORE = 92
 
 
-def is_hard_reject(title: str = "", description: str = "") -> str | None:
-    """Zwraca powód odrzucenia, jeśli zlecenie wpada w Czerwony Ocean i nie ma słów VIP."""
+REMOTE_LOCATION_WHITELIST = {
+    "", "zdalnie", "online", "cała polska", "cala polska", "dowolne", "brak", "-", "remote", "praca zdalna"
+}
+
+
+def is_onsite_location(miejsce_wykonania: str | None) -> bool:
+    """Zwraca True, jeśli zlecenie ma podane fizyczne 'Miejsce wykonania' (np. 'warszawa').
+    
+    Uwaga: od wersji 2.4.1 NIE traktujemy tego jako twardego odrzutu, ponieważ
+    wiele zleceń specjalistycznych (np. automotive, hardware hacking, Tegra 2) posiada
+    lokalizację miasta (np. Warszawa), ale oferuje gigantyczne budżety i możliwość współpracy.
+    """
+    if not miejsce_wykonania:
+        return False
+    loc_clean = str(miejsce_wykonania).strip().lower()
+    return loc_clean not in REMOTE_LOCATION_WHITELIST
+
+
+def is_hard_reject(title: str = "", description: str = "", miejsce_wykonania: str = "") -> str | None:
+    """Zwraca powód odrzucenia, jeśli zlecenie wpada w Czerwony Ocean lub pułapkę.
+    
+    Uwaga: Miejsce wykonania NIE jest twardym odrzutem - pozwala łapać perełki jak Tegra 2.
+    """
     import re as _re
     full_text = f"{title or ''} {description or ''}".lower()
     for tk in TRAP_KEYWORDS:
@@ -133,9 +156,10 @@ def is_hard_reject(title: str = "", description: str = "") -> str | None:
     return None
 
 # --- CZARNA LISTA AUTORÓW (Własne profile / zleceniodawcy wykluczeni) ---
-# Zakaz składania ofert na zlecenia pochodzące od tych autorów (np. własny profil zleceniodawcy 'wer13').
+# Zakaz składania ofert na zlecenia pochodzące od tych autorów (np. własny profil 'wer13', zablokowany 'naviproject').
 BLOCKED_AUTHORS = [
     "wer13",
+    "naviproject",
 ]
 
 

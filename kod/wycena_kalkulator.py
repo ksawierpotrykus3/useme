@@ -329,7 +329,7 @@ def policz_wycene(dane: Dict[str, Any]) -> Dict[str, Any]:
         "korekta_konkurencyjna": korekta,
         "cena_po_korekcie": round(cena_po_korekcie, 1),
         "kwota_koncowa": kwota,
-        "efektywna_stawka": round(efektywna_stawka, 1),
+        "narzut_po_buforze": round(efektywna_stawka, 1),
         "sanity_ok": sanity_ok,
     }
     return {"typ": "projekt", "kwota": kwota, "dni": dni,
@@ -346,17 +346,4 @@ def formatuj_wynik(wynik: Dict[str, Any]) -> str:
     if wynik.get("typ") == "retainer" or wynik.get("okres"):
         linie.append("OKRES: miesiecznie (stala wspolpraca, nie kwota jednorazowa)")
     linie.append("[/WYNIK_KONCOWY]")
-    return "\n".join(linie)
-
-
-if __name__ == "__main__":
-    import sys, json
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    przyklad = {
-        "typ_zlecenia": "projekt",
-        "moduly": [{"nazwa": "Landing page / One-Page", "godziny_real": 20}],
-        "flagi": {"brak_specyfikacji": True, "wiek_ofert_dni": 1,
-                  "liczba_ofert": 71, "nowa_technologia": False},
-    }
-    w = policz_wycene(przyklad)
-    print(json.dumps(w, ensure_ascii=False, indent=2))
+    return "\n".join(linie)
