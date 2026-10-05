@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "job_id": "2514057",
+  "dziennik": "```\nKWALIFIKOWALNOSC: TAK\nTYP_ZLECENIA: stała współpraca (powtarzalne zlecenia), pośrednik/agencja szuka podwykonawcy\nINTENCJA: wykonawcze\nDECYDENT_I_BOL: pisze pośrednik (\"dla moich klientów\") — ma zlecenia, brakuje mu rąk do wdrożeń. Prawdziwy ból: przepustowość. Każde niewdrożone zlecenie to stracony klient końcowy i stracona marża. Nie chodzi o technologię — chodzi o to, że musi komuś przerzucić robotę i mieć pewność, że wróci gotowe.\nWYKONALNE: TAK\nPOLE_DO_POPISU: JEST, ale wąskie — jedno konkretne miejsce (Canva vs Figma) plus odpowiedź na trzy pytania klienta (portfolio/stos/czas). Nie ma tu głębszej merytoryki.\nSCIEZKA_MERYTORYKI: A (klient wprost pyta o portfolio, technologię, czas) + jedna ciekawostka (Canva vs Figma).\nMINY_I_CIEKAWOSTKI:\n- CIEKAWOSTKA (nie mina): Canva i Figma stoją w jednym zdaniu jako równorzędne źródła (\"przenieść projekt ze szablonu Canva/Figma\"). Dowód: sam tekst. Różnica praktyczna: z Figmy odtwarzam 1:1 (inspect, spacje, kolory, eksport assetów), z Canvy — odtwarzam na oko, bo trybu deweloperskiego brak. Wpływ: przy stałej współpracy każdy projekt z Canvy to dodatkowe godziny. To nie zabija klienta, to informacja organizacyjna — mówię spokojnie, nie straszę. Nie nazywam tego miną, bo klient może mieć pełną świadomość i akceptować.\n- Brak innych min. Zakres jest wykonalny, stawki w granicach rynku, żadnej bariery kanału/limitu/regulacji.\nODMOWA: puste (nic klientowi nie szkodzi, zakres wykonalny, brak okazji z typów 1-6)\nPYTANIA:\n1. Kto dostarcza treści i materiały (copy, zdjęcia, logotypy) do wdrożenia — Wy, klient końcowy, czy ja je zbieram? Pytam, bo \"projekt ze szablonu\" może znaczyć wszystko: od kompletnego designu z gotowym copy, po sam layout. Od tego zależy, czy 800–1200 zł za landing to wdrożenie, czy wdrożenie + zbieranie i układanie treści — a to dwa różne czasy przy stałej współpracy.\n   [Reszta idzie jako propozycje TYP 2, nie pytania:]\n   - Stack proponuję domyślnie: WordPress + Elementor dla stron firmowych i sklepów (WooCommerce), czysty HTML/CSS dla landingów jednostronicowych. Jeśli macie inną platformę u klientów — dostroję się.\n   - Hosting/domenę/wdrożenie produkcyjne: domyślnie mogę ogarniać za dopłatą, albo zostawić Wam — do ustalenia przy pierwszym zleceniu, nie teraz.\nCO_ZLECENIE_MOWI:\n- Wdrożenia z szablonów Canva/Figma\n- Trzy typy: landing 1-stronowy, wizytówka 3–5 podstron, prosty sklep\n- Stawki per typ: 800–1200 / 1200–1500 / 2000+\n- Oczekiwania wobec wykonawcy: portfolio, technologia, orientacyjny czas\n- Start od zaraz, stała współpraca, szczegóły prywatnie\nCZEGO_NIE_MOWI:\n- Na jakiej platformie/CMS mają stać strony (klient zostawia nam — nie pytam, proponuję)\n- Czym są \"proste sklepy\" (Woo/Shopify/Shoper — proponuję Woo, reszta wyjdzie przy pierwszym sklepie)\n- Kto robi hosting/domenę/utrzymanie (proponuję domyślnie, nie pytam)\n- Kto dostarcza treści i media (pytam — realnie zmienia zakres)\n- Skala współpracy, branża klientów końcowych, integracje — poza granicą wyceny pojedynczego zlecenia, wycinam\n- Czy projekty Figma/Canva są kompletne — częściowo pokryte pytaniem o treści\nGRANICA_CIECIA: Odpowiedź krótka — konkretna odpowiedź na trzy pytania klienta (portfolio/stos/czas), jedna ciekawostka Canva/Figma, jedna propozycja stacku (TYP 2), jedno pytanie TYP 1 (treści). Bez wyceny (budżet już w ogłoszeniu), bez rozbudowanego portfolio, bez listy integracji sklepowych — to wyjdzie przy pierwszym sklepie.\nRESEARCH_POTRZEBNY: NIE. Canva dev mode to wiedza ogólna, nie wymaga researchu. Po ewentualnej odpowiedzi — jeśli padnie konkretna platforma sklepowa, warto sprawdzić czas wdrożenia, ale do samej oferty nie.\n```\n\n---\n\n**DECYZJE:**\n\n- **DOPISAĆ:** odpowiedź na trzy pytania klienta wprost — (1) portfolio: 2-3 linki, nie ściana; (2) technologia: WordPress/Elementor + Woo dla stron i sklepów, czysty HTML/CSS dla landingów — krótko, bez wykładu; (3) czas: konkretne widełki per typ (landing 2-3 dni, wizytówka 4-5 dni, sklep 1-2 tyg — orientacyjnie, z zastrzeżeniem \"zależnie od kompletności materiałów\"). Ciekawostka Canva/Figma jako jedno zdanie, nie akapit.\n\n- **ODPOWIEDZIEC:** klient chce konkretów (portfolio, stack, czas). Daję konkrety. Nie sprzedaję technologii, bo klient sam ją zostawił nam — pokazuję, że wiem, co robię, i że jestem szybki.\n\n- **DOPYTAĆ:** jedno pytanie — o treści i media (kto dostarcza). Uzasadnienie krótkie: \"pytam, bo od tego zależy zakres każdego zlecenia i czy stawka 800–1200 zł obejmuje wdrożenie, czy wdrożenie + treści\". Reszta (hosting, platforma sklepowa, integracje) idzie jako propozycje domyślne, nie pytania.",
+  "pola": {
+    "KWALIFIKOWALNOSC": "TAK",
+    "TYP_ZLECENIA": "stała współpraca (powtarzalne zlecenia), pośrednik/agencja szuka podwykonawcy",
+    "INTENCJA": "wykonawcze",
+    "DECYDENT_I_BOL": "pisze pośrednik (\"dla moich klientów\") — ma zlecenia, brakuje mu rąk do wdrożeń. Prawdziwy ból: przepustowość. Każde niewdrożone zlecenie to stracony klient końcowy i stracona marża. Nie chodzi o technologię — chodzi o to, że musi komuś przerzucić robotę i mieć pewność, że wróci gotowe.",
+    "WYKONALNE": "TAK",
+    "POLE_DO_POPISU": "JEST, ale wąskie — jedno konkretne miejsce (Canva vs Figma) plus odpowiedź na trzy pytania klienta (portfolio/stos/czas). Nie ma tu głębszej merytoryki.",
+    "SCIEZKA_MERYTORYKI": "A (klient wprost pyta o portfolio, technologię, czas) + jedna ciekawostka (Canva vs Figma).",
+    "MINY_I_CIEKAWOSTKI": "- CIEKAWOSTKA (nie mina): Canva i Figma stoją w jednym zdaniu jako równorzędne źródła (\"przenieść projekt ze szablonu Canva/Figma\"). Dowód: sam tekst. Różnica praktyczna: z Figmy odtwarzam 1:1 (inspect, spacje, kolory, eksport assetów), z Canvy — odtwarzam na oko, bo trybu deweloperskiego brak. Wpływ: przy stałej współpracy każdy projekt z Canvy to dodatkowe godziny. To nie zabija klienta, to informacja organizacyjna — mówię spokojnie, nie straszę. Nie nazywam tego miną, bo klient może mieć pełną świadomość i akceptować.\n- Brak innych min. Zakres jest wykonalny, stawki w granicach rynku, żadnej bariery kanału/limitu/regulacji.",
+    "PYTANIA": "1. Kto dostarcza treści i materiały (copy, zdjęcia, logotypy) do wdrożenia — Wy, klient końcowy, czy ja je zbieram? Pytam, bo \"projekt ze szablonu\" może znaczyć wszystko: od kompletnego designu z gotowym copy, po sam layout. Od tego zależy, czy 800–1200 zł za landing to wdrożenie, czy wdrożenie + zbieranie i układanie treści — a to dwa różne czasy przy stałej współpracy.\n   [Reszta idzie jako propozycje TYP 2, nie pytania:]\n   - Stack proponuję domyślnie: WordPress + Elementor dla stron firmowych i sklepów (WooCommerce), czysty HTML/CSS dla landingów jednostronicowych. Jeśli macie inną platformę u klientów — dostroję się.\n   - Hosting/domenę/wdrożenie produkcyjne: domyślnie mogę ogarniać za dopłatą, albo zostawić Wam — do ustalenia przy pierwszym zleceniu, nie teraz.",
+    "CO_ZLECENIE_MOWI": "- Wdrożenia z szablonów Canva/Figma\n- Trzy typy: landing 1-stronowy, wizytówka 3–5 podstron, prosty sklep\n- Stawki per typ: 800–1200 / 1200–1500 / 2000+\n- Oczekiwania wobec wykonawcy: portfolio, technologia, orientacyjny czas\n- Start od zaraz, stała współpraca, szczegóły prywatnie",
+    "CZEGO_NIE_MOWI": "- Na jakiej platformie/CMS mają stać strony (klient zostawia nam — nie pytam, proponuję)\n- Czym są \"proste sklepy\" (Woo/Shopify/Shoper — proponuję Woo, reszta wyjdzie przy pierwszym sklepie)\n- Kto robi hosting/domenę/utrzymanie (proponuję domyślnie, nie pytam)\n- Kto dostarcza treści i media (pytam — realnie zmienia zakres)\n- Skala współpracy, branża klientów końcowych, integracje — poza granicą wyceny pojedynczego zlecenia, wycinam\n- Czy projekty Figma/Canva są kompletne — częściowo pokryte pytaniem o treści",
+    "GRANICA_CIECIA": "Odpowiedź krótka — konkretna odpowiedź na trzy pytania klienta (portfolio/stos/czas), jedna ciekawostka Canva/Figma, jedna propozycja stacku (TYP 2), jedno pytanie TYP 1 (treści). Bez wyceny (budżet już w ogłoszeniu), bez rozbudowanego portfolio, bez listy integracji sklepowych — to wyjdzie przy pierwszym sklepie.",
+    "RESEARCH_POTRZEBNY": "NIE. Canva dev mode to wiedza ogólna, nie wymaga researchu. Po ewentualnej odpowiedzi — jeśli padnie konkretna platforma sklepowa, warto sprawdzić czas wdrożenia, ale do samej oferty nie.\n```\n\n---\n\n**DECYZJE:**\n\n- **DOPISAĆ:** odpowiedź na trzy pytania klienta wprost — (1) portfolio: 2-3 linki, nie ściana; (2) technologia: WordPress/Elementor + Woo dla stron i sklepów, czysty HTML/CSS dla landingów — krótko, bez wykładu; (3) czas: konkretne widełki per typ (landing 2-3 dni, wizytówka 4-5 dni, sklep 1-2 tyg — orientacyjnie, z zastrzeżeniem \"zależnie od kompletności materiałów\"). Ciekawostka Canva/Figma jako jedno zdanie, nie akapit.\n\n- **ODPOWIEDZIEC:** klient chce konkretów (portfolio, stack, czas). Daję konkrety. Nie sprzedaję technologii, bo klient sam ją zostawił nam — pokazuję, że wiem, co robię, i że jestem szybki.\n\n- **DOPYTAĆ:** jedno pytanie — o treści i media (kto dostarcza). Uzasadnienie krótkie: \"pytam, bo od tego zależy zakres każdego zlecenia i czy stawka 800–1200 zł obejmuje wdrożenie, czy wdrożenie + treści\". Reszta (hosting, platforma sklepowa, integracje) idzie jako propozycje domyślne, nie pytania."
+  },
+  "oferta": "Zgłoszenie traktuję poważnie, bo widzę, że szukacie kogoś do powtarzalnej roboty, a nie jednorazowego wdrożenia. To zmienia sposób, w jaki podchodzę do tematu.\n\nPortfolio w tej niszy nie mam czym się pochwalić, ale powiem wprost, jak pracuję. Projekt z Figmy odtwarzam 1:1, bo Figma ma tryb deweloperski, kolory, spacjowanie i eksport assetów. Canva tego nie ma, więc każdy projekt z Canvy to odtwarzanie na oko, co przy stałej współpracy oznacza dodatkowe godziny, których nie widać w stawce 800, 1200 zł. Nie straszę, tylko mówię, żebyście wiedzieli, gdzie może uciekać czas.\n\nTechnologia, w której czuję się pewnie: WordPress z Elementorem do stron firmowych i sklepów na WooCommerce, czysty HTML i CSS do landingów jednostronicowych. Jeśli u Waszych klientów stoi coś innego, dostroję się.\n\nCzasowo: landing to około 2, 3 dni, wizytówka 3, 5 podstron to 4, 5 dni, prosty sklep 1, 2 tygodnie. Zależnie od tego, jak kompletne dostanę materiały.\n\nI tu jedno pytanie, które realnie zmienia zakres. Kto dostarcza treści i media, czyli teksty, zdjęcia, logotypy? Wy, klient końcowy, czy ja mam je zbierać? Pytam, bo od tego zależy, czy 800, 1200 zł za landing to samo wdrożenie, czy wdrożenie plus układanie treści. A to dwa różne czasy przy stałej współpracy.\n\nStawki z ogłoszenia mi pasują. Przy większym sklepie wycenię indywidualnie, ale 2000 zł i więcej brzmi rozsądnie jako punkt startowy.\n\nKsawier",
+  "wycena": 2000,
+  "dni": 14,
+  "dni_od": 7,
+  "dni_do": 14,
+  "wycena_rozbicie": {
+    "tryb": "debata_dwumodelowa_useme",
+    "surowa_kwota_ai": 2000,
+    "kwota_koncowa": 2000,
+    "dni_od": 7,
+    "dni_do": 14,
+    "rundy_debaty": 1,
+    "uzasadnienie_wyceniacza": "Traktuję zlecenie jako stałą współpracę rozliczaną per projekt: 2000 zł netto za pierwszy sklep lub większe wdrożenie, a landingi/wizytówki w widełkach 1000–1500 zł. Przy AI-assisted wdrażaniu z gotowych szablonów pierwszy projekt zajmie 7–14 dni kalendarzowych z uwzględnieniem testów klienta i poprawek. Warunkiem akceptacji stawek jest komplet materiałów od klienta i jasny zakres; inaczej każdy projekt wyceniam osobno.",
+    "krytyka_reviewera": "Wycena idealnie wpisuje się w budżet kllienta (2000 zł) oraz precyzyjnie nawiązuje do widełek podanych w ogłoszeniu (800-1500 zł za landing/wizytówkę i od 2000 zł za sklep). Termin 14 dni z marginesem na poprawki jest bezpieczny i wiarygodny przy współpracy z początkującymi lub przy użyciu narzędzi AI. Oferta trafnie zabezpiecza freelancera warunkiem kompletu materiałów i buduje grunt pod stałą współpracę.",
+    "widełki_rynkowe": "Landing: 600–1200 zł netto; Wizytówka: 1000–1800 zł netto; Prosty sklep: 1800–3000 zł netto",
+    "przebieg": [
+      {
+        "runda": 0,
+        "aktor": "WYCENIACZ",
+        "kwota": 2000,
+        "dni_od": 7,
+        "dni_do": 14,
+        "uzasadnienie": "Traktuję zlecenie jako stałą współpracę rozliczaną per projekt: 2000 zł netto za pierwszy sklep lub większe wdrożenie, a landingi/wizytówki w widełkach 1000–1500 zł. Przy AI-assisted wdrażaniu z gotowych szablonów pierwszy projekt zajmie 7–14 dni kalendarzowych z uwzględnieniem testów klienta i poprawek. Warunkiem akceptacji stawek jest komplet materiałów od klienta i jasny zakres; inaczej każdy projekt wyceniam osobno."
+      },
+      {
+        "runda": 1,
+        "aktor": "REVIEWER",
+        "werdykt": "OK",
+        "kwota_sugerowana": 2000,
+        "rynek": "Landing: 600–1200 zł netto; Wizytówka: 1000–1800 zł netto; Prosty sklep: 1800–3000 zł netto",
+        "uzasadnienie": "Wycena idealnie wpisuje się w budżet kllienta (2000 zł) oraz precyzyjnie nawiązuje do widełek podanych w ogłoszeniu (800-1500 zł za landing/wizytówkę i od 2000 zł za sklep). Termin 14 dni z marginesem na poprawki jest bezpieczny i wiarygodny przy współpracy z początkującymi lub przy użyciu narzędzi AI. Oferta trafnie zabezpiecza freelancera warunkiem kompletu materiałów i buduje grunt pod stałą współpracę."
+      }
+    ]
+  },
+  "checker": {
+    "ok": true,
+    "problemy": []
+  },
+  "sedzia": {
+    "status": "OK",
+    "kara_pkt": 0,
+    "cytat_lub_brak": "",
+    "uzasadnienie": "Oferta jest konkretna, odpowiada na wszystkie pytania klienta (technologia, czas, portfolio), a brak portfolio został przyznany wprost. Podniesiony problem z Canvą jest merytoryczny i dotyczy realnego ryzyka czasowego, nie neguje podejścia klienta. Ton jest ludzki, bez coachingowej waty. Brak zmyślonych realizacji i fałszywych faktów technicznych.",
+    "instrukcja_naprawy": ""
+  },
+  "research": "",
+  "log": [
+    "[1/6] Analiza #2514057...",
+    "    kwalifikowalnosc=TAK",
+    "[2/6] Weryfikacja #2514057...",
+    "    research OFF",
+    "[3/6] Wycena #2514057...",
+    "    debata wycenowa: Wyceniacz [DeepSeek] vs Reviewer [Gemini]...",
+    "    [Wyceniacz R0] 2000 zł | 7-14 dni (Traktuję zlecenie jako stałą współpracę rozliczaną per projekt: 2...)",
+    "    [Reviewer R1] OK (sugeruje: 2000 zł, rynek: Landing: 600–1200 zł netto; Wizytówka: 1000–1800 zł netto; Prosty sklep: 1800–3000 zł netto)",
+    "    -> [Finał Debaty] 2000 zł / 7-14 dni (psychologiczne zaokrąglenie, Useme ready)",
+    "    wycena debata: 2000 zl / 7-14 dni (retainer)",
+    "[4/6] Pismo #2514057...",
+    "[5/6] Checker #2514057...",
+    "[6/6] Sedzia #2514057..."
+  ]
+}

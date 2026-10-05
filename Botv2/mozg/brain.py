@@ -13,12 +13,13 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 import requests
 
-from wycena_debata import wycen_przez_debate
+from wycena_rada import wycen_rada
 from sanitizer import sanitize_opis
 from checker import sprawdz
 
@@ -26,6 +27,10 @@ BASE_DIR = Path(__file__).parent
 PROMPTS_DIR = BASE_DIR / "prompts"
 DZIENNIKI_DIR = BASE_DIR / "dzienniki"
 DZIENNIKI_DIR.mkdir(parents=True, exist_ok=True)
+
+# Artefakty produkcyjne (analiza/research/wycena/oferta) trafiaja do ofertowarki.
+CORE_DIR = BASE_DIR.parent.parent                       # .../useme_core
+OFERTOWARKA_DIR = CORE_DIR / "badania/baza/ksawierpotrykus3/01_ofertowarka"
 
 DEEPSEEK_API_URL = "http://127.0.0.1:4571/v1/chat/completions"
 MODEL = "deepseek-v4-pro"
@@ -35,10 +40,9 @@ RESEARCH_MODEL = "deepseek-v4-pro-search"
 PODPIS = "Ksawier"
 
 
-def call_ai(system_prompt: str, user_prompt: str, model: str = MODEL,
-            timeout: int = 300, temperature: float = 0.7,
-            max_tokens: int = 4000) -> Optional[str]:
-    """Wywolanie modelu przez lokalne proxy (to samo co V1). Zwraca tekst lub None."""
+def _call_ai_once(system_prompt: str, user_prompt: str, model: str,
+                  timeout: int, temperature: float, max_tokens: int) -> Optional[str]:
+    """Pojedyncze wywolanie modelu przez lokalne proxy. Zwraca tekst lub None."""
     payload = {
         "model": model,
         "messages": [
@@ -80,6 +84,24 @@ def call_ai(system_prompt: str, user_prompt: str, model: str = MODEL,
         return None
     finally:
         session.close()
+
+
+def call_ai(system_prompt: str, user_prompt: str, model: str = MODEL,
+            timeout: int = 300, temperature: float = 0.7,
+            max_tokens: int = 4000, proby: int = 3) -> Optional[str]:
+    """Wywolanie modelu z automatycznym retry (odpornosc na chwilowe bledy proxy).
+
+    Proboje do `proby` razy. Miedzy probami krotka pauza. Zwraca tekst lub None
+    po wyczerpaniu prob. Puste/None odpowiedzi tez sa ponawiane.
+    """
+    for i in range(1, proby + 1):
+        wynik = _call_ai_once(system_prompt, user_prompt, model, timeout, temperature, max_tokens)
+        if wynik:
+            return wynik
+        if i < proby:
+            print(f"[AI] pusta odpowiedz, retry {i}/{proby - 1}...", flush=True)
+            time.sleep(2.0)
+    return None
 
 
 GEMINI_API_URL = "http://127.0.0.1:8045/v1/chat/completions"
@@ -185,11 +207,74 @@ def _wyciagnij_blok(tekst: str, tag: str) -> str:
     return m.group(1).strip() if m else ""
 
 
+def _ocen_u_sedziego(system_sedzia: str, tresc: str, oferta: str,
+                     kwota: int, dni_od: int, dni_do: int) -> Dict[str, Any]:
+    """Ocenia oferte sedzia zdrowego rozsadku. Zwraca dict (status/kara/uzasadnienie/...)."""
+    raw = call_ai(
+        system_sedzia,
+        f"--- OGLOSZENIE KLIENTA ---\n{tresc}\n\n"
+        f"--- WYCENA: {kwota} zl netto / {dni_od}-{dni_do} dni ---\n\n"
+        f"--- OFERTA DO OCENY ---\n{oferta}",
+        model="deepseek-v4-pro-nothink", timeout=120, temperature=0.3,
+    )
+    return _wyciagnij_json_blok(raw or "", "COMMON_SENSE_JSON") or {"status": "OK", "kara_pkt": 0}
+
+
+def _weryfikuj_veto(sedzia: Dict[str, Any], oferta: str, tresc: str) -> str:
+    """Researcher weryfikuje zakwestionowane przez sedziego twierdzenia.
+
+    Zwraca surowy tekst: dla kazdego twierdzenia PRAWDA/FALSZ/NIEPOTWIERDZONE + dowod.
+    """
+    cytat = sedzia.get("cytat_lub_brak", "")
+    uzas = sedzia.get("uzasadnienie", "")
+    instrukcja = sedzia.get("instrukcja_naprawy", "")
+    raw = call_ai(
+        "Jestes researcherem-weryfikatorem. Dostajesz zakwestionowane twierdzenia z oferty. "
+        "Sprawdz KAZDE z osobna: czy to prawda, czy falsz, czy nie da sie potwierdzic. "
+        "Podaj dowod (URL, cytat, dokumentacja). Czego nie potwierdzisz, oznaczone jako "
+        "NIEPOTWIERDZONE. Nie zmyslaj. Zwroc zwiezle: dla kazdego twierdzenia werdykt + dowod.",
+        f"ZLECENIE:\n{tresc}\n\nOFERTA:\n{oferta}\n\n"
+        f"ZAKWESTIONOWANE PRZEZ SEDZIEGO:\n{uzas}\n\n"
+        f"CYTAT Z OFERTY: {cytat}\n\nINSTRUKCJA NAPRAWY: {instrukcja}",
+        model=RESEARCH_MODEL, timeout=180,
+    )
+    return raw or "BRAK_WYNIKU_WERYFIKACJI"
+
+
+def _przepisz_z_faktami(oferta: str, sedzia: Dict[str, Any], fakty: str, tresc: str,
+                        system_pismo: str, kwota_dolna: int, kwota_gorna: int,
+                        definitywna: bool) -> str:
+    """Pismo przepisuje oferte po VETO: usuwa zakwestionowane twierdzenia / zamienia na pytania."""
+    if definitywna:
+        wytyczna = f"podaj jedna kwote {kwota_dolna} zl netto"
+    else:
+        wytyczna = f"podaj widelki od {kwota_dolna} do {kwota_gorna} zl netto"
+    raw = call_ai(
+        system_pismo,
+        f"OTO ZLECENIE:\n{tresc}\n\n"
+        f"=== OFERTA KTORA ZOSTALA ZAWETOWANA (przepisz ja) ===\n{oferta}\n\n"
+        f"=== DLACZEGO SEDZIA JA ZAWETOWAL ===\n{sedzia.get('uzasadnienie', '')}\n"
+        f"Instrukcja naprawy: {sedzia.get('instrukcja_naprawy', '')}\n\n"
+        f"=== WERYFIKACJA FAKTOW (researcher sprawdzil zakwestionowane twierdzenia) ===\n{fakty}\n\n"
+        f"Przepisz oferte. Zakwestionowane twierdzenia USUN albo zamien na pytania/hipotezy "
+        f"zgodnie z weryfikacja faktow. Nie pisz jako pewnika tego, czego nie potwierdzono. "
+        f"Zachowaj zakres i cene: {wytyczna}. Podpis na koncu: {PODPIS}. "
+        f"Wyslij tylko tekst oferty.",
+        temperature=0.7,
+    )
+    return (raw or oferta).strip()
+
+
 # Wycena realizowana jest przez moduł wycena_debata.py (Adversarial Debate Useme)
 
 
-def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, Any]:
-    """Glowna petla V2. Zwraca pelny wynik z dziennikiem, oferta, wycena, checkerem."""
+def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True,
+                  zapisz_dziennik: bool = True) -> Dict[str, Any]:
+    """Glowna petla V2. Zwraca pelny wynik z dziennikiem, oferta, wycena, checkerem.
+
+    zapisz_dziennik=False -> nie zostawia roboczego pliku w mozg/dzienniki
+    (tryb produkcyjny: artefakty trafiaja tylko do ofertowarki).
+    """
     job_id = str(zlecenie.get("id", "?"))
     tresc = _tresc_zlecenia(zlecenie)
     client_text = _tekst_klienta(zlecenie)
@@ -251,48 +336,35 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         dziennik = weryfikacja
         pola = _parsuj_dziennik(dziennik)
 
-    # ---------- WYCENA (debata dwumodelowa Useme: DeepSeek vs Gemini) ----------
+    # ---------- WYCENA (rada 4 modeli: 2x DeepSeek + 2x Gemini + rozjemca) ----------
     say(f"[3/6] Wycena #{job_id}...")
     try:
-        wynik_wyceny = wycen_przez_debate(
+        wynik_wyceny = wycen_rada(
             tresc_zlecenia=tresc,
             dziennik=dziennik,
             research=research,
-            call_wyceniacz_fn=call_ai,      # DeepSeek-v4-Pro (port 4571)
-            call_reviewer_fn=call_gemini,   # Gemini-3.8-Flash (port 8045)
+            call_ai_fn=call_ai,          # DeepSeek (port 4571)
+            call_gemini_fn=call_gemini,  # Gemini (port 8045)
             say=say,
-            max_rundy=2,
         )
+        kwota_dolna = int(wynik_wyceny["kwota_dolna"])
+        kwota_gorna = int(wynik_wyceny["kwota_gorna"])
         kwota = int(wynik_wyceny["kwota"])
-        dni_od = int(wynik_wyceny.get("dni_od", wynik_wyceny["dni"]))
-        dni_do = int(wynik_wyceny.get("dni_do", wynik_wyceny["dni"]))
-        say(f"    wycena debata: {kwota} zl / {dni_od}-{dni_do} dni ({wynik_wyceny.get('typ', 'projekt')})")
+        dni_od = int(wynik_wyceny.get("dni_od", 14))
+        dni_do = int(wynik_wyceny.get("dni_do", 21))
+        say(f"    wycena: {kwota_dolna}-{kwota_gorna} zl / {dni_od}-{dni_do} dni")
     except Exception as e:
-        say(f"    debata blad: {e} - fallback 3000/14-21")
-        kwota, dni_od, dni_do, wynik_wyceny = 3000, 14, 21, {"rozbicie": {"blad": str(e)}}
+        say(f"    wycena blad: {e} - fallback 3000-6000/14-21")
+        kwota_dolna, kwota_gorna, kwota = 3000, 6000, 4500
+        dni_od, dni_do = 14, 21
+        wynik_wyceny = {"rozbicie": {"blad": str(e)}, "surowy_tekst": ""}
 
     # ---------- ITERACJA 3: PISMO ----------
     # Pismo dostaje CALY PRZEBIEG (analiza iter1 + weryfikacja + research + wszystkie
     # rundy debaty wycenowej), nie wyciag. Sam decyduje, jak zbudowac oferte wg pismo.md.
     say(f"[4/6] Pismo #{job_id}...")
 
-    przebieg = wynik_wyceny.get("przebieg") or []
-    linie_przebiegu = []
-    for krok in przebieg:
-        aktor = krok.get("aktor", "?")
-        if aktor == "REVIEWER":
-            linie_przebiegu.append(
-                f"  [runda {krok.get('runda')}] REVIEWER (rynek): {krok.get('werdykt')} | "
-                f"sugeruje {krok.get('kwota_sugerowana')} zł | jego widelki rynku: {krok.get('rynek')}\n"
-                f"      krytyka: {krok.get('uzasadnienie')}"
-            )
-        else:
-            linie_przebiegu.append(
-                f"  [runda {krok.get('runda')}] {aktor}: {krok.get('kwota')} zł / "
-                f"{krok.get('dni_od')}-{krok.get('dni_do')} dni\n"
-                f"      uzasadnienie: {krok.get('uzasadnienie')}"
-            )
-    przebieg_txt = "\n".join(linie_przebiegu) or "  (brak rund)"
+    surowy_tekst_wyceny = wynik_wyceny.get("surowy_tekst") or "  (brak surowych glosow wyceny)"
 
     oferta_raw = call_ai(
         system_pismo,
@@ -300,15 +372,21 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         f"=== ANALIZA (pierwsze czytanie zlecenia, iteracja 1) ===\n{dziennik_iter1}\n\n"
         f"=== WERYFIKACJA (dojrzaly dziennik po researchu, iteracja 2) ===\n{dziennik}\n\n"
         f"=== RESEARCH (dowody, jesli byly) ===\n{research or 'BRAK'}\n\n"
-        f"=== PRZEBIEG DEBATY WYCENOWEJ (wyceniacz inzynierski vs recenzent rynkowy, wszystkie rundy) ===\n{przebieg_txt}\n\n"
-        f"=== WYNIK KONCOWY DEBATY ===\n"
-        f"Kwota: {kwota} zł netto | Czas: od {dni_od} do {dni_do} dni | Typ: {wynik_wyceny.get('typ', 'projekt')}\n\n"
-        f"DECYZJA NALEZY DO CIEBIE. Masz przed soba caly przebieg rozumowania i wszystkie glosy. "
+        f"=== SUROWY ZAPIS WYCENY (glosy 4 modeli + rozjemca, NIC NIE UCIETE) ===\n{surowy_tekst_wyceny}\n\n"
+        + (
+            f"=== WYTYCZNA CENY (z rozjemcy) ===\n"
+            f"Wycena DEFINITYWNA: podaj JEDNA konkretna kwote {kwota_dolna} zł netto. Zero widelek.\n\n"
+            if wynik_wyceny.get("definitywna")
+            else f"=== WYTYCZNA CENY (z rozjemcy) ===\n"
+                 f"Wycena NIEJASNA, sa realne niewiadome: podaj WIDELKI od {kwota_dolna} do {kwota_gorna} zł netto "
+                 f"i powiedz od czego zaleza. Nigdy nie schodz ponizej {kwota_dolna} zł.\n\n"
+        )
+        + f"DECYZJA NALEZY DO CIEBIE. Masz przed soba cale surowe rozumowanie czterech modeli, "
+        f"werdykt rozjemcy oraz to, ktore glosy wybral, a ktore odrzucil i dlaczego. "
         f"Zdecyduj sam, jak zbudowac oferte zgodnie z pismo.md. "
-        f"Jesli zakres zlecenia jest niejasny, mozesz podac widelki zamiast jednej liczby (pismo.md, sekcja Cena). "
-        f"Jesli jest klarowny, podaj jedna kwote {kwota} zł. Czas podaj jako zakres lub przyblizeniem slowym. "
+        f"Czas podaj jako zakres lub przyblizeniem slowym. "
         f"Podpis na koncu: {PODPIS}\n\n"
-        "Napisz oferte. Wynik ma wynikac z calego przebiegu. Wyslij tylko tekst oferty.",
+        "Napisz oferte. Wynik ma wynikac z surowego rozumowania wyceny. Wyslij tylko tekst oferty.",
         temperature=0.8,
     )
     if not oferta_raw:
@@ -320,27 +398,42 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
     # ---------- SANITIZER ----------
     oferta = sanitize_opis(oferta, wycena=kwota, dni=dni_do)
 
-    # ---------- CHECKER ----------
+    # ---------- SĘDZIA (z pętlą naprawczą VETO) ----------
+    # VETO -> researcher weryfikuje zakwestionowane twierdzenia -> pismo przepisuje
+    # z faktami -> sędzia ocenia ponownie. Max 2 próby, żeby nie kręcić w nieskończoność.
+    sedzia = {"status": "OK", "kara_pkt": 0}
+    veto_przebieg: list = []
+    if system_sedzia:
+        say(f"[6/6] Sedzia #{job_id}...")
+        sedzia = _ocen_u_sedziego(system_sedzia, tresc, oferta, kwota, dni_od, dni_do)
+
+        for proba in range(1, 3):
+            if str(sedzia.get("status", "")).upper() != "VETO":
+                break
+            say(f"    sedzia VETO (proba {proba}): {sedzia.get('uzasadnienie', '')[:70]}")
+            say("    -> researcher weryfikuje zakwestionowane twierdzenia...")
+            fakty = _weryfikuj_veto(sedzia, oferta, tresc)
+            veto_przebieg.append({"proba": proba, "sedzia": sedzia, "fakty": fakty})
+            say("    -> pismo przepisuje z faktami...")
+            oferta = _przepisz_z_faktami(
+                oferta, sedzia, fakty, tresc, system_pismo,
+                kwota_dolna, kwota_gorna, bool(wynik_wyceny.get("definitywna")),
+            )
+            oferta = sanitize_opis(oferta, wycena=kwota, dni=dni_do)
+            say("    -> sedzia ocenia ponownie...")
+            sedzia = _ocen_u_sedziego(system_sedzia, tresc, oferta, kwota, dni_od, dni_do)
+
+        if str(sedzia.get("status", "")).upper() == "VETO":
+            say(f"    sedzia nadal VETO po {len(veto_przebieg)} probach - oferta do przegladu")
+        else:
+            say(f"    sedzia po naprawie: {sedzia.get('status')}")
+
+    # ---------- CHECKER (na finalnej wersji, po ewentualnej naprawie) ----------
     say(f"[5/6] Checker #{job_id}...")
     sciezka = "biznes" if "biznes" in (pola.get("SCIEZKA_MERYTORYKI", "") or "").lower() else "inzynieria"
     check = sprawdz(oferta, dni=dni_do, sciezka=sciezka, client_text=client_text)
     if not check["ok"]:
         say(f"    checker: {[p['regula'] for p in check['problemy']]}")
-
-    # ---------- SĘDZIA ----------
-    sedzia = {"status": "OK", "kara_pkt": 0}
-    if system_sedzia:
-        say(f"[6/6] Sedzia #{job_id}...")
-        sedzia_raw = call_ai(
-            system_sedzia,
-            f"--- OGLOSZENIE KLIENTA ---\n{tresc}\n\n"
-            f"--- WYCENA: {kwota} zl netto / {dni_od}-{dni_do} dni ---\n\n"
-            f"--- OFERTA DO OCENY ---\n{oferta}",
-            model="deepseek-v4-pro-nothink", timeout=120, temperature=0.3,
-        )
-        sedzia = _wyciagnij_json_blok(sedzia_raw or "", "COMMON_SENSE_JSON") or {"status": "OK", "kara_pkt": 0}
-        if str(sedzia.get("status", "")).upper() == "VETO":
-            say(f"    sedzia VETO: {sedzia.get('uzasadnienie', '')[:80]}")
 
     wynik = {
         "ok": True,
@@ -349,15 +442,55 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         "pola": pola,
         "oferta": oferta,
         "wycena": kwota,
+        "wycena_dolna": kwota_dolna,
+        "wycena_gorna": kwota_gorna,
         "dni": dni_do, "dni_od": dni_od, "dni_do": dni_do,
+        "komponenty": wynik_wyceny.get("komponenty", []),
+        "niepewnosci": wynik_wyceny.get("niepewnosci", []),
         "wycena_rozbicie": wynik_wyceny.get("rozbicie", {}),
         "checker": check,
         "sedzia": sedzia,
+        "veto_przebieg": veto_przebieg,
         "research": research,
+        "wycena_surowa": wynik_wyceny.get("surowy_tekst", ""),
+        "dziennik_iter1": dziennik_iter1,
         "log": log,
     }
 
-    (DZIENNIKI_DIR / f"{job_id}.json").write_text(
-        json.dumps(wynik, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    # ---------- ZAPIS ARTEFAKTOW ----------
+    # Produkcyjnie: pelny zapis do ofertowarki (analiza, research, wycena, oferta).
+    # Dziennik roboczy w mozg/dzienniki tylko na zadanie (dev).
+    _zapisz_artefakty_ofertowarka(job_id, dziennik_iter1, dziennik, research, wynik_wyceny, oferta, check, sedzia)
+    if zapisz_dziennik:
+        (DZIENNIKI_DIR / f"{job_id}.json").write_text(
+            json.dumps(wynik, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
     return wynik
+
+
+def _zapisz_artefakty_ofertowarka(job_id: str, dziennik_iter1: str, dziennik: str,
+                                  research: str, wynik_wyceny: Dict[str, Any],
+                                  oferta: str, check: Dict[str, Any],
+                                  sedzia: Dict[str, Any]) -> None:
+    """Zapisuje surowe artefakty lancucha do 01_ofertowarka/<job_id>/.
+
+    Zgodnie z docelowym dzialaniem bota: analiza + research + wyceny + oferta koncowa,
+    a dziennik roboczy i debug NIE sa zostawiane.
+    """
+    try:
+        out = OFERTOWARKA_DIR / str(job_id)
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "1_analiza.md").write_text(dziennik_iter1 or "", encoding="utf-8")
+        (out / "2_research.md").write_text(research or "", encoding="utf-8")
+        (out / "3_weryfikacja.md").write_text(dziennik or "", encoding="utf-8")
+        (out / "4_wycena.md").write_text(wynik_wyceny.get("surowy_tekst", "") or "", encoding="utf-8")
+        (out / "5_pismo.md").write_text(oferta or "", encoding="utf-8")
+        koncowa = (
+            f"# OFERTA KONCOWA #{job_id}\n\n"
+            f"WYCENA: {wynik_wyceny.get('kwota_dolna')}-{wynik_wyceny.get('kwota_gorna')} zl netto\n"
+            f"CHECKER: {'OK' if check.get('ok') else [p['regula'] for p in check.get('problemy', [])]}\n"
+            f"SEDZIA: {sedzia.get('status')} (kara {sedzia.get('kara_pkt')} pkt)\n\n---\n\n{oferta}\n"
+        )
+        (out / "6_koncowa.md").write_text(koncowa, encoding="utf-8")
+    except Exception as e:
+        print(f"[ZAPIS-ARTEFAKTY] blad dla #{job_id}: {e}", flush=True)

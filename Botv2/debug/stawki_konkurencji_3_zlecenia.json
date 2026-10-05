@@ -1,0 +1,260 @@
+{
+  "145285": {
+    "nazwa": "Subiekt <-> BaseLinker (40k SKU)",
+    "liczba_ofert": 49,
+    "min": 100,
+    "p10": 1500,
+    "p25": 2900,
+    "mediana": 4800,
+    "p75": 7500,
+    "p90": 15000,
+    "max": 30000,
+    "srednia": 6627,
+    "top5_najdrozsze": [
+      {
+        "offer_id": "2906106",
+        "autor": "WD Partner",
+        "umowy": "0 umów",
+        "cena": 15000,
+        "dni": "30 dni pracy"
+      },
+      {
+        "offer_id": "2905118",
+        "autor": "hermsoft.pl",
+        "umowy": "3 umowy",
+        "cena": 17800,
+        "dni": "21 dni pracy"
+      },
+      {
+        "offer_id": "2905181",
+        "autor": "Vulcanoo - CodeOlympus.studio",
+        "umowy": "113 umów",
+        "cena": 24000,
+        "dni": "30 dni pracy"
+      },
+      {
+        "offer_id": "2905693",
+        "autor": "Szymon M",
+        "umowy": "2 umowy",
+        "cena": 24000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2906257",
+        "autor": "Matrweb",
+        "umowy": "0 umów",
+        "cena": 30000,
+        "dni": "30 dni pracy"
+      }
+    ],
+    "top5_najtansze": [
+      {
+        "offer_id": "2905414",
+        "autor": "Mikołaj",
+        "umowy": "5 umów",
+        "cena": 100,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2906527",
+        "autor": "gorgal",
+        "umowy": "0 umów",
+        "cena": 140,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2907945",
+        "autor": "Aleksander Palczewski",
+        "umowy": "0 umów",
+        "cena": 800,
+        "dni": "14 dni pracy"
+      },
+      {
+        "offer_id": "2904743",
+        "autor": "Patryk Kaczyński",
+        "umowy": "1 umowa",
+        "cena": 1000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2906801",
+        "autor": "Kamil Wąsik",
+        "umowy": "11 umów",
+        "cena": 1500,
+        "dni": "14 dni pracy"
+      }
+    ]
+  },
+  "145287": {
+    "nazwa": "Aplikacja mobilna offline (Flutter/Kotlin)",
+    "liczba_ofert": 60,
+    "min": 86,
+    "p10": 1500,
+    "p25": 6316,
+    "mediana": 11060,
+    "p75": 20000,
+    "p90": 38100,
+    "max": 80000,
+    "srednia": 16701,
+    "top5_najdrozsze": [
+      {
+        "offer_id": "2905078",
+        "autor": "Swiftoletz Brothers",
+        "umowy": "0 umów",
+        "cena": 40000,
+        "dni": "45 dni pracy"
+      },
+      {
+        "offer_id": "2904913",
+        "autor": "Alakhaine",
+        "umowy": "2 umowy",
+        "cena": 45000,
+        "dni": "60 dni pracy"
+      },
+      {
+        "offer_id": "2905283",
+        "autor": "bfirststudio.com",
+        "umowy": "0 umów",
+        "cena": 50000,
+        "dni": "60 dni pracy"
+      },
+      {
+        "offer_id": "2904972",
+        "autor": "DGital Apps",
+        "umowy": "1 umowa",
+        "cena": 66000,
+        "dni": "60 dni pracy"
+      },
+      {
+        "offer_id": "2905692",
+        "autor": "Szymon M",
+        "umowy": "2 umowy",
+        "cena": 80000,
+        "dni": "16 dni pracy"
+      }
+    ],
+    "top5_najtansze": [
+      {
+        "offer_id": "2909131",
+        "autor": "Webcost",
+        "umowy": "0 umów",
+        "cena": 86,
+        "dni": "45 dni pracy"
+      },
+      {
+        "offer_id": "2907758",
+        "autor": "Andrzej Nowicki",
+        "umowy": "10 umów",
+        "cena": 120,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2906260",
+        "autor": "desi9n.pl",
+        "umowy": "0 umów",
+        "cena": 150,
+        "dni": "30 dni pracy"
+      },
+      {
+        "offer_id": "2905413",
+        "autor": "Łukasz",
+        "umowy": "0 umów",
+        "cena": 1000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2906974",
+        "autor": "IJON",
+        "umowy": "6 umów",
+        "cena": 1400,
+        "dni": "21 dni pracy"
+      }
+    ]
+  },
+  "144890": {
+    "nazwa": "Automatyzacja faktur OCR + Optima",
+    "liczba_ofert": 101,
+    "min": 95,
+    "p10": 1900,
+    "p25": 3500,
+    "mediana": 5900,
+    "p75": 10500,
+    "p90": 15000,
+    "max": 120000,
+    "srednia": 9059,
+    "top5_najdrozsze": [
+      {
+        "offer_id": "2892454",
+        "autor": "collabwire",
+        "umowy": "0 umów",
+        "cena": 25000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2891535",
+        "autor": "marekrynarzewski",
+        "umowy": "0 umów",
+        "cena": 28500,
+        "dni": "56 dni pracy"
+      },
+      {
+        "offer_id": "2889292",
+        "autor": "szymon-m",
+        "umowy": "2 umowy",
+        "cena": 36000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2891917",
+        "autor": "synappstech",
+        "umowy": "0 umów",
+        "cena": 42900,
+        "dni": "20 dni pracy"
+      },
+      {
+        "offer_id": "2889657",
+        "autor": "pixelpulse",
+        "umowy": "8 umów",
+        "cena": 120000,
+        "dni": "45 dni pracy"
+      }
+    ],
+    "top5_najtansze": [
+      {
+        "offer_id": "2891906",
+        "autor": "sednotech",
+        "umowy": "3 umowy",
+        "cena": 95,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2895313",
+        "autor": "lukasheek88",
+        "umowy": "62 umowy",
+        "cena": 100,
+        "dni": "100 dni pracy"
+      },
+      {
+        "offer_id": "2889306",
+        "autor": "mikolaj",
+        "umowy": "5 umów",
+        "cena": 500,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2889293",
+        "autor": "ofylypczuk",
+        "umowy": "54 umowy",
+        "cena": 1000,
+        "dni": "7 dni pracy"
+      },
+      {
+        "offer_id": "2895113",
+        "autor": "aleksander-palczewski",
+        "umowy": "0 umów",
+        "cena": 1000,
+        "dni": "14 dni pracy"
+      }
+    ]
+  }
+}

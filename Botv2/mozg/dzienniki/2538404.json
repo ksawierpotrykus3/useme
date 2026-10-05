@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "job_id": "2538404",
+  "dziennik": "KWALIFIKOWALNOSC: TAK\nTYP_ZLECENIA: projekt jednorazowy (dokończenie istniejącej aplikacji) + opcjonalna stała współpraca/serwis; wyceny.remontow.pl — do potwierdzenia, czy w tym samym zleceniu\nINTENCJA: wykonawcze; doradcze tylko jeśli klient sam poprosi o kierunek\nDECYDENT_I_BOL: Marek — podpisany, rola nieokreślona. Ból z tekstu: niedokończony produkt, potrzeba wejścia na rynek, późniejszy serwis. Ból biznesowy nienazwany wprost\nWYKONALNE: TAK warunkowo — po dostępie do kodu i potwierdzeniu zakresu. Jeśli kod nieczytelny/brak dokumentacji, możliwa ścieżka: dokończenie przez przepisanie modułów\nPOLE_DO_POPISU: NIE MA — brak dowodu, że klient czegoś nie wie; research potwierdza tylko publiczne działanie stron, nie daje miny\nSCIEZKA_MERYTORYKI: ZADNA\nMINY_I_CIEKAWOSTKI: puste — brak dowodów ze zlecenia; research nie ujawnił min\nODMOWA: puste\nPYTANIA:\n1. Czy w tym zleceniu chodzi tylko o dokończenie wygrajprzetarg.com/v2, czy także o wyceny.remontow.pl? Jeśli oba — w jakiej kolejności? Pytam, bo od tego zależy zakres i wycena.\n2. Które moduły i jaki zakres frontendu są do dokończenia? Co już działa, a czego brakuje? Pytam, bo bez tego nie da się wycenić.\n3. Czy jest dostęp do repozytorium, dokumentacji, środowiska i czy znany jest stack poza Pythonem? Pytam, bo od stanu kodu zależy, czy to dokończenie, czy przepisanie.\n4. Jaki jest oczekiwany termin wdrożenia? Pytam, bo termin zmienia cenę i możliwość zaangażowania.\nCO_ZLECENIE_MOWI: Python; wygrajprzetarg.com/v2; kilka modułów + frontend; potem możliwość stałego serwisowania; wyceny.remontow.pl; budżet do negocjacji; praca na efekt za ustalone pieniądze; decydent Marek\nCZEGO_NIE_MOWI: stack poza Pythonem, zakres modułów, stan kodu, repo/dokumentacja, termin, konkretny budżet, czy wyceny.remontow.pl wchodzi teraz, czy serwis w umowie, kryteria odbioru\nGRANICA_CIECIA: krótko — 4 pytania, bo zlecenie ma warstwy: zakres/moduly, stan kodu, drugi projekt, termin. Zero merytoryki i zero wyceny do czasu odpowiedzi.\nRESEARCH_POTRZEBNY: NIE — wykonany. Kluczowe: wygrajprzetarg.com działa jako AI do analizy dokumentacji przetargowej; /v2/ zwraca błąd; wyceny.remontow.pl działa jako landing AI do wyceny remontu; brak publicznych info o stacku, repo, dokumentacji, stanie kodu. Nie wchodzi do oferty.\n\nDECYZJE: DOPISAĆ — nic merytorycznego; ODPOWIEDZIEĆ — że po dostępie do kodu i potwierdzeniu zakresu złożę wycenę, możliwy audyt na start; DOPYTAĆ — 1) czy wyceny.remontow.pl w tym zleceniu, 2) zakres modułów/frontendu, 3) repo/docs/stack, 4) termin.",
+  "pola": {
+    "KWALIFIKOWALNOSC": "TAK",
+    "TYP_ZLECENIA": "projekt jednorazowy (dokończenie istniejącej aplikacji) + opcjonalna stała współpraca/serwis; wyceny.remontow.pl — do potwierdzenia, czy w tym samym zleceniu",
+    "INTENCJA": "wykonawcze; doradcze tylko jeśli klient sam poprosi o kierunek",
+    "DECYDENT_I_BOL": "Marek — podpisany, rola nieokreślona. Ból z tekstu: niedokończony produkt, potrzeba wejścia na rynek, późniejszy serwis. Ból biznesowy nienazwany wprost",
+    "WYKONALNE": "TAK warunkowo — po dostępie do kodu i potwierdzeniu zakresu. Jeśli kod nieczytelny/brak dokumentacji, możliwa ścieżka: dokończenie przez przepisanie modułów",
+    "POLE_DO_POPISU": "NIE MA — brak dowodu, że klient czegoś nie wie; research potwierdza tylko publiczne działanie stron, nie daje miny",
+    "SCIEZKA_MERYTORYKI": "ZADNA",
+    "MINY_I_CIEKAWOSTKI": "puste — brak dowodów ze zlecenia; research nie ujawnił min",
+    "PYTANIA": "1. Czy w tym zleceniu chodzi tylko o dokończenie wygrajprzetarg.com/v2, czy także o wyceny.remontow.pl? Jeśli oba — w jakiej kolejności? Pytam, bo od tego zależy zakres i wycena.\n2. Które moduły i jaki zakres frontendu są do dokończenia? Co już działa, a czego brakuje? Pytam, bo bez tego nie da się wycenić.\n3. Czy jest dostęp do repozytorium, dokumentacji, środowiska i czy znany jest stack poza Pythonem? Pytam, bo od stanu kodu zależy, czy to dokończenie, czy przepisanie.\n4. Jaki jest oczekiwany termin wdrożenia? Pytam, bo termin zmienia cenę i możliwość zaangażowania.",
+    "CO_ZLECENIE_MOWI": "Python; wygrajprzetarg.com/v2; kilka modułów + frontend; potem możliwość stałego serwisowania; wyceny.remontow.pl; budżet do negocjacji; praca na efekt za ustalone pieniądze; decydent Marek",
+    "CZEGO_NIE_MOWI": "stack poza Pythonem, zakres modułów, stan kodu, repo/dokumentacja, termin, konkretny budżet, czy wyceny.remontow.pl wchodzi teraz, czy serwis w umowie, kryteria odbioru",
+    "GRANICA_CIECIA": "krótko — 4 pytania, bo zlecenie ma warstwy: zakres/moduly, stan kodu, drugi projekt, termin. Zero merytoryki i zero wyceny do czasu odpowiedzi.",
+    "RESEARCH_POTRZEBNY": "NIE — wykonany. Kluczowe: wygrajprzetarg.com działa jako AI do analizy dokumentacji przetargowej; /v2/ zwraca błąd; wyceny.remontow.pl działa jako landing AI do wyceny remontu; brak publicznych info o stacku, repo, dokumentacji, stanie kodu. Nie wchodzi do oferty."
+  },
+  "oferta": "Marek, wchodzę w temat. Python, dokończenie wygrajprzetarg.com/v2, kilka modułów plus frontend, a potem możliwość stałego serwisowania. Sama część wygrajprzetarg.com/v2 to około 8 500 zł netto i około czterech do sześciu tygodni. Jeśli w tym samym zleceniu ma być też wyceny.remontow.pl, to traktuję to jako drugi zakres, bo to osobna aplikacja i osobna wycena. Stały serwis po wdrożeniu też jest do ustalenia osobno.\n\nZanim ruszę, potrzebuję kilku rzeczy. Czy wyceny.remontow.pl wchodzi teraz, czy dopiero po v2. Które moduły i jaki frontend są do dokończenia, co już działa, a czego brakuje. Czy jest dostęp do repozytorium, dokumentacji i środowiska oraz co już wiadomo o stanie kodu. Jaki jest oczekiwany termin wdrożenia.\n\nProponuję zacząć od dostępu do kodu i krótkiego przeglądu, bo to najszybciej pokaże, czy dokończenie jest prostsze, czy trzeba przepisać część modułów. Jeśli zakres okaże się inny, dopasuję cenę i termin.\n\nKsawier",
+  "wycena": 8500,
+  "dni": 42,
+  "dni_od": 28,
+  "dni_do": 42,
+  "wycena_rozbicie": {
+    "tryb": "debata_dwumodelowa_useme",
+    "surowa_kwota_ai": 8500,
+    "kwota_koncowa": 8500,
+    "dni_od": 28,
+    "dni_do": 42,
+    "rundy_debaty": 2,
+    "uzasadnienie_wyceniacza": "Recenzent ma rację co do samego dokończenia v1/v2: 12 000 zł bez pełnego audytu było oderwane od realiów Useme. Koryguję do 8 500 zł netto, bo zakres obejmuje kilka modułów, frontend, testy i wdrożenie, ale nie pełny audyt obu domen ani budowę wyceny.remont.pl od zera. Termin 28–42 dni kalendarzowych wynika z audytu legacy, integracji i iteracji z klientem; AI skraca kodowanie, ale nie skraca akceptacji, danych i poprawek.",
+    "krytyka_reviewera": "",
+    "widełki_rynkowe": "5 000 – 8 500 zł netto za dokończenie v1/v2; powyżej 10 000 zł wyłącznie przy pełnym audycie obu domen",
+    "przebieg": [
+      {
+        "runda": 0,
+        "aktor": "WYCENIACZ",
+        "kwota": 18000,
+        "dni_od": 40,
+        "dni_do": 70,
+        "uzasadnienie": "Wycena obejmuje dokończenie istniejącej aplikacji Python dla wygrajprzetarg.com/v2: audyt kodu, domknięcie kilku modułów i frontendu oraz testy na realnych danych. 18 000 PLN netto to stawka wartościowa, ale nie korporacyjna — adekwatna do ryzyka i odpowiedzialności za istniejący produkt MŚP na Useme; wyceny.remontow.pl i stały serwis wymagają osobnego potwierdzenia zakresu. Termin 40–70 dni kalendarzowych uwzględnia poprawki po testach klienta i możliwe przepisanie nieczytelnych modułów."
+      },
+      {
+        "runda": 1,
+        "aktor": "REVIEWER",
+        "werdykt": "ZA_DUZA",
+        "kwota_sugerowana": 9500,
+        "rynek": "6 000 - 12 000 zł netto",
+        "uzasadnienie": "Ogłoszenie pochodzi od typowego klienta z sektora MŚŚP na Useme, który operuje nieprecyzyjnym zakresem i szuka szybkiego dokończenia MVP, a nie kontraktu enterprise. Oferta 18 000 zł i 70 dni z góry odstr```json\n{"
+      },
+      {
+        "runda": 1,
+        "aktor": "WYCENIACZ_KONTRA",
+        "kwota": 12000,
+        "dni_od": 30,
+        "dni_do": 50,
+        "uzasadnienie": "Recenzent ma częściowo rację: 18 000 zł było oderwane od realiów MŚP na Useme, ale 6 000–9 500 zł jest zbyt ryzykowne przy nieznanym stanie istniejącego kodu, kilku modułach, froncie i drugim serwisie. Koryguję do 12 000 zł netto, czyli górnej granicy wskazanego przedziału, bo wyceniam efekt, integrację i stabilizację MVP, a nie etatowe godziny. Termin 30–50 dni kalendarzowych uwzględnia audyt kodu, etapowe testy klienta i poprawki bez rozwlekania projektu do 70 dni."
+      },
+      {
+        "runda": 2,
+        "aktor": "REVIEWER",
+        "werdykt": "ZA_DUZA",
+        "kwota_sugerowana": 7500,
+        "rynek": "5 000 – 8 500 zł netto za dokończenie v1/v2; powyżej 10 000 zł wyłącznie przy pełnym audycie obu domen",
+        "uzasadnienie": ""
+      },
+      {
+        "runda": 2,
+        "aktor": "WYCENIACZ_KONTRA",
+        "kwota": 8500,
+        "dni_od": 28,
+        "dni_do": 42,
+        "uzasadnienie": "Recenzent ma rację co do samego dokończenia v1/v2: 12 000 zł bez pełnego audytu było oderwane od realiów Useme. Koryguję do 8 500 zł netto, bo zakres obejmuje kilka modułów, frontend, testy i wdrożenie, ale nie pełny audyt obu domen ani budowę wyceny.remont.pl od zera. Termin 28–42 dni kalendarzowych wynika z audytu legacy, integracji i iteracji z klientem; AI skraca kodowanie, ale nie skraca akceptacji, danych i poprawek."
+      }
+    ]
+  },
+  "checker": {
+    "ok": true,
+    "problemy": []
+  },
+  "sedzia": {
+    "status": "OK",
+    "kara_pkt": 0,
+    "cytat_lub_brak": "",
+    "uzasadnienie": "Oferta jest konkretna, odpowiada na ogłoszenie wprost, nie wymyśla doświadczenia ani portfolio, nie neguje podejścia klienta. Słusznie rozdziela dwa zakresy (wygrajprzetarg.com/v2 i wyceny.remontow.pl) i pyta o brakujące informacje zamiast zgadywać. Ton jest rzeczowy i ludzki, pasuje do stylu ogłoszenia Marka. Brak elementów niepasujących, obietnic bez pokrycia ani pominiętych życzeń klienta.",
+    "instrukcja_naprawy": ""
+  },
+  "research": "KWALIFIKOWALNOSC: TAK\nTYP_ZLECENIA: projekt jednorazowy (dokończenie istniejącej aplikacji) + opcjonalna stała współpraca/serwis; wyceny.remontow.pl — do potwierdzenia, czy w tym samym zleceniu\nINTENCJA: wykonawcze (dokończyć moduły i frontend, wdrożyć); doradcze tylko jeśli klient sam poprosi o kierunek\nDECYDENT_I_BOL: Marek — podpisany, rola nieokreślona. Ból z tekstu: niedokończony produkt, potrzeba wejścia na rynek, później serwis. Ból biznesowy nienazwany wprost\nWYKONALNE: TAK warunkowo — po dostępie do kodu i potwierdzeniu zakresu. Jeśli kod nieczytelny/brak dokumentacji, najbliższa opcja: dokończenie przez przepisanie modułów\nPOLE_DO_POPISU: NIE MA — brak danych o systemie, brak dowodów; URL nie pobrał się\nSCIEZKA_MERYTORYKI: ZADNA\nMINY_I_CIEKAWOSTKI: puste — brak dowodów ze zlecenia\nODMOWA: puste\nPYTANIA:\n1. Czy w tym zleceniu chodzi tylko o dokończenie wygrajprzetarg.com/v2, czy także o wyceny.remontow.pl? Jeśli oba — w jakiej kolejności? Pytam, bo od tego zależy zakres i wycena.\n2. Które moduły i jaki zakres frontendu są do dokończenia? Co już działa, a czego brakuje? Pytam, bo bez tego nie da się wycenić.\n3. Czy jest dostęp do repozytorium, dokumentacji, środowiska i czy znany jest stack poza Pythonem? Pytam, bo od stanu kodu zależy, czy to dokończenie, czy przepisanie.\n4. Jaki jest oczekiwany termin wdrożenia? Pytam, bo termin zmienia cenę i możliwość zaangażowania.\nCO_ZLECENIE_MOWI: Python; wygrajprzetarg.com/v2; kilka modułów + frontend; potem możliwość stałego serwisowania; wyceny.remontow.pl; budżet do negocjacji; praca na efekt za ustalone pieniądze; decydent Marek\nCZEGO_NIE_MOWI: stack poza Pythonem, zakres modułów, stan kodu, repo/dokumentacja, termin, konkretny budżet, czy wyceny.remontow.pl wchodzi teraz, czy serwis w umowie, kryteria odbioru\nGRANICA_CIECIA: krótko — tylko dopytanie o zakres i warunki; zero merytoryki i zero wyceny do czasu odpowiedzi\nRESEARCH_POTRZEBNY: TAK — sprawdzono publicznie:\n- wygrajprzetarg.com działa i wygląda na aplikację AI do analizy dokumentacji przetargowej (BZP, SWZ, przedmiar, wykrywanie rozbieżności). Opis funkcji na stronie sugeruje działający produkt, ale nie ujawnia stacku technicznego.\n- wygrajprzetarg.com/v2/ zwraca błąd — nie można potwierdzić, co zawiera ani w jakim jest stanie.\n- wyceny.remontow.pl działa jako landing page z formularzem wyceny remontu opartym na AI (zdjęcia, kosztorys, raport PDF). Nie ma publicznych informacji o technologii ani o tym, czy backend istnieje.\n- Brak publicznych informacji o użytym frameworku (Django/Flask/FastAPI), repozytorium, dokumentacji czy stanie kodu. Research nie ujawnił żadnych min technicznych — jedynie potwierdza, że produkt jest widoczny publicznie, ale zakres „dokończenia” pozostaje niejasny.",
+  "log": [
+    "[1/6] Analiza #2538404...",
+    "    kwalifikowalnosc=TAK (typ? no)",
+    "[2/6] Weryfikacja #2538404...",
+    "    research ON",
+    "[3/6] Wycena #2538404...",
+    "    debata wycenowa: Wyceniacz [DeepSeek] vs Reviewer [Gemini]...",
+    "    [Wyceniacz R0] 18000 zł | 40-70 dni (Wycena obejmuje dokończenie istniejącej aplikacji Python dla wygr...)",
+    "    [Reviewer R1] ZA_DUZA (sugeruje: 9500 zł, rynek: 6 000 - 12 000 zł netto)",
+    "    [Wyceniacz R1 Kontra] -> 12000 zł / 30-50 dni",
+    "    [Reviewer R2] ZA_DUZA (sugeruje: 7500 zł, rynek: 5 000 – 8 500 zł netto za dokończenie v1/v2; powyżej 10 000 zł wyłącznie przy pełnym audycie obu domen)",
+    "    [Wyceniacz R2 Kontra] -> 8500 zł / 28-42 dni",
+    "    -> [Finał Debaty] 8500 zł / 28-42 dni (psychologiczne zaokrąglenie, Useme ready)",
+    "    wycena debata: 8500 zl / 28-42 dni (projekt)",
+    "[4/6] Pismo #2538404...",
+    "[5/6] Checker #2538404...",
+    "[6/6] Sedzia #2538404..."
+  ]
+}

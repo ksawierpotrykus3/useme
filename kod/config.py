@@ -72,6 +72,8 @@ CATEGORY_URLS = {
 TIMEOUT_DNI = 3
 DRY_RUN = False         # False: tryb wysyłki na żywo po autoryzacji użytkownika
 USE_MOCK_AI = False     # False: uruchamia pełny uodporniony łańcuch AI ze slotami i DeepSeek
+USE_MOZG_V2 = True      # True: nowy mózg V2 (chirurgiczne czytanie + rada 4xDeepSeek + rozjemca)
+                        #       False: stary łańcuch slotów (SlotChainAIPipeline)
 HEADLESS = False        # False: tryb z oknem (omija Cloudflare na formularzu ofert)
 
 # Limity i timeouty

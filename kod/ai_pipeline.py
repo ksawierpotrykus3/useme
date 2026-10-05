@@ -528,4 +528,10 @@ def get_ai_pipeline() -> BaseAIPipeline:
     """Fabryka zwracająca aktywny pipeline AI na podstawie flagi w config.py."""
     if USE_MOCK_AI:
         return MockAIPipeline()
+    if getattr(config, "USE_MOZG_V2", False):
+        try:
+            from mozg_v2_bridge import MozgV2Pipeline
+            return MozgV2Pipeline()
+        except Exception as e:
+            print(f"[MOZG_V2] Nie udalo sie zaladowac nowego mozgu ({e}) - fallback na stary lancuch.", flush=True)
     return SlotChainAIPipeline()
