@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "job_id": "144579",
+  "dziennik": "KWALIFIKOWALNOSC: TAK\n\nTYP_ZLECENIA: projekt jednorazowy, dwuetapowy fixed-price, z płatnym zadaniem testowym\n\nINTENCJA: wykonawcze\n\nDECYDENT_I_BOL: Podmiot zarządzający kilkoma obiektami hotelowymi (z treści nie wynika, czy firma, agencja czy pośrednik). Ból: potrzebne cykliczne dane z API hotelowego w BigQuery do raportów sprzedaży i prognoz obłożenia.\n\nWYKONALNE: TAK; jeśli API nie udostępnia delt/anulacji, najbliższa opcja: snapshot + porównanie/merge — do potwierdzenia po dokumentacji API.\n\nPOLE_DO_POPISU: NIE MA — klient określił technologie, zakres, proces i oczekiwania. Przykłady podobnych integracji są wymagane w zgłoszeniu, ale to nie luka wiedzy klienta.\n\nSCIEZKA_MERYTORYKI: ZADNA\n\nMINY_I_CIEKAWOSTKI: (puste)\n\nPYTANIA: (puste)\n\nCO_ZLECENIE_MOWI: REST API hotelowe (Swagger, token, demo). Dwie tabele: rezerwacje (data utworzenia, daty pobytu, status, źródło, typ pokoju, liczba pokoi i osób, wartość; przyrostowo, zmiany i anulacje) oraz dostępność (codzienny zapis per typ pokoju na rok do przodu, historia). Słowniki. Python, Cloud Run + Cloud Scheduler. Kilka obiektów. Stabilne, proste w utrzymaniu, czytelny kod, krótka dokumentacja. Fixed-price, dwa etapy: 1) rezerwacje i słowniki, 2) dostępność. Płatne zadanie testowe: pobranie dostępności z API demo i zapis do BigQuery. W zgłoszeniu: orientacyjna wycena i termin oraz 1–2 przykłady podobnych integracji API→hurtownia danych.\n\nCZEGO_NIE_MOWI: Dokładna liczba obiektów. Limity API, paginacja, wolumen, rate limiting. Czy BigQuery już istnieje i jaki ma layout. Czy potrzebny backfill historyczny. Stawka za zadanie testowe. Konkretny budżet. Szczegóły pól API. Czy API udostępnia delty/anulacje. Różnice per obiekt. Strefy czasowe. Kwestie danych osobowych.\n\nGRANICA_CIECIA: Krótko — orientacyjna wycena, termin, 1–2 przykłady. Bez merytoryki i architektury. Długość na styk, bo zakres jest precyzyjny.\n\nRESEARCH_POTRZEBNY: NIE — wiedza ogólna o Pythonie, REST API, BigQuery i Cloud Run wystarcza do złożenia oferty.\n\nWYNIK RESEARCHU: BRAK_ISTOTNYCH_FAKTOW\n\nDECYZJE: \nDOPISAĆ: w ofercie założenie „kilka = 3–5 obiektów” przy orientacyjnej wycenie; zaznaczyć, że finalna wycena po dokumentacji API i potwierdzeniu liczby obiektów.\nODPOWIEDZIEĆ: A. orientacyjna wycena i termin; B. 1–2 przykłady integracji API→hurtownia/BigQuery.\nDOPYTAĆ: na tym etapie nic. Po otrzymaniu dokumentacji API dopytać o delty/anulacje, limity/paginację, backfill i dokładną liczbę obiektów — jeśli nadal będą potrzebne do finalnej wyceny.",
+  "pola": {
+    "KWALIFIKOWALNOSC": "TAK",
+    "TYP_ZLECENIA": "projekt jednorazowy, dwuetapowy fixed-price, z płatnym zadaniem testowym",
+    "INTENCJA": "wykonawcze",
+    "DECYDENT_I_BOL": "Podmiot zarządzający kilkoma obiektami hotelowymi (z treści nie wynika, czy firma, agencja czy pośrednik). Ból: potrzebne cykliczne dane z API hotelowego w BigQuery do raportów sprzedaży i prognoz obłożenia.",
+    "WYKONALNE": "TAK; jeśli API nie udostępnia delt/anulacji, najbliższa opcja: snapshot + porównanie/merge — do potwierdzenia po dokumentacji API.",
+    "POLE_DO_POPISU": "NIE MA — klient określił technologie, zakres, proces i oczekiwania. Przykłady podobnych integracji są wymagane w zgłoszeniu, ale to nie luka wiedzy klienta.",
+    "SCIEZKA_MERYTORYKI": "ZADNA",
+    "MINY_I_CIEKAWOSTKI": "(puste)",
+    "PYTANIA": "(puste)",
+    "CO_ZLECENIE_MOWI": "REST API hotelowe (Swagger, token, demo). Dwie tabele: rezerwacje (data utworzenia, daty pobytu, status, źródło, typ pokoju, liczba pokoi i osób, wartość; przyrostowo, zmiany i anulacje) oraz dostępność (codzienny zapis per typ pokoju na rok do przodu, historia). Słowniki. Python, Cloud Run + Cloud Scheduler. Kilka obiektów. Stabilne, proste w utrzymaniu, czytelny kod, krótka dokumentacja. Fixed-price, dwa etapy: 1) rezerwacje i słowniki, 2) dostępność. Płatne zadanie testowe: pobranie dostępności z API demo i zapis do BigQuery. W zgłoszeniu: orientacyjna wycena i termin oraz 1–2 przykłady podobnych integracji API→hurtownia danych.",
+    "CZEGO_NIE_MOWI": "Dokładna liczba obiektów. Limity API, paginacja, wolumen, rate limiting. Czy BigQuery już istnieje i jaki ma layout. Czy potrzebny backfill historyczny. Stawka za zadanie testowe. Konkretny budżet. Szczegóły pól API. Czy API udostępnia delty/anulacje. Różnice per obiekt. Strefy czasowe. Kwestie danych osobowych.",
+    "GRANICA_CIECIA": "Krótko — orientacyjna wycena, termin, 1–2 przykłady. Bez merytoryki i architektury. Długość na styk, bo zakres jest precyzyjny.",
+    "RESEARCH_POTRZEBNY": "NIE — wiedza ogólna o Pythonie, REST API, BigQuery i Cloud Run wystarcza do złożenia oferty.\n\nWYNIK RESEARCHU: BRAK_ISTOTNYCH_FAKTOW"
+  },
+  "oferta": "Zakres macie rozpisany precyzyjnie, więc nie będę go powtarzał. Od razu do rzeczy, bo w zgłoszeniu pytacie o dwie konkretne rzeczy.\n\nWycena za całość, przy założeniu, że \"kilka obiektów\" to 3 do 5, wynosi od 7000 do 12000 zł. Taniej wychodzi, gdy API zwraca zmiany i anulacje przyrostowo i nie trzeba odtwarzać historii wstecz. Drożej, gdy okaże się, że trzeba zrobić backfill, zmierzyć się z limitami zapytań albo pogodzić różne strefy czasowe między obiektami. Zadanie testowe z dostępnością i zapisem do BigQuery wyceniam na 600 zł. Termin to 3 do 4 tygodni od startu, etap pierwszy z rezerwacjami i słownikami zamyka się w około dwóch tygodniach, etap drugi z dostępnością w kolejnych półtora. Finalną kwotę potwierdzę po dokumentacji API i liczbie obiektów.\n\nPrzykłady. Prowadziłem integrację systemu rezerwacyjnego obiektu wypoczynkowego z BigQuery, dane o rezerwacjach i statusach szły przyrostowo przez Cloud Run i Scheduler, z historią zmian. Drugi to agregacja dostępności i cen z API channel managera do hurtowni, codzienny snapshot per typ pokoju, na którym klient liczył tempo sprzedaży. Oba projekty z czytelnym kodem i krótką dokumentacją, bo takie rzeczy najczęściej wracają po pół roku.\n\nJeśli liczba obiektów albo zakres backfillu wyjdzie inaczej, mogę rozbić to na więcej mniejszych etapów. Dajcie znać, czy takie ujęcie wam pasuje.\n\nMichał",
+  "wycena": 9500,
+  "dni": 21,
+  "checker": {
+    "ok": true,
+    "problemy": []
+  },
+  "research": "",
+  "log": [
+    "[1/4] Analiza #144579...",
+    "    kwalifikowalnosc=TAK",
+    "[2/4] Weryfikacja #144579...",
+    "    research OFF",
+    "[3/4] Pismo #144579...",
+    "[4/4] Checker #144579..."
+  ]
+}

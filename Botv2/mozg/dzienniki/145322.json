@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "job_id": "145322",
+  "dziennik": "KWALIFIKOWALNOSC: TAK\nTYP_ZLECENIA: projekt jednorazowy (wdrożenie); stała współpraca nie wynika ze zlecenia\nINTENCJA: wykonawcze; discovery jako warunek wyceny, nie osobna intencja doradcza\nDECYDENT_I_BOL: Decydent nieznany. Ból nie nazwany. Z treści wynika tylko potrzeba nowej strony, panelu B2B i integracji; nie wiadomo, co jest problemem biznesowym. Nie dopisuję automatyzacji ani korzyści.\nWYKONALNE: TAK warunkowo — po discovery; zakres zbyt szeroki na jedną wycenę. Najbliższa opcja: discovery + architektura + etapowe wdrożenie.\nPOLE_DO_POPISU: NIE MA. Brak dowodu, że klient nie wie o czymś, co musi usłyszeć; integracje to temat pytań, nie popisu.\nSCIEZKA_MERYTORYKI: ZADNA\nMINY_I_CIEKAWOSTKI: puste. Brak min z dowodem; luka „marketplace i kurierami” bez wskazania których to pytanie, nie mina.\nPYTANIA:\n- Co z czym ma być zintegrowane i w jakim kierunku: strona/panel B2B ↔ Subiekt, marketplace ↔ Subiekt, kurierzy ↔ Subiekt/panel? — bo od tego zależy architektura i liczba integracji.\n- Które konkretnie marketplace’y i kurierzy? — bo każdy to osobne API, autoryzacja i logika; bez tego nie da się określić zakresu.\n- Jaki dokładnie zakres panelu B2B? (ceny, stany, zamówienia, faktury, limity, historia, użytkownicy) — bo to główny zakres funkcjonalny i wycena.\n- Jaki zakres i kierunek integracji z Subiekt nexo pro? (stany/ceny/zamówienia/faktury, jedno- czy dwukierunkowo, czas rzeczywisty/interwał) — bo to największe ryzyko i koszt.\n- Czy jest dostęp do API/licencji Subiekt nexo pro oraz kont/API marketplace i kurierów? — bo bez tego integracja może być niewykonalna lub wymaga dodatkowych kosztów.\n- Jaki zakres nowej strony (podstrony, CMS, design, treści)? — bo to część wyceny.\n- Jaki budżet widełkowy i termin? — bo „do negocjacji” nie pozwala dobrać zakresu.\nCO_ZLECENIE_MOWI: nowa strona internetowa Makoinstal; panel B2B; integracja z Subiekt nexo pro; marketplace; kurierzy; budżet do negocjacji.\nCZEGO_NIE_MOWI: które marketplace, jacy kurierzy, co z czym i w jakim kierunku ma być zintegrowane, zakres panelu B2B, zakres/kierunek integracji z Subiekt nexo pro, technologie, termin, budżet liczbowy, decydent, licencje/API, hosting, design, treści.\nGRANICA_CIECIA: mało danych → bardzo krótko. Potwierdzić wykonalność, zadać pytania, zaproponować discovery/etapy. Zero wykładu o integracjach, zero technologii, zero zgadywania.\nRESEARCH_POTRZEBNY: TAK — dla siebie: sprawdzić ścieżki integracji Subiekt nexo pro oraz wymagania API marketplace/kurierów, żeby ocenić wykonalność i dobrać pytania. Nie ujawniać w ofercie.\n\nDECYZJE:\nDOPISAĆ: potwierdzenie wykonalności po doprecyzowaniu; propozycję discovery i etapowego wdrożenia; informację, że wycena nastąpi po odpowiedziach.\nODPOWIEDZIEĆ: krótko, bez merytoryki: mogę wykonać, ale zakres wymaga doprecyzowania; proponuję krótką rozmowę/discovery.\nDOPYTAĆ: co z czym integrować i w jakim kierunku; marketplace’y; kurierzy; zakres panelu B2B; zakres/kierunek Subiekt nexo pro; dostępy/API/licencje; zakres strony; budżet widełkowy i termin.",
+  "pola": {
+    "KWALIFIKOWALNOSC": "TAK",
+    "TYP_ZLECENIA": "projekt jednorazowy (wdrożenie); stała współpraca nie wynika ze zlecenia",
+    "INTENCJA": "wykonawcze; discovery jako warunek wyceny, nie osobna intencja doradcza",
+    "DECYDENT_I_BOL": "Decydent nieznany. Ból nie nazwany. Z treści wynika tylko potrzeba nowej strony, panelu B2B i integracji; nie wiadomo, co jest problemem biznesowym. Nie dopisuję automatyzacji ani korzyści.",
+    "WYKONALNE": "TAK warunkowo — po discovery; zakres zbyt szeroki na jedną wycenę. Najbliższa opcja: discovery + architektura + etapowe wdrożenie.",
+    "POLE_DO_POPISU": "NIE MA. Brak dowodu, że klient nie wie o czymś, co musi usłyszeć; integracje to temat pytań, nie popisu.",
+    "SCIEZKA_MERYTORYKI": "ZADNA",
+    "MINY_I_CIEKAWOSTKI": "puste. Brak min z dowodem; luka „marketplace i kurierami” bez wskazania których to pytanie, nie mina.",
+    "PYTANIA": "- Co z czym ma być zintegrowane i w jakim kierunku: strona/panel B2B ↔ Subiekt, marketplace ↔ Subiekt, kurierzy ↔ Subiekt/panel? — bo od tego zależy architektura i liczba integracji.\n- Które konkretnie marketplace’y i kurierzy? — bo każdy to osobne API, autoryzacja i logika; bez tego nie da się określić zakresu.\n- Jaki dokładnie zakres panelu B2B? (ceny, stany, zamówienia, faktury, limity, historia, użytkownicy) — bo to główny zakres funkcjonalny i wycena.\n- Jaki zakres i kierunek integracji z Subiekt nexo pro? (stany/ceny/zamówienia/faktury, jedno- czy dwukierunkowo, czas rzeczywisty/interwał) — bo to największe ryzyko i koszt.\n- Czy jest dostęp do API/licencji Subiekt nexo pro oraz kont/API marketplace i kurierów? — bo bez tego integracja może być niewykonalna lub wymaga dodatkowych kosztów.\n- Jaki zakres nowej strony (podstrony, CMS, design, treści)? — bo to część wyceny.\n- Jaki budżet widełkowy i termin? — bo „do negocjacji” nie pozwala dobrać zakresu.",
+    "CO_ZLECENIE_MOWI": "nowa strona internetowa Makoinstal; panel B2B; integracja z Subiekt nexo pro; marketplace; kurierzy; budżet do negocjacji.",
+    "CZEGO_NIE_MOWI": "które marketplace, jacy kurierzy, co z czym i w jakim kierunku ma być zintegrowane, zakres panelu B2B, zakres/kierunek integracji z Subiekt nexo pro, technologie, termin, budżet liczbowy, decydent, licencje/API, hosting, design, treści.",
+    "GRANICA_CIECIA": "mało danych → bardzo krótko. Potwierdzić wykonalność, zadać pytania, zaproponować discovery/etapy. Zero wykładu o integracjach, zero technologii, zero zgadywania.",
+    "RESEARCH_POTRZEBNY": "TAK — dla siebie: sprawdzić ścieżki integracji Subiekt nexo pro oraz wymagania API marketplace/kurierów, żeby ocenić wykonalność i dobrać pytania. Nie ujawniać w ofercie."
+  },
+  "oferta": "Mogę to zrobić, ale zakres jest na tyle szeroki, że wycena przed doprecyzowaniem byłaby zgadywaniem. Panel B2B, integracja z Subiekt nexo pro, marketplace i kurierzy to kilka osobnych tematów, które dopiero po ustaleniu szczegółów składają się w jedną architekturę.\n\nZacznę od pytań, bo od nich zależy wszystko. Co z czym ma być połączone i w którą stronę, czy panel i strona mają ciągnąć dane z Subiekta, czy też zapisywać coś do niego, czy marketplace i kurierzy wchodzą przez Subiekt, przez panel, czy osobno. Które konkretnie marketplace'y i których kurierów obsługujecie. Co dokładnie ma robić panel B2B, czy chodzi o ceny, stany, zamówienia, faktury, limity, historię, użytkowników. Jaki zakres strony, ile podstron, czy potrzebny CMS i design, czy treści są po waszej stronie. Czy macie dostępy i umowy do API marketplace'ów i kurierów oraz licencję do Subiekta, bo bez tego część integracji może być niewykonalna albo wymaga dodatkowych kosztów. I na koniec budżet oraz termin, żeby dobrać zakres.\n\nKażdy marketplace i każdy kurier to osobna integracja z własnym API, autoryzacją i logiką, więc liczba tych połączeń bezpośrednio przekłada się na czas i koszt.\n\nProponuję krótkie discovery, po którym przedstawię konkretną wycenę i podział na etapy. Przy założeniu jednego marketplace'u i jednego kuriera, prostego panelu i podstawowej strony, dolny punkt odniesienia to 6000 zł netto i około 13 dni. Każde dodatkowe połączenie, bardziej rozbudowany panel albo nietypowy zakres Subiekta podnosi tę kwotę. Jeśli budżet jest inny, mogę zejść z zakresem do pierwszego etapu i rozbudowywać go później.\n\nKsawier",
+  "wycena": 6000,
+  "dni": 13,
+  "wycena_rozbicie": {
+    "tryb": "projekt",
+    "godziny_real": 40.0,
+    "po_testach_15": 46.0,
+    "bufor": 0.2,
+    "po_buforze": 55.2,
+    "mnoznik_ryzyka": 1.15,
+    "cap_zadzialal": true,
+    "po_mnoznikach": 63.5,
+    "stawka": 90,
+    "cena_bazowa": 5713.2,
+    "korekta_konkurencyjna": 1.05,
+    "cena_po_korekcie": 5998.9,
+    "kwota_koncowa": 6000,
+    "sanity_ok": true
+  },
+  "checker": {
+    "ok": true,
+    "problemy": []
+  },
+  "sedzia": {
+    "status": "OK",
+    "kara_pkt": 0,
+    "cytat_lub_brak": "",
+    "uzasadnienie": "Oferta jest konkretna, odpowiada na ogłoszenie i nie zawiera zmyślonych realizacji ani obietnic bez pokrycia. Zamiast sztucznego dopasowania, autor uczciwie sygnalizuje szeroki zakres i zadaje pytania doprecyzowujące, co przy tak złożonym zleceniu jest naturalne i profesjonalne. Nie pomija żadnego wyraźnego życzenia klienta, bo klient nie podał żadnych szczegółowych wymagań poza zakresem. Ton jest rzeczowy, bez coachingowej waty.",
+    "instrukcja_naprawy": ""
+  },
+  "research": "## Research: wykonalność integracji (dla siebie, nie dla klienta)\n\n### 1. Subiekt nexo pro — ścieżki integracji\n\n- **Sfera nexo (COM/API Insert)**: wymaga licencji Sfery; integracja „na własną rękę” to „droga przez mękę i przez cennik InsERT-u” — kilkadziesiąt godzin pracy programisty zanim ruszy pierwsza synchronizacja.\n- **Gotowe REST API (Zintegrujemy)**: mostek instalowany przy Subiekcie, „logika biznesowa Subiekta wbudowana w mostek, licencja Sfery niepotrzebna”; komunikacja wychodząca, bez otwartych portów/VPN. Obsługuje produkty/stany, ceny, zamówienia, dokumenty sprzedaży (GET/POST).\n- **Natywne API Insert** (Connexo): integracja przez „natywne API Insert, konektory iPaaS, SFTP/CSV/XML lub dedykowane rozwiązanie middleware” — dwukierunkowa Subiekt ↔ WMS, synchronizacja w czasie rzeczywistym lub interwałach.\n- **Integratory pośrednie (Base.com)**: Base.com **nie tworzy własnych integratorów** Subiekt NEXO PRO — „prezentujemy na naszej stronie dostępne rozwiązania od sprawdzonych dostawców. Koszt integratora oraz sposób rozliczeń zależny jest od dostawcy oprogramowania”.\n\n### 2. Marketplace — co jest obsługiwane\n\nConnexo deklaruje integrację Nexo Pro z: **Allegro, Amazon, eBay, Empik Marketplace, Shopee i innymi**. Zakres: dwukierunkowa synchronizacja towarów i stanów, automatyczne wystawianie/aktualizacja ofert, import zamówień i generowanie dokumentów sprzedaży w Nexo Pro.\n\n### 3. Kurierzy — dostępne API\n\n- **InPost**: API ShipX — wymaga Access Token i Organization ID z panelu Manager Paczek.\n- **DHL**: DHL24 WebAPI (autoryzacja login/hasło do DHL webAPI v2); wtyczka DHL eCommerce (Poland) „oparta o DHL24 WebAPI bez pośredników”.\n- **GLS**: moduł Kurier GLS dla Subiekt nexo (dbsoft, 299 zł brutto) wykorzystuje **WebApi GLS** do generowania przesyłek z danych Subiekta (FS, PA, WZ, ZK).\n- **Zbiorczo (Orbis Software)**: system obsługuje **DPD, InPost, UPS, DHL, GLS i Pocztę Polską** z jednego miejsca; integracja łączy ERP (Subiekt GT, Subiekt Nexo Pro, Comarch Optima) bezpośrednio z API kuriera, pobiera dane adresowe/wymiary/wagę z dokumentu sprzedaży i zwraca numer śledzenia do ERP/sklepu/marketplace'u.\n\n### Miny (potwierdzone źródłami)\n\n1. **Brak wskazania konkretnych marketplace i kurierów w zleceniu** — zakres integracji determinuje liczba i typ API; przy 5 marketplace'ach i 6 kurierach to minimum 11 integracji, każda z własnym API, autoryzacją i logiką.\n2. **Licencja Sfera** — jeśli klient nie ma Sfery, a integrator wymaga natywnego API Insert, dochodzi koszt licencji; alternatywa (mostek REST) omija ten problem, ale jest abonamentowa.\n3. **Base.com nie jest wykonawcą integracji** — tylko katalogiem dostawców; nie można traktować jako gotowego rozwiązania do wdrożenia.\n4. **Dostęp do API kurierów wymaga kont/umów** — InPost: Access Token i Organization ID; DHL: konto na dhl24.com.pl i uprawnienia do WebAPI; GLS: usługa WebApi GLS. Bez tego integracja niewykonalna.\n\n### Niepotwierdzone (brak dowodu w źródłach)\n\n- Czy Subiekt nexo pro ma **oficjalne, publiczne REST API** po stronie Insert — Zintegrujemy dostarcza własny mostek, Connexo mówi o „natywnym API Insert”, ale nie znalazłem dokumentacji Insert potwierdzającej publiczne REST API dla nexo pro.\n- Konkretne limity API marketplace'ów (Allegro, Amazon itd.) i kurierów — nie badano w tym zakresie.",
+  "log": [
+    "[1/6] Analiza #145322...",
+    "    kwalifikowalnosc=TAK",
+    "[2/6] Weryfikacja #145322...",
+    "    research ON",
+    "[3/6] Wycena #145322...",
+    "    kalkulator: 6000 zl / 13 dni (projekt)",
+    "[4/6] Pismo #145322...",
+    "[5/6] Checker #145322...",
+    "[6/6] Sedzia #145322..."
+  ]
+}
