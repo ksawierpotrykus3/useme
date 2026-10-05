@@ -1,0 +1,95 @@
+[
+  {
+    "job_id": "145285",
+    "nazwa": "145285 Subiekt <-> BaseLinker (40k produktów)",
+    "model_wyceniacza": "deepseek-v4-pro",
+    "model_reviewera": "deepseek-v4-pro",
+    "kwota_finalna": 14000,
+    "dni_od": 21,
+    "dni_do": 30,
+    "typ": "projekt",
+    "werdykt_reviewera": "OK",
+    "uwagi_reviewera": "14 000 zł netto jest poniżej psychologicznego progu 15 000 zł, a przy tej złożoności nie wygląda na dumping ani na kwotę oderwaną od realiów MŚP na Useme. Wyższa kwota 18–22k zwiększyłaby marżę, ale przy 40 000 produktów i integracji Subiekt–BaseLinker istotnie obniżyłaby szansę wygranej z ofertami za 10–15k.",
+    "widelki_rynkowe": "od 10000 do 18000 zł",
+    "rundy": 1,
+    "rozbicie": {
+      "tryb": "debata_useme",
+      "surowa_kwota_ai": 14000,
+      "kwota_koncowa": 14000,
+      "dni_od": 21,
+      "dni_do": 30,
+      "rundy_debaty": 1,
+      "uzasadnienie_wyceniacza": "Złożona integracja Subiekt–BaseLinker dla 40 000 produktów z synchronizacją przyrostową, wariantami/EAN, kolejką retry, rezerwacjami i silent-guard to więcej niż prosty mostek, ale wciąż mieści się w realiach MŚP na Useme. Kwota 14 000 zł netto odzwierciedla ryzyko i zakres, pozostając poniżej psychologicznego progu 15 000 zł, a termin 21–30 dni uwzględnia etapowe wdrożenie i testy klienta.",
+      "krytyka_reviewera": "14 000 zł netto jest poniżej psychologicznego progu 15 000 zł, a przy tej złożoności nie wygląda na dumping ani na kwotę oderwaną od realiów MŚP na Useme. Wyższa kwota 18–22k zwiększyłaby marżę, ale przy 40 000 produktów i integracji Subiekt–BaseLinker istotnie obniżyłaby szansę wygranej z ofertami za 10–15k.",
+      "widełki_rynkowe": "od 10000 do 18000 zł"
+    },
+    "log_say": [
+      "    debata wycenowa: Wyceniacz analizuje zlecenie...",
+      "    [Wyceniacz R0] 14000 zł / 21-30 dni (Złożona integracja Subiekt–BaseLinker dla 40 000 produktów z synchroni...)",
+      "    [Reviewer R1] OK (sugeruje: 14000 zł, rynek: od 10000 do 18000 zł)",
+      "    -> [Finał Debaty] 14000 zł / 21-30 dni (zaokrąglono, Useme ready)"
+    ]
+  },
+  {
+    "job_id": "145287",
+    "nazwa": "145287 Aplikacja mobilna offline (kierowcy/serwis)",
+    "model_wyceniacza": "deepseek-v4-pro",
+    "model_reviewera": "deepseek-v4-pro",
+    "kwota_finalna": 18000,
+    "dni_od": 35,
+    "dni_do": 55,
+    "typ": "projekt",
+    "werdykt_reviewera": "OK",
+    "uwagi_reviewera": "18 000 zł netto nie przekracza psychologicznego progu 25–30 tys. na Useme, a przy aplikacji offline-first z formularzami, zdjęciami i synchronizacją to górna granica akceptowalna dla MŚP. Zejście do 15–16 tys. zwiększyłoby szansę, ale 18 tys. nadal nie jest dumpingiem i ma realny sens przy podziale na etapy.",
+    "widelki_rynkowe": "od 12 000 do 18 000 zł",
+    "rundy": 1,
+    "rozbicie": {
+      "tryb": "debata_useme",
+      "surowa_kwota_ai": 18000,
+      "kwota_koncowa": 18000,
+      "dni_od": 35,
+      "dni_do": 55,
+      "rundy_debaty": 1,
+      "uzasadnienie_wyceniacza": "To dedykowana aplikacja mobilna offline-first dla pracowników terenowych, obejmująca formularze, zdjęcia dokumentów i synchronizację po odzyskaniu sieci, najlepiej we Flutterze na Android/iOS. Kwota 18 000 zł netto mieści się w widełkach 12–25 tys. zł dla aplikacji od zera i jest realistyczna dla MŚP na Useme, poniżej typowego progu agencyjnego.",
+      "krytyka_reviewera": "18 000 zł netto nie przekracza psychologicznego progu 25–30 tys. na Useme, a przy aplikacji offline-first z formularzami, zdjęciami i synchronizacją to górna granica akceptowalna dla MŚP. Zejście do 15–16 tys. zwiększyłoby szansę, ale 18 tys. nadal nie jest dumpingiem i ma realny sens przy podziale na etapy.",
+      "widełki_rynkowe": "od 12 000 do 18 000 zł"
+    },
+    "log_say": [
+      "    debata wycenowa: Wyceniacz analizuje zlecenie...",
+      "    [Wyceniacz R0] 18000 zł / 35-55 dni (To dedykowana aplikacja mobilna offline-first dla pracowników terenowy...)",
+      "    [Reviewer R1] OK (sugeruje: 18000 zł, rynek: od 12 000 do 18 000 zł)",
+      "    -> [Finał Debaty] 18000 zł / 35-55 dni (zaokrąglono, Useme ready)"
+    ]
+  },
+  {
+    "job_id": "144890",
+    "nazwa": "144890 Automatyzacja faktur OCR + Optima",
+    "model_wyceniacza": "deepseek-v4-pro",
+    "model_reviewera": "deepseek-v4-pro",
+    "kwota_finalna": 15000,
+    "dni_od": 21,
+    "dni_do": 35,
+    "typ": "projekt",
+    "werdykt_reviewera": "OK",
+    "uwagi_reviewera": "15 000 zł netto za OCR/AI z walidacją, integracją z Optimą i opieką powdrożeniową to górna granica akceptowalna na Useme, ale wciąż mieści się w widełkach doświadczonego wykonawcy dla MŚP. Zejście poniżej 12 000 zł przy realnych testach i integracji z Comarch Optima groziłoby niedoszacowaniem ryzyka i utratą marży.",
+    "widelki_rynkowe": "od 10 000 do 18 000 zł",
+    "rundy": 1,
+    "rozbicie": {
+      "tryb": "debata_useme",
+      "surowa_kwota_ai": 15000,
+      "kwota_koncowa": 15000,
+      "dni_od": 21,
+      "dni_do": 35,
+      "rundy_debaty": 1,
+      "uzasadnienie_wyceniacza": "Złożona automatyzacja OCR/AI z walidacją matematyczną, integracją z Google Drive, e-mail oraz Comarch Optima wymaga solidnego wdrożenia, testów na realnych dokumentach i asysty powdrożeniowej. Na Useme dla MŚP kwota 15 000 zł netto jest realistyczna za taki zakres i mieści się w górnej granicy budżetów ERP/OCR/Optima, nie odstraszając klienta jak oferta agencyjna.",
+      "krytyka_reviewera": "15 000 zł netto za OCR/AI z walidacją, integracją z Optimą i opieką powdrożeniową to górna granica akceptowalna na Useme, ale wciąż mieści się w widełkach doświadczonego wykonawcy dla MŚP. Zejście poniżej 12 000 zł przy realnych testach i integracji z Comarch Optima groziłoby niedoszacowaniem ryzyka i utratą marży.",
+      "widełki_rynkowe": "od 10 000 do 18 000 zł"
+    },
+    "log_say": [
+      "    debata wycenowa: Wyceniacz analizuje zlecenie...",
+      "    [Wyceniacz R0] 15000 zł / 21-35 dni (Złożona automatyzacja OCR/AI z walidacją matematyczną, integracją z Go...)",
+      "    [Reviewer R1] OK (sugeruje: 15000 zł, rynek: od 10 000 do 18 000 zł)",
+      "    -> [Finał Debaty] 15000 zł / 21-35 dni (zaokrąglono, Useme ready)"
+    ]
+  }
+]

@@ -1,89 +1,199 @@
 # -*- coding: utf-8 -*-
-"""Wycena debaty wieloagentowej (Adversarial Pricing Debate) dla Useme.
+"""Wycena debaty wieloagentowej (Adversarial Multi-Model Pricing Debate) dla Useme.
 
-Zastępuje sztywny kalkulator godzinowy (90 zł/h).
-Wyceniacz (freelancer solo z AI) vs Reviewer (wyjadacz z Useme)
-dyskutują o wartości biznesowej, ryzyku i granicach budżetowych MŚP,
-aż dojdą do porozumienia.
-
-Deterministyczny wrapper na końcu dba o zaokrąglenie psychologiczne i twarde limity Useme.
+Architektura:
+- Dwa niezależne modele:
+    * Wyceniacz (domyślnie DeepSeek-v4-Pro): inżynier-architekt, rzetelna ocena ryzyka technicznego.
+    * Reviewer (domyślnie Gemini-3.8-Flash): twardy recenzent z Useme, pilnujący realiów budżetowych MŚP.
+- Czyste prompty: ZERO wpisanych z góry widełek kwotowych ani sztucznych barier.
+- Automatyczny retry z backoffem na błędy sieci i parsowania.
+- Deterministyczny guardrail na końcu: zaokrąglenie psychologiczne (500/1000 zł), minimum 500 zł, min. 7 dni.
 """
 from __future__ import annotations
 
 import json
 import re
-from typing import Any, Callable, Dict, Optional
+import time
+from typing import Any, Callable, Dict, Optional, Tuple
 
-PROMPT_WYCENIACZ = """Jesteś Ksawierem – polskim freelancerem IT na platformie Useme.
-Rozliczasz się przez Useme (umowa o dzieło, bez firmy, bez pośredników, bez narzutu software house'u).
-Pracujesz solo z zaawansowanym AI (piszesz kod i testy w kilka dni, a reszta terminu to wdrożenie, testy klienta i poprawki).
+# --- CZYSTE PROMPTY DOMENOWE BEZ HARDKODOWANYCH LICZB/WIDEŁEK ---
 
-KRYTYCZNE ZASADY FREELANCINGU NA USEME:
-1. NA USEME NIE MA CZEGOŚ TAKIEGO JAK 'STAWKA DZIENNA' (MAN-DAY)!
-   - Termin w dniach (np. 21 dni czy 30 dni) to czas kalendarzowy projektu z buforem na kontakt i testy klienta, a NIE 30 dni pracy po 8 godzin! Z AI pracujesz wydajnie, nie rozliczasz roboczogodzin jak na etacie w korpo.
-2. REALIA CENOWE POLSKICH KLIENTÓW MŚP NA USEME:
-   - Polscy przedsiębiorcy na Useme szukają pojedynczego wykonawcy, który zrobi to taniej i sprawniej niż agencja.
-   - Poniżej 3 000 - 4 000 zł to amatorski dumping (odrzucany przez mądrych klientów za brak powagi), chyba że to drobne mikrozadanie na pół godziny (wtedy 500-1500 zł).
-   - Złoty środek dla solidnego freelancera na Useme:
-     * Integracje, automatyzacje n8n/Make, mostki Subiekt/BaseLinker: 5 000 – 14 000 zł.
-     * Złożone wdrożenia ERP/OCR/Optima z wieloma dokumentami: 8 000 – 16 000 zł (15k to psychologiczna bariera dla wielu MŚP).
-     * Aplikacje mobilne / dedykowane systemy od zera: 12 000 – 25 000 zł.
-     * Stała współpraca / retainer: 1 500 – 3 500 zł miesięcznie.
-   - Powyżej 25 000 - 30 000 zł klient MŚP zaczyna się wycofywać, a powyżej 40 000 zł uznaje to za ofertę z sufitu od agencji.
-3. KOTWICA BUDŻETU JAWNEGO:
-   - Jeśli klient podał budżet 50–250 zł (np. 100 zł), to najczęściej preferowana stawka godzinowa klienta, a nie budżet całości! Wyceniaj całość normalnie.
-   - Jeśli klient podał jawny budżet całkowity (np. 10 000 zł), dopasuj się do niego (np. 80-90% budżetu), jeśli jest realistyczny.
+PROMPT_WYCENIACZ = """Jesteś Ksawierem – polskim inżynierem-freelancerem na platformie Useme.
+Rozliczasz się przez umowę o dzieło na Useme (bez pośredników, bez firmy, bez kosztów biura agencji).
+Pracujesz solo, wspomagany zaawansowanymi narzędziami programistycznymi AI (piszesz architekturę, kod i testy znacznie szybciej niż tradycyjne zespoły, zachowując najwyższą jakość).
 
-Oszacuj kwotę w PLN netto oraz termin w dniach kalendarzowych (od-do, min. 7 dni).
+ZASADY WYCENY DLA FREELANCERA NA USEME:
+1. BRAK 'STAWKI DZIENNEJ' (MAN-DAY):
+   - Termin w dniach to czas kalendarzowy projektu (etapowanie, testy klienta na rzeczywistych danych, poprawki). Nie przeliczasz tego jak etatu korporacyjnego (dni * 8h).
+2. PSYCHOLOGIA I REALIA POLSKICH KLIENTÓW MŚP NA USEME:
+   - Klienci na Useme to zazwyczaj małe i średnie polskie firmy, które szukają zwinnego specjalisty, bo agencja software house wyceniła ich na kosmiczne kwoty enterprise.
+   - Pamiętaj o dwóch skrajnościach:
+     * Unikaj amatorskiego dumpingu za grosze (klient ucieka przed kimś, kto rzuca kwotami niepoważnymi za trudny system).
+     * Unikaj stawek korporacyjnego software house'u z Warszawy (przetargi korporacyjne to nie ten rynek; klient na Useme natychmiast odrzuci taką ofertę).
+   - Wyceniaj za wartość biznesową, trudność inżynierską, ryzyko i odpowiedzialność za dane/proces klienta.
+3. KOTWICA BUDŻETU:
+   - Jeśli klient w ogłoszeniu podał kwotę 50–250 zł, to zazwyczaj oznacza deklarowaną stawkę za godzinę konsultacji/rozwoju, a NIE budżet na całość!
+   - Jeśli klient podał jawny budżet całkowity, weź go pod uwagę przy ocenie realnych możliwości klienta.
+
+Na podstawie zlecenia oszacuj rzetelną kwotę w PLN netto oraz termin w dniach kalendarzowych (min. 7 dni).
+
 Zwróć WYŁĄCZNIE JSON:
 {
   "kwota": <int>,
   "dni_od": <int>,
   "dni_do": <int>,
   "typ": "projekt" lub "male" lub "retainer",
-  "uzasadnienie": "2 zdania: specyfika zadania i dlaczego taka kwota na Useme"
+  "uzasadnienie": "2-3 konkretne zdania inżynierskie: dlaczego taka kwota i termin dla freelancera z AI na Useme"
 }
 """
 
-PROMPT_REVIEWER = """Jesteś bezwzględnym recenzentem – starym wyjadaczem z Useme, który widział setki wygranych i przegranych ofert.
-Oceniasz wycenę freelancera pod kątem szansy na wygranie zlecenia u polskiego klienta MŚP.
+PROMPT_REVIEWER = """Jesteś bezwzględnym, doświadczonym recenzentem zleceń freelancerskich na polskim Useme.
+Widzisz treść zlecenia oraz propozycję wyceny przesłaną przez innego freelancera.
 
-PAMIĘTAJ:
-1. NIE LICZ 'STAWEK DZIENNYCH'! To nie jest B2B body leasing w korporacji. Freelancer na Useme sprzedaje dowiezienie rezultatu w wyznaczonym terminie kalendarzowym.
-2. W głowie klienta MŚP na Useme:
-   - Powyżej 15 000 zł przy automatyzacji/ERP pojawia się silny opór (chyba że to duży system od zera).
-   - Oferty powyżej 25 000 – 30 000 zł na Useme najczęściej przegrywają z ofertami za 10–18k zł od innych doświadczonych ludzi.
-   - Z kolei 2 000 – 3 000 zł to podejrzany dumping studenta przy zaawansowanym systemie.
-
-Oceń propozycję:
-- "ZA_MALA" (dumping, strata marży, brak bufora na ryzyko).
-- "ZA_DUZA" (przekroczenie budżetu psychologicznego MŚP na Useme, przegra z dobrą konkurencją za 10-15k).
-- "OK" (maksymalna wysoka marża, która wciąż ma realną szansę wygrać).
+TWOJA ROLA:
+Oceń szczerze, czy ta wycena ma realną szansę wygrać zlecenie u polskiego klienta MŚP na Useme:
+1. PAMIĘTAJ: To jest rynek freelancingu, a nie body-leasing korporacyjny. Nie przeliczaj dni na stawkę dzienną. Dni to czas kalendarzowy z testami i rezerwą.
+2. Zdiagnozuj:
+   - Czy kwota to "ZA_MALA" (dumping, niedoszacowanie ryzyka i skali, robienie z siebie taniej siły roboczej)?
+   - Czy kwota to "ZA_DUZA" (przestrzelenie realiów budżetowych MŚP, wejście w stawki agencji enterprise, które odstraszą klienta)?
+   - Czy kwota to "OK" (maksymalna profesjonalna marża, która wciąż mieści się w granicach akceptowalności dla decydenta MŚP)?
 
 Zwróć WYŁĄCZNIE JSON:
 {
   "werdykt": "ZA_MALA" lub "OK" lub "ZA_DUZA",
   "kwota_sugerowana": <int>,
   "dni_sugerowane_do": <int>,
-  "uzasadnienie": "2 zdania merytoryczne bez owijania w bawełnę",
-  "widełki_useme": "od X do Y zł"
+  "uzasadnienie": "2-3 zdania twardej krytyki lub potwierdzenia",
+  "twoje_oszacowanie_rynku": "Twoje widełki w PLN netto dla tego zlecenia na Useme"
 }
 """
 
 
-def _parsuj_json(tekst: Optional[str]) -> Optional[Dict[str, Any]]:
+def _oczysc_int(wartosc: Any, domyslna: int = 0) -> int:
+    """Konwertuje dowolną wartość (int, str np. '15 000 zł', float) na czysty int."""
+    if wartosc is None:
+        return domyslna
+    if isinstance(wartosc, (int, float)):
+        return int(wartosc)
+    s = str(wartosc).strip()
+    tylko_cyfry = re.sub(r"[^\d]", "", s)
+    if tylko_cyfry:
+        return int(tylko_cyfry)
+    return domyslna
+
+
+def _parsuj_json_wyceniacz(tekst: Optional[str]) -> Optional[Dict[str, Any]]:
     if not tekst:
         return None
     raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", tekst.strip(), flags=re.MULTILINE).strip()
+    data = None
     try:
-        return json.loads(raw)
+        data = json.loads(raw)
     except json.JSONDecodeError:
-        m = re.search(r"\{.*\}", raw, re.DOTALL)
+        m = re.search(r"\{[\s\S]*\}", raw)
         if m:
             try:
-                return json.loads(m.group(0))
+                data = json.loads(m.group(0))
             except json.JSONDecodeError:
-                return None
+                pass
+
+    if isinstance(data, dict):
+        kwota = _oczysc_int(data.get("kwota"))
+        dni_od = _oczysc_int(data.get("dni_od"), 7)
+        dni_do = _oczysc_int(data.get("dni_do"), max(dni_od, 14))
+        typ = str(data.get("typ") or "projekt").strip()
+        if kwota > 0:
+            return {
+                "kwota": kwota,
+                "dni_od": dni_od,
+                "dni_do": dni_do,
+                "typ": typ,
+                "uzasadnienie": str(data.get("uzasadnienie", "")).strip(),
+            }
+
+    # Fallback regex (w przypadku obcięcia strumienia pod koniec)
+    m_kwota = re.search(r'"kwota"\s*:\s*["\']?(\d[\d\s]*)', raw)
+    if m_kwota:
+        kwota = _oczysc_int(m_kwota.group(1))
+        if kwota > 0:
+            m_od = re.search(r'"dni_od"\s*:\s*["\']?(\d[\d\s]*)', raw)
+            m_do = re.search(r'"dni_do"\s*:\s*["\']?(\d[\d\s]*)', raw)
+            m_uz = re.search(r'"uzasadnienie"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)', raw)
+            dni_od = _oczysc_int(m_od.group(1), 7) if m_od else 7
+            dni_do = _oczysc_int(m_do.group(1), max(dni_od, 14)) if m_do else 21
+            uz = m_uz.group(1) if m_uz else "Uzasadnienie wyceny."
+            return {
+                "kwota": kwota,
+                "dni_od": dni_od,
+                "dni_do": dni_do,
+                "typ": "projekt",
+                "uzasadnienie": uz.strip(),
+            }
+    return None
+
+
+def _parsuj_json_reviewer(tekst: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not tekst:
+        return None
+    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", tekst.strip(), flags=re.MULTILINE).strip()
+    data = None
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        m = re.search(r"\{[\s\S]*\}", raw)
+        if m:
+            try:
+                data = json.loads(m.group(0))
+            except json.JSONDecodeError:
+                pass
+
+    if isinstance(data, dict):
+        werdykt_raw = str(data.get("werdykt", "")).upper().strip()
+        if "MALA" in werdykt_raw or "MAŁA" in werdykt_raw:
+            werdykt = "ZA_MALA"
+        elif "DUZA" in werdykt_raw or "DUŻA" in werdykt_raw:
+            werdykt = "ZA_DUZA"
+        elif "OK" in werdykt_raw:
+            werdykt = "OK"
+        else:
+            werdykt = "OK"
+
+        kwota_sug = _oczysc_int(data.get("kwota_sugerowana"), 0)
+        dni_sug = _oczysc_int(data.get("dni_sugerowane_do"), 0)
+
+        return {
+            "werdykt": werdykt,
+            "kwota_sugerowana": kwota_sug,
+            "dni_sugerowane_do": dni_sug,
+            "uzasadnienie": str(data.get("uzasadnienie", "")).strip(),
+            "twoje_oszacowanie_rynku": str(data.get("twoje_oszacowanie_rynku", "")).strip(),
+        }
+
+    # Fallback regex
+    m_w = re.search(r'"werdykt"\s*:\s*["\']?([A-Za-z_]+)', raw)
+    if m_w:
+        werdykt_raw = m_w.group(1).upper().strip()
+        if "MALA" in werdykt_raw or "MAŁA" in werdykt_raw:
+            werdykt = "ZA_MALA"
+        elif "DUZA" in werdykt_raw or "DUŻA" in werdykt_raw:
+            werdykt = "ZA_DUZA"
+        else:
+            werdykt = "OK"
+        m_kw = re.search(r'"kwota_sugerowana"\s*:\s*["\']?(\d[\d\s]*)', raw)
+        kwota_sug = _oczysc_int(m_kw.group(1)) if m_kw else 0
+        m_dni = re.search(r'"dni_sugerowane_do"\s*:\s*["\']?(\d[\d\s]*)', raw)
+        dni_sug = _oczysc_int(m_dni.group(1)) if m_dni else 0
+        m_uz = re.search(r'"uzasadnienie"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)', raw)
+        uz = m_uz.group(1) if m_uz else ""
+        m_ryn = re.search(r'"twoje_oszacowanie_rynku"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)', raw)
+        ryn = m_ryn.group(1) if m_ryn else ""
+        return {
+            "werdykt": werdykt,
+            "kwota_sugerowana": kwota_sug,
+            "dni_sugerowane_do": dni_sug,
+            "uzasadnienie": uz.strip(),
+            "twoje_oszacowanie_rynku": ryn.strip(),
+        }
     return None
 
 
@@ -96,88 +206,190 @@ def _zaokraglij_psychologicznie(kwota: int) -> int:
     return int(round(kwota / 1000.0) * 1000)
 
 
+def _call_z_retry(
+    fn_call: Callable[[str, str], Optional[str]],
+    parser_fn: Callable[[Optional[str]], Optional[Dict[str, Any]]],
+    system_prompt: str,
+    user_prompt: str,
+    rola: str,
+    say: Callable[[str], None],
+    max_proby: int = 3,
+    delay: float = 1.5,
+) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+    """Wywołuje funkcję AI z automatycznym ponawianiem w przypadku pustego tekstu lub błędu parsowania."""
+    for proba in range(1, max_proby + 1):
+        if proba > 1:
+            say(f"    [{rola}] Retry próba {proba}/{max_proby} po {delay}s...")
+            time.sleep(delay)
+        raw = fn_call(system_prompt, user_prompt)
+        parsed = parser_fn(raw)
+        if parsed is not None:
+            return parsed, raw
+    return None, None
+
+
 def wycen_przez_debate(
     tresc_zlecenia: str,
     dziennik: str = "",
     research: str = "",
-    call_ai_fn: Optional[Callable] = None,
+    call_wyceniacz_fn: Optional[Callable[[str, str], Optional[str]]] = None,
+    call_reviewer_fn: Optional[Callable[[str, str], Optional[str]]] = None,
+    call_ai_fn: Optional[Callable[[str, str], Optional[str]]] = None,
     say: Optional[Callable[[str], None]] = None,
     max_rundy: int = 2,
 ) -> Dict[str, Any]:
-    """Przeprowadza debatę wieloagentową między Wyceniaczem a Reviewerem Useme.
+    """Przeprowadza prawdziwą debatę dwumodelową (Cross-Model Adversarial Pricing).
 
-    Zwraca ustrukturyzowany wynik wyceny gotowy do wstrzyknięcia do oferty.
+    Domyślnie:
+    - Wyceniacz: DeepSeek-v4-Pro (precyzyjna analiza techniczna)
+    - Reviewer: Gemini-3.8-Flash (twardy recenzent budżetowy MŚP na Useme)
     """
     if say is None:
         say = lambda msg: None
 
-    if call_ai_fn is None:
-        # Fallback lokalny import
-        from brain import call_ai
-        call_ai_fn = call_ai
+    # Kompatybilność wsteczna: jeśli podano tylko call_ai_fn, użyj go jako fallback
+    if call_wyceniacz_fn is None:
+        if call_ai_fn is not None:
+            call_wyceniacz_fn = call_ai_fn
+        else:
+            from brain import call_ai
+            call_wyceniacz_fn = call_ai
 
-    say("    debata wycenowa: Wyceniacz analizuje zlecenie...")
+    if call_reviewer_fn is None:
+        # Próba zaimportowania call_gemini z brain
+        try:
+            from brain import call_gemini
+            call_reviewer_fn = call_gemini
+        except ImportError:
+            call_reviewer_fn = call_wyceniacz_fn
+
+    say("    debata wycenowa: Wyceniacz [DeepSeek] vs Reviewer [Gemini]...")
 
     kontekst_wejsciowy = (
-        f"ZLECENIE KLIENTA:\n{tresc_zlecenia}\n\n"
+        f"ZLECENIE KLIENTA NA USEME:\n{tresc_zlecenia}\n\n"
         f"DZIENNIK MYŚLENIA:\n{dziennik or 'Brak'}\n\n"
         f"RESEARCH DOWODOWY:\n{research or 'Brak'}"
     )
 
-    # Runda 0: Wyceniacz
-    odp_w0 = call_ai_fn(PROMPT_WYCENIACZ, kontekst_wejsciowy, temperature=0.3, max_tokens=1000)
-    prop = _parsuj_json(odp_w0) or {
-        "kwota": 6000,
-        "dni_od": 14,
-        "dni_do": 21,
-        "typ": "projekt",
-        "uzasadnienie": "Standardowa realizacja freelancerska z AI.",
-    }
+    # --- RUNDA 0: Wyceniacz ---
+    prop, raw_w0 = _call_z_retry(
+        fn_call=call_wyceniacz_fn,
+        parser_fn=_parsuj_json_wyceniacz,
+        system_prompt=PROMPT_WYCENIACZ,
+        user_prompt=kontekst_wejsciowy,
+        rola="Wyceniacz",
+        say=say,
+    )
 
-    kwota_start = prop.get("kwota", 6000)
-    dni_od_start = prop.get("dni_od", 14)
-    dni_do_start = prop.get("dni_do", 21)
-    say(f"    [Wyceniacz R0] {kwota_start} zł / {dni_od_start}-{dni_do_start} dni ({prop.get('uzasadnienie', '')[:70]}...)")
+    if not prop:
+        say("    [Wyceniacz] Brak poprawnej odpowiedzi po retry – zastosowano bezpieczną stawkę bazową 6000 zł.")
+        prop = {
+            "kwota": 6000,
+            "dni_od": 14,
+            "dni_do": 21,
+            "typ": "projekt",
+            "uzasadnienie": "Standardowa realizacja zwinnego systemu z narzędziami AI.",
+        }
 
-    rev: Dict[str, Any] = {"werdykt": "OK"}
+    say(f"    [Wyceniacz R0] {prop['kwota']} zł | {prop['dni_od']}-{prop['dni_do']} dni ({prop.get('uzasadnienie', '')[:65]}...)")
+
+    # Pełny przebieg debaty (wszystkie rundy) — przekazywany dalej do pisma.
+    przebieg: list = [{
+        "runda": 0,
+        "aktor": "WYCENIACZ",
+        "kwota": prop["kwota"],
+        "dni_od": prop["dni_od"],
+        "dni_do": prop["dni_do"],
+        "uzasadnienie": prop.get("uzasadnienie", ""),
+    }]
+
+    rev: Dict[str, Any] = {"werdykt": "OK", "uzasadnienie": "Brak uwag."}
     wynegocjowane_w_rundzie = 0
 
     for runda in range(1, max_rundy + 1):
+        time.sleep(1.0)
+
+        # --- REVIEWER ---
         prompt_rev_usr = (
             f"{kontekst_wejsciowy}\n\n"
             f"--- AKTUALNA PROPOZYCJA WYCENIACZA ---\n"
-            f"KWOTA: {prop.get('kwota')} zł netto\n"
-            f"TERMIN: {prop.get('dni_od')}-{prop.get('dni_do')} dni kalendarzowych\n"
+            f"KWOTA: {prop['kwota']} zł netto\n"
+            f"TERMIN: {prop['dni_od']}-{prop['dni_do']} dni kalendarzowych\n"
             f"TYP: {prop.get('typ', 'projekt')}\n"
             f"UZASADNIENIE: {prop.get('uzasadnienie', '')}\n\n"
-            f"Oceń tę propozycję bezlitośnie pod kątem realiów Useme."
+            f"Oceń tę propozycję obiektywnie dla rynku Useme."
         )
 
-        odp_r = call_ai_fn(PROMPT_REVIEWER, prompt_rev_usr, temperature=0.3, max_tokens=1000)
-        rev = _parsuj_json(odp_r) or {"werdykt": "OK", "uzasadnienie": "Wycena akceptowalna."}
-        werdykt = str(rev.get("werdykt", "OK")).upper()
+        rev_wynik, raw_r = _call_z_retry(
+            fn_call=call_reviewer_fn,
+            parser_fn=_parsuj_json_reviewer,
+            system_prompt=PROMPT_REVIEWER,
+            user_prompt=prompt_rev_usr,
+            rola="Reviewer",
+            say=say,
+        )
 
-        say(f"    [Reviewer R{runda}] {werdykt} (sugeruje: {rev.get('kwota_sugerowana')} zł, rynek: {rev.get('widełki_useme', '?')})")
+        # Jeśli reviewer proxy jest niedostępny lub zawiódł, nie przerywaj – zatwierdź
+        if not rev_wynik:
+            say("    [Reviewer] Brak odpowiedzi po retry – zatwierdzam aktualną wycenę.")
+            rev = {"werdykt": "OK", "uzasadnienie": "Brak zastrzeżeń recenzenta po retry."}
+            wynegocjowane_w_rundzie = runda
+            break
+
+        rev = rev_wynik
+        werdykt = rev["werdykt"]
+        say(f"    [Reviewer R{runda}] {werdykt} (sugeruje: {rev.get('kwota_sugerowana')} zł, rynek: {rev.get('twoje_oszacowanie_rynku', '?')})")
+
+        przebieg.append({
+            "runda": runda,
+            "aktor": "REVIEWER",
+            "werdykt": werdykt,
+            "kwota_sugerowana": rev.get("kwota_sugerowana"),
+            "rynek": rev.get("twoje_oszacowanie_rynku", ""),
+            "uzasadnienie": rev.get("uzasadnienie", ""),
+        })
 
         if werdykt == "OK":
             wynegocjowane_w_rundzie = runda
             break
 
-        # Wyceniacz odpowiada na krytykę
+        time.sleep(1.0)
+
+        # --- WYCENIACZ KONTRA ---
         prompt_w_kontra = (
             f"{kontekst_wejsciowy}\n\n"
-            f"TWOJA POPRZEDNIA PROPOZYCJA: {prop.get('kwota')} zł / {prop.get('dni_od')}-{prop.get('dni_do')} dni.\n"
-            f"RECENZENT Z USEME MÓWI: {werdykt}\n"
+            f"TWOJA POPRZEDNIA PROPOZYCJA: {prop['kwota']} zł / {prop['dni_od']}-{prop['dni_do']} dni.\n"
+            f"RECENZENT Z USEME OCENIŁ: {werdykt}\n"
             f"KRYTYKA RECENZENTA: {rev.get('uzasadnienie', '')}\n"
-            f"SUGESTIA RECENZENTA: {rev.get('kwota_sugerowana')} zł, widełki: {rev.get('widełki_useme', '')}\n\n"
-            f"Ustosunkuj się merytorycznie. Skoryguj wycenę lub obroń swoje racje. Zwróć JSON."
+            f"SUGESTIA RECENZENTA: {rev.get('kwota_sugerowana')} zł (jego szacunek rynku: {rev.get('twoje_oszacowanie_rynku', '')})\n\n"
+            f"Ustosunkuj się merytorycznie. Jeśli recenzent ma rację, skoryguj kwotę. Jeśli Twoja wycena broni się inżyniersko, uzasadnij to. Zwróć JSON."
         )
 
-        odp_w = call_ai_fn(PROMPT_WYCENIACZ, prompt_w_kontra, temperature=0.3, max_tokens=1000)
-        nowy_prop = _parsuj_json(odp_w)
+        nowy_prop, raw_w = _call_z_retry(
+            fn_call=call_wyceniacz_fn,
+            parser_fn=_parsuj_json_wyceniacz,
+            system_prompt=PROMPT_WYCENIACZ,
+            user_prompt=prompt_w_kontra,
+            rola="Wyceniacz_kontra",
+            say=say,
+        )
+
         if nowy_prop:
             prop = nowy_prop
-            say(f"    [Wyceniacz R{runda} Kontra] -> {prop.get('kwota')} zł / {prop.get('dni_od')}-{prop.get('dni_do')} dni")
+            say(f"    [Wyceniacz R{runda} Kontra] -> {prop['kwota']} zł / {prop['dni_od']}-{prop['dni_do']} dni")
+            przebieg.append({
+                "runda": runda,
+                "aktor": "WYCENIACZ_KONTRA",
+                "kwota": prop["kwota"],
+                "dni_od": prop["dni_od"],
+                "dni_do": prop["dni_do"],
+                "uzasadnienie": prop.get("uzasadnienie", ""),
+            })
+        else:
+            say(f"    [Wyceniacz R{runda}] Brak odpowiedzi w kontrze – zachowuję {prop['kwota']} zł.")
+            wynegocjowane_w_rundzie = runda
+            break
+
         wynegocjowane_w_rundzie = runda
 
     # --- DETERMINISTYCZNY GUARDRAIL (twarde wymogi Useme) ---
@@ -190,7 +402,7 @@ def wycen_przez_debate(
     dni_od = max(min(dni_od, dni_do), 7)
 
     typ = prop.get("typ") or "projekt"
-    say(f"    -> [Finał Debaty] {kwota} zł / {dni_od}-{dni_do} dni (zaokrąglono, Useme ready)")
+    say(f"    -> [Finał Debaty] {kwota} zł / {dni_od}-{dni_do} dni (psychologiczne zaokrąglenie, Useme ready)")
 
     return {
         "kwota": kwota,
@@ -201,10 +413,11 @@ def wycen_przez_debate(
         "uzasadnienie": prop.get("uzasadnienie", ""),
         "reviewer_werdykt": rev.get("werdykt", "OK"),
         "reviewer_uwagi": rev.get("uzasadnienie", ""),
-        "widełki_rynkowe": rev.get("widełki_useme", ""),
+        "widełki_rynkowe": rev.get("twoje_oszacowanie_rynku", ""),
         "rundy": wynegocjowane_w_rundzie,
+        "przebieg": przebieg,
         "rozbicie": {
-            "tryb": "debata_useme",
+            "tryb": "debata_dwumodelowa_useme",
             "surowa_kwota_ai": surowa_kwota,
             "kwota_koncowa": kwota,
             "dni_od": dni_od,
@@ -212,6 +425,7 @@ def wycen_przez_debate(
             "rundy_debaty": wynegocjowane_w_rundzie,
             "uzasadnienie_wyceniacza": prop.get("uzasadnienie", ""),
             "krytyka_reviewera": rev.get("uzasadnienie", ""),
-            "widełki_rynkowe": rev.get("widełki_useme", ""),
+            "widełki_rynkowe": rev.get("twoje_oszacowanie_rynku", ""),
+            "przebieg": przebieg,
         },
     }

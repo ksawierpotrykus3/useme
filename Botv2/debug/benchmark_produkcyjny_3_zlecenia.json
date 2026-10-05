@@ -1,0 +1,83 @@
+[
+  {
+    "id": "145285",
+    "nazwa": "145285 Subiekt <-> BaseLinker (40k produktów)",
+    "wynik": {
+      "kwota": 17000,
+      "dni": 30,
+      "dni_od": 25,
+      "dni_do": 30,
+      "typ": "projekt",
+      "uzasadnienie": "To złożona integracja wysokiego ryzyka: 40 000 SKU, warianty/EAN, delta-sync co kilka minut, limity BaseLinker API oraz blokady zapisu w Subiekcie wymagają kolejkowania, idempotencji i bezpiecznego silent-guard. Wycena 17 000 PLN netto pokrywa architekturę, usługę działającą w tle, obsługę zamówień i rezerwacji, retry po awariach sieci oraz testy na realnej bazie klienta. Termin 25–30 dni wynika z etapowego wdrożenia i konieczności obserwacji synchronizacji pod obciążeniem, a nie z przeliczania pracy etatowej.",
+      "reviewer_werdykt": "OK",
+      "reviewer_uwagi": "Kwota 17 000 PLN netto trafia w punkt: idealnie odzwierciedla realne ryzyko techniczne, kolejkowanie i złożoność 40k SKU z Subiektem. To maksymalna profesjonalna stawka, którą świadomy decydent MŚP na Useme zaakceptuje, odrzucając jednocześnie amatorski dumping.",
+      "widełki_rynkowe": "12000 - 22000 PLN netto",
+      "rundy": 1,
+      "rozbicie": {
+        "tryb": "debata_dwumodelowa_useme",
+        "surowa_kwota_ai": 17000,
+        "kwota_koncowa": 17000,
+        "dni_od": 25,
+        "dni_do": 30,
+        "rundy_debaty": 1,
+        "uzasadnienie_wyceniacza": "To złożona integracja wysokiego ryzyka: 40 000 SKU, warianty/EAN, delta-sync co kilka minut, limity BaseLinker API oraz blokady zapisu w Subiekcie wymagają kolejkowania, idempotencji i bezpiecznego silent-guard. Wycena 17 000 PLN netto pokrywa architekturę, usługę działającą w tle, obsługę zamówień i rezerwacji, retry po awariach sieci oraz testy na realnej bazie klienta. Termin 25–30 dni wynika z etapowego wdrożenia i konieczności obserwacji synchronizacji pod obciążeniem, a nie z przeliczania pracy etatowej.",
+        "krytyka_reviewera": "Kwota 17 000 PLN netto trafia w punkt: idealnie odzwierciedla realne ryzyko techniczne, kolejkowanie i złożoność 40k SKU z Subiektem. To maksymalna profesjonalna stawka, którą świadomy decydent MŚP na Useme zaakceptuje, odrzucając jednocześnie amatorski dumping.",
+        "widełki_rynkowe": "12000 - 22000 PLN netto"
+      }
+    }
+  },
+  {
+    "id": "145287",
+    "nazwa": "145287 Aplikacja mobilna offline (kierowcy/serwis)",
+    "wynik": {
+      "kwota": 19000,
+      "dni": 55,
+      "dni_od": 40,
+      "dni_do": 55,
+      "typ": "projekt",
+      "uzasadnienie": "Offline-first wymaga lokalnej bazy, kolejki zapisów, odpornej synchronizacji z retry i obsługą konfliktów, a nie tylko formularza na ekranie; do tego dochodzi obsługa zdjęć/dokumentów, kompresja, przechowywanie i wznawianie wysyłki. Rekomendacja Flutter vs natywny Android oraz testy na starych telefonach i przy braku sieci wydłużają etap walidacji, dlatego realny termin to 40–55 dni przy podziale na formularze offline, potem zdjęcia i synchronizację. Kwota 19 000 zł netto pokrywa architekturę, implementację, testy, dokumentację i odpowiedzialność za dane klienta, bez amatorskiego dumpingu i bez stawek enterprise software house.",
+      "reviewer_werdykt": "OK",
+      "reviewer_uwagi": "Brak zastrzeżeń recenzenta po retry.",
+      "widełki_rynkowe": "",
+      "rundy": 1,
+      "rozbicie": {
+        "tryb": "debata_dwumodelowa_useme",
+        "surowa_kwota_ai": 19000,
+        "kwota_koncowa": 19000,
+        "dni_od": 40,
+        "dni_do": 55,
+        "rundy_debaty": 1,
+        "uzasadnienie_wyceniacza": "Offline-first wymaga lokalnej bazy, kolejki zapisów, odpornej synchronizacji z retry i obsługą konfliktów, a nie tylko formularza na ekranie; do tego dochodzi obsługa zdjęć/dokumentów, kompresja, przechowywanie i wznawianie wysyłki. Rekomendacja Flutter vs natywny Android oraz testy na starych telefonach i przy braku sieci wydłużają etap walidacji, dlatego realny termin to 40–55 dni przy podziale na formularze offline, potem zdjęcia i synchronizację. Kwota 19 000 zł netto pokrywa architekturę, implementację, testy, dokumentację i odpowiedzialność za dane klienta, bez amatorskiego dumpingu i bez stawek enterprise software house.",
+        "krytyka_reviewera": "Brak zastrzeżeń recenzenta po retry.",
+        "widełki_rynkowe": ""
+      }
+    }
+  },
+  {
+    "id": "144890",
+    "nazwa": "144890 Automatyzacja faktur OCR + Optima",
+    "wynik": {
+      "kwota": 11000,
+      "dni": 30,
+      "dni_od": 21,
+      "dni_do": 30,
+      "typ": "projekt",
+      "uzasadnienie": "Wycena obejmuje architekturę n8n, integrację Google Drive/IMAP, OCR+LLM z ekstrakcją pozycji dokumentów, walidację matematyczną i obsługę wyjątków oraz bezpieczny plik wymiany/import do Optima zamiast ryzykownego zapisu bezpośrednio do SQL. Termin 21–30 dni wynika z konieczności testów na realnych skanach WZ/faktur/zamówień i iteracyjnego dostrajania rozpoznawania pozycji oraz mapowania pól do Optima. Zakładam dostęp do środowiska n8n/VPS i próbki dokumentów po stronie klienta; opieka powdrożeniowa obejmuje krótkie wsparcie po uruchomieniu.",
+      "reviewer_werdykt": "OK",
+      "reviewer_uwagi": "Kwota 11 000 zł netto doskonale wpisuje się w realia budżetowe MŚP na Useme dla zaawansowanej automatyzacji n8n z AI OCR i Optimą. Zaproponowany termin 21-30 dni jest w pełni wykonalny, o ile klient szybko dostarczy próbki dokumentów do testów.",
+      "widełki_rynkowe": "9 000 - 15 000 zł netto",
+      "rundy": 1,
+      "rozbicie": {
+        "tryb": "debata_dwumodelowa_useme",
+        "surowa_kwota_ai": 11000,
+        "kwota_koncowa": 11000,
+        "dni_od": 21,
+        "dni_do": 30,
+        "rundy_debaty": 1,
+        "uzasadnienie_wyceniacza": "Wycena obejmuje architekturę n8n, integrację Google Drive/IMAP, OCR+LLM z ekstrakcją pozycji dokumentów, walidację matematyczną i obsługę wyjątków oraz bezpieczny plik wymiany/import do Optima zamiast ryzykownego zapisu bezpośrednio do SQL. Termin 21–30 dni wynika z konieczności testów na realnych skanach WZ/faktur/zamówień i iteracyjnego dostrajania rozpoznawania pozycji oraz mapowania pól do Optima. Zakładam dostęp do środowiska n8n/VPS i próbki dokumentów po stronie klienta; opieka powdrożeniowa obejmuje krótkie wsparcie po uruchomieniu.",
+        "krytyka_reviewera": "Kwota 11 000 zł netto doskonale wpisuje się w realia budżetowe MŚP na Useme dla zaawansowanej automatyzacji n8n z AI OCR i Optimą. Zaproponowany termin 21-30 dni jest w pełni wykonalny, o ile klient szybko dostarczy próbki dokumentów do testów.",
+        "widełki_rynkowe": "9 000 - 15 000 zł netto"
+      }
+    }
+  }
+]

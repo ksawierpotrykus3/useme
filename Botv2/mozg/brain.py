@@ -82,6 +82,34 @@ def call_ai(system_prompt: str, user_prompt: str, model: str = MODEL,
         session.close()
 
 
+GEMINI_API_URL = "http://127.0.0.1:8045/v1/chat/completions"
+GEMINI_MODEL = "gemini-3.8-flash"
+
+
+def call_gemini(system_prompt: str, user_prompt: str, model: str = GEMINI_MODEL,
+                timeout: int = 90, temperature: float = 0.3,
+                max_tokens: int = 1000) -> Optional[str]:
+    """Wywolanie Gemini przez lokalne proxy na porcie 8045. W razie niedostępności zwraca None."""
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+    }
+    try:
+        resp = requests.post(GEMINI_API_URL, json=payload, timeout=timeout)
+        if resp.status_code == 200:
+            data = resp.json()
+            content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+            return content.strip() or None
+    except Exception as e:
+        print(f"[Gemini Proxy Błąd]: {e}", flush=True)
+    return None
+
+
 def _czytaj(name: str) -> str:
     p = PROMPTS_DIR / name
     return p.read_text(encoding="utf-8-sig") if p.exists() else ""
@@ -184,6 +212,7 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
     )
     if not dziennik:
         return {"ok": False, "blad": "brak odpowiedzi AI w iteracji 1", "log": log}
+    dziennik_iter1 = dziennik  # zachowujemy surowe, pierwsze czytanie zlecenia
     pola = _parsuj_dziennik(dziennik)
     say(f"    kwalifikowalnosc={pola.get('KWALIFIKOWALNOSC', '?')[:60]}")
 
@@ -222,14 +251,15 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         dziennik = weryfikacja
         pola = _parsuj_dziennik(dziennik)
 
-    # ---------- WYCENA (debata wieloagentowa Useme) ----------
+    # ---------- WYCENA (debata dwumodelowa Useme: DeepSeek vs Gemini) ----------
     say(f"[3/6] Wycena #{job_id}...")
     try:
         wynik_wyceny = wycen_przez_debate(
             tresc_zlecenia=tresc,
             dziennik=dziennik,
             research=research,
-            call_ai_fn=call_ai,
+            call_wyceniacz_fn=call_ai,      # DeepSeek-v4-Pro (port 4571)
+            call_reviewer_fn=call_gemini,   # Gemini-3.8-Flash (port 8045)
             say=say,
             max_rundy=2,
         )
@@ -242,15 +272,43 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         kwota, dni_od, dni_do, wynik_wyceny = 3000, 14, 21, {"rozbicie": {"blad": str(e)}}
 
     # ---------- ITERACJA 3: PISMO ----------
+    # Pismo dostaje CALY PRZEBIEG (analiza iter1 + weryfikacja + research + wszystkie
+    # rundy debaty wycenowej), nie wyciag. Sam decyduje, jak zbudowac oferte wg pismo.md.
     say(f"[4/6] Pismo #{job_id}...")
+
+    przebieg = wynik_wyceny.get("przebieg") or []
+    linie_przebiegu = []
+    for krok in przebieg:
+        aktor = krok.get("aktor", "?")
+        if aktor == "REVIEWER":
+            linie_przebiegu.append(
+                f"  [runda {krok.get('runda')}] REVIEWER (rynek): {krok.get('werdykt')} | "
+                f"sugeruje {krok.get('kwota_sugerowana')} zł | jego widelki rynku: {krok.get('rynek')}\n"
+                f"      krytyka: {krok.get('uzasadnienie')}"
+            )
+        else:
+            linie_przebiegu.append(
+                f"  [runda {krok.get('runda')}] {aktor}: {krok.get('kwota')} zł / "
+                f"{krok.get('dni_od')}-{krok.get('dni_do')} dni\n"
+                f"      uzasadnienie: {krok.get('uzasadnienie')}"
+            )
+    przebieg_txt = "\n".join(linie_przebiegu) or "  (brak rund)"
+
     oferta_raw = call_ai(
         system_pismo,
-        f"OTO ZLECENIE:\n{tresc}\n\nTWOJ DOJRZALY DZIENNIK MYSLENIA:\n{dziennik}\n\n"
-        f"RESEARCH (dowody, jesli byly):\n{research or 'BRAK'}\n\n"
-        f"WYCENA (UZGODNIONA): {kwota} zł netto. Czas: od {dni_od} do {dni_do} dni.\n"
-        f"Kwotę podaj jako JEDNĄ liczbę ({kwota} zł), nie jako widełki. Czas podaj jako zakres (od {dni_od} do {dni_do} dni) albo przybliżeniem słownym.\n"
-        f"Podpis na końcu: {PODPIS}\n\n"
-        "Napisz oferte. Wynik ma wynikac z dziennika. Wyślij tylko tekst oferty.",
+        f"OTO ZLECENIE:\n{tresc}\n\n"
+        f"=== ANALIZA (pierwsze czytanie zlecenia, iteracja 1) ===\n{dziennik_iter1}\n\n"
+        f"=== WERYFIKACJA (dojrzaly dziennik po researchu, iteracja 2) ===\n{dziennik}\n\n"
+        f"=== RESEARCH (dowody, jesli byly) ===\n{research or 'BRAK'}\n\n"
+        f"=== PRZEBIEG DEBATY WYCENOWEJ (wyceniacz inzynierski vs recenzent rynkowy, wszystkie rundy) ===\n{przebieg_txt}\n\n"
+        f"=== WYNIK KONCOWY DEBATY ===\n"
+        f"Kwota: {kwota} zł netto | Czas: od {dni_od} do {dni_do} dni | Typ: {wynik_wyceny.get('typ', 'projekt')}\n\n"
+        f"DECYZJA NALEZY DO CIEBIE. Masz przed soba caly przebieg rozumowania i wszystkie glosy. "
+        f"Zdecyduj sam, jak zbudowac oferte zgodnie z pismo.md. "
+        f"Jesli zakres zlecenia jest niejasny, mozesz podac widelki zamiast jednej liczby (pismo.md, sekcja Cena). "
+        f"Jesli jest klarowny, podaj jedna kwote {kwota} zł. Czas podaj jako zakres lub przyblizeniem slowym. "
+        f"Podpis na koncu: {PODPIS}\n\n"
+        "Napisz oferte. Wynik ma wynikac z calego przebiegu. Wyslij tylko tekst oferty.",
         temperature=0.8,
     )
     if not oferta_raw:

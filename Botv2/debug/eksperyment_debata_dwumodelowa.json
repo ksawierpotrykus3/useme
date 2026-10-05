@@ -1,0 +1,386 @@
+[
+  {
+    "nazwa": "145285 Subiekt <-> BaseLinker (40k produktów)",
+    "wyceniacz_model": "DeepSeek-v4-Pro",
+    "reviewer_model": "Gemini-3.8-Flash",
+    "kwota_finalna": 9000,
+    "dni_od": 21,
+    "dni_do": 28,
+    "uzasadnienie_finalne": "Przyjmuję częściowo korektę: 15 000 zł netto byłoby wyceną na poziomie małego software house’u, ponad percepcję MŚP na Useme. 9000 zł to górna granica realnego budżetu, ale wciąż adekwatna do ryzyka: 40 tys. SKU, synchronizacja przyrostowa, warianty/EAN, kolejka retry oraz rezerwacje zamówień w Subiekcie. Termin 21–28 dni zakłada etapowanie: najpierw stabilny sync stanów i cen z silent-guard, potem zamówienia i rezerwacje, z testami na realnej bazie i buforem na poprawki.",
+    "ostatni_werdykt_reviewera": "ZA_DUZA",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "DeepSeek-v4-Pro",
+        "kwota": 15000,
+        "dni_od": 21,
+        "dni_do": 28,
+        "uzasadnienie": "Wycena obejmuje architekturę synchronizacji delta dla 40 tys. produktów, z wykrywaniem zmian po stronie Subiekta, kolejkowaniem, rate-limitingiem BaseLinkera i bezpiecznym zapisem przez silent-guard, co jest projektem o wysokim ryzyku biznesowym i odpowiedzialności za stany magazynowe. Termin 21–28 dni wynika z etapowania: najpierw niezawodna synchronizacja stanów i cen, potem zamówienia z BaseLinkera z rezerwacjami w Subiekcie oraz testy odporności na braki internetu i konflikty zapisów. Kwota 15 000 zł netto jest realistyczna dla freelancera z AI na Useme: nie jest dumpingiem, ale też nie ceną korporacyjnego software house’u, który za taki moduł liczyłby znacznie więcej.",
+        "surowy_tekst": "{\n  \"kwota\": 15000,\n  \"dni_od\": 21,\n  \"dni_do\": 28,\n  \"uzasadnienie\": \"Wycena obejmuje architekturę synchronizacji delta dla 40 tys. produktów, z wykrywaniem zmian po stronie Subiekta, kolejkowaniem, rate-limitingiem BaseLinkera i bezpiecznym zapisem przez silent-guard, co jest projektem o wysokim ryzyku biznesowym i odpowiedzialności za stany magazynowe. Termin 21–28 dni wynika z etapowania: najpierw niezawodna synchronizacja stanów i cen, potem zamówienia z BaseLinkera z rezerwacjami w Subiekcie oraz testy odporności na braki internetu i konflikty zapisów. Kwota 15 000 zł netto jest realistyczna dla freelancera z AI na Useme: nie jest dumpingiem, ale też nie ceną korporacyjnego software house’u, który za taki moduł liczyłby znacznie więcej.\"\n}",
+        "czas_s": 9.32
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "BŁĄD",
+        "kwota_sugerowana": null,
+        "dni_sugerowane_do": null,
+        "twoje_oszacowanie_rynku": null,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "",
+        "czas_s": 19.92
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 15000,
+        "dni_od": 21,
+        "dni_do": 28,
+        "uzasadnienie": "Recenzent nie podał kontrwyceny ani zarzutu merytorycznego – wystąpił wyłącznie błąd parsowania, więc nie ma podstaw do zmiany kwoty. 15 000 zł netto wynika z ryzyka integracji Subiekt–BaseLinker dla 40 tys. produktów: synchronizacja delta po zmianach stanów/cen, obsługa wariantów i EAN, kolejkowanie i retry oraz rezerwacje zamówień w Subiekcie. Termin 21–28 dni obejmuje etapowanie, testy na realnej bazie i stabilizację silent-guard, a nie etatowe przeliczanie dni na godziny.",
+        "surowy_tekst": "{\n  \"kwota\": 15000,\n  \"dni_od\": 21,\n  \"dni_do\": 28,\n  \"uzasadnienie\": \"Recenzent nie podał kontrwyceny ani zarzutu merytorycznego – wystąpił wyłącznie błąd parsowania, więc nie ma podstaw do zmiany kwoty. 15 000 zł netto wynika z ryzyka integracji Subiekt–BaseLinker dla 40 tys. produktów: synchronizacja delta po zmianach stanów/cen, obsługa wariantów i EAN, kolejkowanie i retry oraz rezerwacje zamówień w Subiekcie. Termin 21–28 dni obejmuje etapowanie, testy na realnej bazie i stabilizację silent-guard, a nie etatowe przeliczanie dni na godziny.\"\n}",
+        "czas_s": 7.21
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "ZA_DUZA",
+        "kwota_sugerowana": 7500,
+        "dni_sugerowane_do": 28,
+        "twoje_oszacowanie_rynku": "5000 - 9000 PLN netto",
+        "uzasadnienie": "Kwota 15 000 zł netto to poważne przestrzelenie realiów budżetowych polskiego MŚP na Useme, wchodzące w stawki małych software house'ów. Mimo wysokiej złożoności technicznej bazy 40 tys. produktów, klient szuka freelancera i natychmiast odrzuci taką ofertę.",
+        "surowy_tekst": "{\n\"werdykt\": \"ZA_DUZA\",\n\"kwota_sugerowana\": 7500,\n\"dni_sugerowane_do\": 28,\n\"uzasadnienie\": \"Kwota 15 000 zł netto to poważne przestrzelenie realiów budżetowych polskiego MŚP na Useme, wchodzące w stawki małych software house'ów. Mimo wysokiej złożoności technicznej bazy 40 tys. produktów, klient szuka freelancera i natychmiast odrzuci taką ofertę.\",\n\"twoje_oszacowanie_rynku\": \"5000 - 9000 PLN netto\"\n}",
+        "czas_s": 15.51
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 9000,
+        "dni_od": 21,
+        "dni_do": 28,
+        "uzasadnienie": "Przyjmuję częściowo korektę: 15 000 zł netto byłoby wyceną na poziomie małego software house’u, ponad percepcję MŚP na Useme. 9000 zł to górna granica realnego budżetu, ale wciąż adekwatna do ryzyka: 40 tys. SKU, synchronizacja przyrostowa, warianty/EAN, kolejka retry oraz rezerwacje zamówień w Subiekcie. Termin 21–28 dni zakłada etapowanie: najpierw stabilny sync stanów i cen z silent-guard, potem zamówienia i rezerwacje, z testami na realnej bazie i buforem na poprawki.",
+        "surowy_tekst": "{\n  \"kwota\": 9000,\n  \"dni_od\": 21,\n  \"dni_do\": 28,\n  \"uzasadnienie\": \"Przyjmuję częściowo korektę: 15 000 zł netto byłoby wyceną na poziomie małego software house’u, ponad percepcję MŚP na Useme. 9000 zł to górna granica realnego budżetu, ale wciąż adekwatna do ryzyka: 40 tys. SKU, synchronizacja przyrostowa, warianty/EAN, kolejka retry oraz rezerwacje zamówień w Subiekcie. Termin 21–28 dni zakłada etapowanie: najpierw stabilny sync stanów i cen z silent-guard, potem zamówienia i rezerwacje, z testami na realnej bazie i buforem na poprawki.\"\n}",
+        "czas_s": 10.56
+      }
+    ]
+  },
+  {
+    "nazwa": "145285 Subiekt <-> BaseLinker (40k produktów)",
+    "wyceniacz_model": "Gemini-3.8-Flash",
+    "reviewer_model": "DeepSeek-v4-Pro",
+    "kwota_finalna": 10500,
+    "dni_od": 14,
+    "dni_do": 25,
+    "uzasadnienie_finalne": "Uwzględniając argumenty recenzenta o krytyczności mechanizmu silent-guard i ryzyku zatorów bazy dla 40 tys. produktów, koryguję wycenę do 10 500 zł netto. Zapewnia to rzetelną marżę za architekturę i testy obciążeniowe, pozostając w realiach budżetowych MŚP na Useme.",
+    "ostatni_werdykt_reviewera": "ZA_MALA",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "Gemini-3.8-Flash",
+        "kwota": 7500,
+        "dni_od": 14,
+        "dni_do": 25,
+        "uzasadnienie": "Wycena 7500 zł netto oraz termin 14-25 dni idealnie trafiają w realia budżetowe polskiego MŚP na Useme, omijając koszty agencji enterprise. Dzięki optymalizacji delty i wsparciu narzędzi AI bezpiecznie wdrożę synchronizację 40 tys. produktów z ochroną bazy Subiekta i obsługą rezerwacji.",
+        "surowy_tekst": "{\n\"kwota\": 7500,\n\"dni_od\": 14,\n\"dni_do\": 25,\n\"uzasadnienie\": \"Wycena 7500 zł netto oraz termin 14-25 dni idealnie trafiają w realia budżetowe polskiego MŚP na Useme, omijając koszty agencji enterprise. Dzięki optymalizacji delty i wsparciu narzędzi AI bezpiecznie wdrożę synchronizację 40 tys. produktów z ochroną bazy Subiekta i obsługą rezerwacji.\"\n}",
+        "czas_s": 11.4
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 15000,
+        "dni_sugerowane_do": 30,
+        "twoje_oszacowanie_rynku": "12 000–22 000 PLN netto",
+        "uzasadnienie": "7500 zł netto za integrację Subiekt–BaseLinker przy 40 tys. produktów, wariantach, EAN, rezerwacjach i współbieżnych zapisach to dumping i niedoszacowanie ryzyka. To nie jest prosty skrypt, lecz krytyczny moduł ERP, w którym błąd oznacza zawieszenia, błędne stany i straty sprzedażowe. Argument o wsparciu AI nie zastąpi doświadczenia w Subiekcie, testów obciążeniowych i obsługi wyjątków.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 15000,\n  \"dni_sugerowane_do\": 30,\n  \"uzasadnienie\": \"7500 zł netto za integrację Subiekt–BaseLinker przy 40 tys. produktów, wariantach, EAN, rezerwacjach i współbieżnych zapisach to dumping i niedoszacowanie ryzyka. To nie jest prosty skrypt, lecz krytyczny moduł ERP, w którym błąd oznacza zawieszenia, błędne stany i straty sprzedażowe. Argument o wsparciu AI nie zastąpi doświadczenia w Subiekcie, testów obciążeniowych i obsługi wyjątków.\",\n  \"twoje_oszacowanie_rynku\": \"12 000–22 000 PLN netto\"\n}",
+        "czas_s": 6.46
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 10500,
+        "dni_od": 14,
+        "dni_do": 25,
+        "uzasadnienie": "Uwzględniając argumenty recenzenta o krytyczności mechanizmu silent-guard i ryzyku zatorów bazy dla 40 tys. produktów, koryguję wycenę do 10 500 zł netto. Zapewnia to rzetelną marżę za architekturę i testy obciążeniowe, pozostając w realiach budżetowych MŚP na Useme.",
+        "surowy_tekst": "{\n\"kwota\": 10500,\n\"dni_od\": 14,\n\"dni_do\": 25,\n\"uzasadnienie\": \"Uwzględniając argumenty recenzenta o krytyczności mechanizmu silent-guard i ryzyku zatorów bazy dla 40 tys. produktów, koryguję wycenę do 10 500 zł netto. Zapewnia to rzetelną marżę za architekturę i testy obciążeniowe, pozostając w realiach budżetowych MŚP na Useme.\"\n}",
+        "czas_s": 15.66
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 17000,
+        "dni_sugerowane_do": 30,
+        "twoje_oszacowanie_rynku": "15 000–25 000 PLN netto; pełny zakres realnie 17 000–22 000 PLN netto, a okrojone MVP tylko stany/ceny 12 000–15 000 PLN netto",
+        "uzasadnienie": "10 500 zł netto to wycena dumpingowa jak na integrację krytyczną dla 40 000 SKU, z Subiektem, BaseLinkerem, silent-guardem, retry i rezerwacjami zamówień. Brak tu marginesu na testy obciążeniowe, obsługę wariantów/EAN oraz ryzyko zatorów i limitów API, więc łatwo wpaść w niedoszacowanie i konflikt z klientem. To nie jest prosty connector, tylko system operacyjny magazynu, który musi działać bezawaryjnie w tle.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 17000,\n  \"dni_sugerowane_do\": 30,\n  \"uzasadnienie\": \"10 500 zł netto to wycena dumpingowa jak na integrację krytyczną dla 40 000 SKU, z Subiektem, BaseLinkerem, silent-guardem, retry i rezerwacjami zamówień. Brak tu marginesu na testy obciążeniowe, obsługę wariantów/EAN oraz ryzyko zatorów i limitów API, więc łatwo wpaść w niedoszacowanie i konflikt z klientem. To nie jest prosty connector, tylko system operacyjny magazynu, który musi działać bezawaryjnie w tle.\",\n  \"twoje_oszacowanie_rynku\": \"15 000–25 000 PLN netto; pełny zakres realnie 17 000–22 000 PLN netto, a okrojone MVP tylko stany/ceny 12 000–15 000 PLN netto\"\n}",
+        "czas_s": 9.24
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 10500,
+        "dni_od": 14,
+        "dni_do": 25,
+        "uzasadnienie": "Uwzględniając argumenty recenzenta o krytyczności mechanizmu silent-guard i ryzyku zatorów bazy dla 40 tys. produktów, koryguję wycenę do 10 500 zł netto. Zapewnia to rzetelną marżę za architekturę i testy obciążeniowe, pozostając w realiach budżetowych MŚP na Useme.",
+        "surowy_tekst": "",
+        "czas_s": 8.81
+      }
+    ]
+  },
+  {
+    "nazwa": "145287 Aplikacja mobilna offline (kierowcy/serwis)",
+    "wyceniacz_model": "DeepSeek-v4-Pro",
+    "reviewer_model": "Gemini-3.8-Flash",
+    "kwota_finalna": 24000,
+    "dni_od": 40,
+    "dni_do": 55,
+    "uzasadnienie_finalne": "Recenzja wskazuje wyłącznie błąd parsowania i nie podważa merytorycznie wyceny, więc nie ma podstaw do zmiany kwoty. 24000 zł netto jest realne dla freelancera AI na Useme: obejmuje architekturę offline-first, lokalną bazę, kolejkę synchronizacji, obsługę konfliktów, formularze, zdjęcia z kompresją oraz testy na starych telefonach i przy braku zasięgu. Termin 40–55 dni kalendarzowych mieści się w limicie 60 dni i uwzględnia etapowanie oraz testy klienta, bez stosowania stawek korporacyjnego software house’u.",
+    "ostatni_werdykt_reviewera": "BŁĄD",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "DeepSeek-v4-Pro",
+        "kwota": 24000,
+        "dni_od": 40,
+        "dni_do": 55,
+        "uzasadnienie": "Wycena obejmuje aplikację offline-first we Flutterze z lokalną bazą SQLite/Drift, kolejką synchronizacji, obsługą zdjęć z kompresją, rozwiązywaniem konfliktów oraz testami na słabych telefonach i bez zasięgu. 24 000 PLN netto jest uczciwe dla MŚP na Useme: to mniej niż software house enterprise, ale nie dumping, bo odpowiada za ryzyko utraty danych i niezawodność pracy terenowej. Termin 40–55 dni uwzględnia etapowanie: formularze offline, zdjęcia, synchronizacja i poprawki po testach klienta, mieszcząc się w limicie 60 dni.",
+        "surowy_tekst": "{\n  \"kwota\": 24000,\n  \"dni_od\": 40,\n  \"dni_do\": 55,\n  \"uzasadnienie\": \"Wycena obejmuje aplikację offline-first we Flutterze z lokalną bazą SQLite/Drift, kolejką synchronizacji, obsługą zdjęć z kompresją, rozwiązywaniem konfliktów oraz testami na słabych telefonach i bez zasięgu. 24 000 PLN netto jest uczciwe dla MŚP na Useme: to mniej niż software house enterprise, ale nie dumping, bo odpowiada za ryzyko utraty danych i niezawodność pracy terenowej. Termin 40–55 dni uwzględnia etapowanie: formularze offline, zdjęcia, synchronizacja i poprawki po testach klienta, mieszcząc się w limicie 60 dni.\"\n}",
+        "czas_s": 8.37
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "BŁĄD",
+        "kwota_sugerowana": null,
+        "dni_sugerowane_do": null,
+        "twoje_oszacowanie_rynku": null,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "{\n\"werdykt\": \"ZA_DUZA\",\n\"kwota_sugerowana\": 12000,\n\"dni_sugerowane_do\": 45,\n\"uzasadnienie\": \"Kwota 24 000 zł netto znacznie przekracza realia budżetowe polskiego MŚP na Useme, zbliżając się do stawek małych software house'ów.",
+        "czas_s": 11.89
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 24000,
+        "dni_od": 40,
+        "dni_do": 55,
+        "uzasadnienie": "Podtrzymuję 24 000 zł netto: recenzent nie podał merytorycznego zarzutu, tylko błąd parsowania, więc nie ma podstaw do korekty. Zakres obejmuje aplikację offline-first z lokalną bazą, kolejką synchronizacji, obsługą zdjęć, konfliktów i retry oraz Flutter Android/iOS, co jest trudniejsze niż prosty CRUD. 40–55 dni kalendarzowych mieści się w limicie 60 dni klienta, uwzględnia etapowanie i testy na realnych danych, a kwota jest adekwatna dla MŚP na Useme bez narzutu software house’u.",
+        "surowy_tekst": "{\n  \"kwota\": 24000,\n  \"dni_od\": 40,\n  \"dni_do\": 55,\n  \"uzasadnienie\": \"Podtrzymuję 24 000 zł netto: recenzent nie podał merytorycznego zarzutu, tylko błąd parsowania, więc nie ma podstaw do korekty. Zakres obejmuje aplikację offline-first z lokalną bazą, kolejką synchronizacji, obsługą zdjęć, konfliktów i retry oraz Flutter Android/iOS, co jest trudniejsze niż prosty CRUD. 40–55 dni kalendarzowych mieści się w limicie 60 dni klienta, uwzględnia etapowanie i testy na realnych danych, a kwota jest adekwatna dla MŚP na Useme bez narzutu software house’u.\"\n}",
+        "czas_s": 7.69
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "BŁĄD",
+        "kwota_sugerowana": null,
+        "dni_sugerowane_do": null,
+        "twoje_oszacowanie_rynku": null,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "",
+        "czas_s": 2.61
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 24000,
+        "dni_od": 40,
+        "dni_do": 55,
+        "uzasadnienie": "Recenzja wskazuje wyłącznie błąd parsowania i nie podważa merytorycznie wyceny, więc nie ma podstaw do zmiany kwoty. 24000 zł netto jest realne dla freelancera AI na Useme: obejmuje architekturę offline-first, lokalną bazę, kolejkę synchronizacji, obsługę konfliktów, formularze, zdjęcia z kompresją oraz testy na starych telefonach i przy braku zasięgu. Termin 40–55 dni kalendarzowych mieści się w limicie 60 dni i uwzględnia etapowanie oraz testy klienta, bez stosowania stawek korporacyjnego software house’u.",
+        "surowy_tekst": "{\n  \"kwota\": 24000,\n  \"dni_od\": 40,\n  \"dni_do\": 55,\n  \"uzasadnienie\": \"Recenzja wskazuje wyłącznie błąd parsowania i nie podważa merytorycznie wyceny, więc nie ma podstaw do zmiany kwoty. 24000 zł netto jest realne dla freelancera AI na Useme: obejmuje architekturę offline-first, lokalną bazę, kolejkę synchronizacji, obsługę konfliktów, formularze, zdjęcia z kompresją oraz testy na starych telefonach i przy braku zasięgu. Termin 40–55 dni kalendarzowych mieści się w limicie 60 dni i uwzględnia etapowanie oraz testy klienta, bez stosowania stawek korporacyjnego software house’u.\"\n}",
+        "czas_s": 5.76
+      }
+    ]
+  },
+  {
+    "nazwa": "145287 Aplikacja mobilna offline (kierowcy/serwis)",
+    "wyceniacz_model": "Gemini-3.8-Flash",
+    "reviewer_model": "DeepSeek-v4-Pro",
+    "kwota_finalna": 19500,
+    "dni_od": 25,
+    "dni_do": 45,
+    "uzasadnienie_finalne": "Uwzględniając merytoryczne uwagi recenzenta o złożoności integracji backendowej, testach QA na starszych urządzeniach i obsłudze kolejek zdjęć, koryguję wycenę do 19 500 zł netto. Dzięki akceleracji narzędziami AI dostarczę pancerny system offline-first w ciągu 4-6 tygodni, co stanowi uczciwą rynkową stawkę dla freelancera, chroniąc klienta z MŚP przed marżami agencji.",
+    "ostatni_werdykt_reviewera": "ZA_MALA",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "Gemini-3.8-Flash",
+        "kwota": 0,
+        "dni_od": 0,
+        "dni_do": 0,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "{\n\"werdykt\": \"ZA_DUZA\",\n\"kwota_sugerowana\": 12000,\n\"dni_sugerowane_do\": 45,\n\"uzasadnienie\": \"Kwota 24 000 zł netto to poważne przestrzelenie realiów budżetowych polskiego MŚP na Useme, wchodzące w stawki software house'ów. Klient szuka zwinnego freelancera,{\n\"werdykt\": \"ZA_DUZA\",\n\"kwota_sugerowana\": 12000,\n\"dni_sugerowane_do\": 45,\n\"uzasadnienie\": \"Kwota 24 000 zł netto to poważne przestrzelenie realiów budżetowych polskiego MŚP na Useme, wchodzące w stawki software house'ów. Klient szuka zwinnego freelancera, a tak wysoka wycena natychmiast odstraszy decydenta szukającego optymalizacji kosztów.\",\n\"twoje_oszacowanie_rynku\": \"8000 - 15000 PLN netto\"\n}",
+        "czas_s": 12.24
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 25000,
+        "dni_sugerowane_do": 60,
+        "twoje_oszacowanie_rynku": "18 000–35 000 PLN netto, 45–60 dni, w zależności od zakresu backendu, wsparcia iOS i liczby integracji",
+        "uzasadnienie": "0 zł netto i termin 0-0 dni to nie wycena, lecz błąd parsowania — taka oferta nie ma żadnej szansy u klienta MŚP, bo wygląda na brak przygotowania. Nawet najprostsza aplikacja offline-first z formularzami, zdjęciami i synchronizacją to minimum kilkanaście tysięcy złotych i kilka tygodni pracy. Klient wprost prosi o rekomendację technologii, etapy i przykłady, więc oferta musi być kompletna, a nie pusta.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 25000,\n  \"dni_sugerowane_do\": 60,\n  \"uzasadnienie\": \"0 zł netto i termin 0-0 dni to nie wycena, lecz błąd parsowania — taka oferta nie ma żadnej szansy u klienta MŚP, bo wygląda na brak przygotowania. Nawet najprostsza aplikacja offline-first z formularzami, zdjęciami i synchronizacją to minimum kilkanaście tysięcy złotych i kilka tygodni pracy. Klient wprost prosi o rekomendację technologii, etapy i przykłady, więc oferta musi być kompletna, a nie pusta.\",\n  \"twoje_oszacowanie_rynku\": \"18 000–35 000 PLN netto, 45–60 dni, w zależności od zakresu backendu, wsparcia iOS i liczby integracji\"\n}",
+        "czas_s": 6.76
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 14500,
+        "dni_od": 21,
+        "dni_do": 35,
+        "uzasadnienie": "Poprzedni wpis z 0 zł wynikał z błędu systemu, a budowa aplikacji offline-first z lokalną bazą i kolejką zdjęć wymaga pełnego zabezpieczenia technologicznego. Dzięki akceleracji narzędziami AI dostarczę pancerny system w 3-5 tygodni za 14 500 zł netto – poniżej kosztów agencji enterprise, ale z zachowaniem pełnej profesjonalnej marży dla freelancera na Useme.",
+        "surowy_tekst": "{\n\"kwota\": 14500,\n\"dni_od\": 21,\n\"dni_do\": 35,\n\"uzasadnienie\": \"Poprzedni wpis z 0 zł wynikał z błędu systemu, a budowa aplikacji offline-first z lokalną bazą i kolejką zdjęć wymaga pełnego zabezpieczenia technologicznego. Dzięki akceleracji narzędziami AI dostarczę pancerny system w 3-5 tygodni za 14 500 zł netto – poniżej kosztów agencji enterprise, ale z zachowaniem pełnej profesjonalnej marży dla freelancera na Useme.\"\n}",
+        "czas_s": 12.1
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 29000,
+        "dni_sugerowane_do": 60,
+        "twoje_oszacowanie_rynku": "24 000–40 000 PLN netto za Android offline-first; 35 000–60 000 PLN netto z iOS lub prostym backendem",
+        "uzasadnienie": "14 500 zł netto za aplikację offline-first z formularzami, kolejką zdjęć, lokalną bazą i synchronizacją to niedoszacowanie ryzyka i skali — brakuje tu miejsca na analizę, integrację z backendem/API, testy na starych Androidach, QA i utrzymanie. Deklaracja 21–35 dni jest agresywna nawet z AI, bo największe ryzyko siedzi w konfliktach synchronizacji, utracie danych i zachowaniu przy braku zasięgu. Przy tej cenie klient dostanie albo dziurawe MVP, albo wykonawca będzie dokładał do projektu.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 29000,\n  \"dni_sugerowane_do\": 60,\n  \"uzasadnienie\": \"14 500 zł netto za aplikację offline-first z formularzami, kolejką zdjęć, lokalną bazą i synchronizacją to niedoszacowanie ryzyka i skali — brakuje tu miejsca na analizę, integrację z backendem/API, testy na starych Androidach, QA i utrzymanie. Deklaracja 21–35 dni jest agresywna nawet z AI, bo największe ryzyko siedzi w konfliktach synchronizacji, utracie danych i zachowaniu przy braku zasięgu. Przy tej cenie klient dostanie albo dziurawe MVP, albo wykonawca będzie dokładał do projektu.\",\n  \"twoje_oszacowanie_rynku\": \"24 000–40 000 PLN netto za Android offline-first; 35 000–60 000 PLN netto z iOS lub prostym backendem\"\n}",
+        "czas_s": 11.61
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 19500,
+        "dni_od": 25,
+        "dni_do": 45,
+        "uzasadnienie": "Uwzględniając merytoryczne uwagi recenzenta o złożoności integracji backendowej, testach QA na starszych urządzeniach i obsłudze kolejek zdjęć, koryguję wycenę do 19 500 zł netto. Dzięki akceleracji narzędziami AI dostarczę pancerny system offline-first w ciągu 4-6 tygodni, co stanowi uczciwą rynkową stawkę dla freelancera, chroniąc klienta z MŚP przed marżami agencji.",
+        "surowy_tekst": "{\n\"kwota\": 19500,\n\"dni_od\": 25,\n\"dni_do\": 45,\n\"uzasadnienie\": \"Uwzględniając merytoryczne uwagi recenzenta o złożoności integracji backendowej, testach QA na starszych urządzeniach i obsłudze kolejek zdjęć, koryguję wycenę do 19 500 zł netto. Dzięki akceleracji narzędziami AI dostarczę pancerny system offline-first w ciągu 4-6 tygodni, co stanowi uczciwą rynkową stawkę dla freelancera, chroniąc klienta z MŚP przed marżami agencji.\"\n}",
+        "czas_s": 16.19
+      }
+    ]
+  },
+  {
+    "nazwa": "144890 Automatyzacja faktur OCR + Optima",
+    "wyceniacz_model": "DeepSeek-v4-Pro",
+    "reviewer_model": "Gemini-3.8-Flash",
+    "kwota_finalna": 13500,
+    "dni_od": 30,
+    "dni_do": 45,
+    "uzasadnienie_finalne": "Recenzent nie wskazał błędu merytorycznego, tylko problem parsowania, więc podtrzymuję 13500 zł netto jako wycenę wartościową, nie godzinową. Zakres obejmuje OCR AI z walidacją matematyczną, n8n na własnym serwerze, integrację lub plik wymiany do Comarch Optima oraz testy na rzeczywistych dokumentach i asystę powdrożeniową, gdzie główne ryzyko to jakość skanów i mapowanie pozycji towarowych. 30–45 dni kalendarzowych uwzględnia etapowanie, iteracje na dokumentach klienta i poprawki przed odbiorem.",
+    "ostatni_werdykt_reviewera": "BŁĄD",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "DeepSeek-v4-Pro",
+        "kwota": 13500,
+        "dni_od": 30,
+        "dni_do": 45,
+        "uzasadnienie": "Koszt wynika z pełnego pipeline'u: ingest z Drive/mail, OCR AI z klasyfikacją i odczytem pozycji, walidacja matematyczna, archiwizacja oraz integracja/eksport do Comarch Optima. Największe ryzyko to jakość skanów i mapowanie pozycji do Optimy, dlatego uwzględniam testy na realnych dokumentach, obsługę wyjątków i asystę powdrożeniową. Termin 30-45 dni obejmuje iteracje z klientem i stabilizację, a nie etatowe dniówki.",
+        "surowy_tekst": "{\n  \"kwota\": 13500,\n  \"dni_od\": 30,\n  \"dni_do\": 45,\n  \"uzasadnienie\": \"Koszt wynika z pełnego pipeline'u: ingest z Drive/mail, OCR AI z klasyfikacją i odczytem pozycji, walidacja matematyczna, archiwizacja oraz integracja/eksport do Comarch Optima. Największe ryzyko to jakość skanów i mapowanie pozycji do Optimy, dlatego uwzględniam testy na realnych dokumentach, obsługę wyjątków i asystę powdrożeniową. Termin 30-45 dni obejmuje iteracje z klientem i stabilizację, a nie etatowe dniówki.\"\n}",
+        "czas_s": 8.04
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "BŁĄD",
+        "kwota_sugerowana": null,
+        "dni_sugerowane_do": null,
+        "twoje_oszacowanie_rynku": null,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "",
+        "czas_s": 3.24
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 13500,
+        "dni_od": 30,
+        "dni_do": 45,
+        "uzasadnienie": "Wycena 13 500 zł netto broni się inżyniersko, bo zakres obejmuje klasyfikację dokumentów, ekstrakcję danych i pozycji, twardą weryfikację matematyczną, obsługę wyjątków, archiwizację oraz mapowanie do Comarch Optima, a nie prosty OCR. n8n self-hosted ogranicza koszty stałe, ale nie usuwa ryzyka błędnych skanów, konieczności testów na realnych dokumentach i integracji z systemem księgowo-magazynowym. Termin 30–45 dni kalendarzowych jest realistyczny przy iteracjach z klientem i krótkiej asyście powdrożeniowej, a recenzent wskazał wyłącznie błąd parsowania, bez merytorycznego oszacowania rynku, więc nie ma podstaw do korekty kwoty.",
+        "surowy_tekst": "{\n  \"kwota\": 13500,\n  \"dni_od\": 30,\n  \"dni_do\": 45,\n  \"uzasadnienie\": \"Wycena 13 500 zł netto broni się inżyniersko, bo zakres obejmuje klasyfikację dokumentów, ekstrakcję danych i pozycji, twardą weryfikację matematyczną, obsługę wyjątków, archiwizację oraz mapowanie do Comarch Optima, a nie prosty OCR. n8n self-hosted ogranicza koszty stałe, ale nie usuwa ryzyka błędnych skanów, konieczności testów na realnych dokumentach i integracji z systemem księgowo-magazynowym. Termin 30–45 dni kalendarzowych jest realistyczny przy iteracjach z klientem i krótkiej asyście powdrożeniowej, a recenzent wskazał wyłącznie błąd parsowania, bez merytorycznego oszacowania rynku, więc nie ma podstaw do korekty kwoty.\"\n}",
+        "czas_s": 10.98
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash",
+        "werdykt": "BŁĄD",
+        "kwota_sugerowana": null,
+        "dni_sugerowane_do": null,
+        "twoje_oszacowanie_rynku": null,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "",
+        "czas_s": 3.18
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro_kontra",
+        "kwota": 13500,
+        "dni_od": 30,
+        "dni_do": 45,
+        "uzasadnienie": "Recenzent nie wskazał błędu merytorycznego, tylko problem parsowania, więc podtrzymuję 13500 zł netto jako wycenę wartościową, nie godzinową. Zakres obejmuje OCR AI z walidacją matematyczną, n8n na własnym serwerze, integrację lub plik wymiany do Comarch Optima oraz testy na rzeczywistych dokumentach i asystę powdrożeniową, gdzie główne ryzyko to jakość skanów i mapowanie pozycji towarowych. 30–45 dni kalendarzowych uwzględnia etapowanie, iteracje na dokumentach klienta i poprawki przed odbiorem.",
+        "surowy_tekst": "{\n  \"kwota\": 13500,\n  \"dni_od\": 30,\n  \"dni_do\": 45,\n  \"uzasadnienie\": \"Recenzent nie wskazał błędu merytorycznego, tylko problem parsowania, więc podtrzymuję 13500 zł netto jako wycenę wartościową, nie godzinową. Zakres obejmuje OCR AI z walidacją matematyczną, n8n na własnym serwerze, integrację lub plik wymiany do Comarch Optima oraz testy na rzeczywistych dokumentach i asystę powdrożeniową, gdzie główne ryzyko to jakość skanów i mapowanie pozycji towarowych. 30–45 dni kalendarzowych uwzględnia etapowanie, iteracje na dokumentach klienta i poprawki przed odbiorem.\"\n}",
+        "czas_s": 8.32
+      }
+    ]
+  },
+  {
+    "nazwa": "144890 Automatyzacja faktur OCR + Optima",
+    "wyceniacz_model": "Gemini-3.8-Flash",
+    "reviewer_model": "DeepSeek-v4-Pro",
+    "kwota_finalna": 9000,
+    "dni_od": 14,
+    "dni_do": 25,
+    "uzasadnienie_finalne": "Zgadzam się z uwagą recenzenta, że poprzedni błąd techniczny dyskwalifikował ofertę, a rzetelna wycena musi odzwierciedlać złożoność integracji z Comarch Optima i AI OCR. Kwota 9000 zł netto oraz termin 14-25 dni zapewniają bezpieczną rezerwę na testy na realnych dokumentach i stabilne wdrożenie dla polskiego MŚP na Useme.",
+    "ostatni_werdykt_reviewera": "ZA_MALA",
+    "log_rund": [
+      {
+        "runda": 0,
+        "aktor": "Gemini-3.8-Flash",
+        "kwota": 0,
+        "dni_od": 0,
+        "dni_do": 0,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "\"4500 - 8500 PLN netto\"\n}",
+        "czas_s": 2.73
+      },
+      {
+        "runda": 1,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 12000,
+        "dni_sugerowane_do": 30,
+        "twoje_oszacowanie_rynku": "8000–16000 PLN netto, zależnie od dostępu do API Comarch Optima i liczby wzorów dokumentów",
+        "uzasadnienie": "0 zł netto to nie wycena, tylko błąd parsowania — taka oferta nie ma żadnej szansy u klienta MŚP, bo nie pokrywa nawet konfiguracji n8n, OCR, testów na realnych dokumentach i opieki powdrożeniowej. Nawet jeśli to literówka, brak terminu 0-0 dni całkowicie dyskwalifikuje wiarygodność wykonawcy.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 12000,\n  \"dni_sugerowane_do\": 30,\n  \"uzasadnienie\": \"0 zł netto to nie wycena, tylko błąd parsowania — taka oferta nie ma żadnej szansy u klienta MŚP, bo nie pokrywa nawet konfiguracji n8n, OCR, testów na realnych dokumentach i opieki powdrożeniowej. Nawet jeśli to literówka, brak terminu 0-0 dni całkowicie dyskwalifikuje wiarygodność wykonawcy.\",\n  \"twoje_oszacowanie_rynku\": \"8000–16000 PLN netto, zależnie od dostępu do API Comarch Optima i liczby wzorów dokumentów\"\n}",
+        "czas_s": 9.87
+      },
+      {
+        "runda": 1,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 0,
+        "dni_od": 0,
+        "dni_do": 0,
+        "uzasadnienie": "Błąd parsowania",
+        "surowy_tekst": "stabilny system w ciągu 2-4 tygodni, zachowując profesjonalną stawkę skrojoną pod realia polskiego MŚP na Useme.\"\n}",
+        "czas_s": 8.08
+      },
+      {
+        "runda": 2,
+        "aktor": "DeepSeek-v4-Pro",
+        "werdykt": "ZA_MALA",
+        "kwota_sugerowana": 9000,
+        "dni_sugerowane_do": 21,
+        "twoje_oszacowanie_rynku": "7000-14000 PLN netto, zależnie od liczby typów dokumentów, jakości skanów i sposobu integracji z Optimą (API vs plik wymiany).",
+        "uzasadnienie": "0 zł i 0 dni to nie wycena, tylko błąd parsowania — taka oferta nie pokrywa nawet konfiguracji n8n, testów OCR ani integracji z Comarch Optima. Dla klienta MŚP oznacza brak wiarygodności i zostanie odrzucona w pierwszym sortowaniu.",
+        "surowy_tekst": "{\n  \"werdykt\": \"ZA_MALA\",\n  \"kwota_sugerowana\": 9000,\n  \"dni_sugerowane_do\": 21,\n  \"uzasadnienie\": \"0 zł i 0 dni to nie wycena, tylko błąd parsowania — taka oferta nie pokrywa nawet konfiguracji n8n, testów OCR ani integracji z Comarch Optima. Dla klienta MŚP oznacza brak wiarygodności i zostanie odrzucona w pierwszym sortowaniu.\",\n  \"twoje_oszacowanie_rynku\": \"7000-14000 PLN netto, zależnie od liczby typów dokumentów, jakości skanów i sposobu integracji z Optimą (API vs plik wymiany).\"\n}",
+        "czas_s": 7.56
+      },
+      {
+        "runda": 2,
+        "aktor": "Gemini-3.8-Flash_kontra",
+        "kwota": 9000,
+        "dni_od": 14,
+        "dni_do": 25,
+        "uzasadnienie": "Zgadzam się z uwagą recenzenta, że poprzedni błąd techniczny dyskwalifikował ofertę, a rzetelna wycena musi odzwierciedlać złożoność integracji z Comarch Optima i AI OCR. Kwota 9000 zł netto oraz termin 14-25 dni zapewniają bezpieczną rezerwę na testy na realnych dokumentach i stabilne wdrożenie dla polskiego MŚP na Useme.",
+        "surowy_tekst": "{\n\"kwota\": 9000,\n\"dni_od\": 14,\n\"dni_do\": 25,\n\"uzasadnienie\": \"Zgadzam się z uwagą recenzenta, że poprzedni błąd techniczny dyskwalifikował ofertę, a rzetelna wycena musi odzwierciedlać złożoność integracji z Comarch Optima i AI OCR. Kwota 9000 zł netto oraz termin 14-25 dni zapewniają bezpieczną rezerwę na testy na realnych dokumentach i stabilne wdrożenie dla polskiego MŚP na Useme.\"\n}",
+        "czas_s": 11.62
+      }
+    ]
+  }
+]
