@@ -300,12 +300,12 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
     oferta = re.sub(r"\[WYCENA\].*?(?:\[/WYCENA\]|\Z)", "", oferta_raw, flags=re.DOTALL | re.IGNORECASE).strip()
 
     # ---------- SANITIZER ----------
-    oferta = sanitize_opis(oferta, wycena=kwota, dni=dni)
+    oferta = sanitize_opis(oferta, wycena=kwota, dni=dni_do)
 
     # ---------- CHECKER ----------
     say(f"[5/6] Checker #{job_id}...")
     sciezka = "biznes" if "biznes" in (pola.get("SCIEZKA_MERYTORYKI", "") or "").lower() else "inzynieria"
-    check = sprawdz(oferta, dni=dni, sciezka=sciezka, client_text=client_text)
+    check = sprawdz(oferta, dni=dni_do, sciezka=sciezka, client_text=client_text)
     if not check["ok"]:
         say(f"    checker: {[p['regula'] for p in check['problemy']]}")
 
@@ -316,7 +316,7 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         sedzia_raw = call_ai(
             system_sedzia,
             f"--- OGLOSZENIE KLIENTA ---\n{tresc}\n\n"
-            f"--- WYCENA: {kwota} zl netto / {dni} dni ---\n\n"
+            f"--- WYCENA: {kwota} zl netto / {dni_od}-{dni_do} dni ---\n\n"
             f"--- OFERTA DO OCENY ---\n{oferta}",
             model="deepseek-v4-pro-nothink", timeout=120, temperature=0.3,
         )
@@ -331,7 +331,7 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         "pola": pola,
         "oferta": oferta,
         "wycena": kwota,
-        "dni": dni,
+        "dni": dni_do, "dni_od": dni_od, "dni_do": dni_do,
         "wycena_rozbicie": wynik_wyceny.get("rozbicie", {}),
         "checker": check,
         "sedzia": sedzia,
