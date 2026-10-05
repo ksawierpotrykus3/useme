@@ -3,26 +3,62 @@
     "id": "145285",
     "nazwa": "145285 Subiekt <-> BaseLinker (40k produktów)",
     "wynik": {
-      "kwota": 17000,
+      "kwota": 18000,
       "dni": 30,
-      "dni_od": 25,
+      "dni_od": 21,
       "dni_do": 30,
       "typ": "projekt",
-      "uzasadnienie": "To złożona integracja wysokiego ryzyka: 40 000 SKU, warianty/EAN, delta-sync co kilka minut, limity BaseLinker API oraz blokady zapisu w Subiekcie wymagają kolejkowania, idempotencji i bezpiecznego silent-guard. Wycena 17 000 PLN netto pokrywa architekturę, usługę działającą w tle, obsługę zamówień i rezerwacji, retry po awariach sieci oraz testy na realnej bazie klienta. Termin 25–30 dni wynika z etapowego wdrożenia i konieczności obserwacji synchronizacji pod obciążeniem, a nie z przeliczania pracy etatowej.",
+      "uzasadnienie": "To krytyczna integracja ERP-sklep dla 40 tys. produktów, gdzie liczą się delta-sync, idempotencja, kolejkowanie retry, obsługa wariantów/EAN oraz bezpieczne rezerwacje zamówień w Subiekcie. AI przyspiesza kod, ale ryzyko blokad tabel, testy na realnej bazie i etapowe wdrożenie z klientem wymagają 21-30 dni kalendarzowych. Kwota 18 500 PLN netto wynika z odpowiedzialności za ciągłość sprzedaży i danych, a nie z dumpingu ani stawek warszawskiego software house'u.",
       "reviewer_werdykt": "OK",
-      "reviewer_uwagi": "Kwota 17 000 PLN netto trafia w punkt: idealnie odzwierciedla realne ryzyko techniczne, kolejkowanie i złożoność 40k SKU z Subiektem. To maksymalna profesjonalna stawka, którą świadomy decydent MŚP na Useme zaakceptuje, odrzucając jednocześnie amatorski dumping.",
-      "widełki_rynkowe": "12000 - 22000 PLN netto",
+      "reviewer_uwagi": "Wycena jest rynkowo adekwatna do skali 40 000 SKU i ryzyka blokad transakcyjnych bazy MSSQL Subiekta w godzinach pracy magazynu. Prawidłowa realizacja wymaga nie tylko skryptu API, ale mechanizmu delta-sync (np. SQL Change Tracking / triggery), kolejkowania zapytań (np.",
+      "widełki_rynkowe": "",
       "rundy": 1,
+      "przebieg": [
+        {
+          "runda": 0,
+          "aktor": "WYCENIACZ",
+          "kwota": 18500,
+          "dni_od": 21,
+          "dni_do": 30,
+          "uzasadnienie": "To krytyczna integracja ERP-sklep dla 40 tys. produktów, gdzie liczą się delta-sync, idempotencja, kolejkowanie retry, obsługa wariantów/EAN oraz bezpieczne rezerwacje zamówień w Subiekcie. AI przyspiesza kod, ale ryzyko blokad tabel, testy na realnej bazie i etapowe wdrożenie z klientem wymagają 21-30 dni kalendarzowych. Kwota 18 500 PLN netto wynika z odpowiedzialności za ciągłość sprzedaży i danych, a nie z dumpingu ani stawek warszawskiego software house'u."
+        },
+        {
+          "runda": 1,
+          "aktor": "REVIEWER",
+          "werdykt": "OK",
+          "kwota_sugerowana": 18500,
+          "rynek": "",
+          "uzasadnienie": "Wycena jest rynkowo adekwatna do skali 40 000 SKU i ryzyka blokad transakcyjnych bazy MSSQL Subiekta w godzinach pracy magazynu. Prawidłowa realizacja wymaga nie tylko skryptu API, ale mechanizmu delta-sync (np. SQL Change Tracking / triggery), kolejkowania zapytań (np."
+        }
+      ],
       "rozbicie": {
         "tryb": "debata_dwumodelowa_useme",
-        "surowa_kwota_ai": 17000,
-        "kwota_koncowa": 17000,
-        "dni_od": 25,
+        "surowa_kwota_ai": 18500,
+        "kwota_koncowa": 18000,
+        "dni_od": 21,
         "dni_do": 30,
         "rundy_debaty": 1,
-        "uzasadnienie_wyceniacza": "To złożona integracja wysokiego ryzyka: 40 000 SKU, warianty/EAN, delta-sync co kilka minut, limity BaseLinker API oraz blokady zapisu w Subiekcie wymagają kolejkowania, idempotencji i bezpiecznego silent-guard. Wycena 17 000 PLN netto pokrywa architekturę, usługę działającą w tle, obsługę zamówień i rezerwacji, retry po awariach sieci oraz testy na realnej bazie klienta. Termin 25–30 dni wynika z etapowego wdrożenia i konieczności obserwacji synchronizacji pod obciążeniem, a nie z przeliczania pracy etatowej.",
-        "krytyka_reviewera": "Kwota 17 000 PLN netto trafia w punkt: idealnie odzwierciedla realne ryzyko techniczne, kolejkowanie i złożoność 40k SKU z Subiektem. To maksymalna profesjonalna stawka, którą świadomy decydent MŚP na Useme zaakceptuje, odrzucając jednocześnie amatorski dumping.",
-        "widełki_rynkowe": "12000 - 22000 PLN netto"
+        "uzasadnienie_wyceniacza": "To krytyczna integracja ERP-sklep dla 40 tys. produktów, gdzie liczą się delta-sync, idempotencja, kolejkowanie retry, obsługa wariantów/EAN oraz bezpieczne rezerwacje zamówień w Subiekcie. AI przyspiesza kod, ale ryzyko blokad tabel, testy na realnej bazie i etapowe wdrożenie z klientem wymagają 21-30 dni kalendarzowych. Kwota 18 500 PLN netto wynika z odpowiedzialności za ciągłość sprzedaży i danych, a nie z dumpingu ani stawek warszawskiego software house'u.",
+        "krytyka_reviewera": "Wycena jest rynkowo adekwatna do skali 40 000 SKU i ryzyka blokad transakcyjnych bazy MSSQL Subiekta w godzinach pracy magazynu. Prawidłowa realizacja wymaga nie tylko skryptu API, ale mechanizmu delta-sync (np. SQL Change Tracking / triggery), kolejkowania zapytań (np.",
+        "widełki_rynkowe": "",
+        "przebieg": [
+          {
+            "runda": 0,
+            "aktor": "WYCENIACZ",
+            "kwota": 18500,
+            "dni_od": 21,
+            "dni_do": 30,
+            "uzasadnienie": "To krytyczna integracja ERP-sklep dla 40 tys. produktów, gdzie liczą się delta-sync, idempotencja, kolejkowanie retry, obsługa wariantów/EAN oraz bezpieczne rezerwacje zamówień w Subiekcie. AI przyspiesza kod, ale ryzyko blokad tabel, testy na realnej bazie i etapowe wdrożenie z klientem wymagają 21-30 dni kalendarzowych. Kwota 18 500 PLN netto wynika z odpowiedzialności za ciągłość sprzedaży i danych, a nie z dumpingu ani stawek warszawskiego software house'u."
+          },
+          {
+            "runda": 1,
+            "aktor": "REVIEWER",
+            "werdykt": "OK",
+            "kwota_sugerowana": 18500,
+            "rynek": "",
+            "uzasadnienie": "Wycena jest rynkowo adekwatna do skali 40 000 SKU i ryzyka blokad transakcyjnych bazy MSSQL Subiekta w godzinach pracy magazynu. Prawidłowa realizacja wymaga nie tylko skryptu API, ale mechanizmu delta-sync (np. SQL Change Tracking / triggery), kolejkowania zapytań (np."
+          }
+        ]
       }
     }
   },
@@ -30,26 +66,62 @@
     "id": "145287",
     "nazwa": "145287 Aplikacja mobilna offline (kierowcy/serwis)",
     "wynik": {
-      "kwota": 19000,
+      "kwota": 24000,
       "dni": 55,
-      "dni_od": 40,
+      "dni_od": 35,
       "dni_do": 55,
       "typ": "projekt",
-      "uzasadnienie": "Offline-first wymaga lokalnej bazy, kolejki zapisów, odpornej synchronizacji z retry i obsługą konfliktów, a nie tylko formularza na ekranie; do tego dochodzi obsługa zdjęć/dokumentów, kompresja, przechowywanie i wznawianie wysyłki. Rekomendacja Flutter vs natywny Android oraz testy na starych telefonach i przy braku sieci wydłużają etap walidacji, dlatego realny termin to 40–55 dni przy podziale na formularze offline, potem zdjęcia i synchronizację. Kwota 19 000 zł netto pokrywa architekturę, implementację, testy, dokumentację i odpowiedzialność za dane klienta, bez amatorskiego dumpingu i bez stawek enterprise software house.",
+      "uzasadnienie": "Offline-first z lokalną bazą, kolejką synchronizacji, obsługą konfliktów i kompresją zdjęć to ryzyko utraty danych, dlatego wycena obejmuje architekturę, testy na braku zasięgu i etapowe odbiory. Rekomenduję Flutter/Android z lekkim backendem lub BaaS, co pozwala zmieścić się w 60 dniach i później dodać iOS bez przepisywania logiki. Kwota 24 000 PLN netto jest realna dla freelancera AI na Useme: niższa niż software house, ale nie dumpingowa przy odpowiedzialności za dane pracowników terenowych.",
       "reviewer_werdykt": "OK",
-      "reviewer_uwagi": "Brak zastrzeżeń recenzenta po retry.",
-      "widełki_rynkowe": "",
+      "reviewer_uwagi": "Wycena 24 000 zł netto jest adekwatna do poziomu trudności architektury offline-first (lokalna baza, kolejkowanie, kompresja zdjęć i rozwiązywanie konfliktów danych). Czas 55 dni mieści się w rygorystycznym limicie klienta (60 dni) przy podziale na etapy, a wybór technologii Flutter/Android zapewnia optymalny stosunek kosztu do możliwości skalowania na iOS. Choć sama oferta merytorycznie trafia w sedno problemu, freelancer powinien uzupełnić ją o konkretne portfolio i ograniczenia starszego sprzętu, których w treści zabrakło.",
+      "widełki_rynkowe": "18 000 – 30 000 zł netto (freelancer), 40 000 – 70 000 zł netto (software house)",
       "rundy": 1,
+      "przebieg": [
+        {
+          "runda": 0,
+          "aktor": "WYCENIACZ",
+          "kwota": 24000,
+          "dni_od": 35,
+          "dni_do": 55,
+          "uzasadnienie": "Offline-first z lokalną bazą, kolejką synchronizacji, obsługą konfliktów i kompresją zdjęć to ryzyko utraty danych, dlatego wycena obejmuje architekturę, testy na braku zasięgu i etapowe odbiory. Rekomenduję Flutter/Android z lekkim backendem lub BaaS, co pozwala zmieścić się w 60 dniach i później dodać iOS bez przepisywania logiki. Kwota 24 000 PLN netto jest realna dla freelancera AI na Useme: niższa niż software house, ale nie dumpingowa przy odpowiedzialności za dane pracowników terenowych."
+        },
+        {
+          "runda": 1,
+          "aktor": "REVIEWER",
+          "werdykt": "OK",
+          "kwota_sugerowana": 24000,
+          "rynek": "18 000 – 30 000 zł netto (freelancer), 40 000 – 70 000 zł netto (software house)",
+          "uzasadnienie": "Wycena 24 000 zł netto jest adekwatna do poziomu trudności architektury offline-first (lokalna baza, kolejkowanie, kompresja zdjęć i rozwiązywanie konfliktów danych). Czas 55 dni mieści się w rygorystycznym limicie klienta (60 dni) przy podziale na etapy, a wybór technologii Flutter/Android zapewnia optymalny stosunek kosztu do możliwości skalowania na iOS. Choć sama oferta merytorycznie trafia w sedno problemu, freelancer powinien uzupełnić ją o konkretne portfolio i ograniczenia starszego sprzętu, których w treści zabrakło."
+        }
+      ],
       "rozbicie": {
         "tryb": "debata_dwumodelowa_useme",
-        "surowa_kwota_ai": 19000,
-        "kwota_koncowa": 19000,
-        "dni_od": 40,
+        "surowa_kwota_ai": 24000,
+        "kwota_koncowa": 24000,
+        "dni_od": 35,
         "dni_do": 55,
         "rundy_debaty": 1,
-        "uzasadnienie_wyceniacza": "Offline-first wymaga lokalnej bazy, kolejki zapisów, odpornej synchronizacji z retry i obsługą konfliktów, a nie tylko formularza na ekranie; do tego dochodzi obsługa zdjęć/dokumentów, kompresja, przechowywanie i wznawianie wysyłki. Rekomendacja Flutter vs natywny Android oraz testy na starych telefonach i przy braku sieci wydłużają etap walidacji, dlatego realny termin to 40–55 dni przy podziale na formularze offline, potem zdjęcia i synchronizację. Kwota 19 000 zł netto pokrywa architekturę, implementację, testy, dokumentację i odpowiedzialność za dane klienta, bez amatorskiego dumpingu i bez stawek enterprise software house.",
-        "krytyka_reviewera": "Brak zastrzeżeń recenzenta po retry.",
-        "widełki_rynkowe": ""
+        "uzasadnienie_wyceniacza": "Offline-first z lokalną bazą, kolejką synchronizacji, obsługą konfliktów i kompresją zdjęć to ryzyko utraty danych, dlatego wycena obejmuje architekturę, testy na braku zasięgu i etapowe odbiory. Rekomenduję Flutter/Android z lekkim backendem lub BaaS, co pozwala zmieścić się w 60 dniach i później dodać iOS bez przepisywania logiki. Kwota 24 000 PLN netto jest realna dla freelancera AI na Useme: niższa niż software house, ale nie dumpingowa przy odpowiedzialności za dane pracowników terenowych.",
+        "krytyka_reviewera": "Wycena 24 000 zł netto jest adekwatna do poziomu trudności architektury offline-first (lokalna baza, kolejkowanie, kompresja zdjęć i rozwiązywanie konfliktów danych). Czas 55 dni mieści się w rygorystycznym limicie klienta (60 dni) przy podziale na etapy, a wybór technologii Flutter/Android zapewnia optymalny stosunek kosztu do możliwości skalowania na iOS. Choć sama oferta merytorycznie trafia w sedno problemu, freelancer powinien uzupełnić ją o konkretne portfolio i ograniczenia starszego sprzętu, których w treści zabrakło.",
+        "widełki_rynkowe": "18 000 – 30 000 zł netto (freelancer), 40 000 – 70 000 zł netto (software house)",
+        "przebieg": [
+          {
+            "runda": 0,
+            "aktor": "WYCENIACZ",
+            "kwota": 24000,
+            "dni_od": 35,
+            "dni_do": 55,
+            "uzasadnienie": "Offline-first z lokalną bazą, kolejką synchronizacji, obsługą konfliktów i kompresją zdjęć to ryzyko utraty danych, dlatego wycena obejmuje architekturę, testy na braku zasięgu i etapowe odbiory. Rekomenduję Flutter/Android z lekkim backendem lub BaaS, co pozwala zmieścić się w 60 dniach i później dodać iOS bez przepisywania logiki. Kwota 24 000 PLN netto jest realna dla freelancera AI na Useme: niższa niż software house, ale nie dumpingowa przy odpowiedzialności za dane pracowników terenowych."
+          },
+          {
+            "runda": 1,
+            "aktor": "REVIEWER",
+            "werdykt": "OK",
+            "kwota_sugerowana": 24000,
+            "rynek": "18 000 – 30 000 zł netto (freelancer), 40 000 – 70 000 zł netto (software house)",
+            "uzasadnienie": "Wycena 24 000 zł netto jest adekwatna do poziomu trudności architektury offline-first (lokalna baza, kolejkowanie, kompresja zdjęć i rozwiązywanie konfliktów danych). Czas 55 dni mieści się w rygorystycznym limicie klienta (60 dni) przy podziale na etapy, a wybór technologii Flutter/Android zapewnia optymalny stosunek kosztu do możliwości skalowania na iOS. Choć sama oferta merytorycznie trafia w sedno problemu, freelancer powinien uzupełnić ją o konkretne portfolio i ograniczenia starszego sprzętu, których w treści zabrakło."
+          }
+        ]
       }
     }
   },
@@ -57,26 +129,62 @@
     "id": "144890",
     "nazwa": "144890 Automatyzacja faktur OCR + Optima",
     "wynik": {
-      "kwota": 11000,
-      "dni": 30,
-      "dni_od": 21,
-      "dni_do": 30,
+      "kwota": 18000,
+      "dni": 45,
+      "dni_od": 30,
+      "dni_do": 45,
       "typ": "projekt",
-      "uzasadnienie": "Wycena obejmuje architekturę n8n, integrację Google Drive/IMAP, OCR+LLM z ekstrakcją pozycji dokumentów, walidację matematyczną i obsługę wyjątków oraz bezpieczny plik wymiany/import do Optima zamiast ryzykownego zapisu bezpośrednio do SQL. Termin 21–30 dni wynika z konieczności testów na realnych skanach WZ/faktur/zamówień i iteracyjnego dostrajania rozpoznawania pozycji oraz mapowania pól do Optima. Zakładam dostęp do środowiska n8n/VPS i próbki dokumentów po stronie klienta; opieka powdrożeniowa obejmuje krótkie wsparcie po uruchomieniu.",
+      "uzasadnienie": "Wycena obejmuje architekturę n8n self-hosted, odporny pipeline OCR/VLM dla skanów i maili, walidację matematyczną pozycji oraz bezpieczne przygotowanie danych pod import do Comarch Optima. Największe ryzyko to integracja z Optimą i różnorodność realnych dokumentów WZ/zamówień/faktur, dlatego przewiduję testy iteracyjne i bufor na poprawki po stronie klienta. Termin 30-45 dni kalendarzowych wynika z potrzeby dostępu do próbek, środowiska Optima i akceptacji mapowania danych, a nie z etatowego przeliczania godzin.",
       "reviewer_werdykt": "OK",
-      "reviewer_uwagi": "Kwota 11 000 zł netto doskonale wpisuje się w realia budżetowe MŚP na Useme dla zaawansowanej automatyzacji n8n z AI OCR i Optimą. Zaproponowany termin 21-30 dni jest w pełni wykonalny, o ile klient szybko dostarczy próbki dokumentów do testów.",
-      "widełki_rynkowe": "9 000 - 15 000 zł netto",
+      "reviewer_uwagi": "Wycena adekwatnie odzwierciedla wysokie ryzyko techniczne związane z integracją z Comarch ERP Optima, wdrożeniem n8n na własnym serwerze oraz obsługą złożonych tabelarycznie pozycji z WZ i faktur. Freelancer słusznie uwzględnił bufor na iteracyjne testy i walidację matematyczną, która jest kluczowa dla księgowości, choć oferta znajduje się w górnym segmencie stawek dla jednoosobowego wykonawcy. Czas 45 dni jest w pełni realistyczny przy konieczności oczekiwania na próbki danych i dostęp do środowiska klienta.",
+      "widełki_rynkowe": "12 000 - 20 000 zł netto",
       "rundy": 1,
+      "przebieg": [
+        {
+          "runda": 0,
+          "aktor": "WYCENIACZ",
+          "kwota": 18000,
+          "dni_od": 30,
+          "dni_do": 45,
+          "uzasadnienie": "Wycena obejmuje architekturę n8n self-hosted, odporny pipeline OCR/VLM dla skanów i maili, walidację matematyczną pozycji oraz bezpieczne przygotowanie danych pod import do Comarch Optima. Największe ryzyko to integracja z Optimą i różnorodność realnych dokumentów WZ/zamówień/faktur, dlatego przewiduję testy iteracyjne i bufor na poprawki po stronie klienta. Termin 30-45 dni kalendarzowych wynika z potrzeby dostępu do próbek, środowiska Optima i akceptacji mapowania danych, a nie z etatowego przeliczania godzin."
+        },
+        {
+          "runda": 1,
+          "aktor": "REVIEWER",
+          "werdykt": "OK",
+          "kwota_sugerowana": 16000,
+          "rynek": "12 000 - 20 000 zł netto",
+          "uzasadnienie": "Wycena adekwatnie odzwierciedla wysokie ryzyko techniczne związane z integracją z Comarch ERP Optima, wdrożeniem n8n na własnym serwerze oraz obsługą złożonych tabelarycznie pozycji z WZ i faktur. Freelancer słusznie uwzględnił bufor na iteracyjne testy i walidację matematyczną, która jest kluczowa dla księgowości, choć oferta znajduje się w górnym segmencie stawek dla jednoosobowego wykonawcy. Czas 45 dni jest w pełni realistyczny przy konieczności oczekiwania na próbki danych i dostęp do środowiska klienta."
+        }
+      ],
       "rozbicie": {
         "tryb": "debata_dwumodelowa_useme",
-        "surowa_kwota_ai": 11000,
-        "kwota_koncowa": 11000,
-        "dni_od": 21,
-        "dni_do": 30,
+        "surowa_kwota_ai": 18000,
+        "kwota_koncowa": 18000,
+        "dni_od": 30,
+        "dni_do": 45,
         "rundy_debaty": 1,
-        "uzasadnienie_wyceniacza": "Wycena obejmuje architekturę n8n, integrację Google Drive/IMAP, OCR+LLM z ekstrakcją pozycji dokumentów, walidację matematyczną i obsługę wyjątków oraz bezpieczny plik wymiany/import do Optima zamiast ryzykownego zapisu bezpośrednio do SQL. Termin 21–30 dni wynika z konieczności testów na realnych skanach WZ/faktur/zamówień i iteracyjnego dostrajania rozpoznawania pozycji oraz mapowania pól do Optima. Zakładam dostęp do środowiska n8n/VPS i próbki dokumentów po stronie klienta; opieka powdrożeniowa obejmuje krótkie wsparcie po uruchomieniu.",
-        "krytyka_reviewera": "Kwota 11 000 zł netto doskonale wpisuje się w realia budżetowe MŚP na Useme dla zaawansowanej automatyzacji n8n z AI OCR i Optimą. Zaproponowany termin 21-30 dni jest w pełni wykonalny, o ile klient szybko dostarczy próbki dokumentów do testów.",
-        "widełki_rynkowe": "9 000 - 15 000 zł netto"
+        "uzasadnienie_wyceniacza": "Wycena obejmuje architekturę n8n self-hosted, odporny pipeline OCR/VLM dla skanów i maili, walidację matematyczną pozycji oraz bezpieczne przygotowanie danych pod import do Comarch Optima. Największe ryzyko to integracja z Optimą i różnorodność realnych dokumentów WZ/zamówień/faktur, dlatego przewiduję testy iteracyjne i bufor na poprawki po stronie klienta. Termin 30-45 dni kalendarzowych wynika z potrzeby dostępu do próbek, środowiska Optima i akceptacji mapowania danych, a nie z etatowego przeliczania godzin.",
+        "krytyka_reviewera": "Wycena adekwatnie odzwierciedla wysokie ryzyko techniczne związane z integracją z Comarch ERP Optima, wdrożeniem n8n na własnym serwerze oraz obsługą złożonych tabelarycznie pozycji z WZ i faktur. Freelancer słusznie uwzględnił bufor na iteracyjne testy i walidację matematyczną, która jest kluczowa dla księgowości, choć oferta znajduje się w górnym segmencie stawek dla jednoosobowego wykonawcy. Czas 45 dni jest w pełni realistyczny przy konieczności oczekiwania na próbki danych i dostęp do środowiska klienta.",
+        "widełki_rynkowe": "12 000 - 20 000 zł netto",
+        "przebieg": [
+          {
+            "runda": 0,
+            "aktor": "WYCENIACZ",
+            "kwota": 18000,
+            "dni_od": 30,
+            "dni_do": 45,
+            "uzasadnienie": "Wycena obejmuje architekturę n8n self-hosted, odporny pipeline OCR/VLM dla skanów i maili, walidację matematyczną pozycji oraz bezpieczne przygotowanie danych pod import do Comarch Optima. Największe ryzyko to integracja z Optimą i różnorodność realnych dokumentów WZ/zamówień/faktur, dlatego przewiduję testy iteracyjne i bufor na poprawki po stronie klienta. Termin 30-45 dni kalendarzowych wynika z potrzeby dostępu do próbek, środowiska Optima i akceptacji mapowania danych, a nie z etatowego przeliczania godzin."
+          },
+          {
+            "runda": 1,
+            "aktor": "REVIEWER",
+            "werdykt": "OK",
+            "kwota_sugerowana": 16000,
+            "rynek": "12 000 - 20 000 zł netto",
+            "uzasadnienie": "Wycena adekwatnie odzwierciedla wysokie ryzyko techniczne związane z integracją z Comarch ERP Optima, wdrożeniem n8n na własnym serwerze oraz obsługą złożonych tabelarycznie pozycji z WZ i faktur. Freelancer słusznie uwzględnił bufor na iteracyjne testy i walidację matematyczną, która jest kluczowa dla księgowości, choć oferta znajduje się w górnym segmencie stawek dla jednoosobowego wykonawcy. Czas 45 dni jest w pełni realistyczny przy konieczności oczekiwania na próbki danych i dostęp do środowiska klienta."
+          }
+        ]
       }
     }
   }

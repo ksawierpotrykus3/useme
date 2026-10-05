@@ -32,8 +32,8 @@ ZASADY WYCENY DLA FREELANCERA NA USEME:
      * Unikaj stawek korporacyjnego software house'u z Warszawy (przetargi korporacyjne to nie ten rynek; klient na Useme natychmiast odrzuci taką ofertę).
    - Wyceniaj za wartość biznesową, trudność inżynierską, ryzyko i odpowiedzialność za dane/proces klienta.
 3. KOTWICA BUDŻETU:
-   - Jeśli klient w ogłoszeniu podał kwotę 50–250 zł, to zazwyczaj oznacza deklarowaną stawkę za godzinę konsultacji/rozwoju, a NIE budżet na całość!
-   - Jeśli klient podał jawny budżet całkowity, weź go pod uwagę przy ocenie realnych możliwości klienta.
+   - Jeśli klient w ogłoszeniu podał bardzo małą kwotę (stawkę rzędu kilkudziesięciu lub stu kilkudziesięciu złotych), to zazwyczaj oznacza deklarowaną preferowaną stawkę za godzinę konsultacji/rozwoju, a NIE budżet na całość projektu!
+   - Jeśli klient podał jawny budżet całkowity projektu, weź go pod uwagę przy ocenie realnych możliwości finansowych klienta.
 
 Na podstawie zlecenia oszacuj rzetelną kwotę w PLN netto oraz termin w dniach kalendarzowych (min. 7 dni).
 
@@ -47,26 +47,7 @@ Zwróć WYŁĄCZNIE JSON:
 }
 """
 
-PROMPT_REVIEWER = """Jesteś bezwzględnym, doświadczonym recenzentem zleceń freelancerskich na polskim Useme.
-Widzisz treść zlecenia oraz propozycję wyceny przesłaną przez innego freelancera.
-
-TWOJA ROLA:
-Oceń szczerze, czy ta wycena ma realną szansę wygrać zlecenie u polskiego klienta MŚP na Useme:
-1. PAMIĘTAJ: To jest rynek freelancingu, a nie body-leasing korporacyjny. Nie przeliczaj dni na stawkę dzienną. Dni to czas kalendarzowy z testami i rezerwą.
-2. Zdiagnozuj:
-   - Czy kwota to "ZA_MALA" (dumping, niedoszacowanie ryzyka i skali, robienie z siebie taniej siły roboczej)?
-   - Czy kwota to "ZA_DUZA" (przestrzelenie realiów budżetowych MŚP, wejście w stawki agencji enterprise, które odstraszą klienta)?
-   - Czy kwota to "OK" (maksymalna profesjonalna marża, która wciąż mieści się w granicach akceptowalności dla decydenta MŚP)?
-
-Zwróć WYŁĄCZNIE JSON:
-{
-  "werdykt": "ZA_MALA" lub "OK" lub "ZA_DUZA",
-  "kwota_sugerowana": <int>,
-  "dni_sugerowane_do": <int>,
-  "uzasadnienie": "2-3 zdania twardej krytyki lub potwierdzenia",
-  "twoje_oszacowanie_rynku": "Twoje widełki w PLN netto dla tego zlecenia na Useme"
-}
-"""
+PROMPT_REVIEWER = "Jesteś niezależnym ekspertem i recenzentem wycen zleceń na portalu Useme."
 
 
 def _oczysc_int(wartosc: Any, domyslna: int = 0) -> int:
@@ -214,12 +195,17 @@ def _call_z_retry(
     rola: str,
     say: Callable[[str], None],
     max_proby: int = 3,
-    delay: float = 1.5,
+    delay: float = 2.0,
 ) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
     """Wywołuje funkcję AI z automatycznym ponawianiem w przypadku pustego tekstu lub błędu parsowania."""
     for proba in range(1, max_proby + 1):
         if proba > 1:
-            say(f"    [{rola}] Retry próba {proba}/{max_proby} po {delay}s...")
+            say(f"    [{rola}] Retry próba {proba}/{max_proby} po {delay}s (reset sesji)...")
+            try:
+                import requests
+                requests.post("http://127.0.0.1:8045/v1/chat/reset", timeout=5)
+            except Exception:
+                pass
             time.sleep(delay)
         raw = fn_call(system_prompt, user_prompt)
         parsed = parser_fn(raw)
@@ -247,6 +233,13 @@ def wycen_przez_debate(
     if say is None:
         say = lambda msg: None
 
+    # Reset sesji przeglądarki Gemini na start debaty
+    try:
+        import requests
+        requests.post("http://127.0.0.1:8045/v1/chat/reset", timeout=5)
+    except Exception:
+        pass
+
     # Kompatybilność wsteczna: jeśli podano tylko call_ai_fn, użyj go jako fallback
     if call_wyceniacz_fn is None:
         if call_ai_fn is not None:
@@ -256,7 +249,6 @@ def wycen_przez_debate(
             call_wyceniacz_fn = call_ai
 
     if call_reviewer_fn is None:
-        # Próba zaimportowania call_gemini z brain
         try:
             from brain import call_gemini
             call_reviewer_fn = call_gemini
@@ -265,7 +257,7 @@ def wycen_przez_debate(
 
     say("    debata wycenowa: Wyceniacz [DeepSeek] vs Reviewer [Gemini]...")
 
-    kontekst_wejsciowy = (
+    kontekst_wyceniacza = (
         f"ZLECENIE KLIENTA NA USEME:\n{tresc_zlecenia}\n\n"
         f"DZIENNIK MYŚLENIA:\n{dziennik or 'Brak'}\n\n"
         f"RESEARCH DOWODOWY:\n{research or 'Brak'}"
@@ -276,7 +268,7 @@ def wycen_przez_debate(
         fn_call=call_wyceniacz_fn,
         parser_fn=_parsuj_json_wyceniacz,
         system_prompt=PROMPT_WYCENIACZ,
-        user_prompt=kontekst_wejsciowy,
+        user_prompt=kontekst_wyceniacza,
         rola="Wyceniacz",
         say=say,
     )
@@ -293,7 +285,6 @@ def wycen_przez_debate(
 
     say(f"    [Wyceniacz R0] {prop['kwota']} zł | {prop['dni_od']}-{prop['dni_do']} dni ({prop.get('uzasadnienie', '')[:65]}...)")
 
-    # Pełny przebieg debaty (wszystkie rundy) — przekazywany dalej do pisma.
     przebieg: list = [{
         "runda": 0,
         "aktor": "WYCENIACZ",
@@ -311,13 +302,20 @@ def wycen_przez_debate(
 
         # --- REVIEWER ---
         prompt_rev_usr = (
-            f"{kontekst_wejsciowy}\n\n"
-            f"--- AKTUALNA PROPOZYCJA WYCENIACZA ---\n"
-            f"KWOTA: {prop['kwota']} zł netto\n"
-            f"TERMIN: {prop['dni_od']}-{prop['dni_do']} dni kalendarzowych\n"
-            f"TYP: {prop.get('typ', 'projekt')}\n"
-            f"UZASADNIENIE: {prop.get('uzasadnienie', '')}\n\n"
-            f"Oceń tę propozycję obiektywnie dla rynku Useme."
+            f"Oceń poniższą ofertę freelancera na zlecenie Useme.\n\n"
+            f"Zakres zlecenia klienta:\n{tresc_zlecenia}\n\n"
+            f"Oferta freelancera do oceny:\n"
+            f"- Kwota: {prop['kwota']} zł netto\n"
+            f"- Czas realizacji: {prop['dni_do']} dni\n"
+            f"- Zakres: {prop.get('uzasadnienie', '')}\n\n"
+            f"Zwróć WYŁĄCZNIE poprawny JSON w formacie:\n"
+            f"{{\n"
+            f'  "werdykt": "ZA_MALA" | "OK" | "ZA_DUZA",\n'
+            f'  "kwota_sugerowana": <int>,\n'
+            f'  "dni_sugerowane_do": <int>,\n'
+            f'  "uzasadnienie": "2-3 zdania analizy",\n'
+            f'  "twoje_oszacowanie_rynku": "widełki rynkowe"\n'
+            f"}}"
         )
 
         rev_wynik, raw_r = _call_z_retry(
@@ -329,7 +327,6 @@ def wycen_przez_debate(
             say=say,
         )
 
-        # Jeśli reviewer proxy jest niedostępny lub zawiódł, nie przerywaj – zatwierdź
         if not rev_wynik:
             say("    [Reviewer] Brak odpowiedzi po retry – zatwierdzam aktualną wycenę.")
             rev = {"werdykt": "OK", "uzasadnienie": "Brak zastrzeżeń recenzenta po retry."}
@@ -357,7 +354,7 @@ def wycen_przez_debate(
 
         # --- WYCENIACZ KONTRA ---
         prompt_w_kontra = (
-            f"{kontekst_wejsciowy}\n\n"
+            f"ZLECENIE KLIENTA NA USEME:\n{tresc_zlecenia}\n\n"
             f"TWOJA POPRZEDNIA PROPOZYCJA: {prop['kwota']} zł / {prop['dni_od']}-{prop['dni_do']} dni.\n"
             f"RECENZENT Z USEME OCENIŁ: {werdykt}\n"
             f"KRYTYKA RECENZENTA: {rev.get('uzasadnienie', '')}\n"

@@ -83,7 +83,7 @@ def call_ai(system_prompt: str, user_prompt: str, model: str = MODEL,
 
 
 GEMINI_API_URL = "http://127.0.0.1:8045/v1/chat/completions"
-GEMINI_MODEL = "gemini-3.8-flash"
+GEMINI_MODEL = "gemini-3.8-flash-thinking"
 
 
 def call_gemini(system_prompt: str, user_prompt: str, model: str = GEMINI_MODEL,
