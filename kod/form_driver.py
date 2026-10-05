@@ -269,3 +269,15 @@ class FormDriver:
 
         finally:
             page.close()
+
+    def send_private_message(
+        self,
+        job_id: str,
+        message_text: str,
+        author_id: Optional[str] = None,
+        dry_run: Optional[bool] = None,
+    ) -> Dict[str, Any]:
+        """Wysyła wiadomość prywatną przez ścieżkę 'Zapytaj o szczegóły'."""
+        from pv_driver import PVDriver
+        pv = PVDriver(self.context, dry_run=self.dry_run if dry_run is None else dry_run)
+        return pv.send_private_message(job_id=job_id, message_text=message_text, author_id=author_id)

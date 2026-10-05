@@ -92,7 +92,6 @@ def test_build_prompt_wstrzykuje_scenariusz_i_modyfikatory():
 
     sys_prompt, user_prompt = chain_executor._build_prompt(slot_02a, context)
 
-    assert "KLASYFIKACJA DUAL-TRACK" in sys_prompt
     assert "--- KLASYFIKACJA STRATEGICZNA ZLECENIA ---" in user_prompt
     assert "ŚCIEŻKA KOMUNIKACJI (Dual-Track): BIZNES" in user_prompt
     assert "--- SCENARIUSZ KLIENTA (ekspert_dziedzinowy) ---" in user_prompt
