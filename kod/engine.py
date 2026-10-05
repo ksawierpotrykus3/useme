@@ -214,10 +214,6 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                 continue
 
             miejsce_wyk = str(z.get("miejsce_wykonania") or (z.get("full_details") or {}).get("miejsce_wykonania") or "").strip()
-            if config.is_onsite_location(miejsce_wyk):
-                print(f"[ODRZUT MIEJSCE WYKONANIA] Zlecenie #{z.get('id')} ({z.get('title')}) odrzucone: Miejsce wykonania = '{miejsce_wyk}'.", flush=True)
-                storage.update_job(z.get("id"), {"status": "ODRZUCONA_LOKALIZACJA", "selekcja_powod": f"Miejsce wykonania: {miejsce_wyk} (całkowity odrzut zleceń z miejscem wykonania)"})
-                continue
 
             offers_cnt = int(z.get("offers_count") or (z.get("list_details") or {}).get("offers_count") or 0)
             title_str = str(z.get("title", ""))
@@ -340,12 +336,6 @@ def _process_account(konto: Dict[str, Any], chain, storage, ai, report: Dict[str
                         print(f"[BLOKADA WŁASNY PROFIL] Zlecenie #{job_id} po pobraniu detali okazało się być od własnego profilu ({aname_after} / {aid_after}). Pomijam!", flush=True)
                         storage.update_job(job_id, {"status": "ODRZUCONA_WLASNY_PROFIL", "selekcja_powod": f"Własny profil ({aname_after or aid_after})"})
                         report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "ODRZUCONA_WLASNY_PROFIL"})
-                        continue
-                    loc_after = str(details.get("miejsce_wykonania", "")).strip()
-                    if config.is_onsite_location(loc_after):
-                        print(f"[ODRZUT MIEJSCE WYKONANIA] Zlecenie #{job_id} po pobraniu detali posiada Miejsce wykonania: '{loc_after}'. Pomijam!", flush=True)
-                        storage.update_job(job_id, {"status": "ODRZUCONA_LOKALIZACJA", "selekcja_powod": f"Miejsce wykonania: {loc_after}"})
-                        report["wyniki"].append({"job_id": job_id, "konto": konto_id, "status": "ODRZUCONA_LOKALIZACJA"})
                         continue
 
                 # Detekcja powtórki: ten sam klient (author_id) dostał już od nas ofertę?

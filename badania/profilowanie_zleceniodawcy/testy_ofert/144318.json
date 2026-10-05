@@ -1,0 +1,10 @@
+{
+  "id": "144318",
+  "tytul": "Software Engineer",
+  "autor": "Miljko Tijanic",
+  "budzet": "Do negocjacji",
+  "czas_s": 144.4,
+  "opis": "Hi,\n\nYour post lines up with what the two of us do. We are a two person programming team and cover both the Python backend and the React frontend, so you would not need to coordinate two separate hires.\n\nNative level English is no issue on our end, so working directly with your US team is fine.\n\nFor an ongoing arrangement I would propose 6000 PLN per month, with the first 7 days as a trial so you can see how we fit before committing longer term.\n\nWhat is the product you are building? The stack is clear from the post, but a bit of context would help me say more about where we would be most useful.\n\nKsawier",
+  "wycena_dni": "[WYNIK_KONCOWY]\nKWOTA: 6000\nDNI: 7\nOKRES: miesiecznie (stala wspolpraca, nie kwota jednorazowa)\n[/WYNIK_KONCOWY]\n\n--- UZASADNIENIE DOBORU (model) ---\nOgłoszenie opisuje stałą rolę Software Engineer w zespole deweloperskim (Python + MERN), a nie jednorazowy projekt z określonym zakresem. Dlatego wybrano typ retainer i stawkę miesięczną 5000 zł z górnej części widełek dla wsparcia/wdrożeń B2B. Brak specyfikacji projektu potwierdza ogólny charakter zlecenia.\n\n--- ROZBICIE (kalkulator deterministyczny) ---\n{\n  \"tryb\": \"retainer\",\n  \"okres\": \"miesiecznie\",\n  \"stawka_bazowa\": 5000.0,\n  \"mnoznik\": 1.05,\n  \"korekta\": 1.15\n}",
+  "research": "BRAK_ISTOTNYCH_FAKTOW"
+}

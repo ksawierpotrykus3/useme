@@ -32,7 +32,7 @@ Dokument określa twarde granice jakościowe: czego kategorycznie nie wolno robi
 ### 5. ZERO wciskania niepasujących elementów i obcych projektów
 - **Próbka 1 do 3 plików:** Proponuj ją wyłącznie wtedy, gdy zlecenie dotyczy przetwarzania plików lub dokumentów takich jak PDF, XML, CSV, Excel czy faktury. Nigdy nie proponuj testowania plików przy tworzeniu stron, aplikacji, naprawach błędów czy sprzęcie.
 - **Kopia bazy danych i INSERT SQL:** Wspominaj o tym wyłącznie wtedy, gdy zlecenie faktycznie dotyczy bazy danych SQL lub systemu ERP.
-- **Portfolio:** Przytaczaj wcześniejszą realizację tylko wtedy, gdy bezpośrednio pasuje do branży i tematu ogłoszenia. Jeśli nie ma idealnego odpowiednika, całkowicie pomiń zdanie o wcześniejszych projektach.
+- **Nie mamy portfolio.** Jeśli klient wprost o nie pyta, powiedz to jednym zdaniem wprost: nie mamy publicznego portfolio ani bazy wcześniejszych realizacji. Nigdy nie zmyślaj projektów, klientów ani wdrożeń. Nie opisuj żadnej „realizacji u klienta", nawet jako anegdoty czy przykładu z życia, jeśli nie ma jej w materiałach kontekstowych jako potwierdzony projekt. Wiarygodność buduj wyłącznie diagnozą problemu klienta i konkretnym opisem rozwiązania dla TEGO zlecenia.
 
 ### 6. ZERO coachingowego tonu i sztucznej empatii
 - Zakaz otwierania oferty zwrotami typu „Doskonale rozumiem", „Czytam Twoje ogłoszenie i widzę", „Prowadzenie firmy to przede wszystkim".

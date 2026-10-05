@@ -1,0 +1,44 @@
+[
+  {
+    "id": "144890",
+    "decyzja": "ON",
+    "dlugosc_opisu": 245,
+    "tytul": "Automatyzacja obiegu faktur i dokumentów kosztowych"
+  },
+  {
+    "id": "145383",
+    "decyzja": "ON",
+    "dlugosc_opisu": 246,
+    "tytul": "Symfony - programowanie plus bezpieczeństwo"
+  },
+  {
+    "id": "144069",
+    "decyzja": "OFF",
+    "dlugosc_opisu": 238,
+    "tytul": "Aplikacja mobilna kotlin - poszukiwany programista"
+  },
+  {
+    "id": "144001",
+    "decyzja": "OFF",
+    "dlugosc_opisu": 1042,
+    "tytul": "Specjalista Allegro, Erli – dodawanie ofert i optymalizacja aukcji"
+  },
+  {
+    "id": "143916",
+    "decyzja": "OFF",
+    "dlugosc_opisu": 300,
+    "tytul": "Firma Perca zleci wykonanie Landing page na swoją stronę"
+  },
+  {
+    "id": "143891",
+    "decyzja": "OFF",
+    "dlugosc_opisu": 413,
+    "tytul": ".NET Developer Needed for Personal Task & Expense Management Web App"
+  },
+  {
+    "id": "144010",
+    "decyzja": "OFF",
+    "dlugosc_opisu": 401,
+    "tytul": "Chatting na stronie internetowej"
+  }
+]

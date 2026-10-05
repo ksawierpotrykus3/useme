@@ -10,5 +10,4 @@ Klienci potrzebują pozyskiwania danych, synchronizacji stanów magazynowych lub
 - Zwycięska oferta musi wprost wspominać o rotujących proxy, obsłudze wyjątków (error handling) i logowaniu błędów.
 
 ## Połączenia
-- [W dół: Case Study smartcare OLX Bot (373 msg)](../06_dowody_i_case_studies/case_smartcare_olx_bot_300.md)
-- [W dół: Case Study S4H Booking PMS](../06_dowody_i_case_studies/case_s4h_booking_pms_4200.md)
+- Dowody transakcyjne i case studies: brak osobnego katalogu (usunięte przy porządkowaniu portfolio).

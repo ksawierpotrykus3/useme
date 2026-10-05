@@ -389,6 +389,7 @@ class SlotChainAIPipeline(BaseAIPipeline):
             and (is_real_chain or job_detail.get("force_audyt_100"))
         ):
             target_score = int(getattr(config, "AUDYTOR_100_TARGET_SCORE", 92))
+            max_rounds = int(getattr(config, "AUDYTOR_100_MAX_ROUNDS", 2))
             audyt_res = audit_fn(
                 job_detail,
                 opis,
@@ -397,7 +398,7 @@ class SlotChainAIPipeline(BaseAIPipeline):
                 wycena_raw=str(wycena_raw or ""),
                 research_text=str(wynik.get("research", "")),
                 target_score=target_score,
-                max_rounds=1,
+                max_rounds=max_rounds,
             )
             opis = audyt_res["opis"]
             kwota = audyt_res["wycena"]

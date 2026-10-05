@@ -24,8 +24,8 @@ Każdy przyznany punkt (`+pkt`) i każdy odjęty punkt (`-pkt`) musi mieć dokł
    - Dla `sciezka: inzynieria`: Czy ton brzmi jak rozmowa doświadczonego inżyniera z właścicielem/CTO, bez coachingowej waty i bez belferskiego pouczania?
 2. **Bezpieczeństwo i 30 dni gwarancji dobrane z głową (0–8 pkt):**
    - Jeśli wspominana jest gwarancja, musi wynosić dokładnie 30 dni gwarancji rozruchowej. Kwestie kopii bazy danych czy środowiska testowego oceniasz kontekstowo: nagradzasz je tam, gdzie praca dotyczy żywego systemu lub bazy danych, a karzesz, jeśli zostały sztucznie doklejone do zlecenia niezwiązanego z bazą czy serwerem.
-3. **Wiarygodny dowód z portfolio (tylko gdy w 100% pasuje) (0–7 pkt):**
-   - Jeśli w `portfolio_baza.md` mamy projekt z dokładnie tej samej dziedziny, oferta może przytoczyć 1 konkretny fakt z liczbą. Jeśli w bazie nie ma projektu z tej samej branży, oferta MUSI pominąć jakiekolwiek wzmianki o wcześniejszych projektach i dostać za tę powściągliwość pełne 7/7 pkt!
+3. **Konkret zamiast ogólnika (0–7 pkt):**
+   - Nie mamy bazy portfolio. Oferta nie może powoływać się na wcześniejsze realizacje ani pisać ogólników typu „mamy doświadczenie", „zrealizowaliśmy wiele podobnych projektów". Oceniaj wyłącznie konkretność diagnozy problemu klienta i opisu rozwiązania. Brak jakiejkolwiek wzmianki o doświadczeniu lub portfolio daje pełne 7/7 pkt.
 
 ### WYMIAR C: Naturalne Pytanie Końcowe (Question CTA) (0–20 pkt)
 1. **Trafność pytania względem ogłoszenia (0–15 pkt):**
@@ -41,7 +41,7 @@ Każdy przyznany punkt (`+pkt`) i każdy odjęty punkt (`-pkt`) musi mieć dokł
 
 ### WYMIAR E: Czystość Stylu i Zero Znaków Zakazanych (0–15 pkt)
 1. **Naturalna długość dopasowana do zlecenia (0–7 pkt):**
-   - Brak sztucznych limitów słów! Oferta ma być dokładnie tak zwięzła lub tak szczegółowa, jak wymaga tego konkretne ogłoszenie klienta. Nie odejmuj żadnych punktów za liczbę słów, o ile tekst jest konkretny i na temat.
+   - Brak jakiegokolwiek limitu słów. Oferta ma być dokładnie tak zwięzła lub tak szczegółowa, jak wymaga tego konkretne ogłoszenie klienta. Oceniaj wyłącznie konkretność i trafność treści, nigdy objętość tekstu.
 2. **Bezwzględna czystość zapisu (0 myślników, 0 nawiasów, 0 wideo) (0–8 pkt):**
    - Czysta, płynna proza bez ani jednej pauzy (`—`, `–`), bez ani jednego myślnika ze spacjami (` - `), bez ani jednego nawiasu `( )`, bez gwiazdek/tabel Markdown, w 100% w języku ogłoszenia klienta, zakończona imiennym podpisem.
 
@@ -63,8 +63,7 @@ Bądź kreatywny i bezlitosny wobec sztuczności. Jeśli w ofercie wystąpi któ
 - **`-20 pkt` [NAZYWANIE SIEBIE INŻYNIERAMI / TANDEMEM INŻYNIERSKIM]:** Użycie w ofercie słów „inżynier", „inżynierami", „zespół inżynierski", „tandem inżynierski" itp. Wykonawcy nie mają formalnego wykształcenia inżynierskiego! Piszemy o sobie wyłącznie jako o programistach, specjalistach IT lub dwuosobowym zespole programistów.
 - **`-20 pkt` [PUSTY FRAZES O DOŚWIADCZENIU LUB UPSELLING WERSJI DRUGIEJ]:** Zdanie typu *„Mamy doświadczenie w..."* bez konkretnego faktu z liczbą ALBO wypychanie elementów ogłoszenia do *„wersji drugiej wycenianej osobno"*.
 - **`-20 pkt` [ZMYŚLANIE POSIADANIA DROGIEGO SPRZĘTU / MODUŁÓW]:** Deklarowanie posiadania drogiego sprzętu fizycznego, rzadkich układów SoC czy specjalistycznej aparatury laboratoryjnej na własność. O testach na własnym środowisku wolno pisać WYŁĄCZNIE wtedy, gdy rozwiązanie jest całkowicie darmowe lub bardzo tanie (np. Docker, darmowy emulator QEMU, mock programowy). W pozostałych przypadkach należy pytać klienta o dostępność sprzętu u niego lub proponować testy wirtualne.
-- **`-15 do -20 pkt` [LANIE WODY / ZBĘDNE ROZWLEKANIE OFERTY]:** Jeśli ogłoszenie klienta jest zwięzłe i proste, a oferta pisze znacznie więcej niż ma sens (leje wodę, powtarza to samo innymi słowami, dodaje zbędne akapity). Sędzia ma obowiązek odjąć punkty, zacytować co dokładnie wyciąć, i w `popraw_oferta` wyznaczyć twardy maksymalny limit słów/znaków dla tej konkretnej oferty.
-- **`-15 pkt` [ŻARGON IT NA ŚCIEŻCE BIZNES LUB FAŁSZYWY SKOK LOGICZNY]:** Użycie żargonu IT niewymienionego przez klienta na ścieżce `biznes` albo nielogiczne sklejanie faktów technicznych.
+- **`-15 pkt` [ŻARGON IT NA ŚCIEŻCE BIZNES LUB FAŁSZYWY SKOK LOGICZNY]:** Użycie żargonu IT niewymienionego przez klienta na ścieżce `biznes` albo nielogiczne sklejanie faktów technicznych. Karz za konkretne wady merytoryczne, nie za samą liczbę słów.
 - **`-12 pkt` [PRZESTRZELONA WYCENA LUB WIDEŁKI CENOWE]:** Wycena rażąco zawyżona przez zdublowane moduły, zaniżona poniżej realnego kosztu pracy lub podanie widełek cenowych zamiast jednej kwoty.
 
 ---
@@ -106,5 +105,6 @@ Zwróć wynik **WYŁĄCZNIE** w bloku `[AUDYT_JSON]`...`[/AUDYT_JSON]` według p
 
 Uwaga:
 - Suma `A + B + C + D + E` pomniejszona o ewentualne kary w `za_co_odjeto` musi dawać dokładny `wynik_100`.
-- Jeśli `wynik_100 < 95`, ustaw `"werdykt": "POPRAW"` i wypełnij `popraw_oferta` (oraz `popraw_wycena`, jeśli wycena była błędna).
-- Jeśli `wynik_100 >= 95` i oferta nie ma żadnego błędu ani sztuczności, ustaw `"werdykt": "IDEALNA"`.
+- Jeśli `wynik_100 < 92`, ustaw `"werdykt": "POPRAW"` i wypełnij `popraw_oferta` (oraz `popraw_wycena`, jeśli wycena była błędna).
+- Jeśli `wynik_100 >= 92` i oferta nie ma żadnego błędu ani sztuczności, ustaw `"werdykt": "IDEALNA"`.
+- Próg 92 wynika z danych: mediana Final dla 27 ofert to 94, a próg 95 skazywał połowę dobrych ofert na wieczną pętlę naprawczą. Skala 1–100 jest ostra, więc 92 oznacza ofertę realnie bardzo dobrą.

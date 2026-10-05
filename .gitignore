@@ -8,6 +8,22 @@ kod/tech/cookies_zleceniodawca.json
 cookies.json
 **/cookies.json
 cookies*.json
+cookies.txt
+**/cookies.txt
+*.cookies.txt
+**/*cookies*.txt
+**/*cookies*
+*_zleceniodawca.txt
+*_zleceniodawca.*
+
+# --- Dumpy robocze / diagnostyka (nie do repo) ---
+kod/tech/_*.html
+kod/tech/_*.json
+kod/tech/_*.txt
+kod/_diag*.py
+kod/_*.py
+kod/_test_cffi.py
+kod/robocze_*
 
 # --- Dane robocze / historia dzialania bota ---
 kod/marker.json

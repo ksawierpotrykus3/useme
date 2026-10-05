@@ -59,6 +59,17 @@ Dla każdego modelu zapisujemy:
 
 ---
 
+## Zestaw walidacyjny (holdout) — obowiązkowy
+
+Problem z dotychczasowymi testami: te same 27 zleceń służyło do tuningu promptów i do pomiaru wyniku. To zawyża wskaźniki, bo system był pod nie strojony. Od teraz obowiązuje rozdział:
+
+1. **Zbiór treningowy (tuning):** zlecenia, na których wolno zmieniać prompty, kryteria i kalkulator. Tu testujemy iteracyjnie i naprawiamy błędy.
+2. **Zbiór walidacyjny (holdout):** minimum 10 nowych zleceń, których NIE dotykamy przy tuningu. Uruchamiamy na nich ofertowarkę dopiero po zamrożeniu zmian i tylko raz na wersję systemu.
+3. **Zasada:** żadnego zlecenia z holdoutu nie używamy do poprawiania promptów, dopóki nie zapiszemy jego wyniku. Dopiero po zapisaniu wyników wolno je przenieść do zbioru treningowego i zastąpić nowym.
+4. **Raport:** dla holdoutu zapisujemy średnią, medianę i odsetek ofert poniżej progu 92, oddzielnie od zbioru treningowego. Jeśli wynik na holdoucie jest istotnie niższy niż na treningu, system jest przetrenowany i wymaga uproszczenia, nie dokładania reguł.
+
+---
+
 ## Struktura plików
 
 ```

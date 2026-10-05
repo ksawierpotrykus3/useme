@@ -14,5 +14,5 @@ Startuj WYŁĄCZNIE wtedy, gdy:
 2. Wchodzisz z pozycją architekta (np. jak przy Doktor Monice – izolacja backendu na VPS, by awaria WordPressa nie położyła bazy rezerwacji).
 
 ## Połączenia
-- [W dół: Case Study Doktor Monika](../06_dowody_i_case_studies/case_doktor_monika_12100.md)
-- [W dół: Matryca granularna technologii](../../analizy/02_matryca_granularna_technologie_i_unmatched.json)
+- [Matryca granularna technologii](02_matryca_granularna_technologie_i_unmatched.json)
+- Dowody transakcyjne i case studies: brak osobnego katalogu (usunięte przy porządkowaniu portfolio).

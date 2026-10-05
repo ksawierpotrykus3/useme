@@ -21,8 +21,6 @@ cd kod; python -m pytest -q
 |---|---|
 | `architektura/` | Jak działa silnik: przepływ, wycena, selekcja |
 | `referencje/` | Trwała wiedza o platformie Useme i operacjach |
-| `plany/` | Pomysły i plany (STATUS: PLAN) — jeszcze nie wdrożone |
-| `historia/` | Zamrożona przeszłość (post-mortem, reformy) |
 | `STANDARD_DOKUMENTACJI.md` | Zasady trzymania porządku w docs |
 
 ## Zasady (skrót)

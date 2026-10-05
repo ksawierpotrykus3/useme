@@ -95,6 +95,69 @@ def _extract_feedback(text: str) -> Dict[str, str]:
     return {k: "\n".join(v) for k, v in out.items()}
 
 
+# --- Anty-wyciek: wykrywanie i wycinanie chain-of-thought z outputu slotu 02a ---
+# Model pisarza oferty czasem zwraca cały swój tok rozumowania (planowanie,
+# iteracyjne przepisywanie, sprawdzanie zakazów) i dopiero na końcu dokleja
+# właściwą ofertę. Poniżej: (1) detektor markerów rozumowania, (2) wycinarka,
+# która obcina wszystko przed pierwszym powitaniem oferty.
+_REASONING_MARKERS_RE = re.compile(
+    r"(?mi)(?:"
+    r"^\s*(?:hmm|może|sprawd[źz]my|my[śs]l[ęe]|ok[,.]?|okej|zr[óo]bmy|poprawmy|"
+    r"wersja robocza|ostateczna wersja|finalna wersja|final|zaczynamy|zacznijmy pisać|"
+    r"piszemy proz[ąa]|struktura:|d[łl]ugo[śs][ćc]:|otwarcie:|zako[ńn]czenie:)\b"
+    r"|to jest (?:dobre|lepsze|ok)\b"
+    r"|^\s*(?:ale|no|wi[ęe]c)\s"
+    r"|\bB[1-9]\b\s*(?:m[óo]wi|zakazuje|zabrania)"
+    r"|sprawd[źz]my zakazy"
+    r"|nie u[żz]ywamy my[śs]lnik[óo]w"
+    r"|hmm\b"
+    r")"
+)
+_GREETING_RE = re.compile(
+    r"(?m)^[ \t]*(?:dzie[ńn] dobry|dzie[ńn] dobry,|cze[śs][ćc]|witam|"
+    r"dobry wiecz[óo]r|dobry dzie[ńn]|hej|hello)\b",
+    re.IGNORECASE,
+)
+
+
+def _policz_markery_reasoningu(text: str) -> int:
+    """Liczy wystąpienia markerów rozumowania w surowym outputcie modelu."""
+    return len(_REASONING_MARKERS_RE.findall(text or ""))
+
+
+_SIGNATURE_RE = re.compile(r"(?m)^[ \t]*Ksawier[ \t]*$")
+
+
+def _wytnij_czysta_oferte(text: str) -> str:
+    """Obcina reasoning wokół właściwej oferty.
+
+    Model z wyciekiem często iteruje: reasoning, szkic oferty, znowu reasoning,
+    finalna oferta. Czystą wersję wyznaczają dwa punkty: OSTATNIE powitanie
+    (start oferty) i podpis „Ksawier” (koniec oferty). Wycinamy wszystko przed
+    powitaniem oraz wszystko po podpisie. Gdy brak powitania lub podpisu —
+    zwracamy tekst bez zmian, a guard zdecyduje o ponowieniu generacji.
+    """
+    if not text:
+        return text
+    if _policz_markery_reasoningu(text) == 0:
+        return text
+
+    start = 0
+    powitania = list(_GREETING_RE.finditer(text))
+    if powitania:
+        start = powitania[-1].start()
+
+    # Koniec: podpis „Ksawier” występujący po wyznaczonym starcie.
+    koniec = len(text)
+    podpisy = [m for m in _SIGNATURE_RE.finditer(text) if m.start() > start]
+    if podpisy:
+        koniec = podpisy[-1].end()
+
+    if start > 0 or koniec < len(text):
+        return text[start:koniec].strip()
+    return text
+
+
 _WYCENA_JSON_RE = re.compile(
     r"\[WYCENA_JSON\](.*?)(?:\[/WYCENA_JSON\]|$)", re.DOTALL | re.IGNORECASE
 )
@@ -723,8 +786,7 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
     max_feedback_rounds = 2
     total_steps = 0
     # Limit krokow MUSI uwzgledniac rundy feedbacku: kazda runda cofa lancuch do
-    # 02a i powtarza wszystkie walidatory. Bez mnoznika wlaczenie walidatorow
-    # 03-07/20 natychmiast wywalalo Circuit Breaker.
+    # 02a i powtarza walidator 08. Bez mnoznika petla poprawek wywalala Circuit Breaker.
     max_total_steps = max(40, len(slots) * (max_feedback_rounds + 2) * 2)
     chain_start_time = time.time()
 
@@ -769,13 +831,18 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                                       timeout=slot_timeout, on_chunk=krok.stream)
 
             if slot["role"] == "generator":
-                # Research slot (01): jeśli zwrócił pustkę, podstaw fallback
+                # Research slot (01): jeśli zwrócił pustkę LUB bramka dała OFF
+                # (zwróciła BRAK_ISTOTNYCH_FAKTOW), podstaw fallback.
                 is_fallback = False
                 if slot.get("id") == "01":
-                    if not odpowiedz or len(odpowiedz.strip()) < 20:
+                    if (
+                        not odpowiedz
+                        or len(odpowiedz.strip()) < 20
+                        or "BRAK_ISTOTNYCH_FAKTOW" in odpowiedz.upper()
+                    ):
                         odpowiedz = "BRAK_ISTOTNYCH_FAKTOW"
                         is_fallback = True
-                        krok.log("Research zwrócił pustkę – podstawiam deterministyczny BRAK_ISTOTNYCH_FAKTOW")
+                        krok.log("Research OFF lub pustka – podstawiam BRAK_ISTOTNYCH_FAKTOW")
 
                 # Generator 02b/02a: jeśli poprosił o dopytywanie researchu,
                 # odpal wyszukiwanie i poproś model o dokończenie w tej samej turze.
@@ -829,18 +896,45 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                     else:
                         krok.log("Brak bloku [WYCENA_JSON] – zostawiam odpowiedź modelu")
 
+                # Anty-wyciek (slot 02a): model czasem zwraca chain-of-thought
+                # przed właściwą ofertą. Najpierw obcinamy reasoning, a jeśli
+                # po wycięciu output nadal jest nim przesycony (brak powitania,
+                # dużo markerów) — traktujemy jak pusty wynik i ponawiamy.
+                is_reasoning_leak = False
+                if slot.get("id") == "02a" and odpowiedz:
+                    markery_przed = _policz_markery_reasoningu(odpowiedz)
+                    if markery_przed >= 3:
+                        oczyszczona = _wytnij_czysta_oferte(odpowiedz)
+                        markery_po = _policz_markery_reasoningu(oczyszczona)
+                        odpowiedz = oczyszczona
+                        if markery_po >= 3:
+                            is_reasoning_leak = True
+                        else:
+                            krok.log(
+                                f"Anty-wyciek 02a: obcięto reasoning "
+                                f"(markery {markery_przed} -> {markery_po})"
+                            )
+
                 # Sprawdzenie pustego wyniku lub braku KWOTA/DNI w slocie 02b
                 is_missing_wycena = (
                     slot.get("id") == "02b"
                     and ("KWOTA:" not in (odpowiedz or "").upper() or "DNI:" not in (odpowiedz or "").upper())
                 )
-                is_empty = (not is_fallback and (odpowiedz is None or len(odpowiedz.strip()) < 30)) or is_missing_wycena
+                is_empty = (
+                    is_reasoning_leak
+                    or (not is_fallback and (odpowiedz is None or len(odpowiedz.strip()) < 30))
+                    or is_missing_wycena
+                )
                 if is_empty:
                     empty_retries += 1
                     err_desc = (
-                        "brak bloku [WYCENA_JSON] / KWOTA / DNI"
-                        if is_missing_wycena
-                        else ("timeout AI" if odpowiedz is None else f"pusty lub za krótki wynik ({len(odpowiedz.strip()) if odpowiedz else 0} znaków)")
+                        "wyciek rozumowania (chain-of-thought) zamiast oferty"
+                        if is_reasoning_leak
+                        else (
+                            "brak bloku [WYCENA_JSON] / KWOTA / DNI"
+                            if is_missing_wycena
+                            else ("timeout AI" if odpowiedz is None else f"pusty lub za krótki wynik ({len(odpowiedz.strip()) if odpowiedz else 0} znaków)")
+                        )
                     )
                     if empty_retries > retry_max:
                         krok.log(f"BŁĄD KRYTYCZNY: {err_desc} po {empty_retries} próbach dla slotu {slot['id']} – abort łańcucha")
@@ -882,13 +976,6 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
 
                 i += 1
                 empty_retries = 0
-                if slot.get("id") == "01":
-                    delay = random.uniform(20.0, 26.0)
-                    krok.log(f"[PACING] Bezpieczny odstep po researchu sieciowym (Golden Ratio): {delay:.1f}s...")
-                else:
-                    delay = random.uniform(18.0, 24.0)
-                    krok.log(f"[PACING] Bezpieczny odstep miedzy krokami (Golden Ratio): {delay:.1f}s...")
-                time.sleep(delay)
 
             elif slot["role"] == "validator":
                 ok = _is_pass(odpowiedz) if (odpowiedz and odpowiedz.strip()) else False
@@ -899,9 +986,6 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                     krok.log(f"[CHECKPOINT] Zapisano stan po walidatorze {slot['id']} (PASS)")
                     i += 1
                     empty_retries = 0
-                    val_delay = random.uniform(18.0, 24.0)
-                    krok.log(f"[PACING] Bezpieczny odstep po walidatorze: {val_delay:.1f}s...")
-                    time.sleep(val_delay)
                 else:
                     on_fail = slot.get("on_fail", "abort")
                     feedback = _extract_feedback(odpowiedz or "")
@@ -928,9 +1012,6 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                             save_checkpoint(job_id, slot["id"], context)
                             i += 1
                             continue
-                        retry_delay = random.uniform(16.0, 22.0)
-                        krok.log(f"[PACING] Bezpieczny bufor przed retry walidatora ({retry_delay:.1f}s - ochrona anty-ban)...")
-                        time.sleep(retry_delay)
                         krok.log(f"FAIL – poprawki {list(feedback.keys())} -> retry od {target} "
                                  f"(runda {feedback_rounds}/{max_feedback_rounds})")
                         i = idx
@@ -951,9 +1032,6 @@ def run_chain(chain_id: str, zlecenie_dane: Dict[str, Any],
                         krok.log("FAIL – abort walidatora")
                         return None
 
-                    fallback_delay = random.uniform(16.0, 22.0)
-                    krok.log(f"[PACING] Bezpieczny bufor przed fallback retry ({fallback_delay:.1f}s - ochrona anty-ban)...")
-                    time.sleep(fallback_delay)
                     krok.log(f"FAIL – retry od {target} (runda {feedback_rounds}/{max_feedback_rounds})")
                     i = idx
 

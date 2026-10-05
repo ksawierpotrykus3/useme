@@ -205,7 +205,13 @@ def sync_public_offers(session: requests.Session, job_id: str, out_dir: Path) ->
     final_offers = sorted(existing_by_id.values(), key=lambda x: int(x["offer_id"]), reverse=True)
     atomic_write_json(canon_file, final_offers)
     atomic_write_json(legacy_file, final_offers)
-    print(f"[ŚWIAT 1 - OFERTY] Baza przed: {initial_count} -> Po synchronizacji: {len(final_offers)} (+{len(new_offers)} nowych).")
+    oferty_dir = out_dir / "oferty"
+    oferty_dir.mkdir(parents=True, exist_ok=True)
+    for o in final_offers:
+        oid = str(o.get("offer_id") or "")
+        if oid:
+            atomic_write_json(oferty_dir / f"{oid}.json", o)
+    print(f"[ŚWIAT 1 - OFERTY] Baza przed: {initial_count} -> Po synchronizacji: {len(final_offers)} (+{len(new_offers)} nowych; zapisano do oferty/).")
     return final_offers
 
 
@@ -319,6 +325,12 @@ def sync_private_messages(session: requests.Session, offers: list[dict], out_dir
     all_threads.sort(key=lambda x: int(x["thread_id"]), reverse=True)
     atomic_write_json(canon_json, all_threads)
     atomic_write_json(legacy_json, all_threads)
+    wiad_dir = out_dir / "wiadomosci"
+    wiad_dir.mkdir(parents=True, exist_ok=True)
+    for t in all_threads:
+        tid = str(t.get("thread_id") or t.get("thread_pk") or "")
+        if tid:
+            atomic_write_json(wiad_dir / f"watek_{tid}.json", t)
 
     # Generuj czytelny raport Markdown
     md_lines = [

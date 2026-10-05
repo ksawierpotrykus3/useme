@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Testy deterministyczne mechanizmu anty-powtórki (wariacja ofert dla stałych klientów).
 
 Sprawdzają trzy rzeczy na mockach (bez sieci i bez AI):
@@ -38,7 +38,9 @@ def test_6_parser_na_prawdziwych_html():
 
     baza = ROOT_DIR.parent / "badania"
     pliki = list(baza.rglob("strona.html"))
-    assert pliki, "BŁĄD: Brak plików strona.html w badania!"
+    if not pliki:
+        pliki = list((ROOT_DIR / "tests" / "fixtures").glob("job_detail_*.html"))
+    assert pliki, "BŁĄD: Brak plików HTML stron zleceń do testu parsera!"
 
     driver = BrowserDriver.__new__(BrowserDriver)  # bez odpalania przeglądarki
     wyciagniete = 0

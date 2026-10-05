@@ -30,11 +30,19 @@ Sprawdź każdy punkt z listy. Jeśli którykolwiek punkt jest ZŁAMANY, zwracas
 - Nie ma żadnego sztywnego limitu ani minimum słów: nie odrzucaj oferty z powodu samej liczby słów, o ile tekst jest konkretny i wyczerpuje temat zlecenia.
 - Gwiazdki markdown `*`, tabele `|`, nagłówki `#`, surowe adresy URL w treści oferty → ZŁAMANE.
 - Szkolne etykiety typu „Kluczowa mina:", „Pytanie kwalifikujące:", „Podkładka dla szefa" → ZŁAMANE.
+- Wyciek terminów z naszego promptu do treści oferty: słowa „granica", „granice", „gdzie leży granica", „mina", „pułapka", „haczyk", „ograniczenie architektoniczne", „pole do popisu", „research", „diagnoza", „recepta" użyte jako termin, a nie naturalny język → ZŁAMANE. Klient ich nie zna. Nakaż w POPRAW_OFERTA zamianę na zwykłe sformułowania: „to się nie uda", „odradzam", „przy tej skali nie da rady".
 
 ### 6. Fakty o kliencie z researchu i słowa-wytrychy AI
 - Zmyślone fakty o firmie klienta (np. rok założenia, liczba lat na rynku, rynki docelowe), których nie było w ogłoszeniu → ZŁAMANE.
 - Słowa-wytrychy AI i coaching: „kompleksowe rozwiązanie", „synergia", „najwyższa jakość", „dedykowany zespół", „Doskonale rozumiem, że...", „Czytam Twoje ogłoszenie i widzę..." → ZŁAMANE.
 - Puste frazesy o doświadczeniu bez konkretnego faktu i liczby (np. „Mamy doświadczenie w...", „Zrealizowaliśmy wiele podobnych projektów") → ZŁAMANE.
+
+### 6a. Weryfikacja faktów technicznych z researchu (anty-fałszywy skok logiczny)
+Dostajesz surowy wynik slotu 01 Research. Sprawdź, czy każdy fakt techniczny, na którym opiera się oferta, faktycznie wynika z tego researchu, a nie został wymyślony lub przekręcony:
+- Jeśli oferta podaje konkretną liczbę, próg, limit API, cenę planu, wersję systemu lub zasadę prawną, sprawdź, czy ta informacja znajduje się w researchu i ma tam źródło URL lub cytat. Jeśli oferta podaje taki fakt, którego w researchu nie ma lub jest oznaczony jako „niepotwierdzone" → ZŁAMANE (nakaż usunięcie twierdzenia albo zastąpienie go pytaniem do klienta).
+- Jeśli research oznaczył coś jako „niepotwierdzone", a oferta przedstawia to jako pewnik → ZŁAMANE.
+- Jeśli oferta łączy dwa fakty z researchu w nielogiczną całość (np. wersja silnika z zupełnie niezwiązaną integracją) → ZŁAMANE.
+- Jeśli research zwrócił `BRAK_ISTOTNYCH_FAKTOW`, a oferta i tak powołuje się na konkretne dane zewnętrzne → ZŁAMANE.
 
 ### 7. Spójność ścieżki komunikacji (`sciezka`)
 - Jeśli w klasyfikacji zlecenia jest `sciezka: biznes`, a oferta używa żargonu IT niewymienionego przez klienta w ogłoszeniu (*FastAPI, Docker, Playwright, PostgreSQL, REST API, webhook, cron, deployment*) → ZŁAMANE.
@@ -59,6 +67,28 @@ Sprawdź każdy punkt z listy. Jeśli którykolwiek punkt jest ZŁAMANY, zwracas
 
 ### 12. Zakaz nazywania siebie inżynierami
 - Jakiekolwiek użycie słów „inżynier", „inżynierami", „inżynierski", „tandem inżynierski" w odniesieniu do siebie lub zespołu (brak formalnego wykształcenia inżynierskiego) → ZŁAMANE (nakaż w POPRAW_OFERTA zamianę na programistów, specjalistów IT lub dwuosobowy zespół).
+
+## 13. Wciśnięty wzorzec ludzki (anty-teatr)
+
+Dostajesz też plik `ludzkie_wzorce.md`. Zawiera on wzorce D (unikalne + wartościowe), ale każdy ma warunek użycia ("Kiedy pasuje u nas" / "Kiedy nie pasuje").
+
+Sprawdź, czy oferta nie używa fragmentu ludzkiego bez zaczepienia w zleceniu:
+- Jeśli oferta zawiera kolokwializm, anegdotę, konkretny szczegół branżowy albo przyznanie ograniczenia, które NIE MA oparcia w treści ogłoszenia (klient nie opisał takiej sytuacji, nie zadał takiego pytania, nie ma takiego kontekstu) → ZŁAMANE (nakaż usunięcie fragmentu albo zamianę na inny, który pasuje do TEGO zlecenia).
+- Jeśli oferta zawiera więcej niż 2-3 wyraźne "ludzkie akcenty" (kolokwializm, emotikon, anegdota, mikroprzykład liczbowy, metafora) → ZŁAMANE (nakaż redukcję, bo przesyt markerów ludzkich zdradza bota tak samo jak ich brak).
+- Jeśli oferta kopiuje dosłownie cytat z pliku wzorców (np. "palec na rogu", "zemści się", "nie będę zmyślał" w tej samej formie) zamiast użyć mechanizmu własnymi słowami w kontekście TEGO zlecenia → ZŁAMANE (nakaż przepisanie od zera, tak żeby fragment wynikał ze zlecenia, nie z listy).
+
+Zasada: wzorzec bez triggera to teatr. Naturalność to brak sztuczności, nie lista sztuczności.
+
+## 14. ZAKAZ zmyślonych realizacji, klientów i wdrożeń (anty-portfolio)
+
+Nie mamy publicznego portfolio ani bazy wcześniejszych realizacji. Sprawdź, czy oferta nie przedstawia zmyślonego doświadczenia jako faktu:
+
+- Jeśli oferta opisuje zrealizowane wdrożenie, projekt, case study albo klienta (np. „zrobiliśmy system dla klienta...", „u klienta w branży X postawiliśmy...", „wdrożyliśmy u pewnej firmy..."), którego NIE MA potwierdzonego w materiałach kontekstowych → ZŁAMANE (nakaż usunięcie i zamianę na konkret z TEGO ogłoszenia albo na opis umiejętności).
+- Dotyczy to również anegdot: jeśli oferta opowiada „historię z życia" o wykonanej pracy u klienta, a nie jest to potwierdzony projekt → ZŁAMANE. Anegdota nie może dotyczyć nieistniejącej realizacji.
+- Jeśli oferta przerabia umiejętność z materiałów kontekstowych na fikcyjną realizację (np. „umiemy robić X" zamienia na „zrobiliśmy X u klienta") → ZŁAMANE.
+- Jeśli klient wprost pyta o portfolio, oferta MUSI odpowiedzieć wprost, że nie mamy publicznego portfolio. Wymijanie pytania albo sugerowanie doświadczenia, którego nie ma → ZŁAMANE.
+
+Zasada: brak portfolio nie jest wadą do ukrycia, a zmyślona realizacja to kłamstwo, które klient może sprawdzić.
 
 ## Output (dokładnie w tym formacie)
 

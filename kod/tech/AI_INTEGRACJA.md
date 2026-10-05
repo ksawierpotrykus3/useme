@@ -79,7 +79,7 @@ c:\Users\Ksawier\Pictures\Screenshots\deepseek-proxy-clean\proxy_pakiet
 |---|---|---|
 | `prompt_ai1.md` | AI #1 | Jakie oferty wybierać |
 | `prompt_ai2.md` | AI #2 | Jak pisać propozycje |
-| `lore.md` / inne | Oba AI | Dodatkowy kontekst (umiejętności, portfolio, styl) |
+| `lore.md` / inne | Oba AI | Dodatkowy kontekst (umiejętności, styl, zasady tożsamości) |
 
 Pliki mogą być `.txt` lub `.md` – cokolwiek jest wygodniejsze.
 Użytkownik może je zmieniać w każdej chwili, bez dotykania kodu Python.

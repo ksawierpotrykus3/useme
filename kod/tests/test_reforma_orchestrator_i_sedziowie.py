@@ -126,16 +126,18 @@ def test_common_sense_judge_veto_integration():
     assert audyt["wynik_100"] <= 70  # 90 - 25 = 65
 
 
-def test_chain_config_contains_orchestrator_slot_00():
-    """Weryfikuje, że slot 00 Orchestrator jest zarejestrowany w chain_config.json przed 02a."""
+def test_chain_config_without_orchestrator_slot_00():
+    """Weryfikuje nową architekturę: slot 00 Orchestrator usunięty, 02a nie zależy od orchestrator_plan."""
     cfg_path = Path(__file__).resolve().parent.parent / "prompts" / "chain_config.json"
     with open(cfg_path, "r", encoding="utf-8") as f:
         cfg = json.load(f)
 
     slot_ids = [s["id"] for s in cfg["slots"]]
-    assert "00" in slot_ids
+    assert "00" not in slot_ids
     assert "02a" in slot_ids
-    assert slot_ids.index("00") < slot_ids.index("02a")
+    assert "01" in slot_ids
+    assert "02b" in slot_ids
+    assert "08" in slot_ids
 
     slot_02a = next(s for s in cfg["slots"] if s["id"] == "02a")
-    assert "orchestrator_plan" in slot_02a.get("requires", [])
+    assert "orchestrator_plan" not in slot_02a.get("requires", [])

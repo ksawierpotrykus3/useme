@@ -1,0 +1,10 @@
+{
+  "id": "144877",
+  "tytul": "Programowanie w języku MQL5",
+  "autor": "InvestClass Sp z o.o.",
+  "budzet": "Do negocjacji",
+  "czas_s": 132.9,
+  "opis": "Dzień dobry, przy stałej współpracy przy Waszej platformie na MT5 proponuję 4400 zł miesięcznie za 7 dni roboczych w miesiącu. W tym serwis obecnego oprogramowania i nowe algorytmy. Na własny kod daję 30 dni gwarancji rozruchowej. Napisz, jak obecnie przekazujecie zlecenia i czy macie dokumentację kodu, wtedy od razu będę wiedział, jak ruszyć.\n\nKsawier",
+  "wycena_dni": "[WYNIK_KONCOWY]\nKWOTA: 4400\nDNI: 7\nOKRES: miesiecznie (stala wspolpraca, nie kwota jednorazowa)\n[/WYNIK_KONCOWY]\n\n--- UZASADNIENIE DOBORU (model) ---\nZlecenie dotyczy stałej współpracy przy serwisowaniu platformy algorytmicznej MQL5/MT5 i tworzeniu nowych algorytmów na zlecenie. To specjalistyczny retainer techniczny, nie jednorazowy projekt.\n\n--- ROZBICIE (kalkulator deterministyczny) ---\n{\n  \"tryb\": \"retainer\",\n  \"okres\": \"miesiecznie\",\n  \"stawka_bazowa\": 3500.0,\n  \"mnoznik\": 1.1,\n  \"korekta\": 1.15\n}",
+  "research": "BRAK_ISTOTNYCH_FAKTOW"
+}

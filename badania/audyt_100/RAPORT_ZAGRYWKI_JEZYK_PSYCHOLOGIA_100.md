@@ -1,5 +1,10 @@
 # WIELKI AUDYT JĘZYKA, STYLU, PSYCHOLOGII I ZAGRYWEK (100 OFERT I WIADOMOŚCI PV — #144890)
 
+**STATUS: HISTORYCZNE (skarbnica taktyk)** | Data badania: 2026-09-26.
+
+> Ten raport to **skarbnica taktyk językowo-psychologicznych** zebranych z 100 ofert konkurencji na #144890 — wartość niezależna od stanu kodu.
+> **UWAGA:** zawiera **historyczne teksty ofert** konkurencji i naszych (stopka „Ksawier Potrykus", myślniki, nawiasy — obecnie karane). **Nie kopiuj tekstów jako wzorzec** — bierz z nich taktyki i strukturę, nie gotowe zdania.
+
 ## Mapa rozszyfrowująca kandydatów w finale stylu i psychologii:
 
 | ID w ślepym teście | Kto to naprawdę? | Kanał |

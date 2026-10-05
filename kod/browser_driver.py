@@ -59,6 +59,15 @@ class BrowserDriver:
                 else:
                     cookies = []
                 if cookies:
+                    for c in cookies:
+                        if isinstance(c, dict):
+                            if c.get("expires") == 0:
+                                c["expires"] = -1
+                            if c.get("name") == "sessionid":
+                                c["httpOnly"] = True
+                                c["secure"] = True
+                            if c.get("sameSite") == "None" and not c.get("secure"):
+                                c["sameSite"] = "Lax"
                     self.context.add_cookies(cookies)
             except Exception as e:
                 print(f"[WARN] Błąd ładowania cookies z {self.cookies_path}: {e}")

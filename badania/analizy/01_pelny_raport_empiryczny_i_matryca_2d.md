@@ -108,5 +108,4 @@ Z tej puli wygrano **17 zleceń** (Win Rate: **10.8%**), co stanowi **30.4% wszy
 - **`TECH_5_WEB_APPS_SAAS`:** 30 zleceń | 3 wygrane | **10.0% Win Rate**
 - **`TECH_4_MOBILE_APPS`:** 24 zlecenia | 6 wygranych | **25.0% Win Rate**
 
-Pełna Sekcja Porażek (Failure Alchemy) dla 11 nowo zamkniętych ofert znajduje się w raporcie:
-👉 [`badania/analizy/RAPORT_SEKCJA_PORAZEK_OFERTOWARKI.md`](file:///c:/Users/Ksawier/Pictures/Screenshots/Projekty_autorskie/useme_core/badania/analizy/RAPORT_SEKCJA_PORAZEK_OFERTOWARKI.md)
+Pełna Sekcja Porażek (Failure Alchemy) dla 11 nowo zamkniętych ofert jest generowana dynamicznie skryptem `kod/narzedzia_badawcze/swiat_2_wykonawca/sekcja_porazek_ai.py` do pliku `badania/analizy/RAPORT_SEKCJA_PORAZEK_OFERTOWARKI.md` (plik powstaje po uruchomieniu skryptu).

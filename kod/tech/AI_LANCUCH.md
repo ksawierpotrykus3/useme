@@ -27,14 +27,18 @@ Każdy agent AI to osobny "slot" – numerowane od `01` do `20`. Sloty są nieza
 
 ```
 prompts/
-├── prompt_ai1.md              # AI #1 – selekcja ofert (Krok 3)
-├── agent_02a_opis_oferty.md   # AI #2a – treść oferty
-├── agent_02b_wycena_dni.md    # AI #2b – wycena + dni pracy
-├── agent_03_walidator_opisu.md  # Slot 03 – walidator (opcjonalny)
-├── agent_04_spojnosc.md         # Slot 04 – sprawdza spójność (opcjonalny)
-├── ...
-├── agent_20_ostatni.md          # Slot 20 – ostatni w łańcuchu (opcjonalny)
-└── lore.md                    # Wspólny kontekst (umiejętności, portfolio)
+├── generatory/
+│   ├── prompt_ai1.md            # AI #1 – selekcja ofert (Krok 3)
+│   ├── agent_00_orchestrator.md # Slot 00 – plan strategii oferty
+│   ├── agent_01_research.md     # Slot 01 – research sieciowy
+│   ├── agent_02a_opis_oferty.md # Slot 02a – treść oferty
+│   └── agent_02b_wycena_dni.md  # Slot 02b – wycena + dni pracy
+├── walidatory/
+│   ├── agent_08_weryfikacja_zasad.md  # Slot 08 – weryfikator zasad (aktywny)
+│   ├── kryteria_audytu_100.md         # kryteria sędziego 1-100 (audytor_lancuch.py)
+│   └── sedzia_zdrowego_rozsadku.md    # drugi sędzia (audytor_lancuch.py)
+└── kontekst/
+    └── ...                      # lore, mechanika, scenariusze klientów, karty wiedzy
 
 chain_config.json              # Konfiguracja slotów
 ```
@@ -112,25 +116,28 @@ Dla jednego zlecenia:
 START ŁAŃCUCHA
   │
   ▼
-[DANE ZLECENIA] (pełne dane z Kroku 4)
+[DANE ZLECENIA]
   │
   ▼
-[Slot 02b] AI #2b → wycena + dni → output: "wycena_dni"
+[Slot 01] Research sieciowy → output: "research"
   │
   ▼
-[Slot 02a] AI #2a → treść oferty (dostaje "wycena_dni") → output: "opis"
+[Slot 02b] Wycena + dni → output: "wycena_dni"
   │
   ▼
-[Slot 03] Walidator → sprawdza "opis"
-  │
-  ├── PASS → leci dalej
-  └── FAIL → retry od 02a (max 3 razy)
+[Slot 00] Orchestrator strategii → output: "orchestrator_plan"
   │
   ▼
-[Slot 04] Walidator → sprawdza całość
+[Slot 02a] Treść oferty (dostaje research + wycenę + plan) → output: "opis"
+  │
+  ▼
+[Slot 08] Weryfikator zasad → sprawdza treść i wycenę
   │
   ├── PASS → ✅ ŁAŃCUCH OK
-  └── FAIL → ❌ abort → człowiek decyduje
+  └── FAIL → retry od 02a lub 02b (max 2 rundy) → jeśli nadal FAIL, akceptacja najlepszej wersji
+  │
+  ▼
+[AUDYTOR 1-100] (audytor_lancuch.py) → sędzia 1-100 + Sędzia Zdrowego Rozsądku, próg 92
   │
   ▼
 [Krok 6] WERYFIKACJA CZŁOWIEKA
@@ -182,26 +189,26 @@ def run_chain(zlecenie_dane, chain_config):
 
 ---
 
-## Przykładowe sloty (do wykorzystania)
+## Aktywne sloty
 
 | Slot | Nazwa | Rola | Co robi |
 |---|---|---|---|
-| 02a | Opis oferty | generator | Pisze treść propozycji |
-| 02b | Wycena i dni | generator | Proponuje stawkę + liczbę dni |
-| 03 | Walidator opisu | validator | Sprawdza czy opis pasuje do zlecenia |
-| 04 | Spójność | validator | Sprawdza czy wycena pasuje do zakresu prac |
-| 05 | Ton i styl | validator | Sprawdza czy ton pasuje do zleceniodawcy |
-| 06 | Błędy językowe | validator | Sprawdza ortografię, gramatykę |
-| 07 | Kompletność | validator | Sprawdza czy wszystkie wymagania pokryte |
-| ... | ... | ... | ... |
-| 20 | Ostatni rzut oka | validator | Końcowy przegląd całości |
+| 01 | Research sieciowy | generator | Zbiera fakty z sieci (API, stawki, progi) z dowodami |
+| 02b | Wycena i dni | generator | Proponuje stawkę i liczbę dni |
+| 00 | Orchestrator strategii | generator | Plan odpowiedzi, blokady anty-szablonowe |
+| 02a | Treść oferty | generator | Pisze treść propozycji |
+| 08 | Weryfikator zasad | validator | Sprawdza treść, wycenę i fakty z researchu (PASS/FAIL) |
+
+Po łańcuchu działa jeszcze **Audytor 1-100** (`audytor_lancuch.py`): niezależny sędzia punktowy (`kryteria_audytu_100.md`) plus **Sędzia Zdrowego Rozsądku** (`sedzia_zdrowego_rozsadku.md`), próg zaliczenia 92/100.
+
+> Historyczne sloty walidatorów 03-07 i 20 zostały usunięte jako nieużywane. Jedynym walidatorem łańcucha jest slot 08.
 
 ---
 
 ## Zasady
 
 1. **Jeden łańcuch = jedno zlecenie.** Nie mieszamy kontekstów między zleceniami.
-2. **Sloty 01-20 są opcjonalne.** Domyślnie tylko 02a i 02b są enabled.
+2. **Aktywne sloty to 01, 02b, 00, 02a i 08.** Reszta numeracji jest wolna dla przyszłych agentów.
 3. **Kolejność ma znaczenie.** Sloty są przetwarzane w kolejności z `chain_config.json`.
 4. **Validator FAIL nie kasuje outputu.** Output generatora zostaje w kontekście, validator tylko blokuje przejście dalej.
 5. **Pliki promptów to zwykłe `.md`.** Możesz je edytować w dowolnym edytorze tekstowym.

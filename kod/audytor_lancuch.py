@@ -652,14 +652,6 @@ def regenerate_from_judge_feedback(
             )
             context["wycena_dni"] = prev_wycena_raw
 
-    # 1b. Jeśli mamy slot 00 (Orchestrator), uruchom go, by wyznaczył blokady kontekstowe
-    if "00" in slots_by_id:
-        slot_00 = slots_by_id["00"]
-        sys_00, usr_00 = _build_prompt(slot_00, context)
-        odp_00 = call_deepseek(sys_00, usr_00, model=slot_00.get("model", "deepseek-v4-pro-nothink"), timeout=120)
-        if odp_00:
-            context["orchestrator_plan"] = odp_00
-
     # Wyciągnij aktualną kwotę i dni z wycena_dni (z fallbackiem do prev_opis)
     m_kw = re.search(r"KWOTA:\s*(\d+)", context["wycena_dni"])
     m_dn = re.search(r"DNI:\s*(\d+)", context["wycena_dni"])
@@ -667,7 +659,7 @@ def regenerate_from_judge_feedback(
     wycena_val = int(m_kw.group(1)) if m_kw else (p_kw or 3000)
     dni_val = int(m_dn.group(1)) if m_dn else (p_dn or 7)
 
-    # 2. Zbuduj precyzyjny feedback dla 02a z listy potrąceń Krytyka 1-100 oraz Sędziego #2
+    # 2. Zbuduj precyzyjny feedback dla 00 i 02a z listy potrąceń Krytyka 1-100 oraz Sędziego #2
     deductions_lines = []
     for d in audyt.get("za_co_odjeto", []):
         deductions_lines.append(f"- {d.get('punkty')}: [{d.get('cytat')}] -> {d.get('uzasadnienie')}")
@@ -679,11 +671,21 @@ def regenerate_from_judge_feedback(
         "wyeliminuj w 100% elementy za które odjęto punkty i pamiętaj o całkowitym zakazie używania myślników, pauz, nawiasów oraz proponowania instrukcji wideo bez prośby klienta!"
     )
 
-    context["_feedback"]["02a"] = (
+    feedback_blob = (
         "POPRZEDNIA WERSJA OFERTY:\n" + (prev_opis or "") +
         "\n\nOCENA NIEZALEŻNEGO KRYTYKA RED TEAM (" + str(audyt.get("wynik_100")) + "/100 pkt) - ZA CO ODJĘTO PUNKTY:\n" +
         "\n".join(deductions_lines)
     )
+    context["_feedback"]["00"] = feedback_blob
+    context["_feedback"]["02a"] = feedback_blob
+
+    # 1b. Jeśli mamy slot 00 (Orchestrator), uruchom go z feedbackiem Sędziów, by wyznaczył blokady kontekstowe
+    if "00" in slots_by_id:
+        slot_00 = slots_by_id["00"]
+        sys_00, usr_00 = _build_prompt(slot_00, context)
+        odp_00 = call_deepseek(sys_00, usr_00, model=slot_00.get("model", "deepseek-v4-pro-nothink"), timeout=120)
+        if odp_00:
+            context["orchestrator_plan"] = odp_00
 
     slot_02a = slots_by_id["02a"]
     sys_02a, usr_02a = _build_prompt(slot_02a, context)
@@ -811,7 +813,10 @@ def audit_and_refine_100(
     for _ in range(max_rounds):
         score = int(best_audyt.get("wynik_100", 0))
         werdykt = str(best_audyt.get("werdykt", "PASS")).upper()
-        if score >= target_score and (werdykt in ("PASS", "IDEALNA", "OK") or score >= 92):
+        # Pętla kończy się TYLKO gdy wynik jest wystarczający AND sędzia nie żąda poprawy.
+        # Wcześniej warunek `or score >= 92` powodował, że oferta z werdyktem POPRAW
+        # i wynikiem 92/100 wychodziła z pętli bez żadnej poprawki (feedback nie wracał).
+        if score >= target_score and werdykt not in ("POPRAW", "RETRY", "FAIL"):
             break
         rounds_run += 1
         new_opis, new_wycena, new_dni, new_wycena_raw = regenerate_from_judge_feedback(

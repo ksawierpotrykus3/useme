@@ -1,0 +1,10 @@
+{
+  "id": "144383",
+  "tytul": "Zlecę poprawki strony www (elementor).",
+  "autor": "Adam Jerusalimcew",
+  "budzet": "Do negocjacji",
+  "czas_s": 179.6,
+  "opis": "Dzień dobry, w sprawie poprawek w Elementorze.\n\nŻeby ruszyć, potrzebuję listy tych punktów. Bez tego nie wiem, czy to kosmetyka w kilku miejscach, czy coś, co ciągnie za sobą więcej pracy. Jak prześle Pan listę, od razu powiem, czy zdążymy w Pana terminie i czy uda się szybciej niż 7 dni, które zakładam na całość.\n\nWycena to 800 zł za całość.\n\nStała współpraca wchodzi w grę, ale najpierw ogarnijmy te poprawki.\n\nKsawier",
+  "wycena_dni": "[WYNIK_KONCOWY]\nKWOTA: 800\nDNI: 7\n[/WYNIK_KONCOWY]\n\n--- UZASADNIENIE DOBORU (model) ---\nDrobne poprawki na istniejącej stronie WWW (Elementor), kilka punktów, bez szczegółowej specyfikacji. Zakwalifikowano jako małe zlecenie rynkowe. Deklarowana docelowa stała współpraca nie jest jeszcze zakresem tego zlecenia.\n\n--- ROZBICIE (kalkulator deterministyczny) ---\n{\n  \"tryb\": \"tabela rynkowa\",\n  \"kwota_rynek\": 800.0\n}",
+  "research": "BRAK_ISTOTNYCH_FAKTOW"
+}

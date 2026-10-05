@@ -4,15 +4,13 @@
 ---
 
 ## Co zabilo te oferty (wzorce, nie pojedyncze przypadki)
-1. **Dlugosc** — wszystkie 11 mialo 500-1000 slow. Klient czyta 20 ofert. Rekomendacja: maks. 150-200 slow.
-2. **Brak twardych referencji w niszy** — PrestaShop B2B i Comarch przegrane, bo nie pokazano wdrozen dokladnie w tej technologii.
-3. **Straszenie zamiast rozwiazywania** — AI Act, TSUE/EFSA odstraszaly klienta.
-4. **Zla kalibracja ceny do malych budzetow** — przy "do negocjacji" 1200-2000 zl czesto za duzo.
-5. **Brak pytan na start** — monologi zamiast 1-2 pytan angazujacych.
-6. **Czerwony ocean** — 5 z 11 to WordPress/WooCommerce/landing (Win Rate <5%).
+1. **Brak twardych referencji w niszy** — PrestaShop B2B i Comarch przegrane, bo nie pokazano wdrozen dokladnie w tej technologii.
+2. **Straszenie zamiast rozwiazywania** — AI Act, TSUE/EFSA odstraszaly klienta.
+3. **Zla kalibracja ceny do malych budzetow** — przy "do negocjacji" 1200-2000 zl czesto za duzo.
+4. **Brak pytan na start** — monologi zamiast 1-2 pytan angazujacych.
+5. **Czerwony ocean** — 5 z 11 to WordPress/WooCommerce/landing (Win Rate <5%).
 
 ## Rekomendacje (POMYSLY do wdrozenia — nie "zrobione")
-- Twardy limit ~200 slow na oferte.
 - Obowiazkowa weryfikacja portfolio przed wyslaniem — brak referencji w technologii = odpusc lub powiedz wprost.
 - Narracja "zadbamy o bezpieczenstwo" zamiast "grozi ci kara".
 - Budzety <1500 zl — proponowac minimum albo odpuszczac.

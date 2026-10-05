@@ -1,0 +1,10 @@
+{
+  "id": "145215",
+  "tytul": "Strona internetowa",
+  "autor": "BeataWW",
+  "budzet": "800,00 PLN",
+  "czas_s": 126.2,
+  "opis": "Dzień dobry, mogę zrobić stronę dla biura rachunkowego. Skoro w planach jest Google Ads, zrobię ją tak, żeby była gotowa pod kampanię. Wycena to 1500 zł za całość, realizacja w 7 dni. Żeby ruszyć, potrzebuję wiedzieć, czy ma Pani już teksty, logo i zdjęcia, czy mam je przygotować. Proszę też napisać, jakie podstrony mają się pojawić.\n\nKsawier",
+  "wycena_dni": "[WYNIK_KONCOWY]\nKWOTA: 1500\nDNI: 7\n[/WYNIK_KONCOWY]\n\n--- UZASADNIENIE DOBORU (model) ---\nProsta strona-wizytówka dla biura rachunkowego, brak specyfikacji i dedykowanego kodu. Traktowana jako małe zlecenie z tabeli rynkowej. Budżet 800 zł jest niższy niż dolna granica dla landing page/strony wizytówki, dlatego wycena rynkowa startuje od 1500 zł.\n\n--- ROZBICIE (kalkulator deterministyczny) ---\n{\n  \"tryb\": \"tabela rynkowa\",\n  \"kwota_rynek\": 1500.0\n}",
+  "research": "BRAK_ISTOTNYCH_FAKTOW"
+}

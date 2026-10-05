@@ -49,18 +49,18 @@ ACCOUNTS = [
         "nazwa": "Konto 2 (zleceniodawca/testowe)",
         "podpis": "Konto 2",
         "baza_id": "weronikabuchholc13",
+        "ofertowanie": False,
         "cookies_path": BASE_DIR / "tech" / "cookies2.json",
     },
 ]
 
 
 def aktywne_konta() -> list:
-    """Zwraca konta, które mają realnie plik cookies.
+    """Zwraca konta, które mają realnie plik cookies i biorą udział w ofertowaniu.
 
-    Puste miejsce (brak cookies2.json) -> zwracana jest tylko lista z kontem 1,
-    czyli zachowanie identyczne jak przed dodaniem multi-konta.
+    Puste miejsce (brak cookies2.json) lub konto zleceniodawcy (ofertowanie=False) -> zwracana jest tylko lista z kontem 1.
     """
-    return [k for k in ACCOUNTS if Path(k["cookies_path"]).exists()]
+    return [k for k in ACCOUNTS if k.get("ofertowanie", True) and Path(k["cookies_path"]).exists()]
 
 # Kategorie monitorowane
 CATEGORY_URLS = {
@@ -114,8 +114,15 @@ PHANTOM_PATTERNS = [
 ]
 
 # Bramka produkcyjna Niezależnego Audytora 1-100 pkt (audytor_lancuch.py)
-USE_AUDYTOR_100 = True
+# WYŁĄCZONY: sędzia 1-100 i drugi sędzia zdrowego rozsądku nie są teraz używane.
+# Testujemy surowy łańcuch 01 -> 02b -> 02a -> 08, żeby zobaczyć naturalne oferty.
+USE_AUDYTOR_100 = False
+# Próg zaliczenia: oferta poniżej tej oceny (lub z werdyktem POPRAW) wraca do pętli poprawek.
+# 92 (nie 95) — mediana Final dla 27 ofert to 94, a próg 95 skazywał połowę dobrych ofert
+# na wieczną pętlę naprawczą. Skala 1-100 jest ostra, więc 92 = oferta realnie bardzo dobra.
 AUDYTOR_100_TARGET_SCORE = 92
+# Ile rund poprawek po feedbacku sędziego (każda runda = przegenerowanie 00+02a i ponowny audyt).
+AUDYTOR_100_MAX_ROUNDS = 2
 
 
 REMOTE_LOCATION_WHITELIST = {
@@ -213,4 +220,55 @@ ZBIERACZ_AKTYWNY = False
 
 # Tryb oferty: tryb meta całkowicie wyłączony, zawsze konserwatywny
 DOMYSLNY_TRYB = "konserwatywny"
+
+# --- TRWAŁA BLOCKLISTA FEEDBACKU (nigdy nie brać ponownie) ---
+# Rekordy wykluczone na zawsze z migracji/zbierania feedbacku (03_odpisane).
+# Sprawdzane po: client (nick), offer_id, thread_id.
+BLOCKED_FEEDBACK_CLIENTS = [
+    "Mateusz Żywicki",
+    "Naviproject",
+]
+BLOCKED_FEEDBACK_OFFER_IDS = [
+    "2519601",
+    "2629216",
+]
+BLOCKED_FEEDBACK_THREAD_IDS = [
+    "1798399",
+    "1967707",
+]
+
+_BLOCKED_FEEDBACK_PATH = ODPISANE_DIR / "blocklist.json"
+
+
+def _wczytaj_blocklist() -> dict:
+    """Wczytuje blocklist.json jesli istnieje, scala z twarda lista z configu."""
+    import json as _json
+    blok = {
+        "clients": [c.strip().lower() for c in BLOCKED_FEEDBACK_CLIENTS],
+        "offer_ids": [str(o).strip() for o in BLOCKED_FEEDBACK_OFFER_IDS],
+        "thread_ids": [str(t).strip() for t in BLOCKED_FEEDBACK_THREAD_IDS],
+    }
+    if _BLOCKED_FEEDBACK_PATH.exists():
+        try:
+            d = _json.loads(_BLOCKED_FEEDBACK_PATH.read_text(encoding="utf-8"))
+            for k in ("clients", "offer_ids", "thread_ids"):
+                if k == "clients":
+                    blok[k] = sorted(set(blok[k]) | {str(x).strip().lower() for x in d.get(k, [])})
+                else:
+                    blok[k] = sorted(set(blok[k]) | {str(x).strip() for x in d.get(k, [])})
+        except Exception:
+            pass
+    return blok
+
+
+def is_blocked_feedback(client=None, offer_id=None, thread_id=None) -> bool:
+    """Zwraca True, jesli rekord jest na trwalej blockliscie feedbacku."""
+    blok = _wczytaj_blocklist()
+    if client and str(client).strip().lower() in blok["clients"]:
+        return True
+    if offer_id and str(offer_id).strip() in blok["offer_ids"]:
+        return True
+    if thread_id and str(thread_id).strip() in blok["thread_ids"]:
+        return True
+    return False
 

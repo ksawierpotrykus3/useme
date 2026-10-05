@@ -28,4 +28,4 @@ AI wchodzi w projekt i od razu wie, co jest prawdą. Dokumentacja nie kłamie i 
 
 ## Struktura badania/
 - Tylko dane i raporty. Każdy raport z nagłówkiem: N, charakter (fakt/hipoteza/poszlaka), data.
-- Jeden plik LICZNIKI.md definiuje, czym są różne N używane w badaniach.
+- Każdy raport definiuje swoje N i jego źródło; nie zakładaj liczb z innych raportów.
