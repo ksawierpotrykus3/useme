@@ -24,6 +24,21 @@ MIN_STAWKA_GODZINOWA = 85      # sanity-check efektywnej stawki
 DNI_STOPA = 7
 DNI_WEEKEND = 1.30
 
+# --- KOREKTA AI zalezna od charakteru pracy ---
+# Model szacuje godziny jak czlowiek BEZ AI. Realnie z AI robimy szybciej, ALE:
+# - praca powtarzalna (CRUD, testy, dokumentacja, proste integracje): oszczednosc 50-85% -> korekta ~0.5
+# - praca architektoniczna (kolejki, idempotencja, bezpieczenstwo, ERP, integracje KSeF): 10-25% -> korekta ~0.8
+# To NIE jest stala. AI nie napisze za nas architektury kolejki.
+KOREKTA_AI_ARCHITEKTURA = 0.80   # praca wymagajaca osadu
+KOREKTA_AI_MIESZANY = 0.65       # pol na pol
+KOREKTA_AI_KLEPANIE = 0.50       # praca powtarzalna
+
+# --- DNI jako przedzialy (piszemy na priv, nie potrzebujemy dokladnosci co do dnia) ---
+PRZEDZIALY_DNI = [7, 14, 21, 30, 40, 50, 60, 70, 80, 90, 100, 120]
+
+# --- WYCENA = JEDNA KWOTA (punkt). Cena to nie widelki - nie da sie przewidziec wszystkiego.
+# --- DNI = WIDELKI (czas jest z natury niepewny, wiec dajemy zakres).
+
 # Reguly korekty konkurencyjnej (bez dumpingu - mala konkurencja PODNOSI marze)
 KOREKTY = [
     (0, 1, 20, None, 1.0),
@@ -93,6 +108,32 @@ def _zaokraglij(kwota: float) -> int:
     if kwota <= 10000:
         return int(round(kwota / 500.0) * 500)
     return int(round(kwota / 1000.0) * 1000)
+
+
+def _przedzial_dni(dni: float) -> tuple:
+    """Zwraca WIDELKI dni (dolny, gorny) z listy przedzialow.
+
+    Czas jest z natury niepewny - dajemy zakres, nie punkt.
+    Dolny = najblizszy przedzial ponizej, gorny = najblizszy powyzej.
+    """
+    dni = max(dni, MIN_DNI)
+    dolny = PRZEDZIALY_DNI[0]
+    for p in PRZEDZIALY_DNI:
+        if p <= dni:
+            dolny = p
+        else:
+            return (dolny, p)
+    return (PRZEDZIALY_DNI[-2], PRZEDZIALY_DNI[-1])
+
+
+def _korekta_ai(charakter: str) -> float:
+    """Zwraca korekte AI zaleznie od charakteru pracy z dziennika."""
+    c = (charakter or "").lower()
+    if "architek" in c:
+        return KOREKTA_AI_ARCHITEKTURA
+    if "klep" in c or "powtarz" in c or "crud" in c:
+        return KOREKTA_AI_KLEPANIE
+    return KOREKTA_AI_MIESZANY
 
 
 def policz_wycene(dane: Dict[str, Any]) -> Dict[str, Any]:
@@ -181,7 +222,11 @@ def policz_wycene(dane: Dict[str, Any]) -> Dict[str, Any]:
         if do_cap:
             godziny_real -= do_cap
 
-    po_testach = godziny_real * (1 + NARZUT_TESTY)
+    # KOREKTA AI zalezna od charakteru pracy (z dziennika/struktury).
+    korekta_ai = _korekta_ai(dane.get("charakter_pracy", ""))
+    godziny_efektywne = godziny_real * korekta_ai
+
+    po_testach = godziny_efektywne * (1 + NARZUT_TESTY)
     bufor = BUFOR_NOWA_TECH if flagi.get("nowa_technologia") else BUFOR_STANDARD
     po_buforze = po_testach * (1 + bufor)
 
@@ -217,25 +262,30 @@ def policz_wycene(dane: Dict[str, Any]) -> Dict[str, Any]:
     kwota = max(_zaokraglij(cena_po_korekcie), MIN_KWOTA)
 
     sanity_ok = True
-    efektywna_stawka = (kwota / godziny_real) if godziny_real > 0 else kwota
+    # Efektywna stawka od EFEKTYWNYCH godzin (po korekcie AI) - realna stawka za roboczogodzine.
+    efektywna_stawka = (kwota / godziny_efektywne) if godziny_efektywne > 0 else kwota
     if efektywna_stawka < MIN_STAWKA_GODZINOWA:
         sanity_ok = False
         ostrzezenia.append(
             f"SANITY: efektywna stawka {efektywna_stawka:.1f} zl/h < progu {MIN_STAWKA_GODZINOWA} zl/h "
-            f"({godziny_real:.0f}h, kwota {kwota}) - wycena podejrzanie niska!")
+            f"({godziny_efektywne:.0f}h, kwota {kwota}) - wycena podejrzanie niska!")
 
-    dni = math.ceil(po_mnoznikach / DNI_STOPA)
-    dni = math.ceil(dni * DNI_WEEKEND)
-    dni = max(dni, MIN_DNI)
+    dni_surowe = math.ceil(po_mnoznikach / DNI_STOPA)
+    dni_surowe = math.ceil(dni_surowe * DNI_WEEKEND)
+    dni_od, dni_do = _przedzial_dni(max(dni_surowe, MIN_DNI))
+    dni = dni_do
 
     rozbicie = {
-        "tryb": "projekt", "godziny_real": round(godziny_real, 1),
+        "tryb": "projekt", "charakter_pracy": dane.get("charakter_pracy", "mieszany"),
+        "godziny_real_bez_ai": round(godziny_real, 1),
+        "korekta_ai": korekta_ai, "godziny_efektywne": round(godziny_efektywne, 1),
         "po_testach_15": round(po_testach, 1), "bufor": bufor,
         "po_buforze": round(po_buforze, 1), "mnoznik_ryzyka": round(mnoznik, 3),
         "cap_zadzialal": mnoznik >= CAP_MNOZNIKOW, "po_mnoznikach": round(po_mnoznikach, 1),
         "stawka": stawka, "cena_bazowa": round(cena_bazowa, 1),
         "korekta_konkurencyjna": korekta, "cena_po_korekcie": round(cena_po_korekcie, 1),
-        "kwota_koncowa": kwota, "sanity_ok": sanity_ok,
+        "kwota_koncowa": kwota, "dni_od": dni_od, "dni_do": dni_do,
+        "sanity_ok": sanity_ok,
     }
-    return {"typ": "projekt", "kwota": kwota, "dni": dni,
+    return {"typ": "projekt", "kwota": kwota, "dni": dni, "dni_od": dni_od, "dni_do": dni_do,
             "rozbicie": rozbicie, "ostrzezenia": ostrzezenia, "sanity_ok": sanity_ok}

@@ -160,6 +160,10 @@ def _wyciagnij_blok(tekst: str, tag: str) -> str:
 PROMPT_WYCENA = """Jesteś wyceniaczem. NIE liczysz ceny sam - zwracasz STRUKTURĘ, a deterministyczny kalkulator w Pythonie policzy kwotę i dni.
 
 Na podstawie zlecenia i dziennika myślenia rozpoznaj:
+- charakter_pracy: "architektura" / "mieszany" / "klepanie".
+  "architektura" = praca wymagająca myślenia i decyzji (kolejki, idempotencja, bezpieczeństwo, integracje ERP/KSeF, przejęcie cudzego kodu, migracje). AI tego za nas nie wymyśli.
+  "klepanie" = praca powtarzalna (CRUD, proste strony, szablony, testy, dokumentacja). Tu AI robi większość.
+  "mieszany" = gdy są jedne i drugie. W razie wątpliwości wybierz "mieszany".
 - typ_zlecenia: "projekt" / "male" / "retainer"
 - moduly: lista modułów, każdy {"nazwa": "...", "godziny_real": <liczba>}
   Moduł = coś, co mógłby zrobić inny dev bez ciągłej koordynacji. Jeśli dwa moduły dzielą kod/tabele/endpointy, scal je. Nie pompuj godzin - bądź realistyczny.
@@ -255,6 +259,10 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
     )
     struktura = _wyciagnij_json_blok(wycena_raw or "", "WYCENA_JSON")
     if struktura:
+        # Charakter pracy z dziennika, jesli model nie podal
+        if not struktura.get("charakter_pracy"):
+            pole_char = (pola.get("TYP_ZLECENIA", "") + " " + pola.get("DECYZENT_I_BOL", "")).lower()
+            struktura["charakter_pracy"] = "mieszany"
         flagi = struktura.setdefault("flagi", {})
         if not flagi.get("budzet_jawny"):
             budget = zlecenie.get("budget") or (zlecenie.get("list_details") or {}).get("budget")
@@ -263,14 +271,15 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         try:
             wynik_wyceny = policz_wycene(struktura)
             kwota = int(wynik_wyceny["kwota"])
-            dni = int(wynik_wyceny["dni"])
-            say(f"    kalkulator: {kwota} zl / {dni} dni ({wynik_wyceny['typ']})")
+            dni_od = int(wynik_wyceny.get("dni_od", wynik_wyceny["dni"]))
+            dni_do = int(wynik_wyceny.get("dni_do", wynik_wyceny["dni"]))
+            say(f"    kalkulator: {kwota} zl / {dni_od}-{dni_do} dni ({wynik_wyceny['typ']})")
         except Exception as e:
             say(f"    kalkulator blad: {e}")
-            kwota, dni, wynik_wyceny = 3000, 14, {}
+            kwota, dni_od, dni_do, wynik_wyceny = 3000, 14, 21, {}
     else:
-        say("    brak [WYCENA_JSON] - fallback 3000/14")
-        kwota, dni, wynik_wyceny = 3000, 14, {}
+        say("    brak [WYCENA_JSON] - fallback 3000/14-21")
+        kwota, dni_od, dni_do, wynik_wyceny = 3000, 14, 21, {}
 
     # ---------- ITERACJA 3: PISMO ----------
     say(f"[4/6] Pismo #{job_id}...")
@@ -278,7 +287,8 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True) -> Dict[str, A
         system_pismo,
         f"OTO ZLECENIE:\n{tresc}\n\nTWOJ DOJRZALY DZIENNIK MYSLENIA:\n{dziennik}\n\n"
         f"RESEARCH (dowody, jesli byly):\n{research or 'BRAK'}\n\n"
-        f"WYCENA Z KALKULATORA (użyj dokładnie tych wartości): {kwota} zł netto, {dni} dni.\n"
+        f"WYCENA Z KALKULATORA: {kwota} zł netto. Czas: od {dni_od} do {dni_do} dni.\n"
+        f"Kwotę podaj jako JEDNĄ liczbę ({kwota} zł), nie jako widełki. Czas podaj jako zakres (od {dni_od} do {dni_do} dni) albo przybliżeniem słownym.\n"
         f"Podpis na końcu: {PODPIS}\n\n"
         "Napisz oferte. Wynik ma wynikac z dziennika. Wyślij tylko tekst oferty.",
         temperature=0.8,
