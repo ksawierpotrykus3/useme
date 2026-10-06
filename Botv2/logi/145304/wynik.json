@@ -1,0 +1,21 @@
+{
+  "job_id": "145304",
+  "title": "Stworzenie ultra-lekkiej strony WWW dla marki osobistej ekspert-doradcy (Jamstack / Webflow / WordPress Gutenberg, SEO/A",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 6000,
+  "wycena_gorna": 10000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 20,
+  "uzasadnienie_rozjemcy": "Wszystkie cztery modele w R1 zbiegły się wokół 6-13 tys. zł, a po autokrytyce B rozbił wycenę per technologia (Webflow 4-6k, WP 6-9k, Jamstack 7-10k), C wskazał 8-10k dla zakresu domyślnego, D zszedł do 5,5-8,5k, a tylko A pozostał wysoko (10-15k) jako outlier. Zbieżność: brak definitywnej wyceny bez odpowiedzi na 3 pytania (struktura, treści, edytowalność), rozbieżność: skala wpływu wyboru technologii na kwotę i czas. Wybrano 6-10k jako pasmo środkowe po odrzuceniu skrajności A (górnej) i B (dolnej dla Webflow). Wycena nie jest definitywna, bo brief nie definiuje zakresu — klient wymienił trzy technologie, jakby były wymienne, a jego własna inspiracja (menshealthweek.com.au) stoi na Webflow, nie na Jamstacku, co fundamentalnie zmienia TCO.",
+  "od_czego_zaleza": [
+    "Wybór technologii: Webflow (dolna połowa, bo wzór klienta stoi na Webflow) vs Jamstack/Astro+headless CMS (górna połowa, więcej pracy wdrożeniowej, ale jednorazowy koszt) vs WordPress Gutenberg (środek, ale wymaga agresywnej optymalizacji pod 'instant loading')",
+    "Struktura strony: single-page z sekcjami vs 5-7 podstron + blog/CMS — brak tej informacji w briefie",
+    "Źródło treści i zdjęć: copy i fotografie od klienta vs po naszej stronie (osobny zakres i cena)",
+    "Zakres designu: gotowy layout od klienta vs projekt UI/UX od zera w estetyce Stealth Wealth / Apple Style — istotna różnica godzinowa",
+    "Edycja po launchu: Webflow CMS vs headless CMS — różny koszt utrzymania i architektury"
+  ],
+  "checker_ok": true,
+  "sedzia": "VETO",
+  "veto_napraw": 2
+}

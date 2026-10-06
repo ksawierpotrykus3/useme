@@ -1,0 +1,7 @@
+TYTUŁ: Stworzenie ultra-lekkiej strony WWW dla marki osobistej ekspert-doradcy (Jamstack / Webflow / WordPress Gutenberg, SEO/A
+KLIENT: .lukasz
+BUDŻET: Do negocjacji
+URL: https://useme.com/pl/jobs/145304/
+
+OPIS:
+<p>Poszukuję doświadczonego Web Developera / UI UX Designera do stworzenia nowoczesnej, ultra-szybkiej strony internetowej dla marki osobistej Łukasz Zembold (Niezależny Doradca i Selekcjoner Wykończeń Wnętrz).<br>Strona ma pozycjonować właściciela jako ekskluzywnego eksperta branżowego z 18-letnim stażem. Estetyka: Stealth Wealth / Apple Style (surowy konkret, wysoki kontrast typograficzny, czysty layout, rygorystyczna przestrzeń).<br>Inspiracja architektoniczna i wizualna:<br>Serwis ma czerpać z lekkiej, typograficznej struktury witryny: [https://www.menshealthweek.com.au/](https://www.menshealthweek.com.au/) (lekkość, wysoki kontrast, błyskawiczne ładowanie, brak zbędnych &quot;bajerów&quot; spowalniających kod).</p>

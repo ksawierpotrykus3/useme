@@ -1,0 +1,7 @@
+Zacznę od rzeczy, która zmienia wybór drogi. Państwa wzór, menshealthweek.com.au, stoi na Webflow, zaprojektowany w Figmie i wdrożony w Webflow. Skoro ta estetyka i lekkość są punktem odniesienia, proponuję Webflow. Dowiezie ten sam efekt typograficzny i wydajnościowy bez odtwarzania go w Jamstacku czy WordPressie, gdzie podobny rezultat wymaga więcej pracy przy konfiguracji i dyscypliny przy pluginach. Jeśli zależy Państwu na jednorazowym koszcie i pełnej kontroli nad kodem, Jamstack z Astro jest alternatywą, ale przy tej estetyce Webflow jest szybszą i prostszą drogą do celu.
+
+Nie zakładam z góry układu single page. Wzór jest single page, ale dla marki osobistej z 18-letnim stażem, którą chcecie Państwo pozycjonować jako ekskluzywnego eksperta, proponuję strukturę: strona główna plus podstrony O mnie, Usługi, Proces współpracy i Kontakt. Taki układ daje miejsce na treści budujące autorytet i zwykle lepiej pracuje w wyszukiwarce. Jeśli wolicie Państwo zostać przy jednej stronie z sekcjami, też to zrobię, zakres będzie wtedy węższy.
+
+Widełki: 6000 do 10000 zł netto, około dwóch do czterech tygodni. Dolna połowa przy układzie single page w Webflow, górna przy pełnej strukturze z podstronami i przy copywritingu po mojej stronie.
+
+Ksawier

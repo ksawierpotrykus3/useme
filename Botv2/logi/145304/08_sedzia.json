@@ -1,0 +1,7 @@
+{
+  "status": "VETO",
+  "kara_pkt": -20,
+  "cytat_lub_brak": "Widełki: 6000 do 10000 zł netto, około dwóch do czterech tygodni. Dolna połowa przy układzie single page w Webflow, górna przy pełnej strukturze z podstronami i przy copywritingu po mojej stronie.",
+  "uzasadnienie": "Oferta nie odnosi się do kluczowego wymagania klienta: budżetu podanego jako 'Do negocjacji' i terminu 10-20 dni. Zamiast tego podaje widełki 6000-10000 zł, które są niższe niż sugerowana wycena 8000 zł netto i mogą sugerować, że oferent nie przeczytał ogłoszenia. Ponadto termin 'około dwóch do czterech tygodni' jest zbyt ogólny i nie pokrywa się z oczekiwanym 10-20 dni. Klient może to odebrać jako brak szacunku dla jego czasu i budżetu.",
+  "instrukcja_naprawy": "Zamiast własnych widełek, odnieś się wprost do budżetu klienta (8000 zł netto) i terminu 10-20 dni. Zaproponuj konkretną kwotę w tym zakresie (np. 8000 zł netto) i realistyczny termin (np. 14 dni), uwzględniając wybraną technologię (Webflow). Jeśli chcesz zachować elastyczność, zaproponuj jedną cenę i termin, a nie widełki, które mogą sugerować niepewność."
+}
