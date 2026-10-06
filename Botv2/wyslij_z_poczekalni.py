@@ -61,14 +61,28 @@ def lista_poczekalni():
     return wyniki
 
 
-def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
+import time
+import random
+
+
+def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool, driver: BrowserDriver = None):
     job_dir = POCZEKALNIA_DIR / str(job_id)
     meta_file = job_dir / "meta.json"
     txt_file = job_dir / "oferta.txt"
+    status_file = job_dir / "status_wysylki.json"
 
     if not meta_file.exists() or not txt_file.exists():
         print(f"[BLAD] Zlecenie #{job_id} nie istnieje w poczekalni ({job_dir}).")
         return False
+
+    if not dry_run and status_file.exists():
+        try:
+            prev = json.loads(status_file.read_text(encoding="utf-8"))
+            if prev.get("wynik", {}).get("status") in ["WYSLANO", "OK", "WYSLANA", "WYSLANO_PV"]:
+                print(f"[POMIJAM] Zlecenie #{job_id} zostało już wysłane ({prev.get('data')}).")
+                return True
+        except Exception:
+            pass
 
     meta = json.loads(meta_file.read_text(encoding="utf-8"))
     tresc = txt_file.read_text(encoding="utf-8").strip()
@@ -85,9 +99,9 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
     job_record = storage.load_job(job_id) or {}
     author_id = meta.get("author_id") or job_record.get("author_id") or (job_record.get("full_details") or {}).get("author_id")
 
-    with BrowserDriver(headless=headless) as driver:
+    def _execute(drv: BrowserDriver):
         if tryb == "pv":
-            pv_driver = PVDriver(driver.context, dry_run=dry_run)
+            pv_driver = PVDriver(drv.context, dry_run=dry_run)
             res = pv_driver.send_private_message(
                 job_id=str(job_id),
                 message_text=tresc,
@@ -97,7 +111,7 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
             )
             print(f"[WYNIK PV] {json.dumps(res, indent=2, ensure_ascii=False)}")
             if not dry_run and res.get("status") in ["WYSLANO", "OK", "WYSLANA", "WYSLANO_PV"]:
-                (job_dir / "status_wysylki.json").write_text(
+                status_file.write_text(
                     json.dumps({"data": datetime.now().isoformat(), "typ": "pv", "wynik": res}, ensure_ascii=False, indent=2),
                     encoding="utf-8"
                 )
@@ -105,7 +119,7 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
             return res.get("status") in ["WYSLANO", "OK", "WYSLANA", "WYSLANO_PV", "DRY_RUN_OK"]
 
         elif tryb == "oferta":
-            form_driver = FormDriver(driver.context, dry_run=dry_run)
+            form_driver = FormDriver(drv.context, dry_run=dry_run)
             prop = ProposalResult(
                 opis=tresc,
                 wycena=int(meta.get("wycena") or 1500),
@@ -116,12 +130,18 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
             res = form_driver.fill_and_prepare_offer(str(job_id), prop)
             print(f"[WYNIK OFERTA] {json.dumps(res, indent=2, ensure_ascii=False)}")
             if not dry_run and res.get("status") in ["WYSLANO", "OK", "WYSLANA"]:
-                (job_dir / "status_wysylki.json").write_text(
+                status_file.write_text(
                     json.dumps({"data": datetime.now().isoformat(), "typ": "oferta", "wynik": res}, ensure_ascii=False, indent=2),
                     encoding="utf-8"
                 )
                 storage.update_job(job_id, {"status": "WYSLANO", "wyslano_at": datetime.now().isoformat()})
             return res.get("status") in ["WYSLANO", "OK", "WYSLANA", "DRY_RUN_OK"]
+
+    if driver is not None:
+        return _execute(driver)
+    else:
+        with BrowserDriver(headless=headless) as drv:
+            return _execute(drv)
 
 
 def main():
@@ -148,8 +168,13 @@ def main():
 
     if args.all:
         oferty = lista_poczekalni()
-        for o in oferty:
-            wyslij_pojedyncza(o["job_id"], args.tryb, dry_run, args.headless)
+        with BrowserDriver(headless=args.headless) as driver:
+            for i, o in enumerate(oferty):
+                if i > 0 and not dry_run:
+                    pauza = random.randint(8, 15)
+                    print(f"\n[PAUZA] Czekam {pauza}s przed kolejną wysyłką...", flush=True)
+                    time.sleep(pauza)
+                wyslij_pojedyncza(o["job_id"], args.tryb, dry_run, args.headless, driver=driver)
     elif args.job_id:
         wyslij_pojedyncza(args.job_id, args.tryb, dry_run, args.headless)
     else:

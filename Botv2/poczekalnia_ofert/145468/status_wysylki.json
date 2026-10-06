@@ -1,0 +1,15 @@
+{
+  "data": "2026-10-06T11:35:49.974817",
+  "typ": "pv",
+  "wynik": {
+    "ok": true,
+    "status": "WYSLANO_PV",
+    "mode": "pv",
+    "job_id": "145468",
+    "final_url": "https://useme.com/pl/mesg/",
+    "dlugosc": 1637,
+    "tresc": "Zanim cokolwiek wycenię, muszę wiedzieć, z czym pracujemy, bo zakres jest szeroki i skala zmienia wszystko. Na ten moment realny przedział to 50 000 do 90 000 zł netto, przy około trzech do pięciu miesięcy pracy. Jeśli archiwum okaże się małe, z eksportem albo API, schodzimy do dolnej granicy. Jeśli w archiwum są tysiące dokumentów i trzeba je przejść ręcznie, kwota idzie w górę. Chcę tę współpracę i po poznaniu materiału dogadamy się na konkret.\n\nDwie rzeczy, które przy takim zakresie warto wiedzieć zawczasu. Pierwsza dotyczy dostępności. Jeśli w archiwum ESPI/EBI są pliki PDF albo Office, to WCAG 2.2 AA obejmuje również te dokumenty, nie tylko szablon strony. Sama zgodność serwisu nie zamknie tematu, bo audyt obejmie też pliki, a część z nich może wymagać remediacji albo wersji alternatywnej. Druga to przekierowania. Każdy stary adres, zwłaszcza prowadzący prosto do dokumentu w archiwum, wymaga mapy 301. Bez inwentaryzacji adresów część linków przychodzących i ruchu z wyszukiwarek po prostu zniknie, a tego przy relacjach inwestorskich raczej nikt nie chce. Więc crawl starej strony i mapa przekierowań to u mnie stały element, nie dodatek.\n\nProponuję realizację etapami, od analizy struktury przez design i CMS, po migrację i compliance. Dzięki temu po pierwszym etapie wiemy dokładnie, ile dokumentów wchodzi w grę i możemy domknąć cenę.\n\nŻeby ruszyć, potrzebuję dwóch rzeczy. W jakim systemie działa obecna strona i skąd migrujemy treści oraz archiwum, czy jest eksport, API, baza, czy tylko ręczne przepisywanie. Oraz ile podstron ma nowa strona i ile dokumentów liczy archiwum ESPI/EBI, w jakich formatach.\n\nKsawier",
+    "proof_screenshot": "C:\\Users\\Ksawier\\Pictures\\Screenshots\\Projekty_autorskie\\useme_core\\Botv2\\debug\\pv_submitted_145468.png",
+    "message": "Wiadomość PV dla zlecenia #145468 została pomyślnie wysłana."
+  }
+}
