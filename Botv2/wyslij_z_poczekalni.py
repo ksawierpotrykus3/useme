@@ -16,6 +16,7 @@ Użycie:
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
 import sys
 from pathlib import Path
@@ -95,12 +96,13 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
                 custom_screenshot_dir=BASE_DIR / "debug"
             )
             print(f"[WYNIK PV] {json.dumps(res, indent=2, ensure_ascii=False)}")
-            if not dry_run and res.get("status") in ["WYSLANO", "OK", "WYSLANA"]:
+            if not dry_run and res.get("status") in ["WYSLANO", "OK", "WYSLANA", "WYSLANO_PV"]:
                 (job_dir / "status_wysylki.json").write_text(
-                    json.dumps({"data": config.datetime.now().isoformat(), "typ": "pv", "wynik": res}, ensure_ascii=False, indent=2),
+                    json.dumps({"data": datetime.now().isoformat(), "typ": "pv", "wynik": res}, ensure_ascii=False, indent=2),
                     encoding="utf-8"
                 )
-            return res.get("status") in ["WYSLANO", "OK", "WYSLANA", "DRY_RUN_OK"]
+                storage.update_job(job_id, {"status": "WYSLANO_PV", "wyslano_pv_at": datetime.now().isoformat()})
+            return res.get("status") in ["WYSLANO", "OK", "WYSLANA", "WYSLANO_PV", "DRY_RUN_OK"]
 
         elif tryb == "oferta":
             form_driver = FormDriver(driver.context, dry_run=dry_run)
@@ -115,9 +117,10 @@ def wyslij_pojedyncza(job_id: str, tryb: str, dry_run: bool, headless: bool):
             print(f"[WYNIK OFERTA] {json.dumps(res, indent=2, ensure_ascii=False)}")
             if not dry_run and res.get("status") in ["WYSLANO", "OK", "WYSLANA"]:
                 (job_dir / "status_wysylki.json").write_text(
-                    json.dumps({"data": config.datetime.now().isoformat(), "typ": "oferta", "wynik": res}, ensure_ascii=False, indent=2),
+                    json.dumps({"data": datetime.now().isoformat(), "typ": "oferta", "wynik": res}, ensure_ascii=False, indent=2),
                     encoding="utf-8"
                 )
+                storage.update_job(job_id, {"status": "WYSLANO", "wyslano_at": datetime.now().isoformat()})
             return res.get("status") in ["WYSLANO", "OK", "WYSLANA", "DRY_RUN_OK"]
 
 

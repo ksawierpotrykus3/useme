@@ -1,0 +1,37 @@
+TYTUŁ: Developer do autorskiej strony portfolio + e-commerce z animacjami
+KLIENT: WojciechSzczot
+BUDŻET: Do negocjacji
+URL: https://useme.com/pl/jobs/145490/
+
+OPIS:
+<p>Szukam osoby do zaprogramowania i wdrożenia autorskiej strony internetowej łączącej portfolio graficzne z niewielkim sklepem online.</p>
+
+<p>Projekt wizualny oraz art direction przygotuję samodzielnie. Potrzebuję osoby, która przełoży projekt i referencje na działającą, responsywną stronę z płynnymi animacjami i interakcjami.</p>
+
+<p>Kierunek:<br>https://shop.6tm-magazine.com/products/showcase-collection-01?variant=56089201508687</p>
+
+<p>Planowane sekcje:</p>
+
+<p>– HOME – animowane, rozproszone miniatury wybranych projektów, klikalne i prowadzące do podstron. Referencja: Showcase 14.</p>
+
+<p>– SHOP – produkty prezentowane w formie kilku animowanych sliderów. Potrzebne: koszyk, checkout, płatności online, zarządzanie produktami, cenami, dostępnością i zamówieniami.</p>
+
+<p>– GRAPHIC DESIGN – pionowy slider z nazwami marek/projektów. Po hoverze pojawia się miniatura, po kliknięciu przejście do case study. Referencja: Showcase 02.</p>
+
+<p>– BOOKS – animowane, zmieniające się miniatury prowadzące do podstron książek.</p>
+
+<p>– POSTERS – kilka kolumn zdjęć poruszających się naprzemiennie góra/dół:<br>https://shop.6tm-magazine.com/products/black-hole-03-the-accretion-jitter-template</p>
+
+<p>– CASE STUDY:<br>https://titarvl.framer.website/works/arcane-studio</p>
+
+<p>– KARTA PRODUKTU:<br>https://vaertemplate.framer.website/shop/haven-coat<br>https://artandobjects.framer.website/infinite-whispers</p>
+
+<p>– GALERIE – m.in. zoom/przeskakujące zdjęcia oraz zdjęcia układające się na sobie. Referencje: Showcase 01 i 07.</p>
+
+<p>Ważne: animacje mają być odtworzone jako interaktywne elementy strony, nie jako osadzone filmy.</p>
+
+<p>Zależy mi na estetyce editorial / fashion / creative studio, dobrym działaniu mobile, szybkim ładowaniu oraz CMS-ie umożliwiającym samodzielne dodawanie projektów i produktów.</p>
+
+<p>Technologia do ustalenia – Framer, Webflow, WooCommerce lub inne rozwiązanie.</p>
+
+<p>Proszę o portfolio, rekomendowaną technologię, orientacyjną wycenę oraz informację, czy realizujesz również e-commerce i płatności online.</p>

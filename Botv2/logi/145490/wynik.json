@@ -1,0 +1,22 @@
+{
+  "job_id": "145490",
+  "title": "Developer do autorskiej strony portfolio + e-commerce z animacjami",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 25000,
+  "wycena_gorna": 40000,
+  "definitywna": false,
+  "dni_od": 30,
+  "dni_do": 45,
+  "uzasadnienie_rozjemcy": "Finalne widełki 25 000–40 000 zł netto dotyczą rekomendowanego kompromisu, czyli WooCommerce/WordPress z customowymi animacjami i płatnościami PL; headless startuje realnie od 45 000–80 000 zł, a Webflow+Shopify ma sens głównie przy małym, nierosnącym asortymencie i bez natywnego P24/BLIK. Modele zgodnie odrzuciły Framer jako fundament sklepu i wskazały WooCommerce lub headless jako uczciwe rozwiązanie dla pełnego backoffice’u. Największa rozbieżność dotyczyła dolnej granicy: część modeli po autokrytyce zeszła do 22–23 tys. zł, ale przy 8 typach autorskich animacji i pełnym sklepie bezpieczniejsza jest dolna granica 25 tys. zł. Wycena nie jest definitywna, bo brak liczby produktów, rynku docelowego, metod płatności i finalnego stacku — te czynniki mogą przesunąć kwotę zarówno w dół, jak i w górę.",
+  "od_czego_zaleza": [
+    "wybór stacku: WooCommerce vs Webflow+Shopify vs headless Next.js",
+    "liczba produktów w sklepie i czy asortyment ma rosnąć",
+    "rynek docelowy i obowiązki compliance UE dla B2C",
+    "metody płatności: Przelewy24/BLIK/Stripe/PayPal",
+    "zakres autorskich animacji i integracji z CMS",
+    "hosting, utrzymanie, treści prawne i szkolenie z CMS"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

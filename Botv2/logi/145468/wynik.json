@@ -1,0 +1,23 @@
+{
+  "job_id": "145468",
+  "title": "Stworzenie nowej strony internetowej - spółka z sektora finansowego",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 50000,
+  "wycena_gorna": 90000,
+  "definitywna": false,
+  "dni_od": 60,
+  "dni_do": 110,
+  "uzasadnienie_rozjemcy": "Modele zgodnie wskazują, że to nie jest prosta strona, lecz wieloetapowe wdrożenie z migracją archiwum ESPI/EBI, WCAG, RODO/CMP, bezpieczeństwem, CWV i SEO/301. Po autokrytyce część modeli podniosła górną granicę z powodu remediacji PDF/Office, mapy 301 i reżimu compliance w sektorze finansowym, co daje rozrzut od ok. 42–65 tys. do 70–120 tys. zł. Brak danych o CMS, skali podstron, wolumenie i formatach archiwum uniemożliwia wycenę definitywną. Przyjmuję widełki 50–90 tys. zł netto jako medianę zbieżności, z zastrzeżeniem, że po inwentaryzacji mogą wzrosnąć do ok. 120 tys. zł lub spaść do ok. 40 tys. zł. Czas 60–110 dni roboczych odzwierciedla tę samą niepewność skali i zakresu remediacji.",
+  "od_czego_zaleza": [
+    "obecny CMS/system i źródło migracji treści oraz archiwum (eksport, API, baza, ręcznie)",
+    "liczba podstron nowej strony",
+    "wolumen i formaty dokumentów archiwum ESPI/EBI (PDF/Office/HTML)",
+    "zakres remediacji WCAG 2.1/2.2 AA dla dokumentów niebędących stronami",
+    "konieczność pełnej inwentaryzacji URL-i i mapy przekierowań 301",
+    "zakres CMP, RODO/DPIA, testów bezpieczeństwa i integracji self-service",
+    "hosting, stack, ewentualne wymagania KNF/GPW oraz termin i decydent"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

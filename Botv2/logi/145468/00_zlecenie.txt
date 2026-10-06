@@ -1,0 +1,9 @@
+TYTUL: Stworzenie nowej strony internetowej - spółka z sektora finansowego
+BUDZET: Do negocjacji
+
+OPIS:
+<p>Poszukujemy doświadczonego wykonawcy do postawienia nowej strony internetowej spółki z sektora finansowego.</p>
+
+<p>Zależy nam na stworzeniu nowoczesnego, bezpiecznego i wydajnego serwisu, który będzie możliwy do samodzielnego rozwijania przez nasz zespół.</p>
+
+<p>Projekt obejmuje m.in.:<br>analizę i uporządkowanie obecnej struktury strony,<br>UX/UI i responsywny design,<br>development oraz wdrożenie CMS,<br>migrację obecnych treści i materiałów,<br>kompletną migrację archiwum relacji inwestorskich / ESPI / EBI,<br>wdrożenie zgodne z WCAG 2.1/2.2 AA,<br>rozwiązania z zakresu RODO, CMP i zarządzania zgodami,<br>zabezpieczenie formularzy i danych użytkowników,<br>optymalizację wydajności i Core Web Vitals,<br>SEO oraz przekierowania 301,<br>przygotowanie do dalszej rozbudowy o funkcje self-service i integracje.</p>
