@@ -1,0 +1,5 @@
+TYTUL: Optymalizacja LCP i Core Web Vitals dla WooCommerce
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Stan obecny: Wynik Performance na Mobile to ~65 pkt. Fundamenty: Baza danych jest wyczyszczona, wdrożony LiteSpeed Cache z Object Cache (Redis) oraz QUIC.cloud (UCSS/VPI). Kod: Wdrożone snippety usuwające zbędne style blokowe WP i WooCommerce. Problem: Głównym wyzwaniem jest LCP (Largest Contentful Paint) na poziomie 5s+. Zadanie: Optymalizacja wczytywania głównego banera (AVIF/WebP), eliminacja zasobów blokujących renderowanie bez psucia funkcjonalności 50+ wtyczek oraz dobicie do zielonej strefy (85-90+) na komórkach. Wymagane funkcje: Wymagania techniczne - Praca na kopii zapasowej/stagingu. - Gwarancja braku konfliktow z 50+ wtyczkami. - Metody White-Hat (brak maskowania wynikow).

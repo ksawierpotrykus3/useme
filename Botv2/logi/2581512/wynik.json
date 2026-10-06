@@ -1,0 +1,21 @@
+{
+  "job_id": "2581512",
+  "title": "Optymalizacja LCP i Core Web Vitals dla WooCommerce",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 2500,
+  "wycena_gorna": 4500,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 10,
+  "uzasadnienie_rozjemcy": "Wszystkie modele zgadzają się, że wycena nie może być definitywna bez URL/stagingu, a gwarancję braku konfliktów z 50+ wtyczkami trzeba zamienić na procedurę staging+backup+rollback+testy. Rozbieżność jest głównie w pracochłonności: A i D zakładają prostszy LCP i zakres home, B i C słusznie doliczają ryzyko UCSS/CCSS, regresji i szerszego zakresu stron. Wybieram 2700–4500 zł jako środek ciężkości po autokorektach: to nie jest najniższa optymistyczna wycena, ale też nie skrajny górny wariant B bez potwierdzonego zakresu. Cel 85–90+ traktuję jako cel, nie gwarancję, a kwota może się zawęzić po audycie stagingu.",
+  "od_czego_zaleza": [
+    "od dostępu do URL/stagingu i identyfikacji faktycznego elementu LCP (img, tło CSS, slider JS, blok buildera)",
+    "od zakresu stron dla celu 85–90+ mobile: tylko home czy także kategorie, produkty i koszyk",
+    "od liczby i krytyczności wtyczek oraz zakresu testów regresji, backupu i rollbacku",
+    "od stanu UCSS/CCSS i konfiguracji LiteSpeed/QUIC.cloud — czy wymagają ręcznych wykluczeń i czy nie tną stylów motywu",
+    "od motywu/page buildera, hostingu i wersji WordPress/WooCommerce/PHP"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

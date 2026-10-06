@@ -1,0 +1,21 @@
+{
+  "job_id": "2523916",
+  "title": "Strona internetowa - ceramika artystyczna",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 3000,
+  "wycena_gorna": 4000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 15,
+  "uzasadnienie_rozjemcy": "Modele są zgodne co do standardowego zakresu: WordPress, lekki motyw/builder, HERO, galeria z lightboxem, CPT dla wyrobów, opinie, kontakt, RWD, edycja treści i krótkie szkolenie, bez sklepu. Po autokrytykach większość wycen osiada w przedziale ok. 2800–4200 zł, a skrajne głosy to 2700–3300 zł po jednej stronie i 3600–4950 zł po drugiej; wybieram 3200–4200 zł jako centralny, bezpieczny przedział dla layoutu dopasowanego do marki i obsługi galerii. Wycena nie jest definitywna, bo brakuje liczby wyrobów, materiałów, identyfikacji i decyzji o blogu. Blog należy wycenić osobno, orientacyjnie +500–900 zł i +1–3 dni, zależnie od zakresu. Pełny projekt graficzny od zera, przygotowanie zdjęć/tekstów lub e-commerce mogą podnieść kwotę poza ten przedział.",
+  "od_czego_zaleza": [
+    "liczba wyrobów docelowo i sposób ich prezentacji (prosta galeria vs CPT i szablony)",
+    "kto dostarcza, obrabia i optymalizuje zdjęcia oraz teksty",
+    "czy istnieje logo/identyfikacja wizualna, do której trzeba dopasować layout",
+    "czy w cenie ma być pełny indywidualny projekt graficzny od zera",
+    "zakres i termin dodania bloga oraz czy domena/hosting są już zapewnione"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

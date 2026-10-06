@@ -1,0 +1,27 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (redesign warstwy prezentacji + formularz kontaktowy)
+INTENCJA: wykonawcze (z otwartością na propozycje)
+DECYDENT_I_BOL: osoba decyzyjna po stronie soft4fx; ból nazwany wprost: strona główna nie wygląda profesjonalnie, brak responsywności, słaby product box. Nie dopisuję „konwersja" ani „zaufanie" — tego klient nie powiedział.
+WYKONALNE: TAK; najbliższa opcja: redesign warstwy prezentacji na istniejącym PHP (research potwierdza własny kod bez frameworka), z zachowaniem treści, logo, screenshotów i linków PayPro.
+POLE_DO_POPISU: JEST — (1) formularz kontaktowy już istnieje na contact.php, więc nie budujemy od zera, tylko weryfikujemy/naprawiamy; (2) PayPro jest zewnętrznym procesorem płatności, nie ma integracji do zrobienia — wystarczy nie zepsuć linków; (3) strona stoi na własnym PHP bez frameworka — można zaproponować podejście do redesignu bez narzucania CMS.
+SCIEZKA_MERYTORYKI: B (ciekawostka o istniejącym formularzu — klient pisze „wymagane funkcje: formularz kontaktowy", a formularz już jest; to zmienia zakres i oszczędza klientowi pieniądze)
+MINY_I_CIEKAWOSTKI:
+- Formularz kontaktowy już istnieje. Dowód: research — contact.php zawiera sekcję „Ask a Question" z akceptacją polityki prywatności. Konsekwencja: klient może oczekiwać budowy od zera, a wystarczy weryfikacja/naprawa. To nie mina, to ciekawostka z wartością finansową dla klienta.
+- PayPro Global jest zewnętrznym procesorem płatności. Dowód: research — wymieniony w polityce prywatności jako procesor; klient nie podaje danych kart na stronie. Konsekwencja: nie ma integracji do wykonania przy redesignie; wystarczy zachować linki przekierowania. Klient pisze „zachować obecną metodę płatności - PayPro" — myślenie „trzeba coś z tym zrobić" jest błędne, ale nie ma potrzeby prostować na siłę; wystarczy nie psuć.
+- Strona stoi na własnym PHP bez frameworka/CMS. Dowód: research — adresy .php, brak śladów Laravela/Symfony/WordPress. Konsekwencja: redesign może być trudniejszy, jeśli logika jest splątana z widokiem. To ryzyko wykonawcze, nie mina dla klienta — zostaje w pytaniu o dostęp do kodu, nie w merytoryce.
+- Meta viewport już jest, ale nie wiadomo, czy layout faktycznie jest mobilny. Dowód: research — `<meta name="viewport">` w nagłówku. Klient pisze „wprowadzić responsywność" — może być tak, że część już działa. To nie mina, to pytanie o zakres.
+ODMOWA: puste — brak okazji. Formularz istnieje (ciekawostka, nie odmowa), PayPro zewnętrzny (brak integracji), PHP potwierdzone (brak konfliktu), RODO uproszczone brakiem cookies. Nie ma obiektu odmowy.
+PYTANIA:
+1. Czy mamy dostęp do kodu/repozytorium i środowiska testowego? Uzasadnienie: od tego zależy, czy redesign to warstwa prezentacji, czy przebudowa widoków; bez dostępu nie da się rzetelnie wycenić ani bezpiecznie wdrożyć. Propozycja: praca na kopii, wdrożenie po akceptacji.
+2. Formularz kontaktowy już istnieje na contact.php — czy on działa i co konkretnie wymaga poprawy (wysyłka e-mail, antyspam, RODO)? Uzasadnienie: klient pisze „wymagane funkcje: formularz kontaktowy", a formularz jest; jeśli działa, nie płaci za budowę od zera. Propozycja: weryfikacja i naprawa zamiast budowy nowego.
+3. Zakres podstron: widzę ok. 10 plików .php (index, contact, pricing, download, affiliate, tutorials MT4/MT5, privacy, reset). Zakładam redesign wszystkich widocznych podstron; jeśli któraś ma zostać bez zmian — proszę dać znać. Uzasadnienie: liczba szablonów zmienia wycenę. To propozycja z zastrzeżeniem, nie pytanie otwarte.
+CO_ZLECENIE_MOWI: nowa szata graficzna dla soft4fx.com; zachować treść, logo, nazwę firmy, nazwę produktu, PayPro, większość treści i screenshotów; poprawić wygląd strony głównej i product box (lub zastąpić czymś innym); wprowadzić responsywność całej witryny; dodać formularz kontaktowy; preferowane PHP; budżet do negocjacji; klient otwarty na propozycje.
+CZEGO_NIE_MOWI: kto hostuje i czy jest dostęp do kodu; czy formularz na contact.php działa; jaki jest termin; jakie dokładnie ma być działanie formularza; czy product box ma być zastąpiony, czy poprawiony; jakie są cele biznesowe poza „profesjonalny wygląd"; czy responsywność ma objąć wszystkie podstrony. Research rozstrzygnął: technologię (własny PHP), istnienie formularza, charakter PayPro (zewnętrzny), liczbę podstron (~10), brak cookies.
+GRANICA_CIECIA: oferta średnia — 2 pytania (dostęp, formularz) + 1 propozycja z zastrzeżeniem (zakres podstron), propozycja podejścia, widełki orientacyjne. Bez wykładu o PHP, PayPro czy RODO ponad dowody. Nie pytać o budżet, nie pytać o technologię (rozstrzygnięta), nie pytać o rzeczy widoczne w researchu.
+RESEARCH_POTRZEBNY: NIE — już zrobiony i wystarczający. Nie ma potrzeby dodatkowego researchu; kolejny krok to pytania do klienta.
+DECYZJE:
+- DOPISAĆ do oferty: informację, że formularz kontaktowy już istnieje na contact.php (oszczędność dla klienta); że PayPro jest zewnętrzny i nie wymaga integracji — wystarczy zachować linki; propozycję podejścia mobile-first i redesignu warstwy prezentacji na istniejącym PHP.
+- ODPOWIEDZIEĆ: na wprost zadane pytania klienta (PHP — potwierdzone, działa; PayPro — zachowany, bez modyfikacji; responsywność — proponujemy mobile-first; product box — proponujemy przebudowę pod czytelny cel sprzedażowy).
+- DOPYTAĆ: (1) dostęp do kodu/repozytorium i środowiska testowego; (2) czy formularz na contact.php działa i co wymaga poprawy; (3) potwierdzenie zakresu podstron (~10) — propozycja z zastrzeżeniem, nie pytanie otwarte.
+```

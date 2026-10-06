@@ -1,0 +1,22 @@
+{
+  "job_id": "2868642",
+  "title": "Kompletne wdrożenie Comarch e-Sklep",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 14000,
+  "wycena_gorna": 22000,
+  "definitywna": false,
+  "dni_od": 25,
+  "dni_do": 40,
+  "uzasadnienie_rozjemcy": "Finalnie przyjmuję widełki 14 000–22 000 zł netto, bo po autokrytyce modele C i D zbiegły się wokół 12–14 tys. dolnej i 20–22 tys. górnej granicy, a A potwierdził, że przy własnym projekcie i pełnej synchronizacji górna granica może rosnąć. B pozostał najniżej z 9–14 tys., ale sam zastrzegł, że działa to tylko przy pełnych licencjach i modułach KB/HA, więc traktuję tę wycenę jako zaniżoną dla pełnego wdrożenia. Rozbieżność dotyczy głównie szaty graficznej, zakresu integracji z Optima i liczby integracji zewnętrznych. Wycena nie jest definitywna, bo ogłoszenie nie podaje licencji, modułów, metody integracji, skali ani materiałów wejściowych.",
+  "od_czego_zaleza": [
+    "posiadania licencji Comarch e-Sklep i Optima stacjonarna oraz modułów Kasa/Bank i Handel",
+    "zakresu i metody integracji z Comarch ERP Optima oraz liczby synchronizowanych obszarów",
+    "wyboru gotowego szablonu czy własnego projektu graficznego",
+    "liczby operatorów płatności, kurierów i złożoności macierzy dostaw",
+    "konieczności migracji danych oraz tego, kto dostarcza logo, zdjęcia, opisy i regulaminy",
+    "skali sklepu, hostingu, wersji SQL, liczby produktów i ewentualnych licencji dodatkowych"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

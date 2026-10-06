@@ -1,0 +1,11 @@
+Wiedeń potrzebuje takiego portalu i brief jest na tyle konkretny, że wiem, co budujemy. Wzór z waw4free traktuję jako wzór funkcjonalny i UX, nie do klonowania. Nowy wygląd, prostota, czytelność, niemiecki jako główny język.
+
+Stawiam na WordPress z The Events Calendar i Community Events, czyli zgłoszenia wydarzeń z frontu z kolejką moderacji. Filtry, tagi, dzielnice jako taksonomie. Wydarzenia cykliczne jak darmowe muzea w poniedziałki modeluję jako reguły powtarzalne, nie jako osobne wpisy, żeby kalendarz nie puchł po roku. Język niemiecki jako bazowy, ale i18n ustawiam od startu, żeby dodanie polskiej wersji nie wymagało przebudowy. Jeśli polska ma być od razu, doliczę tłumaczenia treści.
+
+Dwie rzeczy wchodzą w zakres, bo inaczej projekt się zemści. Pierwsza to Impressum. W Austrii każda strona komercyjna musi je mieć, a reklamy i artykuły sponsorowane kwalifikują portal jako komercyjny, nawet przy osobie prywatnej. Wymagane dane dostarczasz, ja przygotowuję stronę i regulamin. Druga to zgody pod AdSense i newsletter. Google wymaga certyfikowanego banera zgód w standardzie TCF dla UE, bez tego monetyzacja może zostać odrzucona albo ograniczona. Do tego polityka prywatności i double opt-in przy newsletterze. Wstawiam to od razu, żebyś nie wracał do tematu po starcie.
+
+Nie wiem, skąd mają pochodzić wydarzenia na start. Czy sam zasilisz bazę ręcznie albo z listy, którą masz, czy ma powstać moduł importu z istniejących źródeł. To osobna warstwa prac i główny mnożnik ceny, dlatego pytam. Druga rzecz, wydarzenia płatne i wyróżnione. Ma to być tylko oznaczenie wizualne na liście, czy realna płatność przez Stripe albo PayPal z logiką wyróżnień. Brief tego nie precyzuje, a różnica jest spora.
+
+Widełki to 8000 do 12000 zł netto, przy około trzech do czterech tygodni. Dolna granica przy zakresie bazowym, gdy bazę zasilasz sam, a wyróżnienia są wizualne. Górna, gdy dochodzi import wydarzeń i pełna logika płatności. Cena zależy jeszcze od tego, czy hosting, domena i provider newslettera są po Twojej stronie, czy mam je wybrać i skonfigurować. Po Twojej odpowiedzi o źródło wydarzeń domknę kwotę.
+
+Ksawier

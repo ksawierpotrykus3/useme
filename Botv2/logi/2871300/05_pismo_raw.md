@@ -1,0 +1,13 @@
+Zlecenie da się zrobić, ale opis zawiera trzy założenia, które mogą przewrócić projekt. Wolę je nazwać teraz, niż po fakcie, kiedy okaże się, że połowa pracy idzie do kosza.
+
+Najpoważniejsze to Katalog Allegro. Od lipca 2024 Allegro wymaga powiązania ofert z Katalogiem, a części samochodowe nie są wśród wyjątków. Twój plan opiera się na całkowitym wyłączeniu parowania, żeby system nie podmieniał opisów i nie ucinał galerii. Rozumiem intencję, ale w tej kategorii szkice bez powiązania mogą zostać odrzucone przez API albo zablokowane po utworzeniu. Wtedy 5952 szkiców leci do wyrzucenia, a praca do powtórzenia. Proponuję migrację z powiązaniem z Katalogiem tam, gdzie jest wymagane, albo wcześniejszą weryfikację po stronie Allegro, czy kategoria kwalifikuje się do wyjątku. Numer części z początku tytułu nadal da się wpisać, ale nie jako obejście Katalogu, tylko jako uzupełnienie.
+
+Druga rzecz to skąd bierzesz dane i zdjęcia. Regulamin OTOMOTO zakazuje agregowania danych i pobierania materiałów w celu udostępniania ich na innych serwisach, a pobranie zdjęć wymaga zgody Grupy OLX. Rozmycie znaku wodnego nie rozwiązuje problemu prawnego, bo to obejście zabezpieczenia, a nie źródło praw do zdjęcia. Jeśli zdjęcia w repozytorium są Twoją własnością, temat znika. Jeśli pochodzą z OTOMOTO, potrzebna jest zgoda albo inne źródło. To samo dotyczy danych.
+
+Trzecia, lżejsza. Nie istnieje gotowy, uniwersalny skrypt OTOMOTO do Allegro dla 5952 ofert. To zawsze praca dostosowawcza, mapowanie kategorii, parametrów, obsługa wyjątków, logika numeru części, raport końcowy. Oferuję dostosowanie, nie gotowca. Z REST API Allegro pracuję, szkice przez product-offers to dla mnie standard.
+
+Zanim wycenię wiążąco, potrzebuję czterech rzeczy. Czy masz dostęp do API OTOMOTO, dealerskiego albo partnerskiego, do pobrania własnych ogłoszeń. Czy konto firmowe Allegro ma aktywne REST API i uprawnienia do tworzenia szkiców. Czy 5952 ogłoszeń siedzi w jednej kategorii, czy w kilku, bo od tego zależy zakres mapowania. I czy zdjęcia są Twoje, czy z OTOMOTO.
+
+Widełki to od 10 000 do 15 000 zł netto, zależnie od tego, czy kategoria okaże się zwolniona z Katalogu i czy zdjęcia są Twoje, czy trzeba w pełni mapować Katalog i rozwiązywać legalność materiałów. Termin około trzech do pięciu tygodni, 14 dni z ogłoszenia jest realne tylko przy braku blokad, a tych nie mogę wykluczyć przed weryfikacją. Partia 20 szkiców przed umową to realna praca, proponuję ją jako płatny test odliczany od głównego zlecenia.
+
+Ksawier

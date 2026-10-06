@@ -1,0 +1,21 @@
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (wdrożenie CRM), z możliwym późniejszym utrzymaniem
+INTENCJA: wykonawcze
+DECYDENT_I_BOL: Osoba/firma decyzyjna („zdecydowaliśmy się”) w organizacji z M365. Ból: rozproszona komunikacja e-mail z klientami — brak jednego widoku wątków, historii i traceability; potrzeba centralnej bazy klientów i przypisania maili do klienta.
+WYKONALNE: TAK. Najbliższa opcja: Power Apps + Dataverse/SharePoint jako CRM, Azure Function z Microsoft Graph (uprawnienia aplikacyjne Mail.Read, zgoda admina, Exchange Online Application Access Policy) do agregacji maili; nie standardowy konektor Outlook.
+POLE_DO_POPISU: JEST
+SCIEZKA_MERYTORYKI: B
+MINY_I_CIEKAWOSTKI:
+- Standardowy konektor Office 365 Outlook w Power Platform działa w kontekście zalogowanego użytkownika, nie agreguje automatycznie wszystkich skrzynek pracowników. Dowód: „System musi automatycznie agregować wszystkie wiadomości e-mail ze wszystkich skrzynek pracowników”. Mechanizm: potrzebny custom connector/Azure Function + Microsoft Graph z uprawnieniami aplikacyjnymi i zgodą admina. Konsekwencja: jeśli klient oczekuje gotowego konektora, projekt zatrzyma się na uprawnieniach; trzeba zaplanować czas na zgodę, polityki i testy. Alternatywa: Graph + Azure Function + Dataverse/SharePoint, ewentualnie ograniczenie do wybranych skrzynek/współdzielonych.
+- Dostęp do wszystkich skrzynek to wysokie ryzyko RODO i bezpieczeństwa. Dowód: „wszystkich skrzynek pracowników”. Mechanizm: aplikacja z szerokim dostępem do poczty musi mieć podstawę prawną, politykę retention, ograniczenie ról w CRM. Alternatywa: dostęp tylko do skrzynek/aliasów niezbędnych, logowanie dostępu, minimalizacja.
+- „Prosty CRM” vs pełna agregacja wątków e-mail i traceability. Dowód: „prostego, funkcjonalnego CRM” oraz „pełną historię komunikacji e-mail”. To nie jest prosty formularz — to warstwa integracyjna i dopasowanie maili do klientów. Wpływ: zakres i wycena.
+ODMOWA: puste (brak twardej odmowy typu 1-6; RODO i zgody admina to warunki do zabezpieczenia, nie blokada)
+PYTANIA:
+1. Skąd system ma wiedzieć, że dany e-mail należy do danego klienta — po domenie, adresach kontaktowych, temacie, ręcznie? Pytam, bo od tego zależy automatyzacja dopasowania i wycena.
+2. Ile jest skrzynek pracowników i jaki jest miesięczny wolumen maili do agregacji? Pytam, bo od tego zależy architektura (Graph, kolejkowanie, limity) i koszt Azure.
+3. Czy macie licencje Power Apps/Dataverse i subskrypcję Azure, czy mam je uwzględnić w wycenie? Pytam, bo to zmienia całkowity koszt i zakres wdrożenia.
+4. Czy jesteście gotowi na zgodę administratora M365 na dostęp aplikacji do skrzynek? Pytam, bo bez tego agregacja wszystkich maili nie ruszy.
+CO_ZLECENIE_MOWI: CRM w Power Apps/M365/Azure; logowanie i role; centralna baza klientów; karta klienta: dane kontaktowe, notatki, umowy, ustalenia/zmiany, zadania, pełna historia e-mail; traceability na pracowników; automatyczna agregacja maili ze wszystkich skrzynek pracowników i adresów przypisanych do klienta; pełne wątki w jednym miejscu; wymagane M365, MS Graph, PowerPlatform; budżet do negocjacji; termin „na już”; proszą o wycenę, termin, datę startu; zdalnie.
+CZEGO_NIE_MOWI: liczby skrzynek/pracowników/klientów; wolumenu maili; sposobu dopasowania maili do klienta; czy są aliasy/współdzielone skrzynki; jakie licencje i Azure; czy jest zgoda admina; gdzie dane (Dataverse/SharePoint/SQL); integracje zewnętrzne; załączniki/Teams/kalendarz; wymogi RODO/retention; czy „na już” to konkretna data; czy potrzebne utrzymanie.
+GRANICA_CIECIA: Zlecenie ma zakres funkcjonalny, ale brak danych o skali, dopasowaniu maili i licencjach. Odpowiedź średnia, 3-4 pytania, merytoryka tylko jako warunek architektoniczny (Graph vs konektor). Bez wchodzenia w szczegóły implementacji i bez zgadywania.
+RESEARCH_POTRZEBNY: TAK. Potwierdzić aktualne ograniczenia standardowego konektora Office 365 Outlook, wymagania Microsoft Graph (Mail.Read application permissions, Exchange Online Application Access Policy), licencje Power Platform/Dataverse i limity Graph.

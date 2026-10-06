@@ -1,0 +1,21 @@
+{
+  "job_id": "2559405",
+  "title": "Szukam freelancera WordPress do stałej współpracy przy stronach WWW",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 800,
+  "wycena_gorna": 6500,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 18,
+  "uzasadnienie_rozjemcy": "Finalnie przyjmuję widełki 800–6500 zł netto jako kopertę dla trzech typów: one page ok. 800–1400 zł, strona firmowa ok. 1800–3000 zł, sklep WooCommerce ok. 3500–6500 zł. Modele zgodnie zbiegły się co do one page i strony firmowej oraz co do konieczności pytań o wolumen, treści i integracje; największa rozbieżność dotyczyła sklepu (3000–7000 zł) i wpływu white label/stałej współpracy na stawkę. Wycena nie jest definitywna, bo brakuje liczby projektów miesięcznie, źródła treści i zdjęć, konkretnych integracji sklepowych oraz zakresu opieki powdrożeniowej. Przy 2+ projektach miesięcznie lub retainerze możliwy jest upust 10–15% lub stawka 75–85 zł/h, a przy sklepie z wieloma integracjami górna granica może wzrosnąć.",
+  "od_czego_zaleza": [
+    "typu realizacji: one page / strona firmowa / sklep WooCommerce",
+    "liczby projektów miesięcznie i modelu rozliczeń (per projekt vs retainer)",
+    "gotowości treści, zdjęć i dostępów po stronie klienta końcowego",
+    "integracji WooCommerce (płatności, kurierzy, marketplace)",
+    "zakresu opieki powdrożeniowej oraz hostingu i licencji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

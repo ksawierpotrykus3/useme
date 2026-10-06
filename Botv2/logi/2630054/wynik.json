@@ -1,0 +1,20 @@
+{
+  "job_id": "2630054",
+  "title": "Szukamy konsultanta / architekta produktu do konsultacji stworzenia nowoczesnej platformy B2B",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 500,
+  "wycena_gorna": 500,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Modele zgodnie przyjmują stawkę 90 zł/h i że 6 obszarów w 1–2h to diagnoza i priorytety, nie pełne rekomendacje. Rozjazd dotyczył doliczenia przygotowania oraz notatki/roadmapy: część zaniżała do 180–270, część zawyżała do 360–450. Jako rozjemca przyjmuję 270–360 zł za 2h konsultacji z przygotowaniem, gdzie górna granica obejmuje krótką notatkę/roadmapę. Wycena nie jest definitywna, bo brief nie precyzuje 1h vs 2h, zakresu materiałów i oczekiwanego outputu. Brakuje też domeny, użytkownika i etapu projektu, co zwiększa niepewność przygotowania.",
+  "od_czego_zaleza": [
+    "czasu konsultacji: 1h czy 2h",
+    "zakresu przygotowania i przejrzenia materiałów klienta",
+    "czy w cenie jest notatka/roadmapa po spotkaniu",
+    "stawki 90 zł/h przy dalszej współpracy"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

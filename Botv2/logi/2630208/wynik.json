@@ -1,0 +1,21 @@
+{
+  "job_id": "2630208",
+  "title": "Strona internetowa sklepu",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 5500,
+  "wycena_gorna": 22000,
+  "definitywna": false,
+  "dni_od": 8,
+  "dni_do": 30,
+  "uzasadnienie_rozjemcy": "Modele zgodnie wskazują, że bez zakresu nie da się dać wyceny definitywnej, bo ogłoszenie mówi o jakości i portfolio, a nie o funkcjach. Zbieżność jest w stawce ok. 90 zł/h oraz w tym, że strona prezentacyjna jest wyraźnie tańsza niż realny e-commerce. Rozbieżność dotyczy głównie skali: A/B/C oscylują wokół 10,8–18 tys. zł dla e-commerce, C podnosi górę do ok. 22,5 tys. zł przy integracjach, a D jest outlierem z wyższymi godzinami. Przyjąłem 5400–22500 zł jako uczciwe widełki: dół dla premium strony prezentacyjnej, góra dla e-commerce z panelem, płatnościami i integracjami.",
+  "od_czego_zaleza": [
+    "Czy to realny e-commerce z koszykiem, płatnościami i panelem, czy tylko strona prezentacyjna sklepu",
+    "Czy jest już system/platforma sklepu, czy budowa od zera",
+    "Zakres brandingu: samo logo i kolory vs pełna identyfikacja wizualna",
+    "Skala projektu: liczba produktów, podstron i layoutów",
+    "Integracje: płatności, kurierzy, faktury, magazyn i migracja danych"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

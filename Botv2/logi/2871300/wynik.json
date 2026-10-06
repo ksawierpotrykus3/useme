@@ -1,0 +1,21 @@
+{
+  "job_id": "2871300",
+  "title": "Migracja 5952 ogłoszeń z OTOMOTO na Allegro (Wymagane doświadczenie i gotowy skrypt)",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 10000,
+  "wycena_gorna": 15000,
+  "definitywna": false,
+  "dni_od": 14,
+  "dni_do": 25,
+  "uzasadnienie_rozjemcy": "Modele zgodnie odrzucają założenie gotowego uniwersalnego skryptu i wskazują, że 14 dni jest ryzykowne, a kluczowe są blokady Katalogu Allegro oraz legalność danych i zdjęć z OTOMOTO. Rozbieżność jest duża: A i D wyceniają niżej (ok. 5,4–13,5 tys. zł), B i C wyżej (12–18 tys. zł), ale po autokrytyce wszyscy podnoszą zakres do ok. 90–200 h przy stawce 90–120 zł/h. Dlatego finalne widełki 10–15 tys. zł netto są warunkowe i lokują się w środku skorygowanych głosów. Jeśli kategoria jest zwolniona z Katalogu i zdjęcia są własnością klienta, racjonalny jest dolny zakres; jeśli trzeba w pełni mapować Katalog i rozwiązać legalność, uzasadniony jest górny zakres lub ponowna wycena. Bez odpowiedzi na pytania o Katalog, API OTOMOTO i własność zdjęć wycena nie może być definitywna.",
+  "od_czego_zaleza": [
+    "Potwierdzenia, czy w kategorii części samochodowych Allegro wymaga powiązania szkiców z Katalogiem i czy da się je utworzyć bez tego powiązania",
+    "Legalnego źródła danych i zdjęć z OTOMOTO: dostępu do API dealerskiego, zgody OLX lub własności zdjęć klienta",
+    "Liczby kategorii i zakresu mapowania parametrów na Allegro oraz liczby wyjątków wymagających ręcznej weryfikacji",
+    "Dostępu do Allegro REST API i uprawnień konta firmowego do tworzenia szkiców ofert",
+    "Akceptacji płatnej partii próbnej 20 sztuk i realnego terminu dłuższego niż 14 dni"
+  ],
+  "checker_ok": false,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

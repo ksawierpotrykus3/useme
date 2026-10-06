@@ -1,0 +1,21 @@
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (MVP) + stała współpraca/doradztwo technologiczno-produktowe w kolejnych etapach
+INTENCJA: mieszane (wykonawcze + doradcze)
+DECYDENT_I_BOL: Prawdopodobnie właściciel produktu / startup / firma organizująca wydarzenia albo pośrednik. Ból: szybko uruchomić sprzedaż biletów, maksymalnie uprościć zakup, zmonetyzować platformę przez prowizję i opłatę serwisową, a potem skalować do SaaS/mobile. Nie wiemy, czy decydent jest organizatorem, pośrednikiem czy podmiotem budującym marketplace.
+WYKONALNE: TAK. Najbliższa opcja: MVP w zakresie z ogłoszenia; aplikacja mobilna i rozbudowa SaaS jako kolejne etapy, nie część MVP.
+POLE_DO_POPISU: JEST. Klient wprost prosi o rekomendację płatności oraz doradztwo technologiczne. Można pokazać decyzje o architekturze, modelu płatności/wypłat i kolejności prac.
+SCIEZKA_MERYTORYKI: A (płatności – klient pyta wprost o rekomendację) + B (model wypłat/merchant – potencjalna mina z dowodem ze zlecenia)
+MINY_I_CIEKAWOSTKI:
+- Model C + ręczne wypłaty: jeśli platforma ma zbierać pieniądze od kupujących i wypłacać organizatorom, trzeba rozstrzygnąć, kto jest merchantem i czy nie wchodzi w regulacje płatnicze. Dowód: „Model C: prowizja od organizatora + opłata serwisowa dla kupującego”, „Wypłaty: ręczne wypłaty w MVP”, „system rozliczeń kontrolowany przez administratora”.
+- Płatności: Stripe, Przelewy24, PayU/Tpay nie są w pełni wymienne w modelu marketplace/split. Dowód: lista w ogłoszeniu + „wymagana rekomendacja najlepszego rozwiązania”.
+- Check-in QR w przeglądarce: przy słabym internecie skaner online może blokować wejścia. Dowód: „skanowanie QR w przeglądarce (telefon)”, „licznik wejść live”.
+ODMOWA: Warunkowo typ 4 (zgodność/regulacje). Jeśli platforma ma przyjmować środki i ręcznie przekazywać je organizatorom, może pojawić się ryzyko regulacyjne. Mechanizm awarii: brak jasnego modelu merchant/PSP marketplace. Konsekwencja: blokada konta, opóźnienia wypłat, ryzyko kary. Alternatywa: albo PSP z obsługą marketplace/split, albo model „platforma merchantem” + rozliczenie organizatora fakturą za prowizję. Nie odmawiam całego zlecenia — to do wyjaśnienia.
+PYTANIA:
+1. Kto jest merchantem i jak mają wyglądać wypłaty? Czy platforma zbiera środki i ręcznie wypłaca, czy organizatorzy mają własne konta/Connect? Uzasadnienie: od tego zależy integracja płatności, KYC, regulacje, prowizje i zakres MVP.
+2. Jakie są wolumeny MVP: ilu organizatorów, ile wydarzeń/mies., ile biletów na wydarzenie i jaki szczytowy ruch? Uzasadnienie: od tego zależy architektura, wydajność, koszty infrastruktury i wycena.
+3. Czy check-in QR ma działać offline lub przy słabym internecie? Uzasadnienie: skaner online w przeglądarce vs PWA z cache to różne zakresy i koszty.
+4. Czy MVP ma obsługiwać zwroty/anulacje po stronie płatności, czy tylko e-maile o zwrotach? Uzasadnienie: to zmienia zakres integracji płatności i logiki biletów.
+CO_ZLECENIE_MOWI: platforma webowa do sprzedaży biletów; MVP + dalszy rozwój (mobile, SaaS); priorytety UX/UI, mobile-first, szybki zakup, wydajność, skalowalność; doradztwo produktowe i technologiczne; panel organizatora; zakup biletów; strona wydarzenia; PDF + QR; płatności Stripe, Przelewy24, PayU/Tpay z rekomendacją; check-in webapp; panel admina; model C; ręczne wypłaty w MVP; e-maile transakcyjne; prośba o portfolio i wycenę.
+CZEGO_NIE_MOWI: stacku technologicznego, konkretnego budżetu, terminu, wolumenów, liczby organizatorów/wydarzeń, kto jest merchantem, czy organizatorzy mają własne konta płatnicze, czy check-in ma być offline, czy zwroty są w MVP, szczegółów prowizji, wymogów RODO/regulaminowych, hostingu, języków, integracji social media.
+GRANICA_CIECIA: Zlecenie obszerne i wielowarstwowe. Oferta może być konkretna, ale bez rozpisywania każdego ekranu. Skupić się na: zrozumieniu modelu, rekomendacji płatności, architekturze, pytaniach o merchant/wolumeny/offline/zwroty oraz widełkach wyceny. Nie wchodzić w szczegóły UI ani nie wybierać ostatecznego stacku bez odniesienia do odpowiedzi klienta.
+RESEARCH_POTRZEBNY: TAK. Sprawdzić aktualne możliwości Stripe Connect / Przelewy24 / PayU / Tpay dla marketplace/split payments oraz wymogi KYC/regulacyjne dla platformy sprzedającej bilety. Po to, by rekomendacja płatności i model wypłat były oparte na faktach, nie na zgadywaniu.

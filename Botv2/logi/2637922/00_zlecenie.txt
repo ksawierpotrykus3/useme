@@ -1,0 +1,5 @@
+TYTUL: pokewars
+BUDZET: Do negocjacji
+
+OPIS:
+Opis witam.na początku pragne zaznaczyć że jestem osobą niewidomą korzystającą z czytnika ekranu nvda.jeśli chodzi o samo zlecenie szukam osoby która była by w stanie wykonać skrypt do gry pokewars.pl na czym powinno to polegać 1 logujemy się do gry 2 uruchamiamy skrypt 3 skrypt przechodzi do zakładki mapa> lokacje a następnie klika przycisk walcz z bossem niestety nie powiem wam gdzie to jest bo używając czytnika ekranu z poziomu klawiatury nigdzie tego nie widze od innych graczy wiem tylko że wchodzimy w mapa i lokacje i tam gdzieś powinno być.ewentualnie jeśli da się zrobić a jak się nie będzie dało to trudno że np będzie muwić cos w stylu nie możesz walczyć z bossem ponieważ przykładowo nie posiadasz latarki żebym miał świadomość co do wymagań danej walki. z góry dziękuje i płatność zostanie dokonana do dnia 15 maja

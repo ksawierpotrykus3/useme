@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Deterministyczny checker twardych zakazow (z V1 deterministic_pre_audit + lista B).
 
 Nie prompt - skrypt. Lapie mechaniczne AI-izmy ze 100% pewnoscia.
@@ -23,8 +23,6 @@ _FORBIDDEN = [
     (r"\b(?:inżynier|inzynier)[a-ząćęłńóśźż]*\b",
      "Nazywanie siebie inzynierem"),
     (r"\b(?:przyznam\s+szczerze|nie\s+ukrywam)\b", "Frazes przyznam szczerze / nie ukrywam"),
-    (r"\bnie\s+[a-ząćęłńóśźż]+,\s*ale\s+[a-ząćęłńóśźż]+\b",
-     "Szkielet Nie X, ale Y"),
 ]
 
 _ETYKIETY = [

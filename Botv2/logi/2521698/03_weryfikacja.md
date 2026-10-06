@@ -1,0 +1,28 @@
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (wdrożenie CRM), z możliwym późniejszym utrzymaniem
+INTENCJA: wykonawcze
+DECYDENT_I_BOL: Osoba/firma decyzyjna („zdecydowaliśmy się”) w organizacji z M365. Ból: rozproszona komunikacja e-mail z klientami — brak jednego widoku wątków, historii i traceability; potrzeba centralnej bazy klientów i automatycznego przypisania maili do klienta.
+WYKONALNE: TAK. Najbliższa opcja: Power Apps + Dataverse jako CRM, Azure Function z Microsoft Graph (Mail.Read application permissions + Exchange Online Application Access Policy) do agregacji maili; nie standardowy konektor Outlook.
+POLE_DO_POPISU: JEST — ale węższe niż w iteracji 1. Klient wymienił „MS Graph”, więc NIE jest odkryciem, że Graph jest potrzebny. Pole do popisu to nie „użyj Graph”, tylko: (a) że Graph Mail.Read domyślnie daje dostęp do WSZYSTKICH skrzynek i trzeba go ograniczyć Application Access Policy, (b) że potrzebna jest zgoda admina, (c) że dopasowanie maili do klienta to decyzja projektowa, którą trzeba podjąć. Reszta researchu (limity Graph, konektor) to wiedza dla nas, nie dla klienta — chyba że wolumen okaże się duży.
+SCIEZKA_MERYTORYKI: B
+MINY_I_CIEKAWOSTKI:
+- **Mina: Graph Mail.Read daje dostęp do wszystkich skrzynek domyślnie.** Dowód: „wszystkich skrzynek pracowników” + research (Microsoft Learn: „Mail.Read application permission allows apps to read mail in all mailboxes without a signed-in user”). Mechanizm: bez skonfigurowania Application Access Policy aplikacja ma dostęp do całej poczty w dzierżawie. Konsekwencja: ryzyko RODO/bezpieczeństwa; wymaga zgody admina i polityki. Alternatywa: Application Access Policy ograniczająca do wybranych skrzynek/aliasów + logowanie dostępu.
+- **Mina: zgoda administratora M365 to warunek, nie formalność.** Dowód: „wszystkich skrzynek pracowników” + research (wymagana zgoda admina + New-ApplicationAccessPolicy). Mechanizm: bez zgody admina agregacja nie ruszy. Konsekwencja: opóźnienie startu. Alternatywa: wcześniejsze uzyskanie zgody przed startem implementacji.
+- **Ciekawostka (nie mina): „prosty CRM” vs pełna agregacja wątków.** Dowód: „prostego, funkcjonalnego CRM” + „pełną historię komunikacji e-mail”. To napięcie, nie awaria — wpływa na zakres i wycenę. Zostawiam jako obserwację, nie straszę.
+- **NIE MA miny o konektorze Outlook** — klient wymienił MS Graph, więc sugerowanie, że mógł myśleć o konektorze, to zgadywanie. Wycinam.
+- **NIE MA miny o limitach Graph** — nie znam wolumenu, więc straszenie limitami to zgadywanie. Zamieniam na pytanie o wolumen.
+ODMOWA: puste (brak twardej odmowy typu 1-6; RODO i zgoda admina to warunki do zabezpieczenia, nie blokada)
+PYTANIA:
+1. Skąd system ma wiedzieć, że dany e-mail należy do danego klienta — po domenie, adresach kontaktowych, temacie, ręcznie? Pytam, bo od tego zależy automatyzacja dopasowania, architektura i wycena.
+2. Ile jest skrzynek pracowników i jaki jest miesięczny wolumen maili do agregacji? Pytam, bo od tego zależy architektura (Graph, kolejkowanie, limity) i koszt Azure.
+3. Czy macie już licencje Power Apps/Dataverse i subskrypcję Azure, czy mam je uwzględnić w wycenie? Pytam, bo Dataverse wymaga licencji na użytkownika, a to zmienia całkowity koszt.
+4. Czy jesteście gotowi na zgodę administratora M365 na dostęp aplikacji do skrzynek? Pytam, bo bez tego agregacja nie ruszy, a to wpływa na termin startu.
+CO_ZLECENIE_MOWI: CRM w Power Apps/M365/Azure; logowanie i role; centralna baza klientów; karta klienta: dane kontaktowe, notatki, umowy, ustalenia/zmiany, zadania, pełna historia e-mail; traceability na pracowników; automatyczna agregacja maili ze wszystkich skrzynek pracowników i adresów przypisanych do klienta; pełne wątki w jednym miejscu; wymagane M365, MS Graph, PowerPlatform; budżet do negocjacji; termin „na już”; proszą o wycenę, termin, datę startu; zdalnie.
+CZEGO_NIE_MOWI: liczby skrzynek/pracowników/klientów; wolumenu maili; sposobu dopasowania maili do klienta; czy są aliasy/współdzielone skrzynki; jakie licencje i Azure; czy jest zgoda admina; gdzie dane (Dataverse/SharePoint/SQL); integracje zewnętrzne; załączniki/Teams/kalendarz; wymogi RODO/retention; czy „na już” to konkretna data; czy potrzebne utrzymanie.
+GRANICA_CIECIA: Zlecenie ma zakres funkcjonalny, ale brak danych o skali, dopasowaniu maili i licencjach. Odpowiedź średnia, 4 pytania (górna granica), merytoryka tylko jako warunek architektoniczny (Graph + zgoda admina). Bez wchodzenia w szczegóły implementacji, bez straszenia limitami, bez sugerowania konektora.
+RESEARCH_POTRZEBNY: NIE (już wykonany). Wykorzystane fakty: konektor Outlook nie agreguje wszystkich skrzynek (nie używam — klient wymienił Graph), Graph Mail.Read domyślnie dostęp do wszystkich skrzynek + Application Access Policy (używam), Dataverse wymaga licencji (używam w pytaniu), limity Graph (nie używam — brak wolumenu).
+
+DECYZJE: 
+- DOPISAĆ: minę o Graph Mail.Read + Application Access Policy (z dowodem „wszystkich skrzynek” + research), minę o zgodzie admina jako warunku startu, ciekawostkę „prosty vs pełna agregacja” jako obserwację. Wyciąć: minę o konektorze (zgadywanie), minę o limitach Graph (brak wolumenu), pytanie o konektor.
+- ODPOWIEDZIEĆ: oferta w trybie wykonawczym — cena widełkowa (brak danych o skali), zakres, 4 pytania. Wprost powiedzieć: „Zakładam, że chcecie agregować maile przez Graph z uprawnieniami aplikacyjnymi — to wymaga zgody admina i polityki ograniczającej dostęp do wybranych skrzynek. Jeśli planujecie inaczej, dostroję.”
+- DOPYTAĆ: (1) dopasowanie maili do klienta, (2) wolumen skrzynek/maili, (3) licencje Dataverse/Azure, (4) zgoda admina M365.

@@ -1,0 +1,7 @@
+{
+  "status": "OK",
+  "kara_pkt": 0,
+  "cytat_lub_brak": "",
+  "uzasadnienie": "Oferta jest konkretna i dopasowana do ogłoszenia. Autor uczciwie przyznaje, że nie pracował wprost ze stolarką otworową, ale zna problem analizy dokumentów technicznych przez VLM/OCR. Zamiast negować podejście klienta, dodaje wartość: ostrzega o ograniczeniu fine-tuningu Gemini 3 Pro (z zastrzeżeniem weryfikacji), proponuje routing po typie dokumentu i pyta o sposób liczenia dokładności oraz ground truth. Odpowiada też wprost na prośbę o wycenę 2-3 spotkań, proponując dwa warianty. Brak zmyślonych realizacji i sztucznego tonu.",
+  "instrukcja_naprawy": ""
+}

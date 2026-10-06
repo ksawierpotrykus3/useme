@@ -1,0 +1,21 @@
+{
+  "job_id": "2523493",
+  "title": "Zlecenie: WordPress + WooCommerce + prosty system dostępu (PMS Lite)",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 6000,
+  "wycena_gorna": 10000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 20,
+  "uzasadnienie_rozjemcy": "Modele zgodnie potwierdzają wykonalność warunkową, minę PMS Lite przy subskrypcjach cyklicznych oraz potrzebę trzech pytań do klienta. Rozbieżność dotyczy głównie godzin: od ok. 52–72 h do 80–110 h, co po autokrytykach daje bazowo ok. 5–10 tys. zł. Wybieram 6–10 tys. zł netto jako wycenę orientacyjną dla zakresu przy gotowych treściach i brandzie; przy designie i redakcji po stronie wykonawcy górna granica może wzrosnąć. Wycena nie jest definitywna, bo brak wolumenu materiałów i decyzji o cykliczności subskrypcji. Czas 10–20 dni roboczych od przekazania materiałów i licencji.",
+  "od_czego_zaleza": [
+    "Czy subskrypcje są cykliczne z automatycznym odnawianiem, czy to dostęp czasowy — jeśli cykliczne, wymagane PMS Pro lub WooCommerce Subscriptions.",
+    "Wolumen kursów, lekcji i materiałów oraz to, czy treści są gotowe, czy wymagają wprowadzenia lub redakcji.",
+    "Kto dostarcza identyfikację wizualną i teksty — gotowy brand obniża zakres, projekt od zera podnosi.",
+    "Zakres i liczba stanów sekcji po zalogowaniu oraz poziom dopracowania estetyki premium i RWD.",
+    "Koszt i dostępność licencji po stronie klienta oraz termin przekazania materiałów."
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

@@ -1,0 +1,21 @@
+{
+  "job_id": "2638274",
+  "title": "Poprawa wyglądu strony internetowej kreator divi , usunięcie błędu 403 oraz drobne zmiany",
+  "budget": "1100,00 PLN",
+  "wycena_dolna": 900,
+  "wycena_gorna": 1250,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Modele są zgodne co do standardowego charakteru pracy na WordPressie z Divi, stawki ok. 90 zł/h oraz tego, że budżet 1100 PLN mieści się w realnym zakresie tylko przy małej lub średniej skali poprawek i błędzie 403 siedzącym po stronie WP/wtyczki. Rozbieżność dotyczy przede wszystkim górnej granicy: DeepSeek-A dopuszczał nawet 1600 PLN przy WAF i większym zakresie, DeepSeek-C 1350 PLN, DeepSeek-B 1250 PLN, a DeepSeek-D zamykał się w 1100 PLN, ale z zastrzeżeniem ryzyka. Mediany skrajnych wycen wypadają na 900–1250 PLN, więc tę wartość przyjmuję jako finalne widełki, nie kwotę definitywną. Wycena może się zawęzić po odpowiedziach na pytania o liczbę podstron, rodzaj logowania z 403 oraz hosting i support; bez tego każda sztywna kwota byłaby zgadywaniem.",
+  "od_czego_zaleza": [
+    "Liczba podstron objętych poprawą wizualną i zakres „drobnych zmian” (teksty, zdjęcia, układ, kolory, typografia)",
+    "Źródło błędu 403: WP/.htaccess/wtyczka bezpieczeństwa vs WAF lub mod_security po stronie hostingu",
+    "Hosting i dostępność supportu hostingu oraz możliwość współpracy przy diagnostyce 403",
+    "Czas potrzebny na diagnozę 403 i ewentualne odwołania do logów lub supportu",
+    "Terminowość przekazania dostępów do wp-admin, plików i panelu hostingu"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 1
+}

@@ -1,0 +1,21 @@
+{
+  "job_id": "2709431",
+  "title": "Połączenie Shopify API z Google Merchant Center / naprawa integracji Google & YouTube",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 1000,
+  "wycena_gorna": 2000,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Modele zgodnie traktują tę wycenę jako widełkową, a nie definitywną, bo zakres zależy od stanu GMC, wolumenu produktów i liczby integracji. Po autokorekcie większość głosów zbiega się w okolicach 1000–2000 zł, przy stawce ok. 90 zł/h i 12–22 godzinach pracy. Rozbieżność dotyczy głównie górnej granicy: jeden model podnosił ją do 2250 zł przy zawieszonym GMC, ale pozostali zatrzymali się na 1800–2000 zł. Dolna granica 1000 zł jest ostrożna, bo nawet diagnoza bez pełnego wdrożenia może zająć kilkanaście godzin, a proste przypadki OAuth mogą pozwolić zejść niżej po sprawdzeniu dostępów.",
+  "od_czego_zaleza": [
+    "status konta Google Merchant Center: aktywne, ostrzeżenia czy zawieszenie",
+    "liczba produktów i wariantów do zweryfikowania w synchronizacji",
+    "czy problem dotyczy wszystkich produktów, czy tylko części asortymentu",
+    "konflikt z innymi aplikacjami do feedów lub Google Ads",
+    "stan OAuth/uprawnień i ryzyko rotacji tokenów po stronie Shopify"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

@@ -1,0 +1,7 @@
+Widzę sześć obszarów: architektura, stack, MVP, skalowalność, bezpieczeństwo, organizacja projektu. Wszystkie naraz w jednym spotkaniu 1 do 2 godzin to nie konsultacja, to audyt przedprojektowy. Realnie w tym czasie zrobimy diagnozę i priorytety, czyli ustalimy, od czego zacząć i czego świadomie nie robić na starcie. Pełne rekomendacje w każdym z tych obszarów to osobny etap i tak bym to rozłożył, bo inaczej wychodzicie z poczuciem planu, którego nie ma.
+
+Druga rzecz. Stack stoi u was obok architektury jak dwa niezależne punkty do odhaczenia. W praktyce stack wynika z architektury, a architektura z tego, co platforma ma robić i kto z niej korzysta. Bez tego rekomendacja stacku jest listą życzeń, nie decyzją. Dlatego dwa pytania, zanim się spotkamy. Co platforma ma robić i kto jest użytkownikiem, kupujący, sprzedający, oboje. I na jakim etapie jest projekt, idea, prototyp, istniejący system. Od drugiego zależy, czy rozmawiamy o wyborze drogi, czy o korekcie kursu.
+
+Za 2 godziny z przygotowaniem i krótką notatką po spotkaniu 500 zł netto. Jeśli materiały przed spotkaniem okażą się szersze, niż zakładam, powiem o tym przed startem i dogadamy kwotę. Przykłady realizacji podeślę, ale po waszych odpowiedziach, żeby nie wrzucać wam rzeczy z innej bajki.
+
+Ksawier

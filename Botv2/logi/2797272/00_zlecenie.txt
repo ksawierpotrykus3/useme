@@ -1,0 +1,5 @@
+TYTUL: Wprowadzenie danych do Mirakl Superpharm
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Poszukuje osoby podejmującej się wprowadzenia 35 SKU na platformę Mirakl Superpharm. Na codzien korzystamy z systemu Shoper , który niestety wg mojej wiedzy nie posiada automatycznej integracji z mirakl Superpharm. Posiadam konto na mirakl i wytyczne do wprowadznia danych. Plik 1 Multimedia_i_treści_produktowe_MANUAL.pdf Opis pliku 1 W załączniu instrukcje do wprowadzenia produktu na platformę marketplace Superpharm Plik 2 Instrukcja_dla_użytkowników.pdf

@@ -1,0 +1,21 @@
+{
+  "job_id": "2530982",
+  "title": "Nowa szata graficzna dla istniejącej strony",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 5000,
+  "wycena_gorna": 7500,
+  "definitywna": false,
+  "dni_od": 12,
+  "dni_do": 18,
+  "uzasadnienie_rozjemcy": "Modele są zgodne co do zakresu: redesign ok. 10 podstron na własnym PHP, mobile-first, product box oraz weryfikacja/naprawa istniejącego formularza; PayPro i formularz nie są budowane od zera. Rozbieżność dotyczy głównie tego, czy w kwocie jest projekt UI/UX od zera oraz ryzyka splątanego kodu PHP. Dlatego finalnie przyjmuję widełki 5000–7500 zł, a nie kwotę definitywną: dolna granica przy czystym kodzie, istniejących CSS i mockupach od klienta, górna przy projektowaniu od zera, większej liczbie podstron lub przebudowie widoków. Czas 12–18 dni roboczych od dostępów i akceptacji kierunku.",
+  "od_czego_zaleza": [
+    "Dostęp do kodu/repozytorium i jakość istniejącego PHP (czy logika nie jest splątana z widokiem)",
+    "Czy formularz na contact.php działa i czy wymaga tylko weryfikacji, czy naprawy/rozbudowy",
+    "Liczba podstron objętych redesignem i responsywnością (założenie: ok. 10 plików .php)",
+    "Czy klient dostarcza mockupy/projekt UI, czy trzeba zaprojektować szatę graficzną od zera",
+    "Ostateczny zakres product boxa i ewentualne dodatkowe funkcje"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

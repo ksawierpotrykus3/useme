@@ -32,6 +32,9 @@ DZIENNIKI_DIR.mkdir(parents=True, exist_ok=True)
 CORE_DIR = BASE_DIR.parent.parent                       # .../useme_core
 OFERTOWARKA_DIR = CORE_DIR / "badania/baza/ksawierpotrykus3/01_ofertowarka"
 
+# Pelne logi calego lancucha per zlecenie (wszystko, zawsze, posegregowane).
+LOGI_DIR = BASE_DIR.parent / "logi"                     # .../Botv2/logi
+
 DEEPSEEK_API_URL = "http://127.0.0.1:4571/v1/chat/completions"
 MODEL = "deepseek-v4-pro"
 RESEARCH_MODEL = "deepseek-v4-pro-search"
@@ -269,11 +272,12 @@ def _przepisz_z_faktami(oferta: str, sedzia: Dict[str, Any], fakty: str, tresc: 
 
 
 def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True,
-                  zapisz_dziennik: bool = True) -> Dict[str, Any]:
+                  zapisz_dziennik: bool = True, tryb_zapisu: str = "pelne") -> Dict[str, Any]:
     """Glowna petla V2. Zwraca pelny wynik z dziennikiem, oferta, wycena, checkerem.
 
     zapisz_dziennik=False -> nie zostawia roboczego pliku w mozg/dzienniki
     (tryb produkcyjny: artefakty trafiaja tylko do ofertowarki).
+    tryb_zapisu: "pelne" (wszystko), "wycena" (tylko wycena - do zbierania danych), "brak".
     """
     job_id = str(zlecenie.get("id", "?"))
     tresc = _tresc_zlecenia(zlecenie)
@@ -460,7 +464,10 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True,
     # ---------- ZAPIS ARTEFAKTOW ----------
     # Produkcyjnie: pelny zapis do ofertowarki (analiza, research, wycena, oferta).
     # Dziennik roboczy w mozg/dzienniki tylko na zadanie (dev).
-    _zapisz_artefakty_ofertowarka(job_id, dziennik_iter1, dziennik, research, wynik_wyceny, oferta, check, sedzia)
+    # PELNE LOGI calego lancucha -> Botv2/logi/<job_id>/ (zawsze, posegregowane).
+    _zapisz_logi(job_id, zlecenie, dziennik_iter1, dziennik, research, wynik_wyceny,
+                 oferta_raw, oferta, check, sedzia, veto_przebieg, log)
+    _zapisz_artefakty_ofertowarka(job_id, dziennik_iter1, dziennik, research, wynik_wyceny, oferta, check, sedzia, tryb_zapisu)
     if zapisz_dziennik:
         (DZIENNIKI_DIR / f"{job_id}.json").write_text(
             json.dumps(wynik, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -468,18 +475,113 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True,
     return wynik
 
 
+def _zapisz_logi(job_id: str, zlecenie: Dict[str, Any], dziennik_iter1: str,
+                 dziennik: str, research: str, wynik_wyceny: Dict[str, Any],
+                 oferta_raw: str, oferta: str, check: Dict[str, Any],
+                 sedzia: Dict[str, Any], veto_przebieg: list, log: list) -> None:
+    """Zapisuje WSZYSTKO z calego lancucha do Botv2/logi/<job_id>/.
+
+    Posegregowane per zlecenie. Zawsze (niezaleznie od trybu ofertowarki).
+    Zawartosc:
+      00_zlecenie.txt     - surowa tresc wejsciowa
+      01_analiza.md       - dziennik iteracji 1
+      02_research.md      - surowy research
+      03_weryfikacja.md   - dziennik po weryfikacji (iteracja 2)
+      04_wycena.md        - surowy zapis rady 4 modeli + rozjemca
+      05_pismo_raw.md     - pismo przed sanitizerem
+      06_oferta_final.md  - oferta po sanitizerze
+      07_checker.json     - wynik checkera
+      08_sedzia.json      - werdykt sedziego (+ petla VETO)
+      09_veto_przebieg.md - przebieg napraw po VETO (jesli byl)
+      10_log.txt          - pelny log przebiegu (kroki)
+      wynik.json          - podsumowanie strukturalne
+    """
+    try:
+        out = LOGI_DIR / str(job_id)
+        out.mkdir(parents=True, exist_ok=True)
+
+        (out / "00_zlecenie.txt").write_text(
+            f"TYTUL: {zlecenie.get('title', '')}\n"
+            f"BUDZET: {zlecenie.get('budget', '')}\n\n"
+            f"OPIS:\n{zlecenie.get('full_description', '')}\n", encoding="utf-8")
+        (out / "01_analiza.md").write_text(dziennik_iter1 or "", encoding="utf-8")
+        (out / "02_research.md").write_text(research or "", encoding="utf-8")
+        (out / "03_weryfikacja.md").write_text(dziennik or "", encoding="utf-8")
+        (out / "04_wycena.md").write_text(wynik_wyceny.get("surowy_tekst", "") or "", encoding="utf-8")
+        (out / "05_pismo_raw.md").write_text(oferta_raw or "", encoding="utf-8")
+        (out / "06_oferta_final.md").write_text(oferta or "", encoding="utf-8")
+        (out / "07_checker.json").write_text(
+            json.dumps(check, ensure_ascii=False, indent=2), encoding="utf-8")
+        (out / "08_sedzia.json").write_text(
+            json.dumps(sedzia, ensure_ascii=False, indent=2), encoding="utf-8")
+        if veto_przebieg:
+            bloki = []
+            for v in veto_przebieg:
+                bloki.append(
+                    f"=== PROBA {v.get('proba')} ===\n"
+                    f"SEDZIA: {json.dumps(v.get('sedzia'), ensure_ascii=False)}\n\n"
+                    f"WERYFIKACJA FAKTOW:\n{v.get('fakty')}\n"
+                )
+            (out / "09_veto_przebieg.md").write_text("\n\n".join(bloki), encoding="utf-8")
+        (out / "10_log.txt").write_text("\n".join(log or []), encoding="utf-8")
+
+        podsum = {
+            "job_id": job_id,
+            "title": zlecenie.get("title", ""),
+            "budget": zlecenie.get("budget", ""),
+            "wycena_dolna": wynik_wyceny.get("kwota_dolna"),
+            "wycena_gorna": wynik_wyceny.get("kwota_gorna"),
+            "definitywna": wynik_wyceny.get("definitywna"),
+            "dni_od": wynik_wyceny.get("dni_od"),
+            "dni_do": wynik_wyceny.get("dni_do"),
+            "uzasadnienie_rozjemcy": wynik_wyceny.get("uzasadnienie_rozjemcy"),
+            "od_czego_zaleza": wynik_wyceny.get("od_czego_zaleza"),
+            "checker_ok": check.get("ok"),
+            "sedzia": sedzia.get("status"),
+            "veto_napraw": len(veto_przebieg),
+        }
+        (out / "wynik.json").write_text(
+            json.dumps(podsum, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as e:
+        print(f"[ZAPIS-LOGI] blad dla #{job_id}: {e}", flush=True)
+
+
 def _zapisz_artefakty_ofertowarka(job_id: str, dziennik_iter1: str, dziennik: str,
                                   research: str, wynik_wyceny: Dict[str, Any],
                                   oferta: str, check: Dict[str, Any],
-                                  sedzia: Dict[str, Any]) -> None:
-    """Zapisuje surowe artefakty lancucha do 01_ofertowarka/<job_id>/.
+                                  sedzia: Dict[str, Any], tryb: str = "pelne") -> None:
+    """Zapisuje artefakty lancucha do 01_ofertowarka/<job_id>/.
 
-    Zgodnie z docelowym dzialaniem bota: analiza + research + wyceny + oferta koncowa,
-    a dziennik roboczy i debug NIE sa zostawiane.
+    tryb="pelne"   -> analiza + research + weryfikacja + wycena + pismo + koncowa
+    tryb="wycena"  -> TYLKO wycena (do zbierania danych / analizy wycen)
+    tryb="brak"    -> nic nie zapisuje
     """
+    if tryb == "brak":
+        return
     try:
         out = OFERTOWARKA_DIR / str(job_id)
         out.mkdir(parents=True, exist_ok=True)
+
+        if tryb == "wycena":
+            # Tylko wycena + krotki wynik z decyzja.
+            (out / "4_wycena.md").write_text(wynik_wyceny.get("surowy_tekst", "") or "", encoding="utf-8")
+            wynik_wyc = {
+                "job_id": job_id,
+                "wycena_dolna": wynik_wyceny.get("kwota_dolna"),
+                "wycena_gorna": wynik_wyceny.get("kwota_gorna"),
+                "definitywna": wynik_wyceny.get("definitywna"),
+                "dni_od": wynik_wyceny.get("dni_od"),
+                "dni_do": wynik_wyceny.get("dni_do"),
+                "uzasadnienie_rozjemcy": wynik_wyceny.get("uzasadnienie_rozjemcy"),
+                "od_czego_zaleza": wynik_wyceny.get("od_czego_zaleza"),
+                "sedzia": sedzia.get("status"),
+                "checker_ok": check.get("ok"),
+            }
+            (out / "wycena.json").write_text(
+                json.dumps(wynik_wyc, ensure_ascii=False, indent=2), encoding="utf-8")
+            return
+
+        # tryb pelne
         (out / "1_analiza.md").write_text(dziennik_iter1 or "", encoding="utf-8")
         (out / "2_research.md").write_text(research or "", encoding="utf-8")
         (out / "3_weryfikacja.md").write_text(dziennik or "", encoding="utf-8")

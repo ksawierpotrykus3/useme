@@ -1,0 +1,5 @@
+TYTUL: Kompletne wdrożenie Comarch e-Sklep
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Zlecę kompletne wdrożenie e-sklepu i konfigurację z Comarch ERP Optima wraz z przyuczeniem użytkowników i pomocą przy starcie. Do zrobienia m.in .: -Przygotowanie szaty graficznej (zgodnie z trendami, ale też funkcjonalnie) -Pomoc w ew. utworzeniu grafik, banerów -Konfiguracja certyfikatu SSL -Konfiguracja poczty -Konfiguracja płatności online -Konfiguracja macierzy dostaw Wymagane funkcje: płatności onLine obsługa wysyłek współpraca z Comarch ERP Optima (stacjonarna) Szablon / własny projekt: dostosowanie szablonu lub własny projekt

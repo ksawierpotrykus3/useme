@@ -1,0 +1,7 @@
+BaseLinker znam od strony scenariuszy, reguł automatycznych, statusów, dokumentów oraz integracji marketplace i kurierskich. Pracę zaczynam od audytu tego, co macie teraz i gdzie ręczna robota zjada najwięcej czasu, a potem wdrażam automatyzacje w kolejności od tych, które dają największą oszczędność. Wchodzę wyłącznie przez subkonto z ograniczonymi uprawnieniami, nie przez konto główne, i standardowo podpisuję umowę powierzenia danych. To nie jest formalność, tylko zabezpieczenie waszych danych klientów i zamówień.
+
+Zakres wyceniam orientacyjnie na 900 do 1800 zł netto, około dwóch do pięciu dni roboczych od przekazania dostępów. Widełki są szerokie, bo zależą od liczby kanałów sprzedaży, miesięcznej skali zamówień, integracji zewnętrznych oraz tego, co już macie ustawione. Po audycie podam konkretną kwotę i jeśli okaże się, że trzeba dopiero postawić jakąś integrację od zera, zrobiłbym to osobno, ale najpierw ustalmy zakres.
+
+Żeby zawęzić wycenę, potrzebuję trzech rzeczy. Ile zamówień obsługujecie miesięcznie i przez jakie kanały sprzedaży. Które czynności w BaseLinkerze zajmują teraz najwięcej czasu albo są najbardziej ręczne. Jakie systemy poza BaseLinkerem uczestniczą w obiegu zamówień, na przykład ERP, magazyn, księgowość, kurierzy.
+
+Ksawier

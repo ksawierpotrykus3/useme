@@ -1,0 +1,5 @@
+TYTUL: Stworzenie CRM poprzez PowerApss
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Dzień dobry, Zdecydowaliśmy się jednak zlecić zadanie na zewnątrz. Szukam wykonawcy do stworzenia prostego, funkcjonalnego CRM działającego w ekosystemie Microsoft 365 i Azure. Zakres funkcjonalny: Logowanie i Role Centralna baza klientów Każdy klient posiada własną kartę zawierającą: dane kontaktowe notatki umowy ustalenia / zmiany zadania pełną historię komunikacji e-mail Historie zdarzeń na pracowników (traceability list) -Kluczowe wymaganie: Klient może korespondować z różnymi osobami w organizacji. System musi automatycznie agregować wszystkie wiadomości e-mail ze wszystkich skrzynek pracowników i adresów przypisanych do danego klienta, aby możliwe było śledzenie pełnych wątków i tematów w jednym miejscu. Prosze o wycenę, szacowany termin realizacji i mozliwą datę rozpoczęcia. Zlecenie do wykonania na już. Wymagane funkcje: M365 MS Graph MS PowerPlatform itp. Miejsce wykonania: Zdalnie

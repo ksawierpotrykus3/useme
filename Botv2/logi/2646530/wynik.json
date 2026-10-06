@@ -1,0 +1,21 @@
+{
+  "job_id": "2646530",
+  "title": "Ustawienie Automatyzacji w Baselinkerze",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 900,
+  "wycena_gorna": 1800,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Wybieram 900–1800 zł jako finalne orientacyjne widełki, bo to dominujący wynik w głosach: A, C i D w pierwszej rundzie podają właśnie ten zakres, a D po korekcie tylko lekko poszerza go do 700–2000 zł. B podaje 1500–3500 zł, ale jest odosobniony i sam zaznacza, że przy braku danych to wyłącznie orientacyjne „od–do” po audycie. Wycena nie jest definitywna, bo zależy przede wszystkim od skali, kanałów, integracji zewnętrznych i stanu obecnych automatyzacji. Czas 2–5 dni roboczych to zbieżność A, C i D; dłuższy wariant B traktuję jako scenariusz bardziej złożonego wdrożenia.",
+  "od_czego_zaleza": [
+    "liczba kanałów sprzedaży (Allegro, Amazon, sklep własny, inne)",
+    "miesięczna skala zamówień",
+    "liczba i typ integracji zewnętrznych (ERP, magazyn, księgowość, kurierzy, API)",
+    "obecny stan automatyzacji i workflow w BaseLinkerze",
+    "plan BaseLinkera i dostępne funkcje automatyzacji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

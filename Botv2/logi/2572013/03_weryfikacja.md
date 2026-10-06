@@ -1,0 +1,26 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (wdrożenie voicebota na WWW), z opcją osobnego etapu na inne kanały
+INTENCJA: mieszane — klient wprost prosi o architekturę i narzędzia (wykonawczo-doradcze), zakres wdrożenia jest wykonawczy
+DECYDENT_I_BOL: Decydent — właściciel/menedżer firmy HVAC. Ból: sezonowy napływ powtarzalnych pytań (czas oczekiwania, montaż, koszty kucia), potrzeba wstępnej kwalifikacji klientów przed wyceną, standaryzacja odpowiedzi, obawa przed halucynacjami i podawaniem cen bez kompletu danych.
+WYKONALNE: TAK. Widget JS wklejany na stronę + zewnętrzny backend voice (streaming STT → LLM + RAG → TTS z VAD/barge-in). ElevenLabs ma oficjalny widget WP — najbardziej bezpośrednia ścieżka pod „na WordPressa”.
+POLE_DO_POPISU: JEST — klient wprost pyta: jak zbudować, na jakich narzędziach, jak rozwiązać polski głos / przerwania / latencję, jaki koszt, przykłady realizacji. To zaproszenie do merytoryki.
+SCIEZKA_MERYTORYKI: A (klient wprost pyta o technologię i rozwiązania)
+MINY_I_CIEKAWOSTKI:
+- RODO (typ 4, mina compliance): klient zbiera dane osobowe przez rozmowę i prawdopodobnie nagrywa, a w ogłoszeniu nie ma ani słowa o zgodzie, klauzuli informacyjnej czy retencji. Dowód: „zbieranie podstawowych danych od klienta” + „rozmowa głosowa”. Alternatywa: klauzula przed startem rozmowy + zgoda na nagranie + określona retencja — do dodania w ramach projektu, nie blokuje.
+- „Na WordPressa” nie znaczy „plugin, który sam robi voicebota” (ciekawostka, nie mina): WP hostuje tylko widget JS; cały voice pipeline żyje na zewnętrznym backendzie/API. Warto to nazwać, żeby nie było rozjazdu oczekiwań co do zakresu. Dowód: tytuł „na WordPressa” + „działający z poziomu strony internetowej”.
+- Barge-in i niska latencja nie są miną — klient WPROST o to pyta. To element ścieżki A, nie ostrzeżenie.
+ODMOWA: puste. Brak twardej odmowy — RODO jest do dodania, WP da się wpiąć widgetem, klient nie prosi o nic niemożliwego.
+PYTANIA (3):
+1. Gdzie fizycznie leży baza wiedzy firmy i w jakim formacie (dokumenty, FAQ na stronie, arkusze, CRM)? — pytam, bo od tego zależy implementacja RAG i realny zakres prac przy zasilaniu voicebota treścią.
+2. Gdzie mają trafiać dane zebrane od klienta (istniejący CRM, kalendarz, e-mail, zapis w WP)? — pytam, bo od tego zależy zakres integracji i to zmienia wycenę.
+3. Strona WordPress jest self-hosted, czy na WordPress.com (i na jakim planie)? — pytam, bo od tego zależy, czy da się wstawić własny widget JS, czy trzeba iść ścieżką pośrednią.
+CO_ZLECENIE_MOWI: Voicebot AI na stronie WWW (WordPress), język polski, baza wiedzy firmy HVAC. Zakres: info o wycenie, czas oczekiwania w sezonie, montaż/serwis/montaż dwuetapowy, koszty kucia, rodzaj ściany, metraż, zbieranie danych, kierowanie do kontaktu/wideokonsultacji. Wymagania głosowe: naturalny, ludzki, barge-in, krótkie przerwy, nie sztuczny. Mile widziane LLM/RAG i ElevenLabs. Start: WWW, inne kanały osobno. Prosi o: architekturę, narzędzia, rozwiązanie głosu/przerwań/latencji, orientacyjny koszt, przykłady.
+CZEGO_NIE_MOWI: nie mówi, gdzie i w jakim formacie jest baza wiedzy; nie mówi, jaki CRM/kalendarz ani gdzie mają trafiać dane; nie mówi, czy WP jest self-hosted czy .com; nie mówi o RODO/zgodach/retencji; nie mówi o wolumenie ruchu ani o dostępności 24/7 ani o przekazaniu do człowieka; nie mówi, o jaki dokładnie zakres danych osobowych chodzi.
+GRANICA_CIECIA: długość średnia — klient wprost prosi o 5 konkretów (architektura, narzędzia, głos, barge-in/latencja, koszt, przykłady), więc odpowiadamy na te punkty zwięźle, bez głębokiego researchu implementacyjnego. Głębokość: wskazujemy architekturę i stack na poziomie wyboru, nie konfiguracji. Pytania ograniczone do 3 — reszta idzie jako propozycje TYP 2 z zastrzeżeniem.
+RESEARCH_POTRZEBNY: NIE — research z iteracji 1 nic istotnego nie zmienił poza potwierdzeniem, że ElevenLabs ma oficjalny widget WP (co i tak było widać z ogłoszenia). Wystarczy własna wiedza. Uwaga: liczba „barge-in <1 ms” z researchu jest błędna — abort latency jest rzędu dziesiątek–setek ms i nie wolno jej powtarzać klientowi.
+DECYZJE:
+- DOPISAĆ: (a) RODO jako mina typ 4 z dowodem i alternatywą (klauzula + zgoda + retencja) — do wplecenia w ofertę spokojnie, jako element zakresu, nie straszenie; (b) wyjaśnienie „WP = host widgetu, nie backend voicebota” jako TYP 2 (propozycja architektury, nie pytanie); (c) w części o narzędziach — rekomendacja zamiast pytania: ElevenLabs Conversational AI + widget WP jako najkrótsza ścieżka pod „na WordPressa”, ewentualnie LiveKit/Vapi jeśli zajdzie potrzeba większej kontroli nad barge-in.
+- ODPOWIEDZIEĆ: na 5 punktów, o które klient wprost prosił: architektura (widget JS + backend voice poza WP), narzędzia (STT streaming + LLM + RAG + TTS, np. ElevenLabs dla polskiego głosu), rozwiązanie barge-in i niskiej latencji (streaming na każdym etapie + VAD), orientacyjny koszt — widełki (zlecenie niejasne do wyceny w punkt, bo brak danych o bazie wiedzy i integracjach — więc widełki + otwartość, nie „wycena byłaby zgadywaniem”), przykłady — najlepiej 1-2 zbliżone (voicebot z RAG w obsłudze klienta), bez zmyślania case studies HVAC, których nie ma.
+- DOPYTAĆ: 3 pytania — baza wiedzy (gdzie i format), integracja danych (CRM/kalendarz/e-mail/WP), WP self-hosted vs .com. RODO i architektura WP jako propozycje, nie pytania.
+```

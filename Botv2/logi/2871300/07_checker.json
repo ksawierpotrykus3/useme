@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "problemy": [
+    {
+      "regula": "rozjazd dni z kalkulatorem",
+      "dowody": [
+        "tekst: 14 dni vs kalkulator: 25 dni"
+      ]
+    }
+  ]
+}

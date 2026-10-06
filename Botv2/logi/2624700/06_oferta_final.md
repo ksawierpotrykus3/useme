@@ -1,0 +1,9 @@
+Zlecenie jest konkretne, stack spójny, a Figma i specyfikacja po Waszej stronie to duży plus. Proponuję podzielić pracę na trzy etapy. Najpierw fundament, czyli role admin, dyspozytor, kierowca, baza klientów i adresów oraz zamówienia z historią i statusami. Drugi etap to operacje, czyli magazyn, panel dyspozytora, przydzielanie dostaw i lista kierowcy na dzień. Trzeci etap domyka całość, czyli trasy, powiadomienia, raporty i wdrożenie na Waszym serwerze. Taki podział pozwala Wam zobaczyć działającą część po kilku tygodniach i bezpiecznie akceptować kolejne kroki.
+
+Widełki na całość to 35 000 do 50 000 zł netto. Zależą od kilku rzeczy, które muszę doprecyzować. Czy Figma i specyfikacja są kompletne dla wszystkich modułów, w tym raportów i panelu dyspozytora. Czy planowanie tras ma być ręczne, czy system ma je optymalizować automatycznie, bo to największy mnożnik pracochłonności i kosztów zewnętrznych. Jakie kanały powiadomień wchodzą w grę, czy wystarczy in-app, czy potrzebny e-mail, push lub SMS. Czy aplikacja ma się integrować z istniejącym systemem ERP, księgowością, KSeF albo mapami. Realizacja zajmie około 60 do 90 dni.
+
+Nie mam publicznego portfolio, które mógłbym tu podlinkować. Piszę to wprost, żeby nie było niedomówień. Pracuję z Java, Spring Boot, React i PostgreSQL, czyli dokładnie tym stackiem, o którym piszecie. Zamiast zapewniać, wolę dać Wam sposób sprawdzenia mnie. Mogę zrobić krótkie płatne zadanie próbne, na przykład jeden ekran z Figmy plus endpoint w Spring Boot z zapisem do PostgreSQL. Możemy też porozmawiać technicznie, jeśli macie u siebie osobę, która to zweryfikuje. Referencje od poprzednich klientów podam, gdy będzie taka potrzeba.
+
+Jeśli okaże się, że coś trzeba doprecyzować lub macie już inne rozwiązanie, dopasuję się.
+
+Ksawier

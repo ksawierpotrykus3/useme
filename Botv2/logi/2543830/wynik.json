@@ -1,0 +1,21 @@
+{
+  "job_id": "2543830",
+  "title": "Konsultacja/doradztwo odnośnie modelu AI/OCR do analizy rysunków technicznych",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 600,
+  "wycena_gorna": 800,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Po autokrytyce czterech modeli widać zbieżność w przedziale 600–800 zł: skrajne 270–500 zł oraz 900–1100 zł zostały przez same modele skorygowane jako zaniżone lub napompowane. Zakres to doradztwo, nie wdrożenie: 2–3 h spotkań plus 3–5 h analizy materiałów i spisania rekomendacji, co daje realnie 5–8 h pracy. Rozbieżność wynika głównie z tego, czy wycena obejmuje tylko spotkania, czy także research, analizę próbek i roadmapę. Niepewność podnosi brak informacji, jak liczone jest 70%, czy istnieje ground-truth i czy PDF-y są wektorowe czy rastrowe.",
+  "od_czego_zaleza": [
+    "liczba spotkań: 2 vs 3",
+    "zakres pisemnej rekomendacji: krótka notatka vs roadmapa",
+    "czas analizy materiałów i researchu przed spotkaniami",
+    "liczba typów dokumentów do diagnozy: PDF z wyceny, rysunek architekta, szkic",
+    "potrzeba follow-upu po konsultacji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

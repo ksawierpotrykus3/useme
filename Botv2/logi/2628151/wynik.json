@@ -1,0 +1,21 @@
+{
+  "job_id": "2628151",
+  "title": "Full-Stack Developera — Offline-First PWA + Supabase | B2B Mikro-SaaS |",
+  "budget": "20000,00 PLN",
+  "wycena_dolna": 20000,
+  "wycena_gorna": 28000,
+  "definitywna": false,
+  "dni_od": 56,
+  "dni_do": 84,
+  "uzasadnienie_rozjemcy": "Modele są zgodne, że pełny zakres briefu jest wart więcej niż 20 000 PLN; przy 90 zł/h daje to ok. 222 h, a realna pracochłonność pełnego multi-tenant SaaS z offline-first PWA, RLS, PDF, HotPay i Fakturownią to ok. 260–400 h. Zbieżność dotyczy też dwóch min: braku Background Sync w Safari oraz 7-dniowego czyszczenia IndexedDB na iOS bez instalacji PWA, co wymusza dual-path sync i warunek instalacji PWA. Rozbieżność jest w strategii: DeepSeek-B i C akceptują 20 000 PLN tylko przy twardym zamrożeniu zakresu/MVP, a DeepSeek-A i D odrzucają pełny zakres i wskazują 27 000–31 500 PLN. Dlatego finalnie wycena jest widełkowa: 20 000 PLN za ograniczony, jednoznacznie zamknięty MVP albo 24 000–28 000 PLN za pełniejszy zakres; bez doprecyzowania zakresu i HotPay recurring wycena nie może być definitywna.",
+  "od_czego_zaleza": [
+    "Czy zakres zostaje zamrożony do MVP (np. Fakturownia w Fazie 2, PDF bez miniatur w v1), czy realizowany jest pełny zakres z briefu",
+    "Czy HotPay obsługuje płatności cykliczne (recurring), czy wymagany jest cron i własna logika przypomnień po stronie wykonawcy",
+    "Jakich urządzeń używają kierowcy (iOS/Android/mix) — wpływa na dual-path sync i konieczność twardego wymogu instalacji PWA",
+    "Czy są makiety UI dashboardu, czy projektowanie interfejsu odbywa się od zera",
+    "Gotowość środowisk HotPay i Fakturownia (API/sandbox) w dniu startu"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

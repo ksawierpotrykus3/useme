@@ -1,0 +1,21 @@
+{
+  "job_id": "2643264",
+  "title": "Budowa Agenta AI do automatyzacji Marketplace (400 SKU)",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 16000,
+  "wycena_gorna": 24000,
+  "definitywna": false,
+  "dni_od": 25,
+  "dni_do": 45,
+  "uzasadnienie_rozjemcy": "Modele zgodnie rekomendują architekturę hybrydową n8n/Make + Python oraz BaseLinker jako warstwę pośrednią, a także wskazują te same miny: A+ Content wymaga Brand Registry, a bezpośrednie API Allegro do cen konkurencji wymaga weryfikacji aplikacji. Rozbieżność dotyczy głównie nakładu: niższe wyceny 11–15 tys. zł zakładają gotowe dostępy i wariant minimum, a wyższe 20–28 tys. zł pełną automatyzację i brak gotowych integracji. Po korektach autokrytycznych najbardziej obronne są widełki 16–24 tys. zł netto: dół przy gotowych dostępach i BaseLinkerze, góra przy bezpośrednich API, pełnym auto-pricingu i szerszym utrzymaniu. Wycena nie jest definitywna, bo brakuje potwierdzenia SP-API, Brand Registry, rynków Amazon i reguł marżowych.",
+  "od_czego_zaleza": [
+    "Gotowość zatwierdzonej aplikacji Amazon SP-API oraz dostępów do kont Allegro/Amazon/BaseLinker",
+    "Czy marka jest w Amazon Brand Registry, bo bez tego A+ Content wypada z zakresu AI Editora",
+    "Liczba rynków Amazon i zakres monitoringu cen konkurencji per ASIN/EAN",
+    "Tryb auto-pricingu: ręczne zatwierdzanie sugestii czy pełna automatyzacja po regułach marżowych",
+    "Zakres utrzymania oraz koszty narzędzi i tokenów LLM po stronie klienta"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

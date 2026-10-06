@@ -1,0 +1,21 @@
+{
+  "job_id": "2628174",
+  "title": "Zbudowanie drzewa kategorii i przypisanie do nich produktów oraz przerobienie atrybutu rozmiarów w sklepie internetowym",
+  "budget": "500,00 PLN",
+  "wycena_dolna": 5000,
+  "wycena_gorna": 10000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 18,
+  "uzasadnienie_rozjemcy": "Modele zgodnie potwierdzają, że budżet 500 PLN nie pokrywa całości: to co najmniej trzy prace — projekt drzewa, migracja ok. 75 tys. produktów i konsolidacja termów rozmiaru. Zbieżność dotyczy też min: WooCommerce dopasowuje warianty po slugach termów, nie po etykietach, a przy 75 tys. produktów drzewo kategorii jest decyzją wydajnościową, nie kosmetyczną. Rozbieżność dotyczy głównie etapu masowego: DeepSeek-D zaniżył go do 2000–4500 PLN, podczas gdy B i C oscylują wokół 3600–9000 PLN za sam etap 2, a A dochodzi do 12600 PLN za całość. Finalne widełki 5000–10000 PLN są kompromisem dla pełnego zakresu; przy sztywnym budżecie 500 PLN realny jest wyłącznie płatny etap diagnostyczny: projekt drzewa, reguły i walidacja na próbce.",
+  "od_czego_zaleza": [
+    "potwierdzenia, czy rozmiar jest jednym globalnym atrybutem, czy osobnym per typ produktu (obuwie/odzież/dziecięce, EU/US/UK)",
+    "źródła danych produktów (feed/import/ręcznie) i konieczności wpięcia normalizacji w import",
+    "liczby i głębokości istniejących kategorii oraz termów, a także stanu wydajności bazy (tax_query, wp_term_relationships, indeksy)",
+    "zakresu etapu masowego: czy trzeba zachować historyczne warianty/zamówienia i stare URL-e kategorii",
+    "rzeczywistej przydatności wtyczki klienta do wykonania reguł przypisania i normalizacji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

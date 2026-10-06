@@ -1,0 +1,5 @@
+TYTUL: Nowa szata graficzna dla istniejącej strony
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Potrzebuję stworzyć nową szatę graficzną dla strony soft4fx.com zachowując jednocześnie treść strony. W szczególności zależy mi na profesjonalnym wyglądzie strony głównej i na responsywności całej witryny. Chcę zachować: logo i nazwę firmy, nazwę produktu obecną metodę płatności - PayPro większość treści i screenshotów z oprogramowania Chcę zmienić: poprawić szatę graficzną stworzyć ładniejszy product box na stronie głównej lub zastąpić go czymś innym wprowadzić responsywność Wymagane funkcje formularz kontaktowy Preferowane rozwiązanie Musi być oparte o PHP. Poza tym, jestem otwarty na propozycje.

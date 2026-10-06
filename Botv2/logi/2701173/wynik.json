@@ -1,0 +1,21 @@
+{
+  "job_id": "2701173",
+  "title": "PrestaShop – moduł do automatycznego przeliczania cen konfiguracji komputerów i laptopów (RAM / dysk)",
+  "budget": "1000,00 PLN",
+  "wycena_dolna": 3000,
+  "wycena_gorna": 5000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 15,
+  "uzasadnienie_rozjemcy": "Po autokrytyce modele zbiegają się wokół wyceny 3200–5000 zł netto, ponieważ nie ma gotowego modułu PrestaShop realizującego centralny cennik komponentów i automatyczne przeliczanie kombinacji względem konfiguracji bazowej. Rozbieżność dotyczy głównie górnej granicy: część modeli szacuje 4500–5000 zł, a najbardziej ostrożny model podnosi ją do 6500 zł przy większej skali, migracji danych i problemach wydajnościowych. Budżet 1000 zł jest nierealny na pełny custom moduł; pokrywa co najwyżej analizę, prototyp lub rozwiązanie częściowe na globalnych opcjach. Wycena pozostaje widełkowa, bo zlecenie nie podaje wersji PrestaShop, skali produktów, stanu kombinacji ani logiki ceny bazowej.",
+  "od_czego_zaleza": [
+    "Wersja PrestaShop: 1.7 vs 8.x/9.x i ewentualne różnice w zarządzaniu kombinacjami",
+    "Liczba produktów i kombinacji RAM/dysk objętych automatycznym przeliczaniem oraz wydajność synchronizacji",
+    "Czy kombinacje już istnieją w produktach, czy trzeba je budować lub migrować od zera",
+    "Czy cena bazowa produktu ma pozostać stała, a moduł liczy tylko różnice, czy cena ma być sumą komponentów z centralnego cennika",
+    "Zakres komponentów: tylko RAM i dysk, czy także CPU/GPU oraz inne warianty"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

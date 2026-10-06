@@ -1,0 +1,31 @@
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (MVP) z perspektywą stałej współpracy / rozwoju (mobile, SaaS). Nie retainer, nie audyt — etapowy projekt produktowy.
+INTENCJA: mieszane — wykonawcze (MVP) + doradcze (klient wprost: „oczekuję doradztwa produktowego i technologicznego, nie tylko implementacji”).
+DECYDENT_I_BOL: Nie wiemy kto pisze — ogłoszenie nie mówi. Może być właściciel produktu, organizator, pośrednik albo podmiot budujący marketplace. Ból czytelny z treści: chce uruchomić sprzedaż biletów z monetyzacją prowizyjną (Model C), maksymalnie uprościć zakup, a potem skalować. Nie przypisuję mu startupu ani konkretnej roli — to zgadywanie.
+WYKONALNE: TAK. MVP w zakresie z ogłoszenia; mobile i SaaS jako kolejne etapy, nie część MVP.
+POLE_DO_POPISU: JEST. Klient wprost prosi o rekomendację płatności i doradztwo technologiczne — to zaproszenie do merytoryki. Nie ma natomiast pola na rozpiskę UI ani na wybór stacku bez danych.
+SCIEZKA_MERYTORYKI: A (płatności — klient pyta wprost) + B (model rozliczeń/wypłat — potencjalna mina, ale warunkowa, patrz niżej). Ścieżka C nie zachodzi — klient nie obrał gorszej drogi, tylko wybrał model, który wymaga doprecyzowania.
+MINY_I_CIEKAWOSTKI:
+- Model C + ręczne wypłaty w MVP — mina WARUNKOWA. Dowód ze zlecenia: „Model C: prowizja od organizatora + opłata serwisowa dla kupującego”, „ręczne wypłaty w MVP”, „system rozliczeń kontrolowany przez administratora”. Research potwierdza, że przyjmowanie i ręczne przekazywanie środków może wymagać wpisu MIP/KNF. ALE: nie wiemy, czy klient tego nie wie — może działa jako merchant świadomie. Dlatego nie straszę, tylko pytam/proponuję: „Jeśli platforma ma zbierać środki i ręcznie wypłacać, to rekomendujemy PSP marketplace (PayU/Przelewy24/Tpay) — inaczej wchodzi temat MIP/KNF.” To doradztwo, nie odmowa.
+- Płatności nie są wymienne w modelu marketplace — mina z dowodem. Dowód: lista „Stripe, Przelewy24, PayU lub Tpay” + „wymagana rekomendacja najlepszego rozwiązania”. Research potwierdza: każdy PSP ma inny model split/marketplace (Stripe Connect vs Przelewy24 Marketplace vs PayU Marketplace vs Tpay Marketplace) i inne wymogi KYC. To realnie zmienia architekturę. Wchodzi.
+- Check-in QR w przeglądarce — USUNIĘTE z min. To nie mina, tylko normalna technologia. Brak dowodu, że klient ma problem z internetem. To uzasadnienie pytania/propozycji (offline/PWA), nie mina.
+ODMOWA: BRAK. To nie jest odmowa — klient nie prosi o coś niewykonalnego ani sprzecznego z celem. Kwestia modelu merchant/PSP to doradztwo i rekomendacja, nie blokada. Gdybym wpisał tu odmowę typu 4, byłoby to nadużycie — klient może legalnie działać jako merchant albo iść przez PSP marketplace. Nie ma bariery nie do przejścia.
+PYTANIA (tylko TYP 1 — reszta jako propozycje):
+1. Jakie są wolumeny MVP: ilu organizatorów, ile wydarzeń/mies., ile biletów na wydarzenie, jaki szczyt równoczesnych zakupów? Uzasadnienie: tylko klient to wie, a od tego zależy architektura, wydajność, koszty infrastruktury i wycena. TYP 1.
+2. Czy klient ma już zarejestrowaną działalność i/lub konto merchant, czy platforma ma działać jako pośrednik? Uzasadnienie: tylko klient wie; wpływa na to, który PSP wchodzi w grę (np. PayU Marketplace wymaga submerchantów, Stripe Connect — kont połączonych). ALE: to też da się zaproponować domyślnie („rekomendujemy PSP marketplace, jeśli nie macie własnego merchant account”). Zostawiam jako pytanie, bo od tego zależy architektura płatności — ale zaznaczam, że mamy rekomendację domyślną.
+
+PROPOZYCJE (TYP 2 — nie pytamy, proponujemy z zastrzeżeniem):
+- Płatności: rekomendacja PSP marketplace (np. PayU Marketplace albo Przelewy24 Marketplace) zamiast Stripe Connect, jeśli klient nie chce być merchantem. Zastrzeżenie: „jeśli macie własne konto merchant i chcecie nim rozliczać, dostroję.”
+- Check-in: proponuję PWA z cache offline jako domyślne, chyba że klient powie, że wystarczy online. TYP 2 z zastrzeżeniem.
+- Zwroty/anulacje: proponuję objąć MVP zwrotami przez PSP (nie tylko e-maile). Zastrzeżenie: „jeśli zwroty mają być poza MVP, dostroję zakres.”
+- Stack: proponuję konkretny (np. Next.js + PostgreSQL + Stripe/PSP), nie pytam. Zastrzeżenie: „jeśli macie preferencje, dostroję.”
+- Kolejność prac: proponuję najpierw panel organizatora + zakup + QR check-in, potem admin. Nie pytam.
+CO_ZLECENIE_MOWI: platforma webowa do sprzedaży biletów; MVP + rozwój (mobile, SaaS); priorytety UX/UI, mobile-first, szybki zakup, wydajność, skalowalność; doradztwo produktowe i technologiczne; panel organizatora; zakup biletów; strona wydarzenia; PDF + QR; płatności Stripe/Przelewy24/PayU/Tpay z rekomendacją; check-in webapp; panel admina; Model C; ręczne wypłaty w MVP; e-maile transakcyjne; prośba o portfolio i wycenę.
+CZEGO_NIE_MOWI: stacku, budżetu, terminu, wolumenów, liczby organizatorów/wydarzeń, kto jest merchantem, czy organizatorzy mają własne konta, czy check-in ma być offline, czy zwroty są w MVP, szczegółów prowizji, wymogów RODO, hostingu, języków.
+GRANICA_CIECIA: Zlecenie obszerne i wielowarstwowe (płatności + regulacje + admin + QR + e-maile). Oferta może być konkretna: zrozumienie modelu, rekomendacja PSP, jedna decyzja architektoniczna, 2 pytania TYP 1, propozycje TYP 2 z zastrzeżeniami, widełki wyceny. Nie rozpisywać ekranów, nie wybierać ostatecznego PSP bez odpowiedzi o merchant, nie wchodzić w UI.
+RESEARCH_POTRZEBNY: TAK — ale tylko po to, by rekomendacja PSP i modelu rozliczeń była oparta na faktach (Stripe Connect vs Przelewy24 Marketplace vs PayU Marketplace vs Tpay Marketplace, wymogi KYC, MIP/KNF). Research realnie zmienia treść oferty: bez niego nie wiem, który PSP obsługuje split, a który wymaga submerchantów. Poza tym zakresem research nie zmienia nic — nie sprawdzam UI, nie sprawdzam stacku, nie sprawdzam social mediów.
+
+DECYZJE:
+- DOPISAĆ: propozycje TYP 2 (płatności, check-in, zwroty, stack, kolejność prac) z zastrzeżeniami; rekomendację PSP marketplace zamiast pytać o merchant; doradztwo o MIP/KNF jako warunkowe, nie jako odmowa.
+- ODPOWIEDZIEĆ: na wprost zadane pytanie o rekomendację płatności (A) + mina o modelu rozliczeń (B) w tonie rzeczowym, bez straszenia; reszta zakresu zaakceptowana.
+- DOPYTAĆ: tylko o wolumeny MVP (TYP 1) i ewentualnie o posiadanie merchant account (TYP 1, z domyślną rekomendacją). Reszta pytań z iteracji 1 przekształcona w propozycje.

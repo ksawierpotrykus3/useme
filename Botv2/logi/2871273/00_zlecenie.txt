@@ -1,0 +1,5 @@
+TYTUL: modernizacja istniejącej strony internetowej firmy oraz przygotowanie wersji angielskiej
+BUDZET: Do negocjacji
+
+OPIS:
+Opis poszukujemy osoby do modernizacji istniejącej strony internetowej naszej firmy. Chcemy ją unowocześnić oraz dostosować do obecnego profilu działalności firmy. Zakres prac obejmuje m.in aktualizację treści oferty, odświeżenie wyglądu strony, dodanie nowych podstron, jeśli będą potrzebne, poprawę układu i czytelności treści, dostosowanie do urządzeń mobilnych, jeśli jest taka potrzeba, wdrożenie wersji angielskiej (tłumaczenia dostarczymy we własnym zakresie) Prosimy o przesłanie portfolio podobnych realizacji oraz orientacyjnej wyceny Wymagane funkcje dwie wersje językowe (PL i EN) możliwość samodzielnej edycji treści i dodawania realizacji, wersja mobilna Preferowane rozwiązanie aktualna strona jest w WordPress

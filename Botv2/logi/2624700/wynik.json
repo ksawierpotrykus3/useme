@@ -1,0 +1,22 @@
+{
+  "job_id": "2624700",
+  "title": "Zlecę wykonanie aplikacje webowej",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 35000,
+  "wycena_gorna": 50000,
+  "definitywna": false,
+  "dni_od": 60,
+  "dni_do": 90,
+  "uzasadnienie_rozjemcy": "Większość modeli (B, C, D) lokuje bazowy zakres przy ręcznym planowaniu tras, powiadomieniach in-app i braku integracji ERP w przedziale ok. 30–54 tys. zł; A jest wyraźnie niższy (22–30 tys., po autokrytyce nawet od 18 tys.), co przy pełnym systemie z 3 rolami, magazynem, trasami i raportami wygląda na niedoszacowanie. Zbieżność dotyczy też etapowania i tego, że Figma skraca UI, ale nie backend ani logikę biznesową. Rozbieżność pojawia się głównie przy automatycznej optymalizacji tras, SMS i integracjach ERP/KSeF, które podnoszą wycenę do ok. 50–75 tys. zł. Dlatego finalnie przyjmuję widełki 35–50 tys. zł netto jako bazę dla zakresu domyślnego, ale nie definitywną, dopóki klient nie odpowie na pytania zakresowe.",
+  "od_czego_zaleza": [
+    "kompletności i zakresu Figmy oraz specyfikacji wymagań",
+    "czy planowanie tras ma być ręczne, czy automatycznie optymalizowane z API map",
+    "kanałów powiadomień: in-app, e-mail, push, SMS",
+    "integracji z ERP, księgowością, KSeF, bankiem lub mapami",
+    "szczegółów wdrożenia na własnym serwerze: OS, Docker, backupy, monitoring, dostęp",
+    "wolumenu użytkowników i dostaw oraz zakresu testów, dokumentacji i poprawek poodbiorowych"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 1
+}

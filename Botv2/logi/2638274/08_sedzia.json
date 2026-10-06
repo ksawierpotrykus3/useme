@@ -1,0 +1,7 @@
+{
+  "status": "OK",
+  "kara_pkt": 0,
+  "cytat_lub_brak": "",
+  "uzasadnienie": "Oferta jest konkretna i osadzona w zleceniu: stawia 403 na pierwszym miejscu, realistycznie opisuje możliwe przyczyny (htaccess, wtyczka, WAF hostingowy) i wynikający z tego wpływ na budżet, deklaruje zakres zgodny z ogłoszeniem (naprawa 403, teksty, zdjęcia, poprawa wizualna), mieści się w podanym budżecie i czasie oraz zadaje jedno sensowne pytanie doprecyzowujące o miejsce blokady 403. Brak elementów wklejonych na siłę, pominiętych życzeń klienta, zmyślonych realizacji czy sztucznego tonu.",
+  "instrukcja_naprawy": ""
+}

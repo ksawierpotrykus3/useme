@@ -1,0 +1,21 @@
+{
+  "job_id": "2572013",
+  "title": "Voicebot AI na WordPressa po polsku dla firmy HVAC",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 3500,
+  "wycena_gorna": 8000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 20,
+  "uzasadnienie_rozjemcy": "Modele zgodnie wskazują, że to nie jest zwykła wtyczka WordPress, lecz widget na stronie plus zewnętrzny pipeline głosowy STT → LLM + RAG → TTS, a najkrótsza ścieżka to ElevenLabs Conversational AI i oficjalny widget WP. Zbieżność dotyczy też kluczowych niewiadomych: brakuje danych o bazie wiedzy, miejscu zapisu danych, typie WordPressa oraz zgodach RODO. Rozbieżność wycen jest duża: po autokrytyce modele podają od ok. 2 800–4 200 zł do 6 000–12 000 zł, bo część zakłada managed MVP, a część custom pipeline i głębsze integracje. Dlatego finalnie przyjmuję widełki 3 500–8 000 zł netto: dolna granica dla prostego, dobrze przygotowanego wdrożenia managed, górna dla uporządkowania wiedzy, integracji z CRM/kalendarzem i pełnego RODO. Wycena nie jest definitywna do odpowiedzi na pytania o bazę wiedzy, integracje i plan WordPressa.",
+  "od_czego_zaleza": [
+    "format i uporządkowanie bazy wiedzy firmowej pod RAG",
+    "miejsce i sposób zapisu danych z rozmów: CRM, kalendarz, e-mail, zapis w WP",
+    "czy WordPress jest self-hosted, czy na WordPress.com i na jakim planie",
+    "zakres RODO: klauzula, zgoda na nagrywanie, retencja danych",
+    "wybór ścieżki managed (np. ElevenLabs) vs custom pipeline oraz głębokość integracji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 1
+}

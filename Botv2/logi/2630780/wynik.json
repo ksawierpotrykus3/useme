@@ -1,0 +1,21 @@
+{
+  "job_id": "2630780",
+  "title": "Squarespace – strona dla szkoły kulinarnej / team building B2B (PL/EN/IT)",
+  "budget": "3700,00 PLN",
+  "wycena_dolna": 4000,
+  "wycena_gorna": 4500,
+  "definitywna": false,
+  "dni_od": 21,
+  "dni_do": 28,
+  "uzasadnienie_rozjemcy": "Modele początkowo zbiegły się w przedziale 4000–4500 PLN, ale po autokrytyce większość skorygowała stawki w dół: B do ok. 3600–4000, D do 4100–4200, C do 4300, a A dopuszczał 3900–4100 przy cięciach. Rozbieżność dotyczy głównie realnego nakładu godzin i tego, czy blog oraz sekcja zaufania B2B są w pełni w zakresie. Wybrano 4000–4300 PLN jako uczciwy przedział: dolna granica przy uproszczeniu bloga i dostarczonych materiałach B2B, górna przy pełnym blogu, większym QA integracji i custom CSS. Weglot oraz abonament Anolla nie wchodzą w tę kwotę i pozostają kosztem po stronie klienta; Anolla działa wyłącznie jako embed. Wycena nie jest definitywna, bo brak logotypów/case studies B2B i decyzji o blogu oraz wielojęzyczności może zmienić zakres.",
+  "od_czego_zaleza": [
+    "Gotowość i dostarczenie logotypów klientów B2B oraz case studies; bez nich dochodzi pomoc w układzie/redakcji sekcji zaufania.",
+    "Czy blog ma być osobną podstroną, czy tylko sekcją na stronie głównej lub innej podstronie.",
+    "Wybór wielojęzyczności: Weglot (stały abonament po stronie klienta) albo ręczne duplikaty stron (większy nakład pracy freelancera).",
+    "Sposób integracji rezerwacji: Anolla jako embed/Code Block bez natywnej integracji lub Squarespace Scheduling.",
+    "Liczba poprawek, testów i zakres custom CSS oraz ewentualne podłączenie formularzy B2B do CRM."
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

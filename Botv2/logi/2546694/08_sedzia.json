@@ -1,0 +1,7 @@
+{
+  "status": "OK",
+  "kara_pkt": 0,
+  "cytat_lub_brak": "",
+  "uzasadnienie": "Oferta jest konkretna i osadzona w realiach zlecenia: autor od razu podnosi kwestię formatów APK/XAPK/APKM, rekurencyjnego rozpakowania i fallbacku na res/font oraz assets, co bezpośrednio odpowiada na życzenie klienta wyodrębnienia fontów i przygotowania raportu Excel. Proponuje pipeline i panel web zgodny z preferencją klienta. Zamiast zgadywać, uczciwie oznacza największą niewiadomą (serwer) i zadaje trzy pytania, które realnie zmieniają architekturę i wycenę. Widełki są przedstawione z warunkami, a nie jako obietnica bez pokrycia. Brak zmyślonych realizacji, sztucznego tonu i elementów niepasujących do ogłoszenia.",
+  "instrukcja_naprawy": ""
+}

@@ -1,0 +1,21 @@
+{
+  "job_id": "2566145",
+  "title": "Migracja sklepu budcena.pl z PrestaShop 1.6.1.24 do wersji 8.1.x / 8.2.x",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 8000,
+  "wycena_gorna": 14000,
+  "definitywna": false,
+  "dni_od": 15,
+  "dni_do": 25,
+  "uzasadnienie_rozjemcy": "Wszystkie modele zgodnie uznały, że to nie upgrade 1-Click, lecz czysta instalacja PS 8.x z migracją danych, stagingiem, wymianą modułów, BaseLinkerem i mapowaniem 301. Po autokrytyce rozbieżność dotyczyła głównie dolnej granicy: 6-8 tys. zł uznano za ryzykowne, a bezpieczniejsze widełki przesunęły się w stronę 8-14 tys. zł netto. Rozbieżność wynika z braku danych o modułach, wolumenie i customizacjach szablonu, więc wycena musi pozostać warunkowa. 8 tys. zł jest realne tylko przy małym, czystym sklepie i prostych integracjach, a 14 tys. zł przy większym wolumenie, customach lub multistore.",
+  "od_czego_zaleza": [
+    "lista aktywnych modułów i integracji oraz ich krytyczność po migracji",
+    "wolumen danych: liczba produktów, kombinacji, zdjęć, klientów, zamówień i rozmiar bazy",
+    "zakres customizacji szablonu Warehouse i dostępność plików lub dokumentacji",
+    "multistore, liczba języków i walut",
+    "oczekiwane okno wdrożenia oraz zakres testów po go-live"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

@@ -1,0 +1,30 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: mieszane — doradcze (wspólny projekt drzewa) + wykonawcze (migracja przypisań, normalizacja rozmiaru). Jednorazowe.
+INTENCJA: mieszane — klient nazywa obie części wprost.
+DECYDENT_I_BOL: Właściciel sklepu, techniczny (ma własną wtyczkę do masowego przypisywania — zweryfikuje każdą tezę). Ból pod spodem: przy 75k produktów drzewo kategorii przestaje być estetyką, a staje się warstwą wyszukiwania, filtrów i feedów. Rozmiar jako wariant wpływa na konwersję i porównywarkę. Klient sam mówi, czego mu brakuje: „porządnie to zaplanuje i ustawi" — brakuje mu procesu, nie rąk.
+WYKONALNE: TAK — ale nie „ręcznie 75k produktów". Plan: (1) wspólny projekt drzewa z myśleniem o skali, (2) reguły przypisania, (3) wykonanie przez wtyczkę klienta + skrypt, (4) konsolidacja termów rozmiaru z zachowaniem istniejących wariantów.
+POLE_DO_POPISU: JEST
+SCIEZKA_MERYTORYKI: B (dwie miny z dowodem) + C (lepsza droga niż „przemalowanie etykiet")
+MINY_I_CIEKAWOSTKI:
+- Mina 1 (dowód: lista formatów od klienta + „rozmiar wyświetla się jako wariant"; potwierdzone w dokumentacji WooCommerce): WooCommerce dopasowuje warianty po **slugach termów**, nie po etykietach. Zmiana samej etykiety na „39,5" zostawi w bazie trzy osobne termy (39-5, 39-1-2, 39-5-eur) — klient zobaczy nadal trzy rozmiary. Trzeba scalić termy (przypisać produkty do jednego termu), nie tylko przemalować labelkę. Inaczej problem zostaje.
+- Mina 2 (dowód: 75 000 produktów + „rozmiar kluczowy i wyświetla się jako wariant"; potwierdzone w issue #61385 i wątku wp.org): Przy tej skali taksonomia to decyzja architektoniczna, nie estetyczna — głębokie zagnieżdżenie i duże kategorie kładą `tax_query` i `wp_term_relationships`, strony kategorii i filtry się zawieszają. Projekt drzewa musi to uwzględniać od pierwszego szkicu, nie po fakcie.
+- Ciekawostka (dowód: „moją autorską wtyczką, jednak nie są to doskonałe narzędzia"): Klient ma narzędzie, brakuje mu reguł. Wartość nie leży w kodzie wtyczki, a w zestawie reguł, którymi ją zasilimy — to jest dokładnie to, o co prosi, mówiąc „porządnie to zaplanuje".
+- USUNIĘTE z iteracji 1: „mina 3" o mieszanych domenach rozmiarów (39,5 vs US vs dziecięce) — nie miała dowodu ze zlecenia, research jej nie potwierdził. To pytanie, nie mina. Wraca jako pod-warstwa pytania 1. Usunięte też zgadywanie „39,5 EUR sugeruje feed dostawcy" — klient tego nie napisał.
+
+ODMOWA: puste. Nie ma tu „nie da się" — jest konflikt zakresu wobec budżetu (500 PLN na projekt drzewa + migrację 75k + konsolidację termów to trzy prace, nie jedna). To nie odmowa, to zakres do ustalenia w ofercie.
+PYTANIA:
+1. Czy rozmiar jest u Was jednym globalnym atrybutem (np. `pa_rozmiar`) na wszystkich produktach, czy osobnym per typ produktu (obuwie / odzież / dziecięce)? — pytam, bo od tego zależy, czy wystarczy jedna mapa konsolidacji termów, czy trzeba kilku niezależnych. Pod-warstwa tego pytania: czy obok systemu EU pojawiają się US/UK (bo kolizja „39,5" w różnych systemach to inny problem niż ta sama liczba w różnych formatach).
+2. Skąd pochodzą dane produktów — feed dostawcy, import, ręcznie? — pytam, bo jeśli z feedu, normalizacja rozmiaru musi być wpięta w import (inaczej wróci przy następnym imporcie), a to inny zakres niż jednorazowe czyszczenie bazy.
+(Wycięte w stosunku do iteracji 1: pytanie o „czy rozmiar jest tylko na obuwiu" jako osobne — jest pod-warstwą pytania 1. Trzecie pytanie o źródło zostaje, bo realnie zmienia architekturę rozwiązania.)
+
+CO_ZLECENIE_MOWI: Platforma WooCommerce + własny szablon; ~75 000 produktów; autorska wtyczka klienta do masowego przypisywania (auto + ręcznie), oceniana jako niedoskonała; rozmiar jako atrybut globalny wyświetlany jako wariant, formaty niespójne: „39,5", „39 1/2", „39-1-2", „39,5 EUR"; cel: wszędzie jednolicie „39,5"; zakres: konsultacja drzewa → przypisanie produktów → uporządkowanie rozmiaru; budżet 500 PLN.
+CZEGO_NIE_MOWI: czy rozmiar jest globalny czy per typ produktu; jakie typy produktów mają rozmiar; skąd pochodzą dane (feed/import/ręcznie); ile jest aktualnie kategorii i jak głębokie; jak działa wtyczka klienta; czy istnieją historyczne warianty/zamówienia do zachowania; czy stare URL-e kategorii mają wartość SEO.
+GRANICA_CIECIA: Ogłoszenie treściwe, klient techniczny — stać nas na dwie miny z dowodem i dwa pytania. Budżet 500 PLN wymusza wąską ofertę: projekt drzewa + reguły normalizacji + walidacja na próbce (500–1000 produktów). Etap masowy (75k + konsolidacja termów) — osobne widełki po zobaczeniu danych. Bez rozwlekania, bez straszenia, bez pytań bez wpływu na wycenę. Świadomie nie pcham merytoryki o SEO URL-i kategorii jako miny — to propozycja (przekierowania 301), nie pytanie.
+RESEARCH_POTRZEBNY: NIE — research z iteracji 1 wystarczył. Potwierdził minę 1 (mechanizm slugów) i minę 2 (degradacja `tax_query`/`wp_term_relationships` przy dziesiątkach tysięcy). Mina 3 okazała się niepotwierdzona i została przekształcona w pytanie. Dalszy research nic nie zmieni w ofercie.
+
+DECYZJE:
+- DOPISAĆ (do oferty): (a) potwierdzenie mechanizmu slugów jako uzasadnienie dla konsolidacji termów, nie przemalowania etykiet; (b) założenie projektowania drzewa pod skalę (płaska struktura, świadomość `tax_query`, indeks na `wp_term_relationships`); (c) propozycja podejścia: reguły + wtyczka klienta + walidacja na próbce 500–1000; (d) propozycja przekierowań 301 dla starych URL-i kategorii; (e) zakres 500 PLN: drzewo + reguły + próbka, etap masowy w widełkach po danych.
+- ODPOWIEDZIEC: TAK — potwierdzić, że rozumiemy obie części (drzewo + rozmiar); że rozmiar wymaga konsolidacji termów, nie tylko zmiany etykiet; że przy 75k drzewo projektujemy pod wydajność; że wtyczka klienta posłuży jako narzędzie wykonawcze dla naszych reguł; że normalizacja rozmiaru ma sens także jako zabezpieczenie na przyszłe importy (jeśli dane idą z feedu — do potwierdzenia pytaniem 2).
+- DOPYTAĆ: dokładnie dwa pytania — (1) jeden globalny atrybut rozmiaru vs per typ produktu (+ czy obok EU są US/UK); (2) źródło danych produktów (feed / import / ręcznie).
+```

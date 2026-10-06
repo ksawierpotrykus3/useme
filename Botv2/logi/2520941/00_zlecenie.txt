@@ -1,0 +1,5 @@
+TYTUL: Potrzebuje webmastera / programisty do edycji strony - pod kątem sprzedaży usług.
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Szukam webmastera/programisty do wprowadzania zmian na stronie internetowej opartej na WordPressie (Elementor). Na ten moment zależy mi przede wszystkim na: przyspieszeniu działania strony, dodaniu i podmianie zdjęć, zmianach ustawień (np. zastąpienie napisu „wyceń” grafiką), ewentualnym przeniesieniu formularza kontaktowego również na stronę główną, dodaniu gotowego kodu do funkcji oddzwaniania oraz być może czatu. Szukam osoby do dłuższej współpracy, która w razie potrzeby będzie mogła wprowadzać bieżące poprawki i usprawnienia. Dużym atutem będzie doświadczenie w optymalizacji strony pod kątem sprzedaży usług, pozyskiwania leadów oraz aspektów marketingowych. Wymagane funkcje wersja mobilna Preferowane rozwiązanie wordpress

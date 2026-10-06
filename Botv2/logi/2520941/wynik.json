@@ -1,0 +1,22 @@
+{
+  "job_id": "2520941",
+  "title": "Potrzebuje webmastera / programisty do edycji strony - pod kątem sprzedaży usług.",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 1200,
+  "wycena_gorna": 2000,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 8,
+  "uzasadnienie_rozjemcy": "Finalna wycena pakietu startowego to 1200–2000 zł netto, a retainer proponuję rozliczać stawką 90 zł/h, np. 5–10 h/mies. = 450–900 zł. Modele zgodnie przyjęły stawkę 90 zł/h, potrzebę audytu przed optymalizacją, RODO dla nowych kanałów oraz traktowanie mobile domyślnie jako responsywności. Rozbieżność dotyczyła głównie pakietu startowego: A i B schodziły do ok. 720–1300 zł, C i D wyceniały 1400–2500 zł, więc 1200–2000 zł jest kompromisem obejmującym realny zakres bez czatu jako opcji obowiązkowej. Wycena nie jest definitywna, bo bez URL, kodu oddzwaniania i decyzji o czacie/mobile nie da się uczciwie zamknąć zakresu w jednej kwocie.",
+  "od_czego_zaleza": [
+    "URL strony, hosting i lista wtyczek cache/optymalizacyjnych",
+    "charakter 'gotowego kodu' oddzwaniania i czatu: snippet, wtyczka czy SaaS z API/licencją",
+    "czy 'wersja mobilna' oznacza responsywność, czy osobną wersję mobilną",
+    "miesięczny wolumen bieżących poprawek i wybór modelu retainerowego",
+    "konieczność migracji hostingu oraz licencje zewnętrzne po stronie klienta",
+    "istniejące zgody/klauzule RODO i zakres DPA dla nowych kanałów kontaktu"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

@@ -1,0 +1,21 @@
+{
+  "job_id": "2521698",
+  "title": "Stworzenie CRM poprzez PowerApss",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 14000,
+  "wycena_gorna": 22000,
+  "definitywna": false,
+  "dni_od": 25,
+  "dni_do": 35,
+  "uzasadnienie_rozjemcy": "Finalne widełki 14 000–22 000 zł netto są wyceną niedefinitywną, bo brakuje danych o skali i logice dopasowania maili. Modele zgodnie wskazują, że główny koszt to agregacja maili przez Microsoft Graph z uprawnieniami aplikacyjnymi, zgoda admina M365 i Application Access Policy, a nie sam formularz CRM. Po autokrytyce zbieżność jest przy dolnej granicy 14–15 tys. zł i górnej 20–24 tys. zł; DeepSeek-C pozostaje niżej, ale sam zaznacza ryzyko zaniżenia przy większej skali. Rozbieżność wynika głównie z nieznanej liczby skrzynek, wolumenu maili, licencji oraz zakresu dodatkowego, dlatego po odpowiedziach na pytania widełki należy zawęzić.",
+  "od_czego_zaleza": [
+    "liczba skrzynek pracowników i miesięczny wolumen maili do agregacji",
+    "sposób dopasowania maili do klienta: domena, adresy kontaktowe, temat, reguły ręczne",
+    "posiadane licencje Power Apps/Dataverse oraz subskrypcja Azure",
+    "zgoda administratora M365 i skonfigurowanie Application Access Policy dla Graph",
+    "zakres dodatkowy: załączniki, aliasy, skrzynki współdzielone, RODO/retention, import historii, utrzymanie"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

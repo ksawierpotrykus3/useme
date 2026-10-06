@@ -1,0 +1,21 @@
+{
+  "job_id": "2551600",
+  "title": "Integracja systemów firmy Magnus z ChatGPT przy użyciu n8n",
+  "budget": "2890,00 PLN",
+  "wycena_dolna": 18000,
+  "wycena_gorna": 30000,
+  "definitywna": false,
+  "dni_od": 30,
+  "dni_do": 50,
+  "uzasadnienie_rozjemcy": "Wszystkie cztery modele w obu rundach zgodnie twierdzą, że budżet 2890 zł nie pokrywa opisanego zakresu — realnie wystarcza na jeden moduł (wyceny: cennik → VAT 8/23% → zaliczka 30% → zapis do arkusza), wyceniany na 2500–4000 zł. Co do całości głosy rozjeżdżają się: po autokrytyce dolne granice to 16k (B) i 18k (D), a górne 22k (D), 25k (B), 36–40k (A, C) — stąd widełki 18–30k, nie punkt. Zbieżność dotyczy też jakościowej diagnozy: LLM nie powinien generować umów/faktur (szablon + LLM do pól), odbiór musi być per moduł, a RODO przy transferze maili i faktur do OpenAI to warunek wstępny, nie ozdoba. Wycena jest niepewna (niedefinitywna), bo brakuje wolumenu i formatów plików — bez nich każde oszacowanie opiera się na założeniach, nie na danych.",
+  "od_czego_zaleza": [
+    "Format cenników i plików producentów („WEB”, „Kosztorys WEB”) — Excel/CSV vs PDF/skan istotnie zmienia nakład na ekstrakcję",
+    "Wolumen: liczba maili/dzień, wycen/mc, klientów i plików/mc — bezpośrednio wpływa na koszt OpenAI API i liczbę wykonań n8n",
+    "Decyzja n8n cloud vs self-hosted oraz plan Fakturowni (czy API jest aktywne w pakiecie klienta)",
+    "Zakres RODO (DPA/DPIA, rozdzielenie strumieni danych osobowych) i definicja odbioru per moduł zamiast „w pełni działający system”",
+    "Domyślne założenia: SMSAPI + Google Workspace oraz stawka ~90 zł/h"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

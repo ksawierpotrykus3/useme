@@ -1,0 +1,5 @@
+TYTUL: Poprawa wyglądu strony internetowej kreator divi , usunięcie błędu 403 oraz drobne zmiany
+BUDZET: 1100,00 PLN
+
+OPIS:
+Opis Podsumowując: strona ma już dobrą bazę, ale chciałbym ją dokończyć, poprawić wizualnie, uporządkować teksty, zdjęcia i rozwiązać problem techniczny z logowaniem. Nie chodzi o tworzenie strony od zera, tylko o dopracowanie tego, co już jest. Wymagane funkcje Znajomość w WordPressie na Divi Preferowane rozwiązanie Divi Wordpress

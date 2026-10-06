@@ -1,0 +1,21 @@
+{
+  "job_id": "2526974",
+  "title": "Strona podobna do waw4free.pl/ w wordpress",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 8000,
+  "wycena_gorna": 12000,
+  "definitywna": false,
+  "dni_od": 15,
+  "dni_do": 25,
+  "uzasadnienie_rozjemcy": "Po dwóch rundach modele A (8–10 tys. zł) i B (9–10,8 tys. zł) zbiegły się wokół przedziału ~8–11 tys. zł przy zakresie bez modułu importu wydarzeń, co stanowi najsolidniejszy konsensus. Model C po autokrytyce zaniżył do 6–9 tys. zł (traktując compliance jako treść, nie robociznę), a model D zawyżył do 13,5–18 tys. zł, wyceniając szeroko customowe reguły (limit Wiedeń, cykliczność, płatne/wyróżnione) oraz tłumaczenie CPT i taksonomii. Rozbieżność wynika głównie z odmiennej oceny, ile w tym projekcie jest konfiguracji gotowych wtyczek, a ile realnej pracy customowej poza wtyczkami (Community Events nie ma limitu lokalizacji ani pełnej logiki płatne/wyróżnione/cykliczne out-of-the-box). Przyjęte widełki 8–12 tys. zł obejmują scenariusz bazowy (klient sam zasila bazę, wyróżnienia wizualne), a górna granica zbliża się do stanowiska D w wersji ostrożniejszej. Wycena nie może być definitywna, bo kluczowy punkt zakresu — źródło wydarzeń na start — pozostaje nierozstrzygnięty i sami modele wskazują go jako główny mnożnik widełek. Zbieżność dotyczy też czasu (15–25 dni roboczych) i konieczności wliczenia CMP z IAB TCF pod AdSense oraz Impressum wg austriackiego ECG §5 jako twardych warstw compliance.",
+  "od_czego_zaleza": [
+    "Źródło wydarzeń na start: ręczne zasilenie bazy vs. moduł importu/panel importu z zewnętrznych źródeł (+1500–3000 zł, +3–5 dni)",
+    "Zakres mechanizmu wydarzeń płatnych/wyróżnionych: tylko oznaczenie wizualne vs. realna płatność (Stripe/PayPal) i logika wyróżnień",
+    "Hosting, domena i provider newslettera: po stronie klienta vs. wybór i konfiguracja po stronie wykonawcy",
+    "Wersja polska: tylko przygotowanie i18n (Polylang Free) vs. pełne tłumaczenie treści i CPT od startu",
+    "Dane do Impressum AT i status działalności klienta w Austrii (GewO vs. osoba prywatna)"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

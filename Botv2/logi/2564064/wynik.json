@@ -1,0 +1,22 @@
+{
+  "job_id": "2564064",
+  "title": "Stworzenie sklepu internetowego na Shopify",
+  "budget": "9000,00 PLN",
+  "wycena_dolna": 6500,
+  "wycena_gorna": 8500,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 14,
+  "uzasadnienie_rozjemcy": "Modele zgodnie przyjmują ok. 10–12 dni roboczych, standard prawny B2C jako element sklepu gotowego do sprzedaży oraz ostrzeżenie, że Shopify Payments i Przelewy24 nie są dla nowego sklepu alternatywami. Rozbieżność dotyczy godzin: A/B wyceniają 45–70 h (4,5–6,5 tys. zł), a C/D 72–90 h (6,5–8,5 tys. zł). Przyjmuję 6,5–8,5 tys. zł, bo zakres obejmuje nie tylko wdrożenie, ale też konwersję, aplikacje, SEO, szkolenie i elementy prawne, a budżet 6–10 tys. zł to mieści. Wycena nie jest definitywna, bo brak odpowiedzi o materiały produktowe, konto Shopify/domenę i zweryfikowaną bramkę; jeśli wykonawca dostarcza opisy i zdjęcia, kwota idzie w górną granicę.",
+  "od_czego_zaleza": [
+    "kto dostarcza zdjęcia i opisy premium 4 produktów (klient czy wykonawca)",
+    "czy istnieje już konto Shopify i wykupiona domena",
+    "czy jest zweryfikowane konto Przelewy24/PayU i jaka bramka zostanie wybrana (SP+BLIK vs zewnętrzna P24/PayU)",
+    "czy motyw ma być darmowy (Dawn) czy płatny/custom oraz zakres brandbooka i wizji",
+    "aktualność terminu marzec/kwiecień 2026 – obecnie po terminie, wymaga potwierdzenia nowego terminu",
+    "czas weryfikacji bramki płatniczej, który może wydłużyć start sprzedaży poza 2 tygodnie"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

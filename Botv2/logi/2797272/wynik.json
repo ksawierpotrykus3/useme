@@ -1,0 +1,21 @@
+{
+  "job_id": "2797272",
+  "title": "Wprowadzenie danych do Mirakl Superpharm",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 1000,
+  "wycena_gorna": 1800,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Modele zgodnie traktują 35 SKU jako projekt 10–20 h przy stawce ok. 90 zł/h, zależny od drogi plikowej lub ręcznej i zakresu QA. Zbieżność dotyczy głównie górnej granicy: 1500–1800 zł dla realnego wariantu z mapowaniem i walidacją; rozbieżność widać w dolnej granicy (600–1200 zł), bo część modeli zakłada bardzo gładki import i kompletne dane. Wybieram 1000–1800 zł jako widełki obejmujące scenariusz plikowy z mapowaniem oraz bezpiecznik na ręczne uzupełnianie i QA, bez rozwadniania do 2200 zł, które pojawiło się tylko w najtrudniejszym wariancie. Wycena nie jest definitywna, bo brak potwierdzenia importu w panelu Superpharm PL i kompletności danych.",
+  "od_czego_zaleza": [
+    "kompletność danych produktowych: zdjęcia, opisy, EAN, ceny, stany, atrybuty",
+    "czy panel Mirakl Superpharm ma aktywny import plikowy CSV/XML/XLSX",
+    "czy eksport CSV z Shopera pokrywa wymagane kolumny z PDF-ów",
+    "zakres QA i poprawek po publikacji",
+    "ostateczny termin realizacji"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

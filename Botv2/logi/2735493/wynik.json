@@ -1,0 +1,20 @@
+{
+  "job_id": "2735493",
+  "title": "Ekspert ds. automatyzacji i budowania baz danych firm",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 5500,
+  "wycena_gorna": 10000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 20,
+  "uzasadnienie_rozjemcy": "Wszystkie cztery modele zgodnie wskazują ten sam zakres (ETL z KRS/CEIDG/GUS BIR1 → dedup po NIP → standaryzacja → target) i te same wąskie gardła: limit 25 rekordów/żądanie w CEIDG, brak lookupu po NIP w KRS API, nie-self-serve rejestracja GUS BIR1. Zbieżność po rundzie 2 jest wyraźna w dolnej granicy (ok. 5 400–6 000 zł, po autokorekcie C zszedł do 4 500, D podniósł do 5 500) i górnej (7 000–12 000 zł, przy medianie ok. 9 500–10 000). Rozbieżność dotyczy głównie tego, jak mocno wyceniać bufor na nieznaną skalę — C ściął wycenę do 4 500–7 000 zł, uznając że limity API są hojne i ryzyko niskie, natomiast D podniósł do 5 500–12 000 zł z uwagi na możliwy duży wolumen i integrację z CRM. Wybrana kwota 5 500–10 000 zł to środek ciężkości obu rund, z zachowaniem zastrzeżenia, że przy >5 000 firm lub sync ciągłym widełki idą w stronę 12–15 tys. Wycena nie jest definitywna, bo brakuje skali, źródeł wejściowych i targetu — bez nich każde zawężenie byłoby zgadywaniem.",
+  "od_czego_zaleza": [
+    "Skala bazy (liczba firm) i częstotliwość aktualizacji — batch nocny vs sync ciągły; powyżej ~5 000 firm limity CEIDG (25 rekordów/żądanie) i GUS stają się wąskim gardłem",
+    "Źródła wejściowe — lista NIP/KRS/nazw czy zbieranie od zera; przy NIP-ach konieczny REGON jako pośrednik (KRS API nie szuka po NIP), przy nazwach dochodzi 20–40 h na fuzzy matching",
+    "Target — plik/CSV, CRM czy panel www; integracja z systemem klienta lub warstwa wizualna podnoszą zakres i czas",
+    "Zakres wzbogacania i liczby zewnętrznych API/rejestrów do podłączenia"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

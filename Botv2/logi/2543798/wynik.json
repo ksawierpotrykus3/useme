@@ -1,0 +1,15 @@
+{
+  "job_id": "2543798",
+  "title": "Budowa systemu POS + QR ordering dla 8 restauracji",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 80000,
+  "wycena_gorna": 140000,
+  "definitywna": false,
+  "dni_od": 110,
+  "dni_do": 200,
+  "uzasadnienie_rozjemcy": "Finalna wycena obejmuje całość: Etap 0 + MVP na 1 lokal + wersję produkcyjną na 8 lokali. Modele były zgodne co do etapu 0 (ok. 4–6 tys. zł), tezy o własnym silniku split po pozycjach oraz rekomendacji React Native + Node/PostgreSQL. Rozbieżność dotyczyła głównie MVP (22–70 tys. zł) i produkcji na 8 lokali (22,5–108 tys. zł dodatkowo), bo brakuje trzech kluczowych decyzji: płatności, KDS i modelu multi-tenant. Dlatego podaję widełki 80–140 tys. zł; górna granica może wzrosnąć przy terminalach fizycznych, istniejącym KDS, integracjach z agregatorami lub osobnym wdrożeniu per lokal.",
+  "od_czego_zaleza": [],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

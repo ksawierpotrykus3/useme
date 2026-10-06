@@ -1,0 +1,5 @@
+TYTUL: Ekspert ds. automatyzacji i budowania baz danych firm
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Poszukuję doświadczonego freelancera / eksperta, który pomoże mi w zaprojektowaniu, zbudowaniu oraz zautomatyzowaniu systemów zarządzania danymi. Głównym celem projektu jest stworzenie płynnie działających procesów do budowania baz firm. Chodzi konkretnie o pozyskiwanie, strukturyzowanie i automatyczne wzbogacanie danych podmiotów z wyznaczonych kodów PKD oraz o ściśle określonych parametrach. Jeśli potrafisz sprawić, że systemy "rozmawiają ze sobą" bez błędu, a pobierane dane o firmach są automatycznie porządkowane – to zlecenie jest dla Ciebie. Zakres obowiązków: Projektowanie i budowanie baz danych: Tworzenie przejrzystych struktur pod bazy B2B, dostosowanych do precyzyjnego filtrowania po kodach PKD i innych parametrach biznesowych. Wzbogacanie danych : Konfiguracja przepływów, które automatycznie pobierają, weryfikują i uzupełniają brakujące informacje o firmach na podstawie zewnętrznych źródeł, rejestrów lub API. Optymalizacja i czyszczenie danych: Mapowanie pól, eliminacja duplikatów i standaryzacja formatów wpisów, aby bazy były gotowe do dalszej pracy.

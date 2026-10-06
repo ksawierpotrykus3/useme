@@ -1,0 +1,5 @@
+TYTUL: Scraper plików .apk
+BUDZET: Do negocjacji
+
+OPIS:
+Opis Zlecę wykonanie scrapera do pobierania i analizy plików .APK aplikacji ze wskazanego serwera. Na podstawie dostarczonej listy nazw kont deweloperów scraper ma: Wyszukać wszystkie aplikacje danego dewelopera na wskazanym serwerze. Scraper ma rozpakować archiwa APK oraz wszystkie wewnętrzne archiwa. Wyodrębnić pliki fontów (czcionki). Przygotować raport w pliku Excel zawierający: nazwę aplikacji, nazwę fontu, metadane oraz lokalizację pliku fontu w strukturze APK. Preferuje osadzenie całości webowo.

@@ -1,0 +1,29 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy (wdrożenie motywu + konfiguracja sklepu) z wbudowanym egzaminem wiedzy (3 pytania techniczne od klienta)
+INTENCJA: mieszane — wykonawcze (wdrożenie) + doradcze (odpowiedzi na pytania, lista aplikacji, architektura wideo)
+DECYDENT_I_BOL: Prawdopodobnie właściciel sklepu / mała firma PL, która zainwestowała w prototyp (Claude) i chce go wprowadzić na produkcję bez utraty wyglądu, z myślą o kampaniach Google Ads. Ból pod spodem: „mam gotowy design, nie chcę, żeby wyszedł z tego szablonowy, wolny sklep, który nie konwertuje". Drugi ból: „nie chcę przepłacić za miesięczne appki, więc żądam listy z kosztami".
+WYKONALNE: TAK, ale z korektą zakresu. „1:1" w sensie kodu HTML→Shopify jest niemożliwe (Shopify = Liquid + sekcje + schema, nie pliki statyczne). Wykonalne jest „1:1 wizualnie i funkcjonalnie" — odwzorowanie układu, animacji i sliderów w motywie Liquid z OS 2.0. Najbliższa wykonalna opcja: jeden motyw responsywny + sekcje warunkowe (widoczność mobile/desktop) dla miejsc, gdzie układy faktycznie się różnią.
+POLE_DO_POPISU: JEST — klient zadał 3 konkretne pytania techniczne i to jest właściwie test kompetencji. Kto odpowie ogólnikami, wypada.
+SCIEZKA_MERYTORYKI: A (klient WPROST pyta — 3 pytania). Plus B dla wideo (klient sam wskazuje ryzyko PageSpeed, więc potwierdzamy mechanizm i dajemy rozwiązanie).
+MINY_I_CIEKAWOSTKI:
+1. „1:1 z projektu HTML" — dowód: tytuł zlecenia. To nie przeniesienie plików, to przekład na Liquid. Klient najpewniej to rozumie (sam pyta „jak zrealizujesz"), więc NIE traktuję tego jako miny do odmowy — traktuję jako punkt do jasnego nazwania w ofercie: „odwzorowanie wizualne i funkcjonalne, nie kopiowanie kodu".
+2. „Desktop i mobile o różnym układzie" — w Shopify motyw jest jeden i responsywny. Nie ma dwóch osobnych szablonów. Pełne dwa różne układy = custom CSS/JS + warunkowe sekcje. Dowód: sam klient pisze „nie tylko skalowanie".
+3. Duże wideo w tle + PageSpeed — dowód: pytanie klienta. Shopify Files ma limity i nie nadaje się na duże pliki tła. Trzeba hostować zewnętrznie (np. Cloudflare Stream / Bunny / Vimeo Pro) + lazy load + poster + wyłączenie autoplay na mobile przy `prefers-reduced-motion`/słabym łączu.
+4. Consent Mode v2 — dowód: klient wymaga. Wymóg Google od marca 2024 dla EOG; bez tego kampanie tracą dane konwersji. Realizacja: Shopify Customer Privacy API + CMP (Cookiebot/CookieYes) albo natywna integracja Google & YouTube, plus 4 sygnały: ad_storage, ad_user_data, ad_personalization, analytics_storage.
+ODMOWA: Brak twardej okazji z typów 1–6. Nie ma paywalla, nie ma sprzeczności z celem, nie ma licencji blokującej. Jedyne „nie tak, ale tak": nie „1:1 kod", tylko „1:1 wizualno-funkcjonalne". To nie odmowa, to doprecyzowanie zakresu.
+PYTANIA:
+1. Ile SKU akcesoriów i czy wszystkie dzielą jeden szablon produktu, czy każda grupa ma inny? — pytam, bo od tego zależy liczba szablonów produktu i zakres pracy nad sekcją produktu; zmienia wycenę etapu „motyw".
+2. Na jakim planie Shopify będzie sklep (Basic / Shopify / Advanced / Plus)? — pytam, bo od planu zależy dostęp do Shopify Functions, checkout extensibility i limitów API; wpływa na to, co da się zrobić natywnie, a co trzeba obejść appką.
+3. Czy materiały wideo (pliki źródłowe) są już gotowe, czy wchodzi w zakres kompresja/przygotowanie pod web? — pytam, bo to osobna pozycja w etapie „motyw" i realnie zmienia wycenę.
+4. Kiedy i z kim podpisujemy NDA, żeby zobaczyć prototyp? — pytam, bo bez zobaczenia projektu mogę dać tylko widełki; po NDA dostroję wycenę etapową.
+(4 pytania = 4 niezależne warstwy: katalog / środowisko / materiały / logistyka wyceny. Nie pytam o budżet, nie pytam o technologię, nie pytam o rzeczy z ogłoszenia.)
+CO_ZLECENIE_MOWI: gotowy prototyp HTML (Claude) desktop + mobile o różnych układach; ~12 szablonów; 1 produkt główny + akcesoria; dużo wideo, slidery, animacje; PL, sprzedaż w PL; NDA; min. 3 sklepy Shopify z custom theme + linki; Liquid, OS 2.0, Shopify CLI; rynek PL: płatności, InPost, faktury; GA4, Google Ads, Consent Mode v2. Wymagania ofertowe: wycena etapami (motyw/konfiguracja/analityka/opcje), termin, linki, lista płatnych aplikacji z kosztem miesięcznym, odpowiedzi na 3 pytania.
+CZEGO_NIE_MOWI: budżetu („do negocjacji" = brak widełek), liczby SKU akcesoriów, planu Shopify, czy wideo gotowe czy do przygotowania, czy istnieje obecny sklep (migracja czy od zera), kto odpowiada za treści/zdjęcia produktowe, jaki CMP preferują, czy kampanie Google Ads już są skonfigurowane czy my je stawiamy. Nie mówi też, jak dokładnie wygląda „inny układ" na mobile — czy to tylko przestawienie sekcji, czy zupełnie inna struktura.
+GRANICA_CIECIA: Oferta musi zawierać dokładnie to, czego klient zażądał (wycena etapami, termin, linki, lista appek z kosztem, 3 odpowiedzi). Ani jednego akapitu więcej. Żadnych „o mnie", żadnych ogólników o „pasi do Shopify". Odpowiedzi na 3 pytania: krótkie, konkretne, techniczne, każda z nazwą narzędzia/mechanizmu i decyzją. Wycena: widełki etapowe, bo bez NDA nie widzimy projektu — ale pozytywnie: „po NDA dostroję".
+RESEARCH_POTRZEBNY: TAK — po co:
+1. Aktualne limity Shopify Files i rekomendowane zewnętrzne hostingi wideo (Cloudflare Stream / Bunny / Mux / Vimeo) — żeby nie polecić czegoś, co Shopify zmieniło.
+2. Aktualny stan Consent Mode v2 + Shopify Customer Privacy API — czy natywna integracja już to pokrywa, czy trzeba CMP.
+3. Aktualne stawki appek, które i tak trzeba wymienić w ofercie (płatności PL, InPost, faktury, CMP, ewentualnie appka do animacji/sekcji) — bo klient wymaga kosztu miesięcznego.
+4. Ceny planów Shopify — żeby pytanie o plan miało sens i żeby w ofercie było jasne, co plan warunkuje.
+```

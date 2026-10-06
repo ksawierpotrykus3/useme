@@ -1,0 +1,5 @@
+TYTUL: Zbudowanie drzewa kategorii i przypisanie do nich produktów oraz przerobienie atrybutu rozmiarów w sklepie internetowym
+BUDZET: 500,00 PLN
+
+OPIS:
+Opis Witam, Potrzebuję osoby, która skonsultuje ze mną i zaproponuje nowe drzewo kategorii w moim sklepie internetowym działającym na Woocommerce. Po uzgodnieniu drzewa przypisze produkty do odpowiednich im kategorii. Produktów jest około 75000, mam wdrożone masowe przypisywanie kategorii, zarówno automatyczne, jak i ręczne - moją autorską wtyczką, jednak nie są to doskonałe narzędzia, a ja nie mam czasu, by dłubać w tym ręcznie więc szukam kogoś kto za mnie przy tym podłubie i porządnie to zaplanuje i ustawi. Przy okazji też chciałbym zrobić porządek z atrybutem rozmiar, który jednocześnie jest kluczowy i wyświetla się jako wariant produktu. Tutaj chodzi o ujednolicenie - na przykład mam rozmiar 39,5 napisany w formatach 39,5 39 1/2, 39-1-2, 39,5 EUR. Chodzi o to, by to było ujednolicone i pokazywało wszędzie 39,5. Wymagane funkcje: Woocommerce Szablon / własny projekt: jest

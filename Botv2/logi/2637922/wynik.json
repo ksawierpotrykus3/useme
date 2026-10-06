@@ -1,0 +1,22 @@
+{
+  "job_id": "2637922",
+  "title": "pokewars",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 500,
+  "wycena_gorna": 1300,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Finalna wycena jest widełkowa i warunkowa, bo wszyscy modele zgodnie wskazują, że automatyczne klikanie 'walcz z bossem' narusza §7.6 regulaminu pokewars.pl i nie może być przedmiotem oferty wykonawczej. Wyceniamy więc tylko wariant zgodny: skrypt informuje przez NVDA, a kliknięcie pozostaje po stronie klienta. Rozbieżność dotyczyła kwot: wstępne propozycje sięgały 650–1800 zł, ale po autokrytyce część modeli zeszła do 360–720 zł przy prostym DOM lub 700–1300 zł przy większej niepewności, dlatego odrzucam górne 1800 zł jako zawyżenie pod niepewność. Bez wglądu w DOM nie wiadomo, czy przycisk da się selektywnie wybrać, czy mapa nie jest w canvas oraz czy walka wymaga obsługi całej sekwencji, co może zmienić zakres i kwotę. Dlatego definitywna=false, a widełki 400–1300 zł należy potwierdzić po diagnozie konta testowego.",
+  "od_czego_zaleza": [
+    "uzyskania dostępu do konta testowego i diagnozy DOM po zalogowaniu",
+    "czy przycisk 'walcz z bossem' jest selektywny (button/div/ARIA), czy interfejs jest w canvas",
+    "akceptacji wariantu zgodnego z regulaminem: skrypt informuje przez NVDA, klient sam klika",
+    "czy walka po kliknięciu jest automatyczna, czy wymaga dalszych decyzji (atak, przedmiot)",
+    "przeglądarki i systemu klienta oraz sposobu integracji z NVDA",
+    "zakresu testów i ewentualnej ścieżki awaryjnej: zgłoszenie problemu dostępności do twórców gry"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

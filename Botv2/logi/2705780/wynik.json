@@ -1,0 +1,20 @@
+{
+  "job_id": "2705780",
+  "title": "Stworzenie platformy webowej do sprzedaży biletów (MVP + rozwój)",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 35000,
+  "wycena_gorna": 50000,
+  "definitywna": false,
+  "dni_od": 75,
+  "dni_do": 120,
+  "uzasadnienie_rozjemcy": "Po dwóch rundach widać rozrzut: B i C oscylują wokół 25–42 tys. zł, a A i D wokół 40–55 tys. zł; mediana i średnia środka wypadają blisko 40 tys. zł, więc finalne widełki 35–50 tys. zł netto najlepiej godzą te głosy. Zakres MVP jest duży i transakcyjny: płatności w Modelu C, wypłaty, QR check-in, panel admina, e-maile i doradztwo PSP realnie zwiększają pracochłonność ponad prostą implementację. Rozbieżność wynika głównie z nieznanych wolumenów i tego, kto jest merchantem — od tego zależy architektura, KYC i ryzyko MIP/KNF. Dlatego to nie wycena definitywna, lecz widełki do doprecyzowania po odpowiedziach na pytania TYP 1.",
+  "od_czego_zaleza": [
+    "wolumeny MVP: liczba organizatorów, wydarzeń/mies., biletów na wydarzenie i szczyt równoczesnych zakupów",
+    "kto jest merchantem i wybór PSP marketplace (PayU/Przelewy24/Tpay vs Stripe Connect) oraz zakres KYC submerchantów",
+    "zakres zwrotów, check-inu offline/PWA, e-maili transakcyjnych i doradztwa produktowo-technologicznego w MVP",
+    "tempo pracy i skład wykonawcy: freelancer part-time vs mały zespół"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

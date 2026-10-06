@@ -1,0 +1,27 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: projekt jednorazowy — wykonanie strony od podstaw; brak przesłanek na stałą współpracę/retainer.
+INTENCJA: wykonawcze — klient zamawia konkretny zakres. Dopytanie dotyczy materiałów wejściowych i jednej decyzji (załączniki w HubSpot).
+DECYDENT_I_BOL: Decydent: firma TSL, najpewniej właściciel/marketing; brak pośrednika i agencji. Ból: wiarygodna, premium strona B2B generująca zapytania ofertowe z załącznikami, spięta z HubSpot CRM, pokazująca zasięg/proces/certyfikaty/case studies.
+WYKONALNE: TAK. WordPress + indywidualny motyw + ACF + Polylang + HubSpot. Załączniki: obejście — upload do bezpiecznego storage (np. WP Media / S3) i link w polu formularza HubSpot.
+POLE_DO_POPISU: JEST — konkret, nie ogólniki: formularz z załącznikami → HubSpot nie przyjmuje uploadu w nowych formularzach; pokazujemy obejście i to, że wielojęzyczność robimy świadomie (Polylang + optymalizacja ACF pod szybkość).
+SCIEZKA_MERYTORYKI: B — jedna mina potwierdzona (HubSpot) + jedna propozycja techniczna (Polylang/ACF) wchodzi jako nasza decyzja TYP 2, nie jako ostrzeżenie.
+MINY_I_CIEKAWOSTKI:
+- MINA (potwierdzona researchem): „Formularz kontaktowy/wyceny z możliwością dodawania załączników" + „Integracja formularzy z HubSpot CRM". HubSpot usunął możliwość dodania nowego pola uploadu do formularzy; legacy field działa tylko w starych formularzach. Nawet gdy zadziała — plik trafia do prywatnego folderu File Managera, a w rekordzie kontaktu jest tylko link, nie załącznik. Dowód: oba wymagania w treści ogłoszenia + ustalenie z dokumentacji HubSpot. Skutek: jeśli zbudujemy formularz „na naiwnie", załącznik nie dotrze do CRM.
+- Ciekawostka techniczna (nie mina dla klienta, nasza decyzja): PL/EN + rozbudowany CMS + wymóg „optymalizacji szybkości" → wybieramy Polylang zamiast WPML i optymalizujemy ACF (custom tables/caching) świadomie. Dowód: „Wersja PL + EN", „CMS do samodzielnej edycji treści", „optymalizacja szybkości ładowania".
+- Ciekawostka: „Interaktywna mapa zasięgu" + CMS + PL/EN — bez źródła danych i sposobu interakcji. Traktujemy jako moduł w CMS, nie statyczny obrazek; szczegóły doprecyzujemy przy materiale, nie teraz.
+ODMOWA: Wchodzi jako mina, nie jako odmowa całego zakresu. Co szkodzi: klient zakłada, że „formularz z załącznikami + HubSpot" działa out-of-the-box. Typ 1 — brak kanału dostępu (funkcja usunięta z produktu). Mechanizm: nowy formularz HubSpot nie przyjmie uploadu; załącznik nie trafi do rekordu kontaktu jako plik. Konsekwencja: lead bez załącznika, ręczne dociąganie plików, ryzyko niekompletnych zapytań ofertowych. Alternatywa: formularz z uploadem po stronie WP (plik do bezpiecznego storage) + pole tekstowe/link w HubSpot; albo dedykowany endpoint WP → HubSpot z linkiem do pliku. Reszta zakresu bez zmian.
+PYTANIA:
+1. Czy mają Państwo istniejące materiały identyfikacji (logo, kolory, typografia), które mamy uszanować, czy identyfikację projektujemy od zera? Uzasadnienie: „spójnej identyfikacji wizualnej" — spójnej z czymś; od tego zależy zakres UX/UI i wycena.
+2. Kto dostarcza treści podstron, case studies, bloga oraz tłumaczenia PL/EN — Państwo, czy my mamy je przygotować/tłumaczyć? Uzasadnienie: od tego zależy zakres redakcyjny, czas i wycena.
+3. Załączniki: czy wystarczy Państwu, że plik będzie bezpiecznie przechowywany po stronie strony, a w rekordzie HubSpot pojawi się link do niego — czy wymagają Państwo fizycznego załącznika w CRM? Uzasadnienie: od tej odpowiedzi zależy architektura formularza; standardowe formularze HubSpot uploadu nie przyjmują.
+CO_ZLECENIE_MOWI: strona od podstaw, UX/UI premium industrial dark, responsywna, podstrony: Home, O nas, Usługi, Zasięg, Proces, Rozwiązywanie problemów, Case Studies, Certyfikaty, Blog, Kontakt/Wycena; CMS, PL/EN, formularze z załącznikami, HubSpot CRM, mapa zasięgu, GA4/Search Console, SEO, szybkość, SSL, cookies/RODO, social/LinkedIn, panel admin, uruchomienie na wskazanej domenie/hostingu; preferowany WordPress.
+CZEGO_NIE_MOWI: czy jest logo/istniejąca identyfikacja, kto dostarcza treści i tłumaczenia, ile case studies/blog, jaki plan HubSpot, jak dokładnie ma działać mapa zasięgu, jakie dokładnie integracje social media, konkretny budżet i termin.
+GRANICA_CIECIA: Zlecenie bogate w zakres, ale ubogie w dane wejściowe (materiały, treści, decyzja o załącznikach). Odpowiedź średniej długości, rzeczowa: potwierdzić zrozumienie zakresu, nazwać potwierdzoną minę HubSpot i dać obejście, zaproponować WordPress + Polylang + ACF, zadać 3 pytania. Nie rozpisywać każdej podstrony, nie wyceniać szczegółowo bez odpowiedzi. Domena/hosting — wycięte, klient napisał „na wskazanej domenie/hostingu".
+RESEARCH_POTRZEBNY: NIE — research z iteracji 1 wystarcza. Wynik zmienia treść oferty (mina HubSpot z warunkowej na potwierdzoną; wybór Polylang jako nasza decyzja), więc wchodzi do oferty jako konkret, nie jako pytanie.
+
+DECYZJE:
+- DOPISAĆ do oferty: potwierdzoną minę HubSpot jako fakt (nie „jeśli"), konkretne obejście (upload po stronie WP + link w rekordzie CRM), wybór WordPress + Polylang + ACF z jednozdaniowym uzasadnieniem wydajnościowym, potwierdzenie zakresu podstron.
+- ODPOWIEDZIEĆ: że rozumiemy zakres i go realizujemy; że widzimy ograniczenie HubSpot i mamy gotowe obejście, które nie psuje UX formularza ani danych w CRM.
+- DOPYTAĆ: 3 pytania powyżej (identyfikacja, treści/tłumaczenia, załączniki w HubSpot). Nie pytać o domenę/hosting ani o plan HubSpot — domena wskazana przez klienta, plan nie zmienia już architektury formularza.
+```

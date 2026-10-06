@@ -1,0 +1,21 @@
+{
+  "job_id": "2896683",
+  "title": "Wdrożenie sklepu Shopify 1:1 z autorskiego projektu (desktop + mobile) + pełna konfiguracja: płatności, wysyłki, zwroty,",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 13000,
+  "wycena_gorna": 18000,
+  "definitywna": false,
+  "dni_od": 20,
+  "dni_do": 30,
+  "uzasadnienie_rozjemcy": "Modele zgodnie wskazują, że dominuje przekład 12 szablonów na Liquid/OS 2.0 z warunkowymi układami mobile/desktop, konfiguracja PL, analityka Consent Mode v2 i zewnętrzny hosting wideo. Rozbieżność dotyczyła głównie liczby godzin: A był najniższy i po autokorekcie dawał ok. 10,5–13,5 tys. zł, natomiast B, C i D oscylowały wokół 12–18 tys. zł, a po autokorektach B i C domykały się na 13–18 tys. zł. Wybieram 13 000–18 000 zł netto jako medianę skorygowanych głosów, z terminem 20–30 dni roboczych. To nadal widełki, bo bez NDA i prototypu nie da się ustalić stałej kwoty; po NDA i potwierdzeniu wideo oraz planu Shopify zakres się domknie.",
+  "od_czego_zaleza": [
+    "Podpisanie NDA i dostęp do prototypu HTML",
+    "Gotowość plików wideo lub konieczność przygotowania/kompresji pod web",
+    "Plan Shopify (Grow vs Plus) i zakres customizacji checkoutu",
+    "Nowy sklep vs migracja z istniejącego",
+    "Realna złożoność animacji, sliderów i różnic mobile/desktop w 12 szablonach"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 2
+}

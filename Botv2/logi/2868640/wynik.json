@@ -1,0 +1,20 @@
+{
+  "job_id": "2868640",
+  "title": "Strona www dla firmy z branży TSL",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 15000,
+  "wycena_gorna": 22000,
+  "definitywna": false,
+  "dni_od": 30,
+  "dni_do": 45,
+  "uzasadnienie_rozjemcy": "Modele zgodnie potwierdzają szeroki zakres: indywidualne UX/UI premium, WordPress, CMS, PL/EN, HubSpot, SEO/GA4 i optymalizację szybkości. Zbieżność dotyczy też miny HubSpot z uploadem plików oraz wyboru Polylang/ACF jako bezpieczniejszej ścieżki wydajnościowej. Rozbieżność wynika głównie z tego, czy w cenę wchodzi identyfikacja wizualna od zera oraz treści i tłumaczenia. Dlatego przyjmuję widełki 15–22 tys. zł netto: dolna granica przy materiałach i istniejącej identyfikacji od klienta, górna przy szerszym zakresie brandingowym, redakcyjnym i bardziej zaawansowanej mapie zasięgu.",
+  "od_czego_zaleza": [
+    "czy klient dostarcza istniejącą identyfikację wizualną (logo, kolory, typografia), czy projektujemy ją od zera",
+    "kto dostarcza treści podstron, case studies, bloga oraz tłumaczenia PL/EN i ile ich jest",
+    "czy wystarczy link do załącznika w rekordzie HubSpot przy uploadzie po stronie WordPressa, czy wymagany jest fizyczny plik w CRM",
+    "zakres interaktywności mapy zasięgu i liczba dodatkowych integracji social/CTA"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

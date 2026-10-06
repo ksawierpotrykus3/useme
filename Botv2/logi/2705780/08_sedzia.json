@@ -1,0 +1,7 @@
+{
+  "status": "OK",
+  "kara_pkt": 0,
+  "cytat_lub_brak": "",
+  "uzasadnienie": "Oferta jest konkretna i dopasowana do ogłoszenia. Odpowiada wprost na prośbę o rekomendację płatności (Stripe vs Przelewy24/PayU/Tpay) i uzasadnia ją modelem rozliczeń klienta (Model C, ręczne wypłaty). Nie neguje podejścia klienta, tylko doradza w jednym punkcie, co jest zgodne z oczekiwaniem 'doradztwo produktowe i technologiczne'. Proponuje sensowne decyzje zakresowe (PWA z cache do check-in, zwroty przez PSP) z możliwością zmiany. Uczciwie przyznaje, że mobile i SaaS to osobny etap i nie wchodzą w kwotę MVP. Zamiast zmyślać portfolio, pyta o wolumeny i merchantę, co jest profesjonalne. Ton jest rzeczowy, nie coachingowy. Brak zmyślonych realizacji, klientów czy fałszywych faktów technicznych. Jedyne drobiazgi (np. brak wprost odniesienia do eksportu CSV czy konkretnych typów biletów) nie są na tyle poważne, by zgłaszać VETO, zwłaszcza że oferta ma charakter wstępny i zapowiada doprecyzowanie po odpowiedzi klienta.",
+  "instrukcja_naprawy": ""
+}
