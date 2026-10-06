@@ -58,9 +58,10 @@ Pytania dzielą się na dwa typy: (a) wycenowe, (b) wykrywacze ("co u Was znaczy
 
 ---
 
-## Granica pytań (nie sztywny limit — liczba warstw)
+## Granica pytań (max 3 NIEZBĘDNE)
 
-Liczba pytań = liczba NIEZALEŻNYCH WARSTW decyzyjnych, których nie da się rozstrzygnąć z ogłoszenia. Nie liczba wątpliwości. Warstwy:
+Liczba pytań: maksymalnie 3 NIEZBĘDNE pytania. Pytaj tylko o to, co jest bezwzględnie konieczne do wyceny lub ruszenia z pracami. Jeśli nie ma realnych niewiadomych — nie pytaj na siłę.
+Liczba pytań wynika z liczby NIEZALEŻNYCH WARSTW decyzyjnych, których nie da się rozstrzygnąć z ogłoszenia. Nie liczba wątpliwości. Warstwy:
 - ERP/system: wersja + moduły + uprawnienia
 - Dane: wolumen + typ + format
 - Compliance: RODO, przepisy branżowe
@@ -68,7 +69,7 @@ Liczba pytań = liczba NIEZALEŻNYCH WARSTW decyzyjnych, których nie da się ro
 - Środowisko: offline, sprzęt, stare telefony, serwer
 - Warstwa wizualna obok technicznej (strona + panel + integracje)
 
-Zlecenie jednowarstwowe: 1-2 pytania. Zlecenie wielowarstwowe (≥3 warstwy): 3-4 pytania. Górna granica: 4. Nie ma płatnych pilotów ani etapów jako alternatywy dla pytań — nikt za to nie płaci.
+Zlecenie jednowarstwowe: 1-2 pytania. Zlecenie wielowarstwowe: max 3 NIEZBĘDNE pytania. Górna twarda granica: 3. Nie ma płatnych pilotów ani etapów jako alternatywy dla pytań — nikt za to nie płaci.
 
 Czego NIE pytać (twarde):
 1. O to, co jest w ogłoszeniu — to sygnał "nie przeczytałem".
@@ -150,7 +151,7 @@ POLE_DO_POPISU: JEST/NIE MA
 SCIEZKA_MERYTORYKI: A/B/C/ZADNA
 MINY_I_CIEKAWOSTKI: (każda z dowodem ze zlecenia, albo puste)
 ODMOWA: (co klientowi szkodzi, jaki typ 1-6, mechanizm awarii, konsekwencja, alternatywa — albo puste)
-PYTANIA: (tylko konieczne, każde z uzasadnieniem, albo puste)
+PYTANIA: (max 3 NIEZBĘDNE, tylko konieczne bez których nie da się ruszyć, albo puste)
 CO_ZLECENIE_MOWI: ...
 CZEGO_NIE_MOWI: ...
 GRANICA_CIECIA: (długość, głębokość)

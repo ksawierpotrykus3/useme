@@ -23,6 +23,8 @@ _FORBIDDEN = [
     (r"\b(?:inżynier|inzynier)[a-ząćęłńóśźż]*\b",
      "Nazywanie siebie inzynierem"),
     (r"\b(?:przyznam\s+szczerze|nie\s+ukrywam)\b", "Frazes przyznam szczerze / nie ukrywam"),
+    (r"\b(?:w\s+osobnej\s+wiadomo[sś]ci|w\s+kolejnej\s+wiadomo[sś]ci|tuż\s+po\s+tej\s+ofercie|pode[sś]l[eę]\s+(?:linki|realizacje)\s+w\s+wiadomo[sś]ci|wy[sś]l[eę]\s+(?:linki|realizacje)\s+w\s+wiadomo[sś]ci)\b",
+     "Obietnica wysłania linków/materiałów w osobnej wiadomości prywatnej (bot wysyła tylko tę ofertę)"),
 ]
 
 _ETYKIETY = [

@@ -19,16 +19,30 @@ import json
 import re
 from typing import Any, Callable, Dict, List, Optional
 
-PROMPT_SYS = (
+def okresl_stawke(tresc: str, dziennik: str = "") -> int:
+    """Okresla stawke godzinowa: 90 zl standard, 115 zl dla mocniejszego devu/architektury."""
+    full = f"{tresc} {dziennik}".lower()
+    mocne_slowa = [
+        "java", "spring", "supabase", "pwa", "offline", "power apps", "powerapps",
+        "dataverse", "graph api", "b2b", "crm", "erp", "n8n", "baselinker", "ocr",
+        "llm", "ai ", "architekt", "mikroserwis", "nest", "docker", "kubernetes",
+        "presta", "prestashop", "migracj", "etl", "comarch", "optima", "subiekt"
+    ]
+    if any(s in full for s in mocne_slowa):
+        return 115
+    return 90
+
+
+PROMPT_SYS_BASE = (
     "Jestes polskim freelancerem programista pracujacym solo na Useme. "
     "Rozliczasz sie przez umowe o dzielo, bez firmy i bez kosztow biura. "
-    "Masz 90 zl stawki za godzine. Odpowiadasz konkretnie i krotko."
+    "Masz {stawka} zl stawki za godzine. Odpowiadasz konkretnie i krotko."
 )
 
-PROMPT_R1 = (
+PROMPT_R1_BASE = (
     "Wycen to zlecenie.\n\n"
     "Jestem solo dev, freelancer. Nie chce dawac kwot z kosmosu, ani nie chce "
-    "robic za darmo. Moja stawka to 90 zl za godzine.\n\n"
+    "robic za darmo. Moja stawka to {stawka} zl za godzine.\n\n"
     "Podaj: kwota (albo widelki), orientacyjny czas w dniach, i 2-3 zdania uzasadnienia. "
     "Jesli cos jest niejasne w zleceniu, powiedz czego brakuje.\n\n"
     "TRESC ZLECENIA:\n{tresc}"
@@ -108,7 +122,7 @@ def _parsuj_rozjemce(tekst: Optional[str]) -> Optional[Dict[str, Any]]:
         "kwota_dolna": cd,
         "kwota_gorna": cg,
         "definitywna": definitywna,
-        "od_czego_zaleza": [str(x).strip() for x in (data.get("od_czego_zaleza") or []) if str(x).strip()],
+        "od_czego_zaleza": [str(x).strip() for x in (data.get("od_czego_zaleza") or data.get("od_czego_zalezy") or data.get("od_czego_zalea") or []) if str(x).strip()],
         "dni_od": _oczysc_int(data.get("dni_od"), 14),
         "dni_do": _oczysc_int(data.get("dni_do"), 21),
         "uzasadnienie": str(data.get("uzasadnienie") or "").strip(),
@@ -118,9 +132,7 @@ def _parsuj_rozjemce(tekst: Optional[str]) -> Optional[Dict[str, Any]]:
 def _zaokraglij(kwota: int) -> int:
     if kwota <= 2000:
         return int(round(kwota / 50.0) * 50)
-    if kwota <= 10000:
-        return int(round(kwota / 500.0) * 500)
-    return int(round(kwota / 1000.0) * 1000)
+    return int(round(kwota / 100.0) * 100)
 
 
 def _wyciagnij_kwoty(tekst: str) -> List[int]:
@@ -184,17 +196,17 @@ def wycen_rada(
     if research:
         tresc = f"{tresc}\n\nRESEARCH:\n{research}"
 
-    prompt1 = PROMPT_R1.format(tresc=tresc)
+    stawka = okresl_stawke(tresc_zlecenia, dziennik)
+    say(f"    stawka bazowa dla zlecenia: {stawka} zł/h ({'mocny dev/architektura' if stawka > 90 else 'standard'})")
+    prompt_sys = PROMPT_SYS_BASE.format(stawka=stawka)
+    prompt1 = PROMPT_R1_BASE.format(stawka=stawka, tresc=tresc)
     nazwy = ["DeepSeek-A", "DeepSeek-B", "DeepSeek-C", "DeepSeek-D"]
 
     # --- RUNDA 1: 4x DeepSeek SEKWENCYJNIE ---
-    # UWAGA: proxy DeepSeek (port 4571) NIE obsluguje rownoleglych requestow.
-    # Przy ThreadPoolExecutor wracalo tylko 1 z 4 odpowiedzi (reszta pusta).
-    # Dlatego lecimy po kolei - wolniej, ale komplet glosow.
     say("    rada wycen: 4x DeepSeek (sekwencyjnie)...")
     r1: Dict[str, str] = {}
     for n in nazwy:
-        r1[n] = _call_par(call_ai_fn, PROMPT_SYS, prompt1) or ""
+        r1[n] = _call_par(call_ai_fn, prompt_sys, prompt1) or ""
 
     for nazwa in nazwy:
         say(f"      [{nazwa} R1] {(r1[nazwa] or '')[:90].strip()}...")
@@ -203,7 +215,7 @@ def wycen_rada(
     say("    rada wycen: runda 2 (czy na pewno nie zgadles?)...")
     r2: Dict[str, str] = {}
     for n in nazwy:
-        r2[n] = _call_par(call_ai_fn, PROMPT_SYS,
+        r2[n] = _call_par(call_ai_fn, prompt_sys,
                           PROMPT_R2.format(poprzednia=r1[n], tresc=tresc)) or ""
 
     for nazwa in nazwy:

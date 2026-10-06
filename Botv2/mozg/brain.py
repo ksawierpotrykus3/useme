@@ -244,6 +244,22 @@ def _weryfikuj_veto(sedzia: Dict[str, Any], oferta: str, tresc: str) -> str:
     return raw or "BRAK_WYNIKU_WERYFIKACJI"
 
 
+def _z_kontekstem_czasu(prompt: str) -> str:
+    """Wstrzykuje dynamiczny kontekst biezacej daty do promptu."""
+    from datetime import datetime
+    miesiace = {
+        1: "stycznia", 2: "lutego", 3: "marca", 4: "kwietnia", 5: "maja", 6: "czerwca",
+        7: "lipca", 8: "sierpnia", 9: "września", 10: "października", 11: "listopada", 12: "grudnia"
+    }
+    now = datetime.now()
+    m_pl = miesiace.get(now.month, "")
+    naglowek_daty = (
+        f"\n[KONTEKST CZASU: Dzisiejsza data to {now.day} {m_pl} {now.year} roku ({now.strftime('%Y-%m-%d')}). "
+        f"Wszelkie terminy, harmonogramy i odniesienia czasowe muszą odnosić się do bieżącego lub przyszłego czasu, nigdy wstecz.]\n"
+    )
+    return prompt.strip() + "\n" + naglowek_daty
+
+
 def _przepisz_z_faktami(oferta: str, sedzia: Dict[str, Any], fakty: str, tresc: str,
                         system_pismo: str, kwota_dolna: int, kwota_gorna: int,
                         definitywna: bool) -> str:
@@ -261,7 +277,8 @@ def _przepisz_z_faktami(oferta: str, sedzia: Dict[str, Any], fakty: str, tresc: 
         f"=== WERYFIKACJA FAKTOW (researcher sprawdzil zakwestionowane twierdzenia) ===\n{fakty}\n\n"
         f"Przepisz oferte. Zakwestionowane twierdzenia USUN albo zamien na pytania/hipotezy "
         f"zgodnie z weryfikacja faktow. Nie pisz jako pewnika tego, czego nie potwierdzono. "
-        f"Zachowaj zakres i cene: {wytyczna}. Podpis na koncu: {PODPIS}. "
+        f"Zachowaj poprawna merytoryke techniczna i wiedze dziedzinowa — nie usuwaj trafnych analiz technicznych. "
+        f"Zachowaj zakres i cene: {wytyczna} (nigdy nie obnizaj ceny ponizej {kwota_dolna} zl netto). Podpis na koncu: {PODPIS}. "
         f"Wyslij tylko tekst oferty.",
         temperature=0.7,
     )
@@ -282,9 +299,9 @@ def zbuduj_oferte(zlecenie: Dict[str, Any], verbose: bool = True,
     job_id = str(zlecenie.get("id", "?"))
     tresc = _tresc_zlecenia(zlecenie)
     client_text = _tekst_klienta(zlecenie)
-    system_myslenie = _czytaj("myslenie.md")
-    system_pismo = _czytaj("pismo.md")
-    system_sedzia = _czytaj("sedzia.md")
+    system_myslenie = _z_kontekstem_czasu(_czytaj("myslenie.md"))
+    system_pismo = _z_kontekstem_czasu(_czytaj("pismo.md"))
+    system_sedzia = _z_kontekstem_czasu(_czytaj("sedzia.md"))
     log: list[str] = []
 
     def say(msg):
