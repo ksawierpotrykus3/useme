@@ -1,0 +1,7 @@
+TYTUŁ: Poszukiwany specjalista od Subiekta i Javy - naprawa działania integracji pomiędzy Subiektem a Woocommerce
+KLIENT: BossCats
+BUDŻET: Do negocjacji
+URL: https://useme.com/pl/jobs/145391/
+
+OPIS:
+<p>Szukamy specjalisty od Subiekta, który naprawi błąd w integracji Woocommerce z Subiektem (komunikacja przez Sferę) polegający na tym, że do Subiekta nie importuje się koszt przesyłki w zamówieniu. Mamy kod źródłowy integracji który trzeba zmienić, gdyby byłą konieczność. Trzeba to zrobić na dwóch platformach (u dwóch klientów, ale zasada identyczna, skopiowanie istniejącego rozwiązania na drugą platformę)</p>

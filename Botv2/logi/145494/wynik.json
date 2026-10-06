@@ -1,0 +1,21 @@
+{
+  "job_id": "145494",
+  "title": "Elektronik / embedded – ESP32 / IoT, sterowanie urządzeniami i czujniki (prototyp MVP)",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 6600,
+  "wycena_gorna": 9500,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 18,
+  "uzasadnienie_rozjemcy": "Modele zgodnie rekomendują ESP32, dedykowany czytnik QR po UART zamiast ESP32-CAM oraz modularność pod RS485 na etap 2. Zbieżność prac to ok. 5,8-8,0 tys. zł netto, a podzespołów ok. 0,8-1,5 tys. zł netto, co daje łącznie 6,6-9,5 tys. zł netto. Rozbieżność dotyczy głównie górnej granicy prac (A początkowo do 10 tys. zł) i BOM w zależności od tego, kto kupuje części. Wycena jest widełkowa, bo API, zawartość QR, mapowanie na sekcję i warunki outdoor pozostają nieustalone.",
+  "od_czego_zaleza": [
+    "Kontrakt API logów: endpoint, format JSON, autoryzacja oraz zachowanie offline (bufor lokalny + retry/backoff).",
+    "Zawartość QR i mapowanie QR na sekcję: co koduje QR i czy firmware ma lokalną tablicę, czy pyta API.",
+    "Kto kupuje podzespoły i czy w zakresie są elektromagnesy 12 V, zasilacz outdoor IP65 oraz obudowa.",
+    "Warunki środowiskowe: IP, temperatura, zasilanie na miejscu i wymagany poziom zabezpieczeń.",
+    "Dostępność części i termin startu po zamknięciu specyfikacji API/QR."
+  ],
+  "checker_ok": false,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

@@ -28,6 +28,7 @@ kod/robocze_*
 # --- Dane robocze / historia dzialania bota ---
 kod/marker.json
 kod/debug/
+Botv2/debug/
 kod/data/
 
 # --- Dane operacyjne i badawcze (dane klientow, surowe scrapowanie) ---

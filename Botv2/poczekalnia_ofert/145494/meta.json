@@ -1,0 +1,24 @@
+{
+  "job_id": "145494",
+  "title": "Elektronik / embedded – ESP32 / IoT, sterowanie urządzeniami i czujniki (prototyp MVP)",
+  "author": "mbrvm",
+  "budget": "Do negocjacji",
+  "url": "https://useme.com/pl/jobs/145494/",
+  "wycena": 8050,
+  "wycena_dolna": 6600,
+  "wycena_gorna": 9500,
+  "dni_od": 10,
+  "dni_do": 18,
+  "definitywna": null,
+  "checker_ok": false,
+  "checker_problemy": [
+    {
+      "regula": "przeladowanie skrotami",
+      "dowody": [
+        "ESP32, ESP32, QR, UART, HTTP, ESP32, RS485, QR, ESP32, CAM"
+      ]
+    }
+  ],
+  "sedzia_status": "OK",
+  "sedzia_kara": 0
+}

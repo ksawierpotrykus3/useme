@@ -1,0 +1,13 @@
+Zacznę od najważniejszego, bo pyta Pan wprost o ESP32 vs Raspberry Pi. Proponuję ESP32, nie Pi. Do logiki sesji, sterowania przekaźnikami, odczytu QR po UART i wysyłki logów HTTP nie potrzebuje Pan systemu operacyjnego. ESP32 jest tańszy, prostszy, mniej prądożerny i stabilniejszy przy pracy ciągłej, a przy tym zostawia rezerwę na RS485 pod etap 2. Raspberry Pi miałby sens tylko wtedy, gdyby QR miał być czytany kamerą i dekodowany lokalnie. Tego nie polecam, bo ESP32-CAM ma za mało SRAM do stabilnego dekodowania QR, a dedykowany czytnik po UART zwraca gotowy string i zdejmuje z firmware całe przetwarzanie obrazu. Prościej, taniej i pewniej.
+
+Drugą rzeczą, którą chcę powiedzieć zanim przejdę do wyceny, są elektromagnesy. Nie podłącza się ich wprost do GPIO. Przy 12 V i obciążeniu indukcyjnym każda cewka wymaga diody gaszącej równolegle, inaczej napięcie indukowane przy wyłączaniu zniszczy styk przekaźnika albo tranzystor sterujący. To nie jest problem, to standardowy element doboru, ale musi być w projekcie od początku.
+
+Pod etap 2 proponuję moduł typu Waveshare ESP32-S3-Relay-6CH, który ma wbudowany izolowany RS485. Rezerwa pod wagę platformową jest wtedy gotowa bez dokładania transceivera i bez przeprojektowywania płytki. Czytnik QR proponuję dedykowany moduł UART, kontaktron lub czujnik indukcyjny do drzwi, PIR, obudowa IP65 i zasilanie 12 V również w obudowie IP65.
+
+Wycena jest widełkowa, bo trzy rzeczy pozostają nieustalone i mogą przesunąć zakres w obie strony. Praca to 5800 do 8000 zł netto. Podzespoły to 800 do 1500 zł netto, w zależności od tego, czy elektromagnesy, zasilacz i obudowa są po mojej stronie, czy po Państwa. Razem 6600 do 9500 zł netto. W cenie firmware, schemat połączeń, BOM, krótka instrukcja uruchomienia i przeniesienie majątkowych praw autorskich do wykonanych prac. Czas realizacji to 10 do 18 dni roboczych od momentu, gdy mamy zamknięty kontrakt API i specyfikację QR oraz potwierdzony BOM. Dostępność podzespołów sprawdzam po ustaleniu, który czytnik QR i którą obudowę wybierzemy.
+
+Do ruszenia firmware potrzebuję trzech rzeczy. Pierwsza to kontrakt API logów, czyli endpoint, format JSON, sposób autoryzacji i zachowanie przy braku sieci. Druga to zawartość QR i mapowanie na sekcję, czyli co koduje kod i skąd firmware wie, którą sekcję otworzyć, czy z API, czy z lokalnej tablicy. Trzecia to informacja, kto kupuje podzespoły i jakie są warunki środowiskowe na miejscu, głównie IP i zakres temperatur. Bez tych trzech punktów nie zamknę firmware, a wycena powyżej jest orientacyjna.
+
+Jeśli etap 2 ruszy po prototypie, modularność jest już w projekcie i wtedy siadamy do rozszerzenia osobno.
+
+Ksawier

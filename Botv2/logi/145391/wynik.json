@@ -1,0 +1,20 @@
+{
+  "job_id": "145391",
+  "title": "Poszukiwany specjalista od Subiekta i Javy - naprawa działania integracji pomiędzy Subiektem a Woocommerce",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 1800,
+  "wycena_gorna": 3200,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Po autokrytyce trzy modele zbiegły się przy dolnej granicy 1800 zł, a górne granice rozjechały się głównie między 3000 a 4000 zł; D pozostał niżej z zakresem 1200–2500 zł. Wybieram 1800–3200 zł jako medianę zakresu około 16–28 h przy stawce 115 zł/h, bo zlecenie obejmuje diagnozę, poprawkę mapowania kosztu przesyłki i replikację na drugą platformę. To nadal widełki, nie wycena definitywna, ponieważ brakuje potwierdzenia wersji Subiekta/Sfery oraz typu dokumentu i sposobu reprezentacji kosztu przesyłki. Po wglądzie w kod i odpowiedziach na pytania można podać kwotę wiążącą.",
+  "od_czego_zaleza": [
+    "wersje Subiekta i Sfery na obu platformach (identyczne vs GT/nexo lub różne numery wersji)",
+    "typ dokumentu tworzonego przez integrację (ZK / FS / PA) oraz miejsce kosztu przesyłki (pozycja vs pole nagłówkowe)",
+    "zakres replikacji na drugą platformę: kopiowanie 1:1 vs adaptacja kodu",
+    "dostęp do kodu źródłowego i środowiska testowego Subiekta"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

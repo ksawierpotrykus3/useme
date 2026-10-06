@@ -1,0 +1,24 @@
+```
+KWALIFIKOWALNOSC: TAK
+TYP_ZLECENIA: stała współpraca / seria zleceń („tworzenie agentów" w liczbie mnogiej + „testowanie i optymalizacja" sugerują ciągłą relację, nie jednorazowy projekt). Retainer możliwy, ale nie przesądzam — brak danych o kadencji.
+INTENCJA: wykonawcze („projektowanie i budowa", „testowanie i optymalizacja" — konkretne zadania do wykonania, nie prośba o opinię)
+DECYDENT_I_BOL: Nieznany — brak firmy, brak osoby, bezosobowe „Szukamy osoby". Ból pod spodem: powtarzalne, ręczne czynności w trzech narzędziach (AutoCAD, Excel, PDF), które zjadają czas zespołu i nie skalują się z liczbą projektów. To na razie hipoteza z jednego zdania ogłoszenia — bez dowodu, więc nie idzie do klienta.
+WYKONALNE: TAK warunkowo — realne, ale nie da się potwierdzić zakresu bez konkretu. Najbliższa wykonalna ścieżka: diagnoza procesów → pilotaż jednego procesu → skalowanie. Kolejność prac proponujemy my, nie klient.
+POLE_DO_POPISU: NIE MA — brak jakiejkolwiek kotwicy: żadnej nazwy procesu, żadnej liczby, żadnej wersji AutoCAD/Excel, żadnego przykładu pliku. Nie ma dowodu, że wiemy coś, czego klient nie wie. Merytoryka schodzi z drogi.
+SCIEZKA_MERYTORYKI: ZADNA — A nie zachodzi (brak pytania wprost), B nie zachodzi (brak miny z dowodem ze zlecenia), C nie zachodzi (brak alternatywy z dowodem). Research nic nie wniósł → potwierdzenie, że nie ma czego wstawić.
+MINY_I_CIEKAWOSTKI: (puste — brak dowodu na jakąkolwiek minę)
+ODMOWA: (puste — nie ma jeszcze obiektu odmowy; brak nazwy systemu, wersji, wolumenu. Nie da się wskazać bariery bez danych)
+PYTANIA:
+  1. Które konkretnie kroki w AutoCAD, Excel i PDF mają być zautomatyzowane — i jak wygląda dziś jeden pełny cykl takiego zadania od początku do końca? — bez tego nie da się określić ani zakresu, ani architektury; to jedno pytanie zamiast trzech.
+  2. Jakie są wersje i środowisko pracy: AutoCAD (pełny/ LT / jaka wersja), Excel (365 czy starszy), w jaki sposób powstają i są przetwarzane PDF-y oraz czy praca jest lokalna, czy w chmurze? — od tego zależy, który kanał automatyzacji jest w ogóle dostępny (LISP vs .NET vs Python vs Power Automate vs RPA), a to wpływa wprost na wykonalność i wycenę.
+  3. Jaka jest skala: ile takich procesów/plików/dokumentów przechodzi dziennie lub miesięcznie i ile osób dziś to obsługuje? — od wolumenu zależy, czy sensowny jest agent, RPA, skrypt, czy kombinacja — i czy w ogóle warto to automatyzować.
+  (Świadomie NIE pytam „co rozumiecie przez agenta AI" — to pytanie o definicję, na które odpowiadamy my. Idzie do propozycji poniżej, nie do pytań.)
+CO_ZLECENIE_MOWI: szukają osoby do projektowania, budowy, testowania i optymalizacji agentów AI; obszar automatyzacji: AutoCAD, Excel, PDF; wymagane doświadczenie: AI/LLM + automatyzacja procesów; budżet: do negocjacji; tryb: wielokrotny (liczba mnoga + optymalizacja).
+CZEGO_NIE_MOWI: jaka firma i branża; kto decyduje; jakie konkretnie procesy i przykłady; wolumen i częstotliwość; wersje i środowisko (Windows, wersje AutoCAD/Excel, licencje, offline/cloud); jak wygląda dziś jeden cykl pracy; realny widełkowy budżet; czy „agenci AI" to workflow z LLM, chatbot, RPA z modelem, czy coś jeszcze innego; czy to projekt czy stała współpraca.
+GRANICA_CIECIA: Ogłoszenie = 3 zdania + 3 punkty. Odpowiedź krótka, bez merytoryki (nie ma z czego), 3 pytania diagnostyczne z uzasadnieniem, plus propozycja TYP 2 ram prac (diagnoza → pilotaż jednego procesu → skalowanie) i otwartość cenowa po poznaniu materiału. Żadnych tez o świecie klienta — brak kotwicy (system, liczba, wersja). Żadnych min — brak dowodu. Żadnej odmowy — brak obiektu. Zero researchu — brak technologii do sprawdzenia na tym etapie.
+RESEARCH_POTRZEBNY: NIE — brak konkretnego API, wersji, integracji do weryfikacji. „AutoCAD + Excel + PDF + agent AI" to zbiór kategorii, nie technologia. Research dopiero po odpowiedzi na pytanie 2 (wersja AutoCAD determinuje kanał automatyzacji).
+DECYZJE:
+- DOPISAĆ: nic nowego — research BRAK, merytoryka zamknięta (śCIEŻKA ZADNA), brak min i odmów. Nie ma czego dopisywać.
+- ODPOWIEDZIEC: krótka oferta w trybie dopytania — przedstawić propozycję TYP 2 (rozumiemy „agenta AI" jako workflow sterowany LLM, który wywołuje deterministyczne narzędzia do AutoCAD/Excel/PDF; jeśli chodzi o coś innego — dostroimy), zaproponować kolejność prac (diagnoza procesów → pilotaż jednego procesu → skalowanie), zadeklarować otwartość cenową po poznaniu zakresu. Bez merytoryki, bez min, bez odmowy.
+- DOPYTAĆ: dokładnie 3 pytania z sekcji PYTANIA — (1) konkretne kroki i przebieg jednego cyklu, (2) wersje i środowisko AutoCAD/Excel/PDF + lokalnie/chmura, (3) wolumen i liczba osób dziś obsługujących proces.
+```

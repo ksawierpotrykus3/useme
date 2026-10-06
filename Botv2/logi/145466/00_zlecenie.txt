@@ -1,0 +1,9 @@
+TYTUL: AI Developer – budowa agentów AI | AutoCAD, Excel, PDF
+BUDZET: Do negocjacji
+
+OPIS:
+<p>Szukamy osoby do tworzenia Agentów AI realizujących i automatyzujących procesy wykonywane obecnie przy użyciu AutoCAD, Excel i PDF.</p>
+
+<p>Zakres:<br>• projektowanie i budowa agentów AI,<br>• automatyzacja zadań wykonywanych w AutoCAD, Excel i PDF,<br>• testowanie i optymalizacja agentów.</p>
+
+<p>Szukamy osoby z praktycznym doświadczeniem w AI/LLM i automatyzacji procesów.</p>

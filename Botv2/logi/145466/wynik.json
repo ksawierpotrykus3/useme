@@ -1,0 +1,20 @@
+{
+  "job_id": "145466",
+  "title": "AI Developer – budowa agentów AI | AutoCAD, Excel, PDF",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 6000,
+  "wycena_gorna": 15000,
+  "definitywna": false,
+  "dni_od": 10,
+  "dni_do": 20,
+  "uzasadnienie_rozjemcy": "Wszystkie modele zgodnie odmawiają wyceny całego wdrożenia i proponują diagnozę, pilotaż jednego procesu oraz skalowanie; powtarzają też te same trzy pytania diagnostyczne i stawkę 115 zł/h. Rozbieżność dotyczy głównie tego, czy diagnoza jest osobnym etapem, oraz górnej granicy pilotażu: B daje najniżej, C najwyżej, A i D pośrodku, z zastrzeżeniem, że pełna orkiestracja wielu narzędzi może podnieść górę. Finalnie przyjmuję 6 000–15 000 zł netto na diagnozę i pilotaż jednego procesu jako uczciwe widełki, nie cenę definitywną. Kwota zależy od zakresu, środowiska i kanału automatyzacji; po odpowiedziach na pytania i diagnozie powinna zostać zawężona.",
+  "od_czego_zaleza": [
+    "odpowiedzi na 3 pytania: konkretne kroki/proces end-to-end, wersje i środowisko AutoCAD/Excel/PDF oraz wolumen i liczba osób",
+    "od wyboru kanału automatyzacji (LISP/.NET/Python/Power Automate/RPA) i dostępności API/plików testowych",
+    "od zakresu pilotażu: jeden wąski workflow vs pełna orkiestracja LLM + wielu narzędzi",
+    "od tego, czy po pilocie wchodzi stała współpraca/retainer, czy jednorazowe wdrożenie"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

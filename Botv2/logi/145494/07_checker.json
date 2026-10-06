@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "problemy": [
+    {
+      "regula": "przeladowanie skrotami",
+      "dowody": [
+        "ESP32, ESP32, QR, UART, HTTP, ESP32, RS485, QR, ESP32, CAM"
+      ]
+    }
+  ]
+}

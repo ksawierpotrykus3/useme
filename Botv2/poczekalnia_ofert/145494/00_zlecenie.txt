@@ -1,0 +1,25 @@
+TYTUŁ: Elektronik / embedded – ESP32 / IoT, sterowanie urządzeniami i czujniki (prototyp MVP)
+KLIENT: mbrvm
+BUDŻET: Do negocjacji
+URL: https://useme.com/pl/jobs/145494/
+
+OPIS:
+<p>Szukam elektronika / embedded developera do wykonania i uruchomienia prototypu MVP systemu IoT do kontroli dostępu do urządzeń zewnętrznych.</p>
+
+<p>Zakres obejmuje dobór i integrację elektroniki oraz firmware urządzenia. Aplikacja webowa, mobilna i backend są poza zakresem.</p>
+
+<p>Zakres MVP:<br>- centralka ESP32 lub Raspberry Pi — do ustalenia;<br>- sterowanie 2–3 elektromagnesami 12 V;<br>- czujnik drzwi: indukcyjny lub kontaktron;<br>- czujnik obecności PIR;<br>- odczyt QR: kamera, czytnik lub inne uzgodnione rozwiązanie;<br>- połączenie elementów i uruchomienie prototypu.</p>
+
+<p>Logika:<br>- aktywacja po otwarciu drzwi;<br>- podtrzymanie sesji przy ruchu i timeout przy braku aktywności;<br>- identyfikacja użytkownika przez QR;<br>- otwarcie wybranej sekcji;<br>- zapis zdarzeń i wysyłanie logów przez HTTP do uzgodnionego API, bez tworzenia serwera.</p>
+
+<p>Sposób weryfikacji QR i komunikację z API ustalimy przed rozpoczęciem prac.</p>
+
+<p>Waga — etap 2:<br>System ma umożliwiać późniejsze podłączenie wagi platformowej: modularna architektura i rezerwa odpowiednich interfejsów, np. RS485 / UART / USB. Waga nie jest implementowana na tym etapie.</p>
+
+<p>Założenia:<br>Prototyp, nie produkt finalny. Priorytetem jest prostota i działające rozwiązanie. Docelowa praca w warunkach zewnętrznych; zabezpieczenie elektroniki do ustalenia.</p>
+
+<p>Proszę o:<br>- krótkie informacje o doświadczeniu i podobnych realizacjach;<br>- propozycję podejścia, w tym ESP32 vs Raspberry Pi;<br>- wycenę prac i podzespołów osobno;<br>- dostępność i przewidywany czas realizacji.</p>
+
+<p>Oczekuję kodu źródłowego firmware, schematu połączeń, listy podzespołów i krótkiej instrukcji uruchomienia oraz przeniesienia majątkowych praw autorskich do wykonanych prac.</p>
+
+<p>Możliwa dalsza współpraca przy rozwoju projektu.</p>

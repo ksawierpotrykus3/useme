@@ -1,0 +1,7 @@
+{
+  "status": "OK",
+  "kara_pkt": 0,
+  "cytat_lub_brak": "",
+  "uzasadnienie": "Oferta odpowiada wprost na wszystkie pytania klienta: wybór ESP32 vs Raspberry Pi z uzasadnieniem, podejście do QR, wycena prac i podzespołów osobno, widełki czasowe, deklaracja przekazania kodu, schematu, BOM, instrukcji i praw autorskich. Ton jest rzeczowy, nie coachingowy. Merytoryka (dioda gasząca przy cewkach, SRAM ESP32-CAM vs czytnik UART, izolowany RS485 pod etap 2) jest trafna i nie jest watą. Nie ma zmyślonych realizacji ani obietnic dosyłania czegokolwiek w osobnej wiadomości. Terminy 10–18 dni roboczych są zgodne z bieżącą datą. Oferta nie neguje podejścia klienta, a jedynie rekomenduje wybór w ramach jego własnego zakresu.",
+  "instrukcja_naprawy": ""
+}
