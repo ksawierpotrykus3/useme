@@ -1,0 +1,21 @@
+{
+  "job_id": "145394",
+  "title": "Wykonanie strony WWW + UX + prosty CMS",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 6500,
+  "wycena_gorna": 12000,
+  "definitywna": false,
+  "dni_od": 15,
+  "dni_do": 28,
+  "uzasadnienie_rozjemcy": "Modele po autokrytyce zgodnie oscylowały wokół 5,5–12,5 tys. zł, przy czym większość uznała dolną granicę 5,5–7 tys. zł za realną tylko przy gotowych makietach i prostej stronie do ok. 6 podstron. Górna granica 12 tys. zł jest spójna z zakresem UX, wdrożenia, CMS, SEO, testów i uruchomienia oraz stawką ok. 115 zł/h. Rozbieżność dotyczyła głównie modelu C, który wyceniał projekt na 12–18 tys. zł, ale to zawyżenie dla wymagania „prostego CMS-a” i prawdopodobnego WordPressa. Wycena nie jest definitywna, bo brakuje liczby podstron, stanu makiet i listy integracji — te czynniki mogą przesunąć kwotę zarówno w dół, jak i w górę.",
+  "od_czego_zaleza": [
+    "liczba podstron i kluczowych sekcji",
+    "stan wstępnego projektu: gotowe makiety Figma/XD/PSD czy tylko ogólna koncepcja",
+    "zakres integracji: formularz, newsletter, kalendarz, analityka, wielojęzyczność",
+    "wybór technologii i CMS: WordPress + ACF/bloki vs Next.js + headless CMS",
+    "czy zapewniacie treści, logo, hosting oraz czy potrzebne są niestandardowe animacje"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 1
+}

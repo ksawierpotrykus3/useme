@@ -1,0 +1,27 @@
+TYTUŁ: Wykonanie strony WWW + UX + prosty CMS
+KLIENT: Grasp Group
+BUDŻET: Do negocjacji
+URL: https://useme.com/pl/jobs/145394/
+
+OPIS:
+<p>Szukamy osoby / freelancera do dopracowania i wykonania strony internetowej dla firmy świadczącej profesjonalne usługi w zakresie marketingu.</p>
+
+<p>Mamy już wstępny projekt i koncepcję strony – nie zaczynamy od zera. Potrzebujemy osoby, która spojrzy na projekt UX-owo, zaproponuje potrzebne korekty, a następnie wykona i uruchomi stronę.</p>
+
+<p>Zakres prac:</p>
+
+<p>· analiza istniejącego projektu i rekomendacje UX,<br>· dopracowanie architektury, nawigacji i funkcjonalności strony,<br>· ewentualne korekty / uzupełnienia projektu,<br>· wykonanie responsywnej strony WWW,<br>· wdrożenie prostego i wygodnego CMS, pozwalającego nam samodzielnie edytować treści, zdjęcia i poszczególne sekcje,<br>· optymalizacja pod urządzenia mobilne, szybkość działania i podstawowe SEO,<br>· testy i uruchomienie strony.</p>
+
+<p>Kogo szukamy?</p>
+
+<p>Zależy nam na osobie, która łączy dobre wyczucie UX/UI z umiejętnością samodzielnego wdrożenia strony.</p>
+
+<p>Strona powinna być nowoczesna, przejrzysta i profesjonalna, dlatego ważne jest dla nas również dobre wyczucie designu, typografii i subtelnych animacji/interakcji.</p>
+
+<p>Technologia jest do ustalenia – jesteśmy otwarci na rekomendację wykonawcy. CMS powinien być przede wszystkim prosty w późniejszej obsłudze.</p>
+
+<p>W zgłoszeniu prosimy o:</p>
+
+<p>· portfolio podobnych realizacji,<br>· krótką informację, w jakiej technologii proponujesz wykonać stronę i dlaczego,<br>· orientacyjny czas realizacji,<br>· wycenę całości prac.</p>
+
+<p>Prosimy przede wszystkim o konkretne przykłady zrealizowanych stron, które można zobaczyć online.</p>

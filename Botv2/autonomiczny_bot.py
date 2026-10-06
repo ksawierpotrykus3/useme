@@ -125,48 +125,95 @@ def pobierz_liste_zlecen_live(driver: BrowserDriver, max_stron: int = 3) -> list
     return znalezione
 
 
+def znajdz_najnowsze_w_calej_bazie(storage: Storage) -> tuple[int, dict]:
+    """Przeszukuje CAŁĄ bazę ofertowarki i znajduje zlecenie o najwyższym ID."""
+    max_id = 0
+    max_record = {}
+    for p in storage.magazyn_dir.rglob("*.json"):
+        if ".checkpoints" in str(p) or p.name in ["marker.json", "meta.json", "status_wysylki.json", "blocklist.json"]:
+            continue
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            jid_str = str(data.get("id") or p.stem).strip()
+            if jid_str.isdigit():
+                jid_num = int(jid_str)
+                if jid_num > max_id:
+                    max_id = jid_num
+                    max_record = data
+        except Exception:
+            pass
+    return max_id, max_record
+
+
 def uruchom_cykl_autonomiczny(dry_run: bool = False, max_ofert: int = 10, headless: bool = False):
     """Jeden pełny, autonomiczny cykl bota."""
     storage = Storage()
+
+    # KROK 0: Wykrycie najnowszego zlecenia w CAŁEJ bazie jako punktu startu
+    max_id, max_job = znajdz_najnowsze_w_calej_bazie(storage)
+
     print("\n" + "=" * 78)
     print(f"   START CYKLU AUTONOMICZNEGO BOTA | Tryb: {'DRY_RUN' if dry_run else 'LIVE (WYSYŁKA PV)'}")
     print(f"   Czas: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"   PUNKT STARTU W BAZIE: Najnowsze zlecenie to #{max_id} ({max_job.get('title', '')[:50]})")
+    print(f"   Klient: {max_job.get('author', 'brak')}")
     print("=" * 78, flush=True)
 
     with BrowserDriver(headless=headless) as driver:
-        # Krok 1: Skanowanie Useme
-        print("\n[KROK 1] Skanuję świeże zlecenia z Useme (strony 1-3)...")
+        # Krok 1: Skanowanie Useme i pobieranie wszystkiego, co nowsze lub nieprzetworzone
+        print(f"\n[KROK 1] Skanuję Useme w poszukiwaniu nowych zleceń (> #{max_id}) oraz świeżych list...")
         live_jobs = pobierz_liste_zlecen_live(driver, max_stron=3)
-        print(f"[KROK 1] Znaleziono {len(live_jobs)} zleceń na listach kategorii.")
+        print(f"[KROK 1] Pobrano {len(live_jobs)} zleceń z bieżących list Useme.")
+
+        nowo_wykryte = 0
+        for j in live_jobs:
+            jid = j["id"]
+            if not storage.exists(jid, j.get("category", "programowanie-i-it")):
+                try:
+                    storage.save_new_job(j, j.get("category", "programowanie-i-it"))
+                    nowo_wykryte += 1
+                except Exception:
+                    pass
+        if nowo_wykryte > 0:
+            print(f"[KROK 1] Zapisano {nowo_wykryte} zupełnie nowych zleceń do bazy prawdy.")
 
         # Krok 2: Filtracja i kwalifikacja wstępna
         kandydaci = []
         for j in live_jobs:
-            jid = j["id"]
+            jid = str(j["id"])
             if juz_wyslano_na_to_zlecenie(jid, storage):
                 continue
             if config.is_blocked_author(j.get("author_id"), j.get("author")):
                 continue
             kandydaci.append(j)
 
-        # Dołącz nieobsłużone zlecenia z magazynu
+        # Dołącz nieobsłużone zlecenia z bazy (status NOWA, POBRANO_DETALE lub brak wysłanej oferty)
         for kat in config.CATEGORY_URLS.keys():
             slug = storage._get_category_slug(kat)
             for jf in (storage.magazyn_dir / slug).glob("*.json"):
                 try:
                     data = json.loads(jf.read_text(encoding="utf-8"))
                     jid = str(data.get("id"))
-                    if jid and not any(k["id"] == jid for k in kandydaci) and not juz_wyslano_na_to_zlecenie(jid, storage):
+                    if jid and not any(str(k["id"]) == jid for k in kandydaci) and not juz_wyslano_na_to_zlecenie(jid, storage):
                         if not config.is_blocked_author(data.get("author_id"), data.get("author")):
                             if data.get("status") in ["POBRANO_DETALE", "NOWA", None]:
                                 kandydaci.append(data)
                 except Exception:
                     pass
 
+        # Sortujemy kandydatów MALEJĄCO PO ID (od NAJNOWSZEGO w dół)
+        def _id_klucz(item):
+            zid = str(item.get("id", "0"))
+            return int(zid) if zid.isdigit() else 0
+
+        kandydaci.sort(key=_id_klucz, reverse=True)
+
         print(f"[KROK 2] Wytypowano {len(kandydaci)} kandydatów bez wysłanej oferty.")
         if not kandydaci:
-            print("[INFO] Brak nowych zleceń do przetworzenia w tym cyklu.")
+            print("[INFO] Brak zleceń oczekujących na przetworzenie w tym cyklu.")
             return 0
+
+        print(f"[PRZYGODA] Zaczynamy przetwarzanie od NAJNOWSZEGO zlecenia: #{kandydaci[0]['id']} ({kandydaci[0].get('title', '')[:50]})")
 
         # Krok 3: Przetwarzanie i wysyłka
         wyslano_w_cyklu = 0

@@ -1,0 +1,20 @@
+{
+  "job_id": "145243",
+  "title": "Netlify / Sqaurespace / Stripe",
+  "budget": "Do negocjacji",
+  "wycena_dolna": 500,
+  "wycena_gorna": 500,
+  "definitywna": false,
+  "dni_od": 7,
+  "dni_do": 7,
+  "uzasadnienie_rozjemcy": "Po autokrytyce modele zbiegły się przy stawce 115 zł/h i realnym czasie 2–2,5 h, co daje 230–288 zł. Rozbieżność dotyczyła głównie dolnej granicy: część modeli startowała od 150–172 zł, ale uznano 1–1,5 h za nierealne dla nietechnicznej klientki. Górna granica oscylowała wokół 260–288 zł; wyżej tylko przy dodatkowych godzinach po akceptacji. Wycena nie jest definitywna, bo brakuje ustalenia, czy Netlify to osobny projekt i jaki jest efekt końcowy. Jeśli dojdzie osobny projekt lub development, każda dodatkowa godzina to 115 zł/h albo potrzebna będzie osobna wycena.",
+  "od_czego_zaleza": [
+    "czy Squarespace i Netlify dotyczą jednej strony, czy dwóch osobnych projektów",
+    "jaki jest efekt końcowy: sklep z płatnościami czy prosta strona/wizytówka",
+    "czy po diagnozie potrzebna będzie dodatkowa konfiguracja, development lub druga sesja",
+    "faktyczny czas sesji zdalnej i zakres pracy na ekranie klientki"
+  ],
+  "checker_ok": true,
+  "sedzia": "OK",
+  "veto_napraw": 0
+}

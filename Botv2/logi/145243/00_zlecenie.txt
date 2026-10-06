@@ -1,0 +1,7 @@
+TYTUL: Netlify / Sqaurespace / Stripe
+BUDZET: Do negocjacji
+
+OPIS:
+<p>Pogubiłam się w tworzeniu strony na Sqaurespace, dodalam projekt przez Netlify i chcialam podlaczyc Stripe ale jednak to nie dla mnie chyba :)) </p>
+
+<p>Potrzebuje pomocy najchetniej zdalnie na video? gdzie mozemy zrobic to z mojego poziomu przez udostepnienia ekranu - ale inne rozwiazania tez przyjme</p>
